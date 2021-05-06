@@ -9,12 +9,12 @@
 
 ## About Laravel 8.0 core dashboard
 
-After clone the project, please execute these commands to create admins and permissions:
-php artisan migrate:fresh
-php artisan db:seed --class=PermissionTableSeeder
-php artisan db:seed --class=CreateAdminSeeder
+After clone the project, please execute these commands to create admins and permissions: <br>
+php artisan migrate:fresh <br>
+php artisan db:seed --class=PermissionTableSeeder <br>
+php artisan db:seed --class=CreateAdminSeeder <br>
 
 ## Default admin login account
 
-Email: super@admin.com
+Email: super@admin.com <br>
 Password: 123456
