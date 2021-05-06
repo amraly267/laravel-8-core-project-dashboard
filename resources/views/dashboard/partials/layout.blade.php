@@ -1,39 +1,36 @@
 <!DOCTYPE html>
+{{-- <html direction="rtl" dir="rtl" style="direction: rtl"> --}}
 <html>
     @include(config('dashboard.resource_folder').'partials.header')
-        @if(auth()->guard('admin')->check() || Request::is('home'))
-            <body class="hold-transition sidebar-mini layout-fixed">
-                <div class="wrapper">
+    @if(auth()->guard('admin')->check() || Request::is('home'))
+    <body id="kt_body" class="header-fixed header-tablet-and-mobile-fixed toolbar-enabled toolbar-fixed toolbar-tablet-and-mobile-fixed aside-enabled aside-fixed" style="--kt-toolbar-height:55px;--kt-toolbar-height-tablet-and-mobile:55px">
+        <div class="d-flex flex-column flex-root">
+            <div class="page d-flex flex-row flex-column-fluid">
+                @include(config('dashboard.resource_folder').'partials.side_menu')
+                <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper" style="padding-top: calc(1px + var(--kt-toolbar-height))">
                     @include(config('dashboard.resource_folder').'partials.top_nav')
-                    @include(config('dashboard.resource_folder').'partials.side_menu')
-                    <!-- Content Wrapper. Contains page content -->
-                    <div class="content-wrapper">
-                        <!-- Content Header (Page header) -->
-                        @yield('content-header')
-                        <!-- /.content-header -->
-                        <!-- Main content -->
-                        @yield('content')
-                        <!-- /.content -->
-                    </div>
-                    <!-- /.content-wrapper -->
-                </div>
-                <!-- ./wrapper -->
-        @else
-            <body class="hold-transition login-page">
-                <div class="login-box">
-                    <div class="login-logo">
-                        <img src="{{config('dashboard.static_images_folder').'login.png'}}" width="150"/>
-                    </div>
-                    <!-- /.login-logo -->
-                    <div class="card">
-                        <div class="card-body login-card-body">
-                            @yield('content')
+                    <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+                        <!--begin::Post-->
+                        <div class="post d-flex flex-column-fluid" id="kt_post">
+                            <!--begin::Container-->
+                            <div id="kt_content_container" class="container">
+                                @yield('content')
+                            </div>
+                            <!--end::Container-->
+                            <!--end::Post-->
                         </div>
-                        <!-- /.login-card-body -->
                     </div>
                 </div>
-                <!-- /.login-box -->
-        @endif
+            </div>
+        </div>
         @include(config('dashboard.resource_folder').'partials.footer')
     </body>
+    @else
+    <body id="kt_body" class="bg-white header-fixed header-tablet-and-mobile-fixed toolbar-enabled toolbar-fixed toolbar-tablet-and-mobile-fixed aside-enabled aside-fixed" style="--kt-toolbar-height:55px;--kt-toolbar-height-tablet-and-mobile:55px">
+		<div class="d-flex flex-column flex-root">
+            @yield('content')
+		</div>
+        @include(config('dashboard.resource_folder').'partials.footer')
+    </body>
+    @endif
 </html>

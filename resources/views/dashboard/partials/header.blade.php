@@ -1,11 +1,18 @@
 <head>
-    <meta charset="UTF-8">
+    <base href="">
+    <meta charset="utf-8" />
     <title>Laravel Core Dashboard</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-    <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="{{asset('fonts/dashboard/fontawesome-free/css/all.min.css')}}">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="{{asset('css/dashboard/adminlte.min.css')}}">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <link rel="shortcut icon" href="{{asset('img/dashboard/favicon.ico')}}" />
+    <!--begin::Fonts-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
+    <!--end::Fonts-->
+    <!--begin::Global Stylesheets Bundle(used by all pages)-->
+    <link href="{{asset('plugins/dashboard/global/plugins.bundle.css')}}" rel="stylesheet" type="text/css" />
+    {{-- <link href="{{asset('plugins/dashboard/global/plugins.bundle.rtl.css')}}" rel="stylesheet" type="text/css" /> --}}
+    <link href="{{asset('css/dashboard/style.bundle.css')}}" rel="stylesheet" type="text/css" />
+    {{-- <link href="{{asset('css/dashboard/style.bundle.rtl.css')}}" rel="stylesheet" type="text/css" /> --}}
+    <!--end::Global Stylesheets Bundle-->
+    <!-- Toastr Awesome -->
+    <link rel="stylesheet" href="{{asset('css/dashboard/toastr.min.css')}}">
 </head>

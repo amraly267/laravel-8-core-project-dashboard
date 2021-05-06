@@ -1,14 +1,8 @@
 
-<footer class="page-footer">
-    <div class="footer-content">
-        <div class="container-fluid">
-        {{-- <p class="mb-0 text-muted">© All rights reserved</p> --}}
-        </div>
-    </div>
-</footer>
-
-<script src="{{asset('js/dashboard/jquery.min.js')}}"></script>
-<!-- Bootstrap 4 -->
-<script src="{{asset('js/dashboard/bootstrap.bundle.min.js')}}"></script>
-<!-- AdminLTE App -->
-<script src="{{asset('js/dashboard/adminlte.min.js')}}"></script>
+<script src="{{asset('plugins/dashboard/global/plugins.bundle.js')}}"></script>
+<script src="{{asset('js/dashboard/scripts.bundle.js')}}"></script>
+<!--end::Global Javascript Bundle-->
+<!-- Toastr script -->
+<script src="{{asset('js/dashboard/toastr.min.js')}}"></script>
+@stack('footer-scripts')
+<script type="text/javascript" src="{{asset('js/dashboard/custome.js')}}"></script>

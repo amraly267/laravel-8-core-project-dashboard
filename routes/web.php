@@ -1,6 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Dashboard\AuthController;
+use App\Http\Controllers\Dashboard\AdminController;
+use App\Http\Controllers\Dashboard\RoleController;
+use App\Http\Controllers\Dashboard\HomeController;
+use App\Http\Controllers\Dashboard\SettingController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -17,13 +23,30 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('login', function(){
+Route::prefix('admin')->group(function () {
 
-    return view('dashboard.auth.login');
+    // === Not login admin routes ===
+    Route::middleware(['admin.guest'])->group(function () {
+        Route::get('login', [AuthController::class, 'loginForm'])->name('admin-login');
+        Route::get('forget-password', [AuthController::class, 'forgetPasswordForm'])->name('admin-forget-password');
+        Route::get('reset-password', [AuthController::class, 'resetPasswordForm'])->name('admin-reset-password');
 
-});
-Route::get('home', function(){
+        Route::middleware('admin.ajax')->group(function () {
+            Route::post('submit-login',[AuthController::class, 'submitLogin'])->name('admin-submit-login');
+            Route::post('submit-forget-password', [AuthController::class, 'submitForgetPassword'])->name('admin-submit-forget-password');
+            Route::post('submit-reset-password', [AuthController::class, 'submitResetPassword'])->name('admin-submit-reset-password');
+        });
+    });
 
-    return view('dashboard.home.index');
+    // === Login admin routes ===
+    Route::middleware(['admin.auth'])->group(function () {
+
+        Route::get('home', [HomeController::class, 'index'])->name('admin-home');
+        Route::post('logout', [AuthController::class, 'logout'])->name('admin-logout');
+        Route::resource('admins', AdminController::class);
+        Route::resource('roles', RoleController::class);
+        Route::get('change-language/{lang}', [SettingController::class, 'changeLanguage'])->name('admin-change-language');
+
+    });
 
 });
