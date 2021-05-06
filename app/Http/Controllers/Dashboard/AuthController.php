@@ -130,6 +130,7 @@ class AuthController extends BaseController
 
         if($request->hasFile('image'))
         {
+            $this->removeImage($admin->image, 'admins');
             $admin->image = $this->uploadImage($request->image, 'admins');
         }
 

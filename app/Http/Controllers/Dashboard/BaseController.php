@@ -25,6 +25,11 @@ class BaseController extends Controller
     // === Upload image from storage folder ===
     public function uploadImage($image, $storageFolder)
     {
+        if(!Storage::exists($storageFolder))
+        {
+            Storage::makeDirectory($storageFolder);
+        }
+
         $imageName = uniqid(). '.png' ;
         Storage::disk($storageFolder)->put($imageName, file_get_contents($image->getRealPath()));
         return $imageName;
