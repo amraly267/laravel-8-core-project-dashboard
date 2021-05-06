@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 use Auth;
 
 class BaseController extends Controller
@@ -21,8 +22,19 @@ class BaseController extends Controller
     }
     // === End function ===
 
-    protected function authCheck($guard = 'admin')
+    // === Upload image from storage folder ===
+    public function uploadImage($image, $storageFolder)
     {
-        return Auth::guard('admin')->check();
+        $imageName = uniqid(). '.png' ;
+        Storage::disk($storageFolder)->put($imageName, file_get_contents($image->getRealPath()));
+        return $imageName;
     }
+    // === End function ===
+
+    // === Remove image from storage folder ===
+    public function removeImage($imageName, $storageFolder)
+    {
+        Storage::disk($storageFolder)->delete($imageName);
+    }
+    // === End function ===
 }

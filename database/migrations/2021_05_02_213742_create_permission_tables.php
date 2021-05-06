@@ -66,6 +66,11 @@ class CreatePermissionTables extends Migration
                 ->on($tableNames['roles'])
                 ->onDelete('cascade');
 
+            $table->foreign('model_id')
+                ->references('id')
+                ->on('admins')
+                ->onDelete('cascade');
+
             $table->primary(['role_id', $columnNames['model_morph_key'], 'model_type'],
                     'model_has_roles_role_model_type_primary');
         });

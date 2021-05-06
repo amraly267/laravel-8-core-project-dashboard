@@ -4,7 +4,7 @@
 
 @section('page_path')
 <!--begin::Title-->
-<h1 class="d-flex align-items-center text-dark fw-bolder my-1 fs-3">{{trans(config('dashboard.trans_file').'admins')}}</h1>
+<h1 class="d-flex align-items-center text-dark fw-bolder my-1 fs-3">{{trans(config('dashboard.trans_file').'roles')}}</h1>
 <!--end::Title-->
 <!--begin::Separator-->
 <span class="h-20px border-gray-200 border-start mx-4"></span>
@@ -22,7 +22,7 @@
     </li>
     <!--end::Item-->
     <!--begin::Item-->
-    <li class="breadcrumb-item text-dark">{{trans(config('dashboard.trans_file').'admins')}}</li>
+    <li class="breadcrumb-item text-dark">{{trans(config('dashboard.trans_file').'roles')}}</li>
     <!--end::Item-->
 </ul>
 <!--end::Breadcrumb-->
@@ -34,20 +34,21 @@
         <!--begin::Header-->
         <div class="card-header border-0 pt-5">
             <h3 class="card-title align-items-start flex-column">
-                <span class="card-label fw-bolder fs-3 mb-1">{{trans(config('dashboard.trans_file').'admins')}}</span>
+                <span class="card-label fw-bolder fs-3 mb-1">{{trans(config('dashboard.trans_file').'roles')}}</span>
                 <span class="text-muted mt-1 fw-bold fs-7">{{trans(config('dashboard.trans_file').'total_results', ['val' => $totalResults])}}</span>
             </h3>
-            @if(auth()->guard('admin')->user()->can('admin-create'))
+            @if(auth()->guard('admin')->user()->can('role-create'))
             <div class="card-toolbar">
-                <a href="{{route('admins.create')}}" class="btn btn-sm btn-light-primary">
+                <a href="{{route('roles.create')}}" class="btn btn-sm btn-light-primary">
                     <!--begin::Svg Icon | path: icons/duotone/Communication/Add-user.svg-->
-                    <span class="svg-icon svg-icon-3">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                            <path d="M18,8 L16,8 C15.4477153,8 15,7.55228475 15,7 C15,6.44771525 15.4477153,6 16,6 L18,6 L18,4 C18,3.44771525 18.4477153,3 19,3 C19.5522847,3 20,3.44771525 20,4 L20,6 L22,6 C22.5522847,6 23,6.44771525 23,7 C23,7.55228475 22.5522847,8 22,8 L20,8 L20,10 C20,10.5522847 19.5522847,11 19,11 C18.4477153,11 18,10.5522847 18,10 L18,8 Z M9,11 C6.790861,11 5,9.209139 5,7 C5,4.790861 6.790861,3 9,3 C11.209139,3 13,4.790861 13,7 C13,9.209139 11.209139,11 9,11 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
-                            <path d="M0.00065168429,20.1992055 C0.388258525,15.4265159 4.26191235,13 8.98334134,13 C13.7712164,13 17.7048837,15.2931929 17.9979143,20.2 C18.0095879,20.3954741 17.9979143,21 17.2466999,21 C13.541124,21 8.03472472,21 0.727502227,21 C0.476712155,21 -0.0204617505,20.45918 0.00065168429,20.1992055 Z" fill="#000000" fill-rule="nonzero"></path>
-                        </svg>
+                    <span class="svg-icon svg-icon-primary svg-icon-2x"><!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-03-183419/theme/html/demo2/dist/../src/media/svg/icons/Navigation/Plus.svg-->
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <rect fill="#000000" x="4" y="11" width="16" height="2" rx="1"/>
+                                <rect fill="#000000" opacity="0.3" transform="translate(12.000000, 12.000000) rotate(-270.000000) translate(-12.000000, -12.000000) " x="4" y="11" width="16" height="2" rx="1"/>
+                            </g>
+                        </svg><!--end::Svg Icon-->
                     </span>{{trans(config('dashboard.trans_file').'add_new')}}
-                    <!--end::Svg Icon-->
                 </a>
             </div>
             @endif
@@ -64,10 +65,8 @@
                         <tr class="fw-bolder text-muted">
                             <th class="min-w-25px">#</th>
                             <th class="min-w-150px">{{trans(config('dashboard.trans_file').'name')}}</th>
-                            <th class="min-w-150px">{{trans(config('dashboard.trans_file').'role')}}</th>
-                            <th class="min-w-140px">{{trans(config('dashboard.trans_file').'email')}}</th>
-                            <th class="min-w-120px">{{trans(config('dashboard.trans_file').'mobile')}}</th>
-                            @if(auth()->guard('admin')->user()->can('admin-edit') || auth()->guard('admin')->user()->can('admin-delete'))
+                            <th class="min-w-150px">{{trans(config('dashboard.trans_file').'permissions')}}</th>
+                            @if(auth()->guard('admin')->user()->can('role-edit') || auth()->guard('admin')->user()->can('role-delete'))
                             <th class="min-w-100px text-end">{{trans(config('dashboard.trans_file').'actions')}}</th>
                             @endif
                         </tr>
@@ -75,39 +74,28 @@
                     <!--end::Table head-->
                     <!--begin::Table body-->
                     <tbody>
-                        @if(count($admins) == 0)
+                        @if(count($roles) == 0)
                         <td colspan="100%">
                             <h3 class="col-12 text-center">{{trans(config('dashboard.trans_file').'no_result')}}</h3>
                         </td>
                         @else
-                        @foreach ($admins as $index => $admin)
+                        @foreach ($roles as $index => $role)
                         <tr>
                             <td>
                                 <p class="text-dark fw-bolder d-block fs-6">{{++$index}}</p>
                             </td>
                             <td>
-                                <div class="d-flex align-items-center">
-                                    <div class="symbol symbol-45px me-5">
-                                        <img src="{{$admin->image_path}}" alt="{{$admin->name}}">
-                                    </div>
-                                    <div class="d-flex justify-content-start flex-column">
-                                        <p class="text-dark fw-bolder fs-6">{{$admin->name}}</p>
-                                    </div>
-                                </div>
+                                <p class="text-dark fw-bolder d-block fs-6">{{$role->name}}</p>
                             </td>
                             <td>
-                                <p class="text-dark fw-bolder d-block fs-6">{{$admin->roles[0]->name}}</p>
+                                @foreach($role->permissions as $permission)
+                                    <span class="badge badge-light-success">{{$permission->name}}</span>
+                                @endforeach
                             </td>
-                            <td>
-                                <p class="text-dark fw-bolder d-block fs-6">{{$admin->email}}</p>
-                            </td>
-                            <td>
-                                <p class="text-dark fw-bolder d-block fs-6">{{$admin->mobile}}</p>
-                            </td>
-                            @if(auth()->guard('admin')->user()->can('admin-edit') || auth()->guard('admin')->user()->can('admin-delete'))
+                            @if(auth()->guard('admin')->user()->can('role-edit') || auth()->guard('admin')->user()->can('role-delete'))
                             <td class="text-end">
-                                @if(auth()->guard('admin')->user()->can('admin-edit'))
-                                <a href="{{route('admins.edit', $admin->id)}}" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+                                @if(auth()->guard('admin')->user()->can('role-edit'))
+                                <a href="{{route('roles.edit', $role->id)}}" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                                     <!--begin::Svg Icon | path: icons/duotone/Communication/Write.svg-->
                                     <span class="svg-icon svg-icon-3">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -119,8 +107,8 @@
                                 </a>
                                 @endif
 
-                                @if(auth()->guard('admin')->user()->can('admin-delete'))
-                                <a href="#" onclick="deleteRow('{{route('admins.destroy', $admin->id)}}', '{{csrf_token()}}')" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm">
+                                @if(auth()->guard('admin')->user()->can('role-delete'))
+                                <a href="#" onclick="deleteRow('{{route('roles.destroy', $role->id)}}', '{{csrf_token()}}')" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm">
                                     <!--begin::Svg Icon | path: icons/duotone/General/Trash.svg-->
                                     <span class="svg-icon svg-icon-3">
                                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -142,7 +130,7 @@
                     </tbody>
                     <!--end::Table body-->
                 </table>
-                {{$admins->links("pagination::bootstrap-4")}}
+                {{$roles->links("pagination::bootstrap-4")}}
                 <!--end::Table-->
             </div>
             <!--end::Table container-->
@@ -155,6 +143,6 @@
 
 @push('footer-scripts')
     <script>
-    var title = "{{trans(config('dashboard.trans_file').'delete_question')}}";
+        var title = "{{trans(config('dashboard.trans_file').'delete_question')}}";
     </script>
 @endpush

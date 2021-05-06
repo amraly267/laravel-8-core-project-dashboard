@@ -10,9 +10,10 @@ use App\Http\Requests\Dashboard\ResetPasswordRequest;
 use App\Notifications\Dashboard\ForgetPasswordEmail;
 use App\Models\Admin;
 use Carbon\Carbon;
+use Illuminate\Auth\Notifications\ResetPassword;
+use App\Http\Requests\Dashboard\ProfileRequest;
 use Auth;
 use DB;
-use Illuminate\Auth\Notifications\ResetPassword;
 use Str;
 
 class AuthController extends BaseController
@@ -106,6 +107,43 @@ class AuthController extends BaseController
         $existingAdmin->save();
         DB::table('admin_password_resets')->where([['email', $request->email], ['token', $request->token]])->delete();
         return $this->successResponse(['redirect' => route('admin-login'), 'message' => trans(config('dashboard.trans_file').'success_reset_password')]);
+    }
+    // === End function ===
+
+    // === Profile page ===
+    public function profile()
+    {
+        return view(config('dashboard.resource_folder').$this->controllerResource.'profile', ['admin' => auth()->guard('admin')->user(), 'submitFormMethod' => 'put']);
+    }
+    // === End function ===
+
+    // === Submit update profile ===
+    public function updateProfile(ProfileRequest $request)
+    {
+        $admin = Admin::find(auth()->guard('admin')->user()->id);
+
+        if($request->image_remove)
+        {
+            $this->removeImage($admin->image, 'admins');
+            $admin->image = null;
+        }
+
+        if($request->hasFile('image'))
+        {
+            $admin->image = $this->uploadImage($request->image, 'admins');
+        }
+
+        if(strlen(trim($request->password)) > 0)
+        {
+            $admin->password = bcrypt($request->password);
+        }
+
+        $admin->name = $request->name;
+        $admin->email = $request->email;
+        $admin->mobile = $request->mobile;
+        $admin->save();
+
+        return $this->successResponse(['message' => trans(config('dashboard.trans_file').'success_save')]);
     }
     // === End function ===
 

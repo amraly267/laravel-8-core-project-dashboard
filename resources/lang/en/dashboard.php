@@ -4,17 +4,11 @@ return [
     "password" => "Password",
     "forget_password" => "Forget password ?",
     "login" => "Login",
-    "email_is_required" => "Email is required",
-    "invalid_email" => "Invalid email",
-    "password_is_required" => "Password is required",
     "invalid_credentials" => "Invalid credentials",
     "are_you_sure_logout" => "Are you want to logout ?",
     "send_reset_password_link" => "Send reset password link",
     "success_send" => "Success send",
     "confirm_password" => "Confirm password",
-    "confirm_password_is_required" => "Confirm password is required",
-    "confirm_password_not_identical" => "Confirm password is not identical with password",
-    "password_should_be_6_char" => "Password should be contains of 6 characters at least",
     "success_reset_password" => "Success reset password",
     "ok" => "Ok",
     "cancel" => "Cancel",
@@ -31,7 +25,6 @@ return [
     "logout" => "Logout",
     "sing_in_dashboard" => "Sign In to Dashboard",
     "enter_email_to_reset_password" => "Enter your email to reset your password.",
-    "email_not_exist" => "Email is not existing",
     "reset_password" => "Reset password",
     "total_results" => "Total resuls: :val",
     "image" => "Image",
@@ -44,6 +37,20 @@ return [
     "remove_image" => "Remove image",
     "change_image" => "Change image",
     "success_save" => "Success save",
+    "success_delete" => "Success delete",
+    "edit" => "Edit",
+    "let_password_empty" => "Let password field empty if you don't want to change it",
+    "delete_question" => "Do you want to delete this row ?",
+    "cannot_delete_your_account" => "Your account can't be deleted",
+    "my_profile" => "My profile",
+    "roles" => "Roles",
+    "permissions" => "Permissions",
+    "total_admins" => "Total admins",
+    "total_roles" => "Total roles",
+
+
+
+
 
 
 ];

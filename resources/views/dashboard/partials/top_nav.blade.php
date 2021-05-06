@@ -82,7 +82,7 @@
                             <!--end::Menu separator-->
                             <!--begin::Menu item-->
                             <div class="menu-item px-5">
-                                <a href="account/overview.html" class="menu-link px-5">My Profile</a>
+                                <a href="{{route('admin-profile')}}" class="menu-link px-5">{{trans(config('dashboard.trans_file').'my_profile')}}</a>
                             </div>
                             <!--end::Menu item-->
                             <!--begin::Menu item-->

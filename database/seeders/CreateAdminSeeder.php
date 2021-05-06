@@ -16,18 +16,28 @@ class CreateAdminSeeder extends Seeder
      */
     public function run()
     {
-        $user = Admin::create([
-            'name' => 'Amr Aly',
-            'email' => 'amr@y.com',
+        // === Super admin ===
+        $superAdmin = Admin::create([
+            'name' => 'Super Admin',
+            'email' => 'super@admin.com',
             'password' => bcrypt('123456'),
-            'mobile' => '9999',
+            'mobile' => '123456789',
         ]);
+        $superRole = Role::find(1);
+        $permissions = Permission::pluck('id')->all();
+        $superRole->syncPermissions($permissions);
+        $superAdmin->assignRole([$superRole->id]);
 
-        $role = Role::create(['name' => 'Admin', 'guard_name' => 'admin']);
-
-        $permissions = Permission::pluck('id','id')->all();
-
-        $role->syncPermissions($permissions);
-        $user->assignRole([$role->id]);
+        // === Regular admin ===
+        $regularAdmin = Admin::create([
+            'name' => 'Admin',
+            'email' => 'admin@admin.com',
+            'password' => bcrypt('123456'),
+            'mobile' => '123956789',
+        ]);
+        $adminRole = Role::find(2);
+        $permissions = Permission::pluck('id')->all();
+        $adminRole->syncPermissions($permissions);
+        $regularAdmin->assignRole([$adminRole->id]);
     }
 }

@@ -27,13 +27,4 @@ class ForgetPasswordRequest extends FormRequest
             'email' => 'required|email|exists:admins,email',
         ];
     }
-
-    public function messages()
-    {
-        return [
-            'email.required' => trans(config('dashboard.trans_file').'email_is_required'),
-            'email.email' => trans(config('dashboard.trans_file').'invalid_email'),
-            'email.exists' => trans(config('dashboard.trans_file').'email_not_exist'),
-        ];
-    }
 }

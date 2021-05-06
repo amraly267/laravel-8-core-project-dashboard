@@ -30,14 +30,4 @@ class ResetPasswordRequest extends FormRequest
             'token' => 'required|exists:admin_password_resets,token',
         ];
     }
-
-    public function messages()
-    {
-        return [
-            'password.required' => trans(config('dashboard.trans_file').'password_is_required'),
-            'password.min' => trans(config('dashboard.trans_file').'password_should_be_6_char'),
-            'confirm_password.required' => trans(config('dashboard.trans_file').'confirm_password_is_required'),
-            'confirm_password.same' => trans(config('dashboard.trans_file').'confirm_password_not_identical'),
-        ];
-    }
 }

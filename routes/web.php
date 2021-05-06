@@ -30,12 +30,9 @@ Route::prefix('admin')->group(function () {
         Route::get('login', [AuthController::class, 'loginForm'])->name('admin-login');
         Route::get('forget-password', [AuthController::class, 'forgetPasswordForm'])->name('admin-forget-password');
         Route::get('reset-password', [AuthController::class, 'resetPasswordForm'])->name('admin-reset-password');
-
-        Route::middleware('admin.ajax')->group(function () {
-            Route::post('submit-login',[AuthController::class, 'submitLogin'])->name('admin-submit-login');
-            Route::post('submit-forget-password', [AuthController::class, 'submitForgetPassword'])->name('admin-submit-forget-password');
-            Route::post('submit-reset-password', [AuthController::class, 'submitResetPassword'])->name('admin-submit-reset-password');
-        });
+        Route::post('submit-login',[AuthController::class, 'submitLogin'])->name('admin-submit-login');
+        Route::post('submit-forget-password', [AuthController::class, 'submitForgetPassword'])->name('admin-submit-forget-password');
+        Route::post('submit-reset-password', [AuthController::class, 'submitResetPassword'])->name('admin-submit-reset-password');
     });
 
     // === Login admin routes ===
@@ -43,6 +40,8 @@ Route::prefix('admin')->group(function () {
 
         Route::get('home', [HomeController::class, 'index'])->name('admin-home');
         Route::post('logout', [AuthController::class, 'logout'])->name('admin-logout');
+        Route::get('profile', [AuthController::class, 'profile'])->name('admin-profile');
+        Route::put('update-profile', [AuthController::class, 'updateProfile'])->name('admin-update-profile');
         Route::resource('admins', AdminController::class);
         Route::resource('roles', RoleController::class);
         Route::get('change-language/{lang}', [SettingController::class, 'changeLanguage'])->name('admin-change-language');

@@ -2,19 +2,13 @@
 return [
     "email" => "البريد الإلكتروني",
     "password" => "كلمة المرور",
-    "forget_password" => "نسيت كلمة المرور ?",
+    "forget_password" => "نسيت كلمة المرور ؟",
     "login" => "تسجيل دخول",
-    "email_is_required" => "البريد الالكتروني مطلوب",
-    "invalid_email" => "البريد الالكتروني غير صحيح",
-    "password_is_required" => "كلمة المرور مطلوبة",
     "invalid_credentials" => "بيانات الدخول غير صحيحة",
     "are_you_sure_logout" => "هل تريد تسجيل خروج ؟",
     "send_reset_password_link" => "ارسال رابط اعادة تعيين كلمة المرور",
     "success_send" => "تم الارسال",
     "confirm_password" => "تأكيد كلمة المرور",
-    "confirm_password_is_required" => "تأكيد كلمة المرور مطلوب",
-    "confirm_password_not_identical" => "تأكيد كلمة المرور غير مطابقة لكلمة المرور",
-    "password_should_be_6_char" => "كلمة المرور يجب أن تكون 6 حروف/ارقام على الأقل",
     "success_reset_password" => "تم تغيير كلمة المرور",
     "ok" => "تأكيد",
     "cancel" => "الغاء",
@@ -31,7 +25,6 @@ return [
     "logout" => "تسجيل خروج",
     "sing_in_dashboard" => "تسجيل دخول للوحة التحكم",
     "enter_email_to_reset_password" => "ادخل بريدك الالكتروني لاستعادة كلمة المرور",
-    "email_not_exist" => "البريد الالكتروني غير موجود",
     "reset_password" => "اعادة تعيين كلمة المرور",
     "total_results" => "اجمالي النتائج: :val",
     "image" => "الصورة",
@@ -42,7 +35,22 @@ return [
     "arabic" => "عربي",
     "add_new" => "اضافة جديد",
     "remove_image" => "حذف الصورة",
+    "change_image" => "تغيير الصورة",
     "success_save" => "تم الحفظ",
+    "success_delete" => "تم الحذف",
+    "edit" => "تعديل",
+    "let_password_empty" => "اترك كلمة المرور فارغة اذا لم تريد تعديله",
+    "delete_question" => "هل تريد حذف هذا العنصر ؟",
+    "cannot_delete_your_account" => "لا يمكن حذف حسابك",
+    "my_profile" => "حسابي",
+    "roles" => "الأدوار",
+    "permissions" => "المسؤوليات",
+    "total_admins" => "عدد المسؤولين",
+    "total_roles" => "عدد المسؤوليات",
+
+
+
+
 
 ];
 

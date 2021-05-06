@@ -4,7 +4,7 @@ namespace App\Http\Requests\Dashboard;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class LoginRequest extends FormRequest
+class ProfileRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,11 @@ class LoginRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => 'required|email|exists:admins,email',
-            'password' => 'required',
+            'name' => 'required',
+            'email' => 'required|email|unique:admins,email,'.auth()->guard('admin')->user()->id.',id',
+            'mobile' => 'required|digits_between:9,12|unique:admins,mobile,'.auth()->guard('admin')->user()->id.',id',
+            'image' => 'nullable|mimes:jpeg,jpg,png|max:5120',
+            'password' => 'nullable|min:6',
         ];
     }
 }

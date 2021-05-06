@@ -66,7 +66,6 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'admin.guest' => \App\Http\Middleware\Dashboard\AdminGuest::class,
         'admin.auth' => \App\Http\Middleware\Dashboard\AdminAuth::class,
-        'admin.ajax' => \App\Http\Middleware\Dashboard\AdminAjaxRequest::class,
         'role' => \Spatie\Permission\Middlewares\RoleMiddleware::class,
         'permission' => \Spatie\Permission\Middlewares\PermissionMiddleware::class,
         'role_or_permission' => \Spatie\Permission\Middlewares\RoleOrPermissionMiddleware::class,

@@ -7,9 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Admin;
 use Spatie\Permission\Models\Role;
 use App\Http\Requests\Dashboard\AdminRequest;
-use Illuminate\Support\Facades\Storage;
 use Spatie\Permission\Models\Permission;
-use Auth;
 
 class AdminController extends BaseController
 {
@@ -17,7 +15,7 @@ class AdminController extends BaseController
 
     public function __construct()
     {
-        $this->middleware('permission:admin-list|admin-create|admin-edit|admin-delete,admin', ['only' => ['index','show']]);
+        $this->middleware('permission:admin-list,admin', ['only' => ['index','show']]);
         $this->middleware('permission:admin-create,admin', ['only' => ['create','store']]);
         $this->middleware('permission:admin-edit,admin', ['only' => ['edit','update']]);
         $this->middleware('permission:admin-delete,admin', ['only' => ['destroy']]);
@@ -43,11 +41,10 @@ class AdminController extends BaseController
     public function create()
     {
         $roles = Role::all();
-        $admins = Admin::orderBy('created_at', 'DESC')->get();
         $pageTitle = trans(config('dashboard.trans_file').'add_new');
         $submitFormRoute = route('admins.store');
         $submitFormMethod = 'post';
-        return view(config('dashboard.resource_folder').$this->controllerResource.'form', compact('roles', 'admins', 'pageTitle', 'submitFormRoute', 'submitFormMethod'));
+        return view(config('dashboard.resource_folder').$this->controllerResource.'form', compact('roles', 'pageTitle', 'submitFormRoute', 'submitFormMethod'));
     }
 
     /**
@@ -58,26 +55,22 @@ class AdminController extends BaseController
      */
     public function store(AdminRequest $request)
     {
-        $fileName = null;
+        $imageName = null;
+
         if($request->hasFile('image'))
         {
-            $fileName = uniqid(). '.png' ;
-            Storage::disk('admins')->put($fileName, file_get_contents($request->image->getRealPath()));
+            $imageName = $this->uploadImage($request->image, 'admins');
         }
 
-        $savedAdmin = Admin::create([
+        $admin = Admin::create([
             'name' => $request->name,
             'email' => $request->email,
             'mobile' => $request->mobile,
             'password' => bcrypt($request->password),
-            'image' => $fileName,
+            'image' => $imageName,
         ]);
 
-        $role = Role::find($request->role);
-
-        $permissions = Permission::pluck('id','id')->all();
-        $role->syncPermissions($permissions);
-        $savedAdmin->assignRole([$request->role]);
+        $this->assignRole($admin, $request->role);
         return $this->successResponse(['message' => trans(config('dashboard.trans_file').'success_save')]);
     }
 
@@ -100,7 +93,12 @@ class AdminController extends BaseController
      */
     public function edit($id)
     {
-        //
+        $roles = Role::all();
+        $admin = Admin::find($id);
+        $pageTitle = trans(config('dashboard.trans_file').'edit');
+        $submitFormRoute = route('admins.update', $id);
+        $submitFormMethod = 'put';
+        return view(config('dashboard.resource_folder').$this->controllerResource.'form', compact('roles', 'admin', 'pageTitle', 'submitFormRoute', 'submitFormMethod'));
     }
 
     /**
@@ -110,9 +108,32 @@ class AdminController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(AdminRequest $request, $id)
     {
-        //
+        $admin = Admin::find($id);
+
+        if($request->image_remove)
+        {
+            $this->removeImage($admin->image, 'admins');
+            $admin->image = null;
+        }
+
+        if($request->hasFile('image'))
+        {
+            $admin->image = $this->uploadImage($request->image, 'admins');
+        }
+
+        if(strlen(trim($request->password)) > 0)
+        {
+            $admin->password = bcrypt($request->password);
+        }
+
+        $admin->name = $request->name;
+        $admin->email = $request->email;
+        $admin->mobile = $request->mobile;
+        $admin->save();
+        $this->assignRole($admin, $request->role);
+        return $this->successResponse(['message' => trans(config('dashboard.trans_file').'success_save')]);
     }
 
     /**
@@ -123,6 +144,23 @@ class AdminController extends BaseController
      */
     public function destroy($id)
     {
-        //
+        if(auth()->guard('admin')->user()->id == $id)
+        {
+            return $this->successResponse(['message' => trans(config('dashboard.trans_file').'cannot_delete_your_account')], 400);
+        }
+
+        Admin::where('id', $id)->delete();
+        return $this->successResponse(['message' => trans(config('dashboard.trans_file').'success_delete')]);
     }
+
+    // === Assign or update role to admin ===
+    private function assignRole($admin, $roleId)
+    {
+        $admin->roles()->detach();
+        $role = Role::find($roleId);
+        $permissions = Permission::pluck('id','id')->all();
+        $role->syncPermissions($permissions);
+        $admin->assignRole($roleId);
+    }
+    // === End function ===
 }

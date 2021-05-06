@@ -35,3 +35,47 @@ function submitForm(form, beforeSendAction, afterCompleteAction, successResponse
     });
 }
 // === End function ===
+
+// === Delete Row ===
+function deleteRow(route, deleteToken)
+{
+    Swal.fire({
+        icon: 'question',
+        title: title,
+        showCancelButton: true,
+    }).then((result) => {
+        if(result.isConfirmed)
+        {
+            $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
+            $.ajax({
+                type: 'DELETE',
+                url: route,
+                data: {"_method": 'DELETE', "_token": deleteToken},
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function (response)
+                {
+                    Swal.fire({
+                        icon: 'success',
+                        title: response.message,
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    setTimeout(function(){
+                        window.location.reload();
+                    }, 1000);
+                },
+                error: function(response)
+                {
+                    Swal.fire({
+                        icon: 'error',
+                        title: response.responseJSON.message,
+                        showConfirmButton: true,
+                    });
+                }
+            });
+        }
+    })
+}
+// === End script ===

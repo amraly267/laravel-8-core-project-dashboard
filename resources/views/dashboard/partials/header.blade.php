@@ -13,6 +13,4 @@
     <link href="{{asset('css/dashboard/style.bundle.css')}}" rel="stylesheet" type="text/css" />
     {{-- <link href="{{asset('css/dashboard/style.bundle.rtl.css')}}" rel="stylesheet" type="text/css" /> --}}
     <!--end::Global Stylesheets Bundle-->
-    <!-- Toastr Awesome -->
-    <link rel="stylesheet" href="{{asset('css/dashboard/toastr.min.css')}}">
 </head>

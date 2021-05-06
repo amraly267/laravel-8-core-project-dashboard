@@ -31,7 +31,7 @@
     </li>
     <!--end::Item-->
     <!--begin::Item-->
-    <li class="breadcrumb-item text-dark">{{trans(config('dashboard.trans_file').'add_new')}}</li>
+    <li class="breadcrumb-item text-dark">{{$pageTitle}}</li>
     <!--end::Item-->
 </ul>
 <!--end::Breadcrumb-->
@@ -47,6 +47,7 @@
         <!--end::Card title-->
     </div>
     <!--begin::Card header-->
+
     <!--begin::Content-->
     <div id="kt_account_profile_details" class="collapse show">
         <!--begin::Form-->
@@ -64,7 +65,7 @@
                         <!--begin::Image input-->
                         <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url({{asset('img/dashboard/default-user.png')}})">
                             <!--begin::Preview existing avatar-->
-                            <div class="image-input-wrapper w-125px h-125px" style="background-image: url({{asset('img/dashboard/default-user.png')}})"></div>
+                            <div class="image-input-wrapper w-125px h-125px" style="background-image: url({{$submitFormMethod == 'put' ? $admin->image_path : asset('img/dashboard/default-user.png')}})"></div>
                             <!--end::Preview existing avatar-->
                             <!--begin::Label-->
                             <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="" data-bs-original-title="{{trans(config('dashboard.trans_file').'change_image')}}">
@@ -76,7 +77,7 @@
                             </label>
                             <!--end::Label-->
                             <!--begin::Cancel-->
-                            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="" data-bs-original-title="{{trans(config('dashboard.trans_file').'remove_image')}}">
+                            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="" data-bs-original-title="{{trans(config('dashboard.trans_file').'cancel')}}">
                             <i class="bi bi-x fs-2"></i>
                             </span>
                             <!--end::Cancel-->
@@ -86,6 +87,8 @@
                             </span>
                             <!--end::Remove-->
                         </div>
+                        <br>
+                        <span class="help-block error-help-block input-error image-error" style="color: red;"></span>
                         <!--end::Image input-->
                     </div>
                     <!--end::Col-->
@@ -99,7 +102,7 @@
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-11 fv-row fv-plugins-icon-container">
-                        <input type="text" name="name" class="form-control form-control-lg form-control-solid" placeholder="{{trans(config('dashboard.trans_file').'name')}}" value="">
+                        <input type="text" name="name" class="form-control form-control-lg form-control-solid" placeholder="{{trans(config('dashboard.trans_file').'name')}}" value="{{$submitFormMethod == 'put' ? $admin->name : old('name')}}">
                         <span class="help-block error-help-block input-error name-error" style="color: red;"></span>
                     </div>
                     <!--end::Col-->
@@ -113,7 +116,7 @@
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-5 fv-row fv-plugins-icon-container">
-                        <input type="email" name="email" class="form-control form-control-lg form-control-solid" placeholder="{{trans(config('dashboard.trans_file').'email')}}" value="">
+                        <input type="email" name="email" class="form-control form-control-lg form-control-solid" placeholder="{{trans(config('dashboard.trans_file').'email')}}" value="{{$submitFormMethod == 'put' ? $admin->email : old('email')}}">
                         <span class="help-block error-help-block input-error email-error" style="color: red;"></span>
                     </div>
                     <!--end::Col-->
@@ -123,7 +126,7 @@
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-5 fv-row fv-plugins-icon-container">
-                        <input type="tel" name="mobile" class="form-control form-control-lg form-control-solid" placeholder="{{trans(config('dashboard.trans_file').'mobile')}}" value="">
+                        <input type="tel" name="mobile" class="form-control form-control-lg form-control-solid" placeholder="{{trans(config('dashboard.trans_file').'mobile')}}" value="{{$submitFormMethod == 'put' ? $admin->mobile : old('mobile')}}">
                         <span class="help-block error-help-block input-error mobile-error" style="color: red;"></span>
                     </div>
                     <!--end::Col-->
@@ -138,6 +141,11 @@
                     <!--begin::Col-->
                     <div class="col-lg-5 fv-row fv-plugins-icon-container">
                         <input type="password" name="password" class="form-control form-control-lg form-control-solid" placeholder="{{trans(config('dashboard.trans_file').'password')}}" value="">
+                        @if($submitFormMethod == 'put')
+                            <span class="help-block error-help-block input-error password-error" style="color: rgb(167, 161, 161);">
+                                {{trans(config('dashboard.trans_file').'let_password_empty')}}
+                            </span><br>
+                        @endif
                         <span class="help-block error-help-block input-error password-error" style="color: red;"></span>
                     </div>
                     <!--end::Col-->
@@ -149,7 +157,7 @@
                     <div class="col-lg-5 fv-row fv-plugins-icon-container">
                         <select name="role" data-control="select2" class="form-select form-select-solid form-select-lg fw-bold select2-hidden-accessible" data-select2-id="select2-data-10-jdo1" tabindex="-1" aria-hidden="true">
                             @foreach($roles as $role)
-                                <option value="{{$role->id}}">{{$role->name}}</option>
+                                <option @if($submitFormMethod == 'put' && $admin->roles[0]->id == $role->id) {{'selected'}} @endif value="{{$role->id}}">{{$role->name}}</option>
                             @endforeach
                         </select>
                         <span class="help-block error-help-block input-error role-error" style="color: red;"></span>
@@ -161,7 +169,7 @@
             <!--end::Card body-->
             <!--begin::Actions-->
             <div class="card-footer d-flex justify-content-end py-6 px-9">
-                <button type="reset" class="btn btn-white btn-active-light-primary me-2">{{trans(config('dashboard.trans_file').'cancel')}}</button>
+                <button type="reset" class="btn btn-white btn-active-light-primary me-2" onclick="window.location.reload()">{{trans(config('dashboard.trans_file').'cancel')}}</button>
                 <button type="submit" class="btn btn-primary" id="saveBtn">
                     <span class="spinner-border spinner-border-sm align-middle ms-2 d-none"></span>
                     {{trans(config('dashboard.trans_file').'save')}}
@@ -176,7 +184,6 @@
     <!--end::Content-->
 </div>
 @endsection
-
 
 @push('footer-scripts')
     <script>
@@ -199,11 +206,12 @@
                 Swal.fire({
                     icon: 'success',
                     title: callResponse.message,
-                    confirmButtonText: "{{trans(config('dashboard.trans_file').'ok')}}",
+                    showConfirmButton: false,
+                    timer: 1500
                 });
-                window.location.reload();
-                // $('.image-input-wrapper').css('background-image', "url({{asset('img/dashboard/default-user.png')}})")
-                // $('#adminForm')[0].reset();
+                setTimeout(function(){
+                    window.location.reload();
+                }, 1000);
             }
             function errorResponse()
             {

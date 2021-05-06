@@ -23,14 +23,24 @@ class AdminRequest extends FormRequest
      */
     public function rules()
     {
-        $adminId = request()->id ?? null;
+        $adminId = request()->admin ?? null;
 
-        return [
+        $rules = [
             'name' => 'required',
-            'email' => 'required|email|unique:admins,email,except,'.$adminId,
-            'password' => 'required|min:6',
-            'mobile' => 'required|digits_between:9,12|unique:admins,mobile,except,'.$adminId,
+            'email' => 'required|email|unique:admins,email,'.$adminId.',id',
+            'mobile' => 'required|digits_between:9,12|unique:admins,mobile,'.$adminId.',id',
             'image' => 'nullable|mimes:jpeg,jpg,png|max:5120',
         ];
+
+        if(\Route::currentRouteName() == 'admins.update')
+        {
+            $rules['password'] = 'nullable|min:6';
+        }
+        else
+        {
+            $rules['password'] = 'required|min:6';
+        }
+
+        return $rules;
     }
 }

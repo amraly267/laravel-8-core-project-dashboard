@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Admin;
+use Spatie\Permission\Models\Role;
 
 class HomeController extends BaseController
 {
@@ -11,6 +13,8 @@ class HomeController extends BaseController
 
     public function index()
     {
-        return view(config('dashboard.resource_folder').$this->controllerResource.'index');
+        $totalAdmins = Admin::count();
+        $totalRoles = Role::count();
+        return view(config('dashboard.resource_folder').$this->controllerResource.'index', compact('totalAdmins', 'totalRoles'));
     }
 }
