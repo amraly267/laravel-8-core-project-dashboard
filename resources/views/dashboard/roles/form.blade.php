@@ -80,18 +80,14 @@
 
                 <!--begin::Input group-->
                 <div class="row mb-6">
-                    <!--begin::Col-->
-                    <div class="d-flex align-items-center">
-                        <!--begin::Checkbox-->
-                        @foreach($permissions as $permission)
-                        <label class="form-check form-check-custom form-check-solid me-10">
-                            <input class="form-check-input h-20px w-20px"{{$submitFormMethod == 'put' && in_array($permission->id, $relatedPermissions)? 'checked':''}} type="checkbox" name="permissions[]" value="{{$permission->id}}">
-                            <span class="form-check-label fw-bold">{{$permission->name}}</span>
-                        </label>
-                        @endforeach
-                        <!--end::Checkbox-->
-                    </div>
-                    <!--end::Col-->
+                    <!--begin::Checkbox-->
+                    @foreach($permissions as $key => $permission)
+                    <label class="mb-2 col-2 form-check form-check-custom form-check-solid me-10">
+                        <input class="form-check-input h-20px w-20px"{{$submitFormMethod == 'put' && in_array($permission->id, $relatedPermissions)? 'checked':''}} type="checkbox" name="permissions[]" value="{{$permission->id}}">
+                        <span class="form-check-label fw-bold">{{$permission->name}}</span>
+                    </label>
+                    @endforeach
+                    <!--end::Checkbox-->
                 </div>
                 <!--end::Input group-->
             </div>
@@ -106,8 +102,6 @@
                 </button>
             </div>
             <!--end::Actions-->
-            <input type="hidden">
-            <div></div>
         </form>
         <!--end::Form-->
     </div>

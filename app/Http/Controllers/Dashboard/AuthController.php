@@ -18,7 +18,11 @@ use Str;
 
 class AuthController extends BaseController
 {
-    private $controllerResource = 'auth.';
+    public function __construct()
+    {
+        $this->controllerResource = 'auth.';
+        $this->storageFolder = Admin::storageFolder();
+    }
 
     // === Open login Form ===
     public function loginForm()
@@ -124,14 +128,14 @@ class AuthController extends BaseController
 
         if($request->image_remove)
         {
-            $this->removeImage($admin->image, 'admins');
+            $this->removeImage($admin->image, $this->storageFolder);
             $admin->image = null;
         }
 
         if($request->hasFile('image'))
         {
-            $this->removeImage($admin->image, 'admins');
-            $admin->image = $this->uploadImage($request->image, 'admins');
+            $this->removeImage($admin->image, $this->storageFolder);
+            $admin->image = $this->uploadImage($request->image, $this->storageFolder);
         }
 
         if(strlen(trim($request->password)) > 0)

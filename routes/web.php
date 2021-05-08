@@ -3,9 +3,11 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\AuthController;
 use App\Http\Controllers\Dashboard\AdminController;
+use App\Http\Controllers\Dashboard\CountryController;
 use App\Http\Controllers\Dashboard\RoleController;
 use App\Http\Controllers\Dashboard\HomeController;
 use App\Http\Controllers\Dashboard\SettingController;
+use App\Http\Controllers\Dashboard\PageController;
 
 
 /*
@@ -44,6 +46,10 @@ Route::prefix('admin')->group(function () {
         Route::put('update-profile', [AuthController::class, 'updateProfile'])->name('admin-update-profile');
         Route::resource('admins', AdminController::class);
         Route::resource('roles', RoleController::class);
+        Route::resource('countries', CountryController::class);
+        Route::resource('pages', PageController::class);
+        Route::get('settings', [SettingController::class, 'index'])->name('admin-settings');
+        Route::put('settings', [SettingController::class, 'update'])->name('admin-update-settings');
         Route::get('change-language/{lang}', [SettingController::class, 'changeLanguage'])->name('admin-change-language');
 
     });

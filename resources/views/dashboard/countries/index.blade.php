@@ -4,7 +4,7 @@
 
 @section('page_path')
 <!--begin::Title-->
-<h1 class="d-flex align-items-center text-dark fw-bolder my-1 fs-3">{{trans(config('dashboard.trans_file').'admins')}}</h1>
+<h1 class="d-flex align-items-center text-dark fw-bolder my-1 fs-3">{{trans(config('dashboard.trans_file').'countries')}}</h1>
 <!--end::Title-->
 <!--begin::Separator-->
 <span class="h-20px border-gray-200 border-start mx-4"></span>
@@ -22,7 +22,7 @@
     </li>
     <!--end::Item-->
     <!--begin::Item-->
-    <li class="breadcrumb-item text-dark">{{trans(config('dashboard.trans_file').'admins')}}</li>
+    <li class="breadcrumb-item text-dark">{{trans(config('dashboard.trans_file').'countries')}}</li>
     <!--end::Item-->
 </ul>
 <!--end::Breadcrumb-->
@@ -34,12 +34,12 @@
         <!--begin::Header-->
         <div class="card-header border-0 pt-5">
             <h3 class="card-title align-items-start flex-column">
-                <span class="card-label fw-bolder fs-3 mb-1">{{trans(config('dashboard.trans_file').'admins')}}</span>
+                <span class="card-label fw-bolder fs-3 mb-1">{{trans(config('dashboard.trans_file').'countries')}}</span>
                 <span class="text-muted mt-1 fw-bold fs-7">{{trans(config('dashboard.trans_file').'total_results', ['val' => $totalResults])}}</span>
             </h3>
-            @if(auth()->guard('admin')->user()->can('admin-create'))
+            @if(auth()->guard('admin')->user()->can('country-create'))
             <div class="card-toolbar">
-                <a href="{{route('admins.create')}}" class="btn btn-sm btn-light-primary">
+                <a href="{{route('countries.create')}}" class="btn btn-sm btn-light-primary">
                     <!--begin::Svg Icon | path: icons/duotone/Communication/Add-user.svg-->
                     <span class="svg-icon svg-icon-primary svg-icon-2x"><!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-03-183419/theme/html/demo2/dist/../src/media/svg/icons/Navigation/Plus.svg-->
                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -50,7 +50,6 @@
                         </svg><!--end::Svg Icon-->
                     </span>
                     {{trans(config('dashboard.trans_file').'add_new')}}
-                    <!--end::Svg Icon-->
                 </a>
             </div>
             @endif
@@ -67,10 +66,10 @@
                         <tr class="fw-bolder text-muted">
                             <th class="min-w-25px">#</th>
                             <th class="min-w-150px">{{trans(config('dashboard.trans_file').'name')}}</th>
-                            <th class="min-w-150px">{{trans(config('dashboard.trans_file').'role')}}</th>
-                            <th class="min-w-140px">{{trans(config('dashboard.trans_file').'email')}}</th>
-                            <th class="min-w-120px">{{trans(config('dashboard.trans_file').'mobile')}}</th>
-                            @if(auth()->guard('admin')->user()->can('admin-edit') || auth()->guard('admin')->user()->can('admin-delete'))
+                            <th class="min-w-150px">{{trans(config('dashboard.trans_file').'name_code')}}</th>
+                            <th class="min-w-140px">{{trans(config('dashboard.trans_file').'phone_code')}}</th>
+                            <th class="min-w-120px">{{trans(config('dashboard.trans_file').'status')}}</th>
+                            @if(auth()->guard('admin')->user()->can('country-edit') || auth()->guard('admin')->user()->can('country-delete'))
                             <th class="min-w-100px text-end">{{trans(config('dashboard.trans_file').'actions')}}</th>
                             @endif
                         </tr>
@@ -78,12 +77,12 @@
                     <!--end::Table head-->
                     <!--begin::Table body-->
                     <tbody>
-                        @if(count($admins) == 0)
+                        @if(count($countries) == 0)
                         <td colspan="100%">
                             <h3 class="col-12 text-center">{{trans(config('dashboard.trans_file').'no_result')}}</h3>
                         </td>
                         @else
-                        @foreach ($admins as $index => $admin)
+                        @foreach($countries as $index => $country)
                         <tr>
                             <td>
                                 <p class="text-dark fw-bolder d-block fs-6">{{++$index}}</p>
@@ -91,26 +90,30 @@
                             <td>
                                 <div class="d-flex align-items-center">
                                     <div class="symbol symbol-45px me-5">
-                                        <img src="{{$admin->image_path}}" alt="{{$admin->name}}">
+                                        <img src="{{$country->flag_path}}" alt="{{$country->name}}">
                                     </div>
                                     <div class="d-flex justify-content-start flex-column">
-                                        <p class="text-dark fw-bolder fs-6">{{$admin->name}}</p>
+                                        <p class="text-dark fw-bolder fs-6">{{$country->name}}</p>
                                     </div>
                                 </div>
                             </td>
                             <td>
-                                <p class="text-dark fw-bolder d-block fs-6">{{$admin->roles[0]->name}}</p>
+                                <p class="text-dark fw-bolder d-block fs-6">{{$country->name_code}}</p>
                             </td>
                             <td>
-                                <p class="text-dark fw-bolder d-block fs-6">{{$admin->email}}</p>
+                                <p class="text-dark fw-bolder d-block fs-6">{{$country->phone_code}}</p>
                             </td>
                             <td>
-                                <p class="text-dark fw-bolder d-block fs-6">{{$admin->mobile}}</p>
+                                @if($country->status)
+                                    <span class="badge badge-light-success">{{trans(config('dashboard.trans_file').'active')}}</span>
+                                @else
+                                    <span class="badge badge-light-danger">{{trans(config('dashboard.trans_file').'deactivate')}}</span>
+                                @endif
                             </td>
-                            @if(auth()->guard('admin')->user()->can('admin-edit') || auth()->guard('admin')->user()->can('admin-delete'))
+                            @if(auth()->guard('admin')->user()->can('country-edit') || auth()->guard('admin')->user()->can('country-delete'))
                             <td class="text-end">
-                                @if(auth()->guard('admin')->user()->can('admin-edit'))
-                                <a href="{{route('admins.edit', $admin->id)}}" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+                                @if(auth()->guard('admin')->user()->can('country-edit'))
+                                <a href="{{route('countries.edit', $country->id)}}" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                                     <!--begin::Svg Icon | path: icons/duotone/Communication/Write.svg-->
                                     <span class="svg-icon svg-icon-3">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -122,8 +125,8 @@
                                 </a>
                                 @endif
 
-                                @if(auth()->guard('admin')->user()->can('admin-delete'))
-                                <a href="#" onclick="deleteRow('{{route('admins.destroy', $admin->id)}}', '{{csrf_token()}}')" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm">
+                                @if(auth()->guard('admin')->user()->can('country-delete'))
+                                <a href="#" onclick="deleteRow('{{route('countries.destroy', $country->id)}}', '{{csrf_token()}}')" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm">
                                     <!--begin::Svg Icon | path: icons/duotone/General/Trash.svg-->
                                     <span class="svg-icon svg-icon-3">
                                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -145,7 +148,7 @@
                     </tbody>
                     <!--end::Table body-->
                 </table>
-                {{$admins->links("pagination::bootstrap-4")}}
+                {{$countries->links("pagination::bootstrap-4")}}
                 <!--end::Table-->
             </div>
             <!--end::Table container-->

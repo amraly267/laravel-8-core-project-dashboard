@@ -11,10 +11,10 @@ use Spatie\Permission\Models\Permission;
 
 class AdminController extends BaseController
 {
-    private $controllerResource = 'admins.';
-
     public function __construct()
     {
+        $this->controllerResource = 'admins.';
+        $this->storageFolder = Admin::storageFolder();
         $this->middleware('permission:admin-list,admin', ['only' => ['index','show']]);
         $this->middleware('permission:admin-create,admin', ['only' => ['create','store']]);
         $this->middleware('permission:admin-edit,admin', ['only' => ['edit','update']]);
@@ -59,7 +59,7 @@ class AdminController extends BaseController
 
         if($request->hasFile('image'))
         {
-            $imageName = $this->uploadImage($request->image, 'admins');
+            $imageName = $this->uploadImage($request->image, $this->storageFolder);
         }
 
         $admin = Admin::create([
@@ -114,14 +114,14 @@ class AdminController extends BaseController
 
         if($request->image_remove)
         {
-            $this->removeImage($admin->image, 'admins');
+            $this->removeImage($admin->image, $this->storageFolder);
             $admin->image = null;
         }
 
         if($request->hasFile('image'))
         {
-            $this->removeImage($admin->image, 'admins');
-            $admin->image = $this->uploadImage($request->image, 'admins');
+            $this->removeImage($admin->image, $this->storageFolder);
+            $admin->image = $this->uploadImage($request->image, $this->storageFolder);
         }
 
         if(strlen(trim($request->password)) > 0)
@@ -149,8 +149,9 @@ class AdminController extends BaseController
         {
             return $this->successResponse(['message' => trans(config('dashboard.trans_file').'cannot_delete_your_account')], 400);
         }
-
-        Admin::where('id', $id)->delete();
+        $existingAdmin = Admin::find($id);
+        $this->removeImage($existingAdmin->image, $this->storageFolder);
+        $existingAdmin->delete();
         return $this->successResponse(['message' => trans(config('dashboard.trans_file').'success_delete')]);
     }
 

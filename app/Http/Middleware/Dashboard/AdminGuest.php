@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Redirect;
 use Auth;
 use Closure;
 use Illuminate\Http\Request;
+use App\Models\Setting;
+use View;
 
 class AdminGuest
 {
@@ -22,6 +24,15 @@ class AdminGuest
             return redirect()->route('admin-home');
         }
 
+        $settings = Setting::find(1);
+        if(is_null($settings->logo))
+        {
+            View::share('logo', asset('img/dashboard/logo.svg'));
+        }
+        else
+        {
+            View::share('logo', $settings->logo_path);
+        }
         return $next($request);
     }
 }

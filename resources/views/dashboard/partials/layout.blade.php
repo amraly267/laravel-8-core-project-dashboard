@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html @if(config('app.locale') == 'ar') direction="rtl" dir="rtl" style="direction: rtl" @endif>
     @include(config('dashboard.resource_folder').'partials.header')
-    @if(auth()->guard('admin')->check() || Request::is('home'))
+    @if(auth()->guard('admin')->check())
     <body id="kt_body" class="header-fixed header-tablet-and-mobile-fixed toolbar-enabled toolbar-fixed toolbar-tablet-and-mobile-fixed aside-enabled aside-fixed" style="--kt-toolbar-height:55px;--kt-toolbar-height-tablet-and-mobile:55px">
         <div class="d-flex flex-column flex-root">
             <div class="page d-flex flex-row flex-column-fluid">

@@ -53,9 +53,9 @@
                     <!--begin::Col-->
                     <div class="col-lg-8">
                         <!--begin::Image input-->
-                        <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url({{asset('img/dashboard/default-user.png')}})">
+                        <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url({{asset('img/dashboard/default-user.svg')}})">
                             <!--begin::Preview existing avatar-->
-                            <div class="image-input-wrapper w-125px h-125px" style="background-image: url({{$submitFormMethod == 'put' ? $admin->image_path : asset('img/dashboard/default-user.png')}})"></div>
+                            <div class="image-input-wrapper w-125px h-125px" style="background-image: url({{$submitFormMethod == 'put' ? $admin->image_path : asset('img/dashboard/default-user.svg')}})"></div>
                             <!--end::Preview existing avatar-->
                             <!--begin::Label-->
                             <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="" data-bs-original-title="{{trans(config('dashboard.trans_file').'change_image')}}">

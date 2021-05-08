@@ -48,7 +48,8 @@
                                 <rect fill="#000000" opacity="0.3" transform="translate(12.000000, 12.000000) rotate(-270.000000) translate(-12.000000, -12.000000) " x="4" y="11" width="16" height="2" rx="1"/>
                             </g>
                         </svg><!--end::Svg Icon-->
-                    </span>{{trans(config('dashboard.trans_file').'add_new')}}
+                    </span>
+                    {{trans(config('dashboard.trans_file').'add_new')}}
                 </a>
             </div>
             @endif

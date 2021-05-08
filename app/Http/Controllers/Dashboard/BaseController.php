@@ -8,6 +8,9 @@ use Auth;
 
 class BaseController extends Controller
 {
+    protected $controllerResource;
+    protected $storageFolder;
+
     // === Return success json response ===
     protected function successResponse($data, $status_code = 200, $headers = [])
     {

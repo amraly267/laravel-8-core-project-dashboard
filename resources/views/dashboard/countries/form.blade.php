@@ -3,7 +3,7 @@
 
 @section('page_path')
 <!--begin::Title-->
-<h1 class="d-flex align-items-center text-dark fw-bolder my-1 fs-3">{{trans(config('dashboard.trans_file').'admins')}}</h1>
+<h1 class="d-flex align-items-center text-dark fw-bolder my-1 fs-3">{{trans(config('dashboard.trans_file').'countries')}}</h1>
 <!--end::Title-->
 <!--begin::Separator-->
 <span class="h-20px border-gray-200 border-start mx-4"></span>
@@ -22,7 +22,7 @@
     <!--end::Item-->
     <!--begin::Item-->
     <li class="breadcrumb-item text-muted">
-        <a href="{{route('admins.index')}}" class="text-muted text-hover-primary">{{trans(config('dashboard.trans_file').'admins')}}</a>
+        <a href="{{route('countries.index')}}" class="text-muted text-hover-primary">{{trans(config('dashboard.trans_file').'countries')}}</a>
     </li>
     <!--end::Item-->
     <!--begin::Item-->
@@ -51,28 +51,28 @@
     <!--begin::Content-->
     <div id="kt_account_profile_details" class="collapse show">
         <!--begin::Form-->
-        <form action="{{$submitFormRoute}}" method="POST" id="adminForm" class="form fv-plugins-bootstrap5 fv-plugins-framework" novalidate="novalidate">
+        <form action="{{$submitFormRoute}}" method="POST" id="countryForm" class="form fv-plugins-bootstrap5 fv-plugins-framework" novalidate="novalidate">
             @csrf @method($submitFormMethod)
             <!--begin::Card body-->
             <div class="card-body border-top p-9">
                 <!--begin::Input group-->
                 <div class="row mb-6">
                     <!--begin::Label-->
-                    <label class="col-lg-4 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'image')}}</label>
+                    <label class="col-lg-4 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'flag')}}</label>
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-8">
                         <!--begin::Image input-->
-                        <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url({{asset('img/dashboard/default-user.svg')}})">
+                        <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url({{asset('img/dashboard/default-flag.svg')}})">
                             <!--begin::Preview existing avatar-->
-                            <div class="image-input-wrapper w-125px h-125px" style="background-image: url({{$submitFormMethod == 'put' ? $admin->image_path : asset('img/dashboard/default-user.svg')}})"></div>
+                            <div class="image-input-wrapper w-125px h-125px" style="background-image: url({{$submitFormMethod == 'put' ? $country->flag_path : asset('img/dashboard/default-flag.svg')}})"></div>
                             <!--end::Preview existing avatar-->
                             <!--begin::Label-->
                             <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="" data-bs-original-title="{{trans(config('dashboard.trans_file').'change_image')}}">
                                 <i class="bi bi-pencil-fill fs-7"></i>
                                 <!--begin::Inputs-->
-                                <input type="file" name="image" accept=".png, .jpg, .jpeg">
-                                <input type="hidden" name="image_remove">
+                                <input type="file" name="flag" accept=".png, .jpg, .jpeg">
+                                <input type="hidden" name="flag_remove">
                                 <!--end::Inputs-->
                             </label>
                             <!--end::Label-->
@@ -88,7 +88,7 @@
                             <!--end::Remove-->
                         </div>
                         <br>
-                        <span class="help-block error-help-block input-error image-error" style="color: red;"></span>
+                        <span class="help-block error-help-block input-error flag-error" style="color: red;"></span>
                         <!--end::Image input-->
                     </div>
                     <!--end::Col-->
@@ -98,12 +98,22 @@
                 <!--begin::Input group-->
                 <div class="row mb-6">
                     <!--begin::Label-->
-                    <label class="col-lg-1 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'name')}}</label>
+                    <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'name_en')}}</label>
                     <!--end::Label-->
                     <!--begin::Col-->
-                    <div class="col-lg-11 fv-row fv-plugins-icon-container">
-                        <input type="text" name="name" class="form-control form-control-lg form-control-solid" placeholder="{{trans(config('dashboard.trans_file').'name')}}" value="{{$submitFormMethod == 'put' ? $admin->name : old('name')}}">
-                        <span class="help-block error-help-block input-error name-error" style="color: red;"></span>
+                    <div class="col-lg-4 fv-row fv-plugins-icon-container">
+                        <input type="text" name="name[en]" class="form-control form-control-lg form-control-solid" placeholder="{{trans(config('dashboard.trans_file').'name_en')}}" value="{{$submitFormMethod == 'put' ? $country->getTranslation('name', 'en') : old('name_en')}}">
+                        <span class="help-block error-help-block input-error name-en-error" style="color: red;"></span>
+                    </div>
+                    <!--end::Col-->
+
+                    <!--begin::Label-->
+                    <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'name_ar')}}</label>
+                    <!--end::Label-->
+                    <!--begin::Col-->
+                    <div class="col-lg-4 fv-row fv-plugins-icon-container">
+                        <input type="text" name="name[ar]" class="form-control form-control-lg form-control-solid" placeholder="{{trans(config('dashboard.trans_file').'name_ar')}}" value="{{$submitFormMethod == 'put' ? $country->getTranslation('name', 'ar') : old('name_ar')}}">
+                        <span class="help-block error-help-block input-error name-ar-error" style="color: red;"></span>
                     </div>
                     <!--end::Col-->
                 </div>
@@ -112,22 +122,22 @@
                 <!--begin::Input group-->
                 <div class="row mb-6">
                     <!--begin::Label-->
-                    <label class="col-lg-1 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'email')}}</label>
+                    <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'name_code')}}</label>
                     <!--end::Label-->
                     <!--begin::Col-->
-                    <div class="col-lg-5 fv-row fv-plugins-icon-container">
-                        <input type="email" name="email" class="form-control form-control-lg form-control-solid" placeholder="{{trans(config('dashboard.trans_file').'email')}}" value="{{$submitFormMethod == 'put' ? $admin->email : old('email')}}">
-                        <span class="help-block error-help-block input-error email-error" style="color: red;"></span>
+                    <div class="col-lg-4 fv-row fv-plugins-icon-container">
+                        <input type="text" minlength="2" maxlength="3" name="name_code" class="form-control form-control-lg form-control-solid" placeholder="{{trans(config('dashboard.trans_file').'name_code')}}" value="{{$submitFormMethod == 'put' ? $country->name_code : old('name_code')}}">
+                        <span class="help-block error-help-block input-error name_code-error" style="color: red;"></span>
                     </div>
                     <!--end::Col-->
 
                     <!--begin::Label-->
-                    <label class="col-lg-1 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'mobile')}}</label>
+                    <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'phone_code')}}</label>
                     <!--end::Label-->
                     <!--begin::Col-->
-                    <div class="col-lg-5 fv-row fv-plugins-icon-container">
-                        <input type="tel" minlength="9" maxlength="12" name="mobile" class="form-control form-control-lg form-control-solid" placeholder="{{trans(config('dashboard.trans_file').'mobile')}}" value="{{$submitFormMethod == 'put' ? $admin->mobile : old('mobile')}}">
-                        <span class="help-block error-help-block input-error mobile-error" style="color: red;"></span>
+                    <div class="col-lg-4 fv-row fv-plugins-icon-container">
+                        <input type="tel" minlength="3" maxlength="3" name="phone_code" class="form-control form-control-lg form-control-solid" placeholder="{{trans(config('dashboard.trans_file').'phone_code')}}" value="{{$submitFormMethod == 'put' ? $country->phone_code : old('phone_code')}}">
+                        <span class="help-block error-help-block input-error phone_code-error" style="color: red;"></span>
                     </div>
                     <!--end::Col-->
                 </div>
@@ -135,38 +145,17 @@
 
                 <!--begin::Input group-->
                 <div class="row mb-6">
-                    <!--begin::Label-->
-                    <label class="col-lg-1 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'password')}}</label>
-                    <!--end::Label-->
-                    <!--begin::Col-->
-                    <div class="col-lg-5 fv-row fv-plugins-icon-container">
-                        <input type="password" name="password" class="form-control form-control-lg form-control-solid" placeholder="{{trans(config('dashboard.trans_file').'password')}}" value="">
-                        @if($submitFormMethod == 'put')
-                            <span class="help-block error-help-block input-error password-error" style="color: rgb(167, 161, 161);">
-                                {{trans(config('dashboard.trans_file').'let_password_empty')}}
-                            </span><br>
-                        @endif
-                        <span class="help-block error-help-block input-error password-error" style="color: red;"></span>
+                    <div class="form-check form-switch form-check-custom form-check-solid">
+                        <label class="form-check-label col-lg-2 col-form-label fw-bold fs-6" for="flexSwitchDefault">
+                            {{trans(config('dashboard.trans_file').'status')}}
+                        </label>
+                        <input class="form-check-input" {{$submitFormMethod == 'put' && $country->status == 0 ? '' : 'checked'}} type="checkbox" name="status" value="1" id="flexSwitchDefault"/>
                     </div>
-                    <!--end::Col-->
-
-                    <!--begin::Label-->
-                    <label class="col-lg-1 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'role')}}</label>
-                    <!--end::Label-->
-                    <!--begin::Col-->
-                    <div class="col-lg-5 fv-row fv-plugins-icon-container">
-                        <select name="role" data-control="select2" class="form-select form-select-solid form-select-lg fw-bold select2-hidden-accessible" data-select2-id="select2-data-10-jdo1" tabindex="-1" aria-hidden="true">
-                            @foreach($roles as $role)
-                                <option @if($submitFormMethod == 'put' && $admin->roles[0]->id == $role->id) {{'selected'}} @endif value="{{$role->id}}">{{$role->name}}</option>
-                            @endforeach
-                        </select>
-                        <span class="help-block error-help-block input-error role-error" style="color: red;"></span>
-                    </div>
-                    <!--end::Col-->
                 </div>
                 <!--end::Input group-->
             </div>
             <!--end::Card body-->
+
             <!--begin::Actions-->
             <div class="card-footer d-flex justify-content-end py-6 px-9">
                 <button type="reset" class="btn btn-white btn-active-light-primary me-2" onclick="window.location.reload()">{{trans(config('dashboard.trans_file').'cancel')}}</button>
@@ -192,12 +181,12 @@
             {
                 $('.input-error').hide();
                 $('#saveBtn .spinner-border').removeClass('d-none');
-                $('#adminForm *').prop('disabled', true);
+                $('#countryForm *').prop('disabled', true);
             }
             function afterComplete()
             {
                 $('#saveBtn .spinner-border').addClass('d-none');
-                $('#adminForm *').prop('disabled', false);
+                $('#countryForm *').prop('disabled', false);
             }
             function successResponse()
             {
@@ -214,6 +203,7 @@
             function errorResponse()
             {
                 $.each(callResponse.responseJSON.errors, function(index, value) {
+                    index = index.replace(".", "-");
                     if($('.'+index+'-error').length)
                     {
                         $('.'+index+'-error').show();
@@ -221,7 +211,7 @@
                     }
                 });
             }
-            submitForm($('#adminForm')[0], beforeSend, afterComplete, successResponse, errorResponse)
+            submitForm($('#countryForm')[0], beforeSend, afterComplete, successResponse, errorResponse)
         })
         // === End script ===
     </script>

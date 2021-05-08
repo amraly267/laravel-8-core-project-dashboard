@@ -10,10 +10,9 @@ use App\Http\Requests\Dashboard\RoleRequest;
 
 class RoleController extends BaseController
 {
-    private $controllerResource = 'roles.';
-
     public function __construct()
     {
+        $this->controllerResource = 'roles.';
         $this->middleware('permission:role-list,admin', ['only' => ['index','show']]);
         $this->middleware('permission:role-create,admin', ['only' => ['create','store']]);
         $this->middleware('permission:role-edit,admin', ['only' => ['edit','update']]);

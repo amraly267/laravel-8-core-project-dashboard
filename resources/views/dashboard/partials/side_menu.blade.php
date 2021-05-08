@@ -3,7 +3,7 @@
     <div class="aside-logo flex-column-auto" id="kt_aside_logo">
         <!--begin::Logo-->
         <a href="{{route('admin-home')}}">
-            <img alt="Logo" src="{{asset('img/dashboard/logo.svg')}}" class="h-15px logo" />
+            <img alt="Logo" src="{{$logo}}" class="h-15px logo" />
         </a>
         <!--end::Logo-->
         <!--begin::Aside toggler-->
@@ -85,6 +85,56 @@
                             <!--end::Svg Icon-->
                         </span>
                         <span class="menu-title">{{trans(config('dashboard.trans_file').'roles')}}</span>
+                    </a>
+                </div>
+                @endif
+
+                @if(auth()->guard('admin')->user()->can('country-list'))
+                <div class="menu-item">
+                    <a class="menu-link {{ Request::is('admin/countries*') ? 'active' : '' }}" href="{{route('countries.index')}}">
+                        <span class="menu-icon">
+                            <!--begin::Svg Icon | path: assets/media/icons/duotone/Communication/Flag.svg-->
+                            <span class="svg-icon svg-icon-muted svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                <path d="M3.5,3 L5,3 L5,19.5 C5,20.3284271 4.32842712,21 3.5,21 L3.5,21 C2.67157288,21 2,20.3284271 2,19.5 L2,4.5 C2,3.67157288 2.67157288,3 3.5,3 Z" fill="#000000"/>
+                                <path d="M6.99987583,2.99995344 L19.754647,2.99999303 C20.3069317,2.99999474 20.7546456,3.44771138 20.7546439,3.99999613 C20.7546431,4.24703684 20.6631995,4.48533385 20.497938,4.66895776 L17.5,8 L20.4979317,11.3310353 C20.8673908,11.7415453 20.8341123,12.3738351 20.4236023,12.7432941 C20.2399776,12.9085564 20.0016794,13 19.7546376,13 L6.99987583,13 L6.99987583,2.99995344 Z" fill="#000000" opacity="0.3"/>
+                            </svg></span>
+                            <!--end::Svg Icon-->
+                        </span>
+                        <span class="menu-title">{{trans(config('dashboard.trans_file').'countries')}}</span>
+                    </a>
+                </div>
+                @endif
+
+                @if(auth()->guard('admin')->user()->can('page-edit'))
+                <div class="menu-item">
+                    <a class="menu-link {{ Request::is('admin/pages*') ? 'active' : '' }}" href="{{route('pages.index')}}">
+                        <span class="menu-icon">
+                            <!--begin::Svg Icon | path: assets/media/icons/duotone/Communication/Archive.svg-->
+                            <span class="svg-icon svg-icon-muted svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                <path d="M4.5,3 L19.5,3 C20.3284271,3 21,3.67157288 21,4.5 L21,19.5 C21,20.3284271 20.3284271,21 19.5,21 L4.5,21 C3.67157288,21 3,20.3284271 3,19.5 L3,4.5 C3,3.67157288 3.67157288,3 4.5,3 Z M8,5 C7.44771525,5 7,5.44771525 7,6 C7,6.55228475 7.44771525,7 8,7 L16,7 C16.5522847,7 17,6.55228475 17,6 C17,5.44771525 16.5522847,5 16,5 L8,5 Z" fill="#000000"/>
+                            </svg></span>
+                            <!--end::Svg Icon-->
+                        </span>
+                        <span class="menu-title">{{trans(config('dashboard.trans_file').'static_pages')}}</span>
+                    </a>
+                </div>
+                @endif
+
+                @if(auth()->guard('admin')->user()->can('setting-edit'))
+                <div class="menu-item">
+                    <a class="menu-link {{ Request::is('admin/settings*') ? 'active' : '' }}" href="{{route('admin-settings')}}">
+                        <span class="menu-icon">
+                            <!--begin::Svg Icon | path: assets/media/icons/duotone/General/Settings-2.svg-->
+                            <span class="svg-icon svg-icon-muted svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <rect x="0" y="0" width="24" height="24"/>
+                                    <path d="M5,8.6862915 L5,5 L8.6862915,5 L11.5857864,2.10050506 L14.4852814,5 L19,5 L19,9.51471863 L21.4852814,12 L19,14.4852814 L19,19 L14.4852814,19 L11.5857864,21.8994949 L8.6862915,19 L5,19 L5,15.3137085 L1.6862915,12 L5,8.6862915 Z M12,15 C13.6568542,15 15,13.6568542 15,12 C15,10.3431458 13.6568542,9 12,9 C10.3431458,9 9,10.3431458 9,12 C9,13.6568542 10.3431458,15 12,15 Z" fill="#000000"/>
+                                </g>
+                            </svg>
+                        </span>
+                            <!--end::Svg Icon-->
+                        </span>
+                        <span class="menu-title">{{trans(config('dashboard.trans_file').'settings')}}</span>
                     </a>
                 </div>
                 @endif

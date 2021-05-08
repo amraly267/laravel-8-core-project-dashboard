@@ -23,6 +23,7 @@ class CreateAdminSeeder extends Seeder
             'password' => bcrypt('123456'),
             'mobile' => '123456789',
         ]);
+
         $superRole = Role::find(1);
         $permissions = Permission::pluck('id')->all();
         $superRole->syncPermissions($permissions);

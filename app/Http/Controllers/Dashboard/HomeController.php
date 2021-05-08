@@ -6,10 +6,14 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Admin;
 use Spatie\Permission\Models\Role;
+use App\Models\Setting;
 
 class HomeController extends BaseController
 {
-    private $controllerResource = 'home.';
+    public function __construct()
+    {
+        $this->controllerResource = 'home.';
+    }
 
     public function index()
     {

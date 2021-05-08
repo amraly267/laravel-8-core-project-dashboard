@@ -39,6 +39,15 @@ class PermissionTableSeeder extends Seeder
             'admin-create',
             'admin-edit',
             'admin-delete',
+            'country-list',
+            'country-create',
+            'country-edit',
+            'country-delete',
+            'page-list',
+            'page-create',
+            'page-edit',
+            'page-delete',
+            'setting-edit',
         ];
 
         foreach($superPermissions as $permission)
@@ -58,5 +67,9 @@ class PermissionTableSeeder extends Seeder
                 Permission::where('name', $permission->name)->delete();
             }
         }
+
+        $superRole = Role::find(1);
+        $permissions = Permission::pluck('id')->all();
+        $superRole->syncPermissions($permissions);
     }
 }
