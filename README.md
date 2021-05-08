@@ -10,9 +10,7 @@
 ## About Laravel 8.0 core dashboard
 
 After cloning the project, please execute these commands to create admins and permissions: <br>
-php artisan migrate:fresh <br>
-php artisan db:seed --class=PermissionTableSeeder <br>
-php artisan db:seed --class=CreateAdminSeeder <br>
+php artisan dashboard:dumy
 
 ## Default admin login account
 
