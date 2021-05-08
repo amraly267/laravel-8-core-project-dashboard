@@ -9,7 +9,7 @@
 
 ## About Laravel 8.0 core dashboard
 
-After cloning the project, please execute these commands to create admins and permissions: <br>
+After cloning the project, please execute these commands to dummy data in dashboard: <br>
 php artisan dashboard:dumy
 
 ## Default admin login account
