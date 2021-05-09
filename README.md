@@ -14,6 +14,6 @@ php artisan dashboard:dumy
 
 ## Default admin login account
 
-url: {Your_Domain}/admin/login
+url: {Your_Domain}/admin/login <br>
 Email: super@admin.com <br>
 Password: 123456
