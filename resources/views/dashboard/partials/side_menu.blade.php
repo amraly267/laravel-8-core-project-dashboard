@@ -44,6 +44,15 @@
                         <span class="menu-title">{{trans(config('dashboard.trans_file').'home')}}</span>
                     </a>
                 </div>
+
+                @if(auth()->guard('admin')->user()->can('admin-list') || auth()->guard('admin')->user()->can('role-list'))
+                <div class="menu-item">
+                    <div class="menu-content pt-8 pb-2">
+                        <span class="menu-section text-muted text-uppercase fs-8 ls-1">{{trans(config('dashboard.trans_file').'admins_permissions')}}</span>
+                    </div>
+                </div>
+                @endif
+
                 @if(auth()->guard('admin')->user()->can('admin-list'))
                 <div class="menu-item">
                     <a class="menu-link {{ Request::is('admin/admins*') ? 'active' : '' }}" href="{{route('admins.index')}}">
@@ -89,6 +98,14 @@
                 </div>
                 @endif
 
+                @if(auth()->guard('admin')->user()->can('country-list') || auth()->guard('admin')->user()->can('page-list') || auth()->guard('admin')->user()->can('setting-edit'))
+                <div class="menu-item">
+                    <div class="menu-content pt-8 pb-2">
+                        <span class="menu-section text-muted text-uppercase fs-8 ls-1">{{trans(config('dashboard.trans_file').'general_settings')}}</span>
+                    </div>
+                </div>
+                @endif
+
                 @if(auth()->guard('admin')->user()->can('country-list'))
                 <div class="menu-item">
                     <a class="menu-link {{ Request::is('admin/countries*') ? 'active' : '' }}" href="{{route('countries.index')}}">
@@ -105,7 +122,7 @@
                 </div>
                 @endif
 
-                @if(auth()->guard('admin')->user()->can('page-edit'))
+                @if(auth()->guard('admin')->user()->can('page-list'))
                 <div class="menu-item">
                     <a class="menu-link {{ Request::is('admin/pages*') ? 'active' : '' }}" href="{{route('pages.index')}}">
                         <span class="menu-icon">

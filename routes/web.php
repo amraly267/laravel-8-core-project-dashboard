@@ -39,7 +39,7 @@ Route::prefix('admin')->group(function () {
 
     // === Login admin routes ===
     Route::middleware(['admin.auth'])->group(function () {
-
+        Route::get('/', [HomeController::class, 'index']);
         Route::get('home', [HomeController::class, 'index'])->name('admin-home');
         Route::post('logout', [AuthController::class, 'logout'])->name('admin-logout');
         Route::get('profile', [AuthController::class, 'profile'])->name('admin-profile');

@@ -1,5 +1,5 @@
 // === Submit forms via ajax call ===
-function submitForm(form, beforeSendAction, afterCompleteAction, successResponse, errorResponse)
+function submitForm(form, beforeSendAction, afterCompleteAction, successResponse, errorResponse, ckeditorTextareas)
 {
     event.preventDefault();
     var formData = new FormData(form);
@@ -17,6 +17,10 @@ function submitForm(form, beforeSendAction, afterCompleteAction, successResponse
         processData: false,
 
         beforeSend: function(){
+            $.each(ckeditorTextareas, function(index, value) {
+                formData.append(value, CKEDITOR.instances[value].getData());
+            });
+
             beforeSendAction();
         },
         complete: function(){

@@ -86,7 +86,7 @@
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-12 fv-row fv-plugins-icon-container">
-                        <textarea name="description[en]" class="form-control form-control-lg form-control-solid" placeholder="{{trans(config('dashboard.trans_file').'description_en')}}" rows="8">{{$submitFormMethod == 'put' ? $page->getTranslation('description', 'en') : old('description_en')}}</textarea>
+                        <textarea name="description[en]" class="description form-control form-control-lg form-control-solid" placeholder="{{trans(config('dashboard.trans_file').'description_en')}}" rows="8">{{$submitFormMethod == 'put' ? $page->getTranslation('description', 'en') : old('description_en')}}</textarea>
                         <span class="help-block error-help-block input-error description-en-error" style="color: red;"></span>
                     </div>
                     <!--end::Col-->
@@ -100,7 +100,7 @@
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-12 fv-row fv-plugins-icon-container">
-                        <textarea name="description[ar]" class="form-control form-control-lg form-control-solid" placeholder="{{trans(config('dashboard.trans_file').'description_ar')}}" rows="8">{{$submitFormMethod == 'put' ? $page->getTranslation('description', 'ar') : old('description_en')}}</textarea>
+                        <textarea name="description[ar]" class="description form-control form-control-lg form-control-solid" placeholder="{{trans(config('dashboard.trans_file').'description_ar')}}" rows="8">{{$submitFormMethod == 'put' ? $page->getTranslation('description', 'ar') : old('description_en')}}</textarea>
                         <span class="help-block error-help-block input-error description-ar-error" style="color: red;"></span>
                     </div>
                     <!--end::Col-->
@@ -137,7 +137,16 @@
 @endsection
 
 @push('footer-scripts')
+
+    <script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
+
     <script>
+        setTimeout(function(){
+            CKEDITOR.replaceAll('description',{
+                contentsLangDirection: "{{ config('app.locale') == 'en'? 'ltr': 'rtl'}}",
+            });
+        },400);
+
         // === save changes ===
         $('#saveBtn').on('click', function(){
 
@@ -175,7 +184,7 @@
                     }
                 });
             }
-            submitForm($('#pageForm')[0], beforeSend, afterComplete, successResponse, errorResponse)
+            submitForm($('#pageForm')[0], beforeSend, afterComplete, successResponse, errorResponse, ['description[en]', 'description[ar]'])
         })
         // === End script ===
     </script>

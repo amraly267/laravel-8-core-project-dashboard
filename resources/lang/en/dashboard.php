@@ -79,6 +79,9 @@ return [
     "snapchat_url" => "Snapchat url",
     "whatsapp_number" => "Whatsapp number",
     "logo" => "Logo",
+    "admins_permissions" => "Admins And Permissions",
+    "general_settings" => "General settings",
+    "total_static_pages" => "Total static pages",
 
 
 

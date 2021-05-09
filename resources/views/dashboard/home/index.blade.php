@@ -7,7 +7,7 @@
 @endsection
 
 <div class="row g-5 g-xl-8">
-    <div class="col-xl-4">
+    <div class="col-xl-3">
         <!--begin::Statistics Widget 5-->
         <a href="#" class="card bg-danger hoverable card-xl-stretch mb-xl-8">
             <!--begin::Body-->
@@ -31,7 +31,7 @@
         </a>
         <!--end::Statistics Widget 5-->
     </div>
-    <div class="col-xl-4">
+    <div class="col-xl-3">
         <!--begin::Statistics Widget 5-->
         <a href="#" class="card bg-primary hoverable card-xl-stretch mb-xl-8">
             <!--begin::Body-->
@@ -54,8 +54,50 @@
         </a>
         <!--end::Statistics Widget 5-->
     </div>
+    <div class="col-xl-3">
+        <!--begin::Statistics Widget 5-->
+        <a href="#" class="card bg-info hoverable card-xl-stretch mb-xl-8">
+            <!--begin::Body-->
+            <div class="card-body">
+                <!--begin::Svg Icon | path: icons/duotone/Design/PenAndRuller.svg-->
+                <span class="svg-icon svg-icon-muted svg-icon-2hx">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                        <path d="M3.5,3 L5,3 L5,19.5 C5,20.3284271 4.32842712,21 3.5,21 L3.5,21 C2.67157288,21 2,20.3284271 2,19.5 L2,4.5 C2,3.67157288 2.67157288,3 3.5,3 Z" fill="#000000"/>
+                        <path d="M6.99987583,2.99995344 L19.754647,2.99999303 C20.3069317,2.99999474 20.7546456,3.44771138 20.7546439,3.99999613 C20.7546431,4.24703684 20.6631995,4.48533385 20.497938,4.66895776 L17.5,8 L20.4979317,11.3310353 C20.8673908,11.7415453 20.8341123,12.3738351 20.4236023,12.7432941 C20.2399776,12.9085564 20.0016794,13 19.7546376,13 L6.99987583,13 L6.99987583,2.99995344 Z" fill="#000000" opacity="0.3"/>
+                    </svg>
+                </span>
+                <!--end::Svg Icon-->
+                <div class="text-inverse-primary fw-bolder fs-2 mb-2 mt-5">{{trans(config('dashboard.trans_file').'total_countries')}}</div>
+                <div class="fw-bold text-inverse-primary fs-7">{{$totalCountries}}</div>
+            </div>
+            <!--end::Body-->
+        </a>
+        <!--end::Statistics Widget 5-->
+    </div>
+    <div class="col-xl-3">
+        <!--begin::Statistics Widget 5-->
+        <a href="#" class="card bg-dark hoverable card-xl-stretch mb-xl-8">
+            <!--begin::Body-->
+            <div class="card-body">
+                <!--begin::Svg Icon | path: icons/duotone/Design/PenAndRuller.svg-->
+                <span class="menu-icon">
+                    <!--begin::Svg Icon | path: assets/media/icons/duotone/Communication/Archive.svg-->
+                    <span class="svg-icon svg-icon-muted svg-icon-2hx">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                            <path d="M4.5,3 L19.5,3 C20.3284271,3 21,3.67157288 21,4.5 L21,19.5 C21,20.3284271 20.3284271,21 19.5,21 L4.5,21 C3.67157288,21 3,20.3284271 3,19.5 L3,4.5 C3,3.67157288 3.67157288,3 4.5,3 Z M8,5 C7.44771525,5 7,5.44771525 7,6 C7,6.55228475 7.44771525,7 8,7 L16,7 C16.5522847,7 17,6.55228475 17,6 C17,5.44771525 16.5522847,5 16,5 L8,5 Z" fill="#000000"/>
+                        </svg>
+                    </span>
+                    <!--end::Svg Icon-->
+                </span>
+                <!--end::Svg Icon-->
+                <div class="text-inverse-primary fw-bolder fs-2 mb-2 mt-5">{{trans(config('dashboard.trans_file').'total_static_pages')}}</div>
+                <div class="fw-bold text-inverse-primary fs-7">{{$totalPages}}</div>
+            </div>
+            <!--end::Body-->
+        </a>
+        <!--end::Statistics Widget 5-->
+    </div>
 </div>
-
 
 
 @endsection

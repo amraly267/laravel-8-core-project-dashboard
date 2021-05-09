@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Admin;
 use Spatie\Permission\Models\Role;
 use App\Models\Setting;
+use App\Models\Country;
+use App\Models\Page;
 
 class HomeController extends BaseController
 {
@@ -19,6 +21,8 @@ class HomeController extends BaseController
     {
         $totalAdmins = Admin::count();
         $totalRoles = Role::count();
-        return view(config('dashboard.resource_folder').$this->controllerResource.'index', compact('totalAdmins', 'totalRoles'));
+        $totalCountries = Country::count();
+        $totalPages = Page::count();
+        return view(config('dashboard.resource_folder').$this->controllerResource.'index', compact('totalAdmins', 'totalRoles', 'totalCountries', 'totalPages'));
     }
 }

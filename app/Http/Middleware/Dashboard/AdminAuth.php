@@ -25,6 +25,8 @@ class AdminAuth
         }
 
         $settings = Setting::find(1);
+        View::share('title', $settings->project_name);
+
         if(is_null($settings->logo))
         {
             View::share('logo', asset('img/dashboard/logo.svg'));

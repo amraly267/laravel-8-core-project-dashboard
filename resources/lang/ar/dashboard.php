@@ -79,6 +79,9 @@ return [
     "snapchat_url" => "رابط سناب شات",
     "whatsapp_number" => "رقم الواتساب",
     "logo" => "لوجو",
+    "admins_permissions" => "المسؤوليين والصلاحيات",
+    "general_settings" => "اعدادات عامة",
+    "total_static_pages" => "عدد الصفحات الثابتة",
 
 
 

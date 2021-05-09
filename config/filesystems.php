@@ -45,21 +45,21 @@ return [
         'admins' => [
             'driver' => 'local',
             'root' => storage_path('app/public/admins'),
-            'url' => env('APP_URL').'/storage/admins',
+            'url' => env('APP_URL') == 'http://laravel-core-project.test' ? env('APP_URL').'/storage/admins' : env('APP_URL').'/public/storage/admins',
             'visibility' => 'public',
         ],
 
         'countries' => [
             'driver' => 'local',
             'root' => storage_path('app/public/countries'),
-            'url' => env('APP_URL').'/storage/countries',
+            'url' => env('APP_URL') == 'http://laravel-core-project.test' ? env('APP_URL').'/storage/countries' : env('APP_URL').'/public/storage/countries',
             'visibility' => 'public',
         ],
 
         'settings' => [
             'driver' => 'local',
             'root' => storage_path('app/public/settings'),
-            'url' => env('APP_URL').'/storage/settings',
+            'url' => env('APP_URL') == 'http://laravel-core-project.test' ? env('APP_URL').'/storage/settings' : env('APP_URL').'/public/storage/settings',
             'visibility' => 'public',
         ],
 
