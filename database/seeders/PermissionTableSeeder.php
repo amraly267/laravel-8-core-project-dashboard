@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use App\Models\PermissionGroup;
 
 class PermissionTableSeeder extends Seeder
 {
@@ -28,38 +29,35 @@ class PermissionTableSeeder extends Seeder
             Role::create(['name' => 'admin', 'guard_name' => 'admin']);
         }
 
-        $dbPermissions = Permission::select('name')->get();
 
-        $superPermissions = [
-            'role-list',
-            'role-create',
-            'role-edit',
-            'role-delete',
-            'admin-list',
-            'admin-create',
-            'admin-edit',
-            'admin-delete',
-            'country-list',
-            'country-create',
-            'country-edit',
-            'country-delete',
-            'page-list',
-            'page-create',
-            'page-edit',
-            'page-delete',
-            'setting-edit',
+        $permissionGroups= ['role', 'admin', 'country', 'page', 'setting', 'statistics'];
+
+        foreach($permissionGroups as $group)
+        {
+            PermissionGroup::updateOrCreate(['name' => $group], ['name' => $group]);
+        }
+
+        $superPermissions = ['role-list', 'role-create', 'role-edit', 'role-delete',
+                                'admin-list', 'admin-create', 'admin-edit', 'admin-delete',
+                                'country-list', 'country-create', 'country-edit', 'country-delete',
+                                'page-list', 'page-create', 'page-edit', 'page-delete',
+                                'setting-edit', 'statistics-list'
         ];
 
         foreach($superPermissions as $permission)
         {
-            $exstingPermission = Permission::where('name', $permission)->first();
+            $permissionGroupId = PermissionGroup::where('name', explode('-', $permission)[0])->first();
+            $permission = Permission::updateOrCreate(['name' => $permission, 'guard_name' => 'admin', 'group_id' => $permissionGroupId->id], ['name' => $permission, 'guard_name' => 'admin', 'group_id' => $permissionGroupId->id]);
 
-            if(!$exstingPermission)
-            {
-                $permission = Permission::create(['name' => $permission, 'guard_name' => 'admin']);
-            }
+            // $exstingPermission = Permission::where('name', $permission)->first();
+            // if(!$exstingPermission)
+            // {
+            //     $permissionGroupId = PermissionGroup::where('name', explode('-', $permission)[0])->first();
+            //     $permission = Permission::create(['name' => $permission, 'guard_name' => 'admin', 'group_id' => $permissionGroupId->id]);
+            // }
         }
 
+        $dbPermissions = Permission::select('name')->get();
         foreach($dbPermissions as $permission)
         {
             if(!in_array($permission->name, $superPermissions))

@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use App\Http\Requests\Dashboard\RoleRequest;
-
+use App\Models\PermissionGroup;
 class RoleController extends BaseController
 {
     public function __construct()
@@ -38,7 +38,7 @@ class RoleController extends BaseController
      */
     public function create()
     {
-        $permissions = Permission::all();
+        $permissions = PermissionGroup::get();
         $pageTitle = trans(config('dashboard.trans_file').'add_new');
         $submitFormRoute = route('roles.store');
         $submitFormMethod = 'post';
@@ -77,7 +77,7 @@ class RoleController extends BaseController
      */
     public function edit($id)
     {
-        $permissions = Permission::all();
+        $permissions = PermissionGroup::all();
         $role = Role::with('permissions')->find($id);
 
         $relatedPermissions = Permission::whereHas('roles', function($q) use ($role){

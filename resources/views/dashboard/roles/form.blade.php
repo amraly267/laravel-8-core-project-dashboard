@@ -78,18 +78,24 @@
                 </div>
                 <!--end::Input group-->
 
+                @foreach($permissions as $key => $permission)
                 <!--begin::Input group-->
                 <div class="row mb-6">
                     <!--begin::Checkbox-->
-                    @foreach($permissions as $key => $permission)
+                    <label class="mb-2 col-12 form-check form-check-custom form-check-solid me-10">
+                        <span class="form-check-label fw-bold">{{strtoupper($permission->name)}}</span>
+                    </label>
+                    @foreach($permission->relatedPerm as $related)
                     <label class="mb-2 col-2 form-check form-check-custom form-check-solid me-10">
-                        <input class="form-check-input h-20px w-20px"{{$submitFormMethod == 'put' && in_array($permission->id, $relatedPermissions)? 'checked':''}} type="checkbox" name="permissions[]" value="{{$permission->id}}">
-                        <span class="form-check-label fw-bold">{{$permission->name}}</span>
+                        <input class="form-check-input h-20px w-20px"{{$submitFormMethod == 'put' && in_array($related->id, $relatedPermissions)? 'checked':''}} type="checkbox" name="permissions[]" value="{{$related->id}}">
+                        <span class="form-check-label fw-bold">{{$related->name}}</span>
                     </label>
                     @endforeach
                     <!--end::Checkbox-->
                 </div>
+                @endforeach
                 <!--end::Input group-->
+
             </div>
             <!--end::Card body-->
 
@@ -133,9 +139,9 @@
                     showConfirmButton: false,
                     timer: 1500
                 });
-                // setTimeout(function(){
-                //     window.location.reload();
-                // }, 1000);
+                setTimeout(function(){
+                    window.location.reload();
+                }, 1000);
             }
             function errorResponse()
             {

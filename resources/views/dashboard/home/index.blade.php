@@ -6,6 +6,7 @@
 <!--end::Title-->
 @endsection
 
+@if(auth()->guard('admin')->user()->can('statistics-list'))
 <div class="row g-5 g-xl-8">
     <div class="col-xl-3">
         <!--begin::Statistics Widget 5-->
@@ -98,6 +99,6 @@
         <!--end::Statistics Widget 5-->
     </div>
 </div>
-
+@endif
 
 @endsection
