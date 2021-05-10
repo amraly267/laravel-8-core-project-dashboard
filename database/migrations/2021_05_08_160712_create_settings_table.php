@@ -26,6 +26,10 @@ class CreateSettingsTable extends Migration
             $table->string('instagram_url')->nullable();
             $table->string('whatsapp_number')->nullable();
             $table->string('snapchat_url')->nullable();
+            $table->string('css_in_header')->nullable();
+            $table->string('js_before_header')->nullable();
+            $table->string('js_before_body')->nullable();
+
             $table->timestamps();
         });
     }

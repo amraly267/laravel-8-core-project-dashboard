@@ -8,6 +8,7 @@ use App\Models\Admin;
 use Spatie\Permission\Models\Role;
 use App\Http\Requests\Dashboard\AdminRequest;
 use Spatie\Permission\Models\Permission;
+use App\Models\Country;
 
 class AdminController extends BaseController
 {
@@ -40,11 +41,12 @@ class AdminController extends BaseController
      */
     public function create()
     {
+        $countries = Country::all();
         $roles = Role::all();
         $pageTitle = trans(config('dashboard.trans_file').'add_new');
         $submitFormRoute = route('admins.store');
         $submitFormMethod = 'post';
-        return view(config('dashboard.resource_folder').$this->controllerResource.'form', compact('roles', 'pageTitle', 'submitFormRoute', 'submitFormMethod'));
+        return view(config('dashboard.resource_folder').$this->controllerResource.'form', compact('countries', 'roles', 'pageTitle', 'submitFormRoute', 'submitFormMethod'));
     }
 
     /**
@@ -68,6 +70,8 @@ class AdminController extends BaseController
             'mobile' => $request->mobile,
             'password' => bcrypt($request->password),
             'image' => $imageName,
+            'gender' => $request->gender,
+            'country_id' => $request->country_id,
         ]);
 
         $this->assignRole($admin, $request->role);
@@ -93,12 +97,13 @@ class AdminController extends BaseController
      */
     public function edit($id)
     {
+        $countries = Country::all();
         $roles = Role::all();
         $admin = Admin::find($id);
         $pageTitle = trans(config('dashboard.trans_file').'edit');
         $submitFormRoute = route('admins.update', $id);
         $submitFormMethod = 'put';
-        return view(config('dashboard.resource_folder').$this->controllerResource.'form', compact('roles', 'admin', 'pageTitle', 'submitFormRoute', 'submitFormMethod'));
+        return view(config('dashboard.resource_folder').$this->controllerResource.'form', compact('countries', 'roles', 'admin', 'pageTitle', 'submitFormRoute', 'submitFormMethod'));
     }
 
     /**
@@ -132,6 +137,8 @@ class AdminController extends BaseController
         $admin->name = $request->name;
         $admin->email = $request->email;
         $admin->mobile = $request->mobile;
+        $admin->gender = $request->gender;
+        $admin->country_id = $request->country_id;
         $admin->save();
         $this->assignRole($admin, $request->role);
         return $this->successResponse(['message' => trans(config('dashboard.trans_file').'success_save')]);

@@ -83,7 +83,7 @@
                 <div class="row mb-6">
                     <!--begin::Checkbox-->
                     <label class="mb-2 col-12 form-check form-check-custom form-check-solid me-10">
-                        <span class="form-check-label fw-bold">{{strtoupper($permission->name)}}</span>
+                        <span class="form-check-label fw-bold">{{trans(config('dashboard.trans_file').$permission->name)}}</span>
                     </label>
                     @foreach($permission->relatedPerm as $related)
                     <label class="mb-2 col-2 form-check form-check-custom form-check-solid me-10">

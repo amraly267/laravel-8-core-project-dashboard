@@ -153,11 +153,45 @@
                     <!--begin::Label-->
                     <label class="col-lg-1 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'role')}}</label>
                     <!--end::Label-->
+
                     <!--begin::Col-->
                     <div class="col-lg-5 fv-row fv-plugins-icon-container">
                         <select name="role" data-control="select2" class="form-select form-select-solid form-select-lg fw-bold select2-hidden-accessible" data-select2-id="select2-data-10-jdo1" tabindex="-1" aria-hidden="true">
                             @foreach($roles as $role)
                                 <option @if($submitFormMethod == 'put' && $admin->roles[0]->id == $role->id) {{'selected'}} @endif value="{{$role->id}}">{{$role->name}}</option>
+                            @endforeach
+                        </select>
+                        <span class="help-block error-help-block input-error role-error" style="color: red;"></span>
+                    </div>
+                    <!--end::Col-->
+                </div>
+                <!--end::Input group-->
+
+                <!--begin::Input group-->
+                <div class="row mb-6">
+                    <!--begin::Label-->
+                    <label class="col-lg-1 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'gender')}}</label>
+                    <!--end::Label-->
+
+                    <!--begin::Col-->
+                    <div class="col-lg-5 fv-row fv-plugins-icon-container">
+                        <select name="gender" data-control="select2" class="form-select form-select-solid form-select-lg fw-bold select2-hidden-accessible" data-select2-id="select2-data-10-jdo1" tabindex="-1" aria-hidden="true">
+                            <option @if($submitFormMethod == 'put' && $admin->gender == 'male') {{'selected'}} @endif value="male">{{trans(config('dashboard.trans_file').'male')}}</option>
+                            <option @if($submitFormMethod == 'put' && $admin->gender == 'female') {{'selected'}} @endif value="female">{{trans(config('dashboard.trans_file').'female')}}</option>
+                        </select>
+                        <span class="help-block error-help-block input-error gender-error" style="color: red;"></span>
+                    </div>
+                    <!--end::Col-->
+
+                    <!--begin::Label-->
+                    <label class="col-lg-1 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'countries')}}</label>
+                    <!--end::Label-->
+
+                    <!--begin::Col-->
+                    <div class="col-lg-5 fv-row fv-plugins-icon-container">
+                        <select name="country_id" data-control="select2" class="form-select form-select-solid form-select-lg fw-bold select2-hidden-accessible" data-select2-id="select2-data-10-jdo1" tabindex="-1" aria-hidden="true">
+                            @foreach($countries as $country)
+                                <option @if($submitFormMethod == 'put' && $admin->country_id == $country->id) {{'selected'}} @endif value="{{$country->id}}">{{$country->name}}</option>
                             @endforeach
                         </select>
                         <span class="help-block error-help-block input-error role-error" style="color: red;"></span>

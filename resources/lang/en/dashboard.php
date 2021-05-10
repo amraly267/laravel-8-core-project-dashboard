@@ -82,6 +82,17 @@ return [
     "admins_permissions" => "Admins And Permissions",
     "general_settings" => "General settings",
     "total_static_pages" => "Total static pages",
+    "css_in_header" => "Css in header",
+    "js_before_header" => "Js before header",
+    "js_before_body" => "Js before body",
+    "admin" => "Admin",
+    "country" => "Country",
+    "page" => "Page",
+    "setting" => "Setting",
+    "statistics" => "Statistics",
+    "male" => "Male",
+    "female" => "Female",
+    "gender" => "Gender",
 
 
 

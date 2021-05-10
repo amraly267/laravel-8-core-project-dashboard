@@ -40,5 +40,36 @@ class CreateAdminSeeder extends Seeder
         $permissions = Permission::pluck('id')->all();
         $adminRole->syncPermissions($permissions);
         $regularAdmin->assignRole([$adminRole->id]);
+
+        // for($i=0; $i<10000; $i++)
+        // {
+        //     $regularAdmin = Admin::create([
+        //         'name' => $this->quickRandom(5),//$faker->name,
+        //         'email' => $this->quickRandom(5).'@'.$this->quickRandom(5).'com',
+        //         'password' => bcrypt('123456'),
+        //         'mobile' => $this->quickRandom(12, true),
+        //     ]);
+        //     $adminRole = Role::find(2);
+        //     $permissions = Permission::pluck('id')->all();
+        //     $adminRole->syncPermissions($permissions);
+        //     $regularAdmin->assignRole([$adminRole->id]);
+        // }
+
     }
+
+    public static function quickRandom($length = 16, $num = null)
+    {
+        if($num)
+        {
+            $pool='0123456789';
+        }
+        else
+        {
+            $pool = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+        }
+
+        return substr(str_shuffle(str_repeat($pool, 5)), 0, $length);
+    }
+
 }

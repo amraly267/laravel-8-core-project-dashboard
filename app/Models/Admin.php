@@ -15,7 +15,7 @@ class Admin extends Authenticatable
     use HasFactory, Notifiable, HasRoles;
 
     public static $storageFolder = 'admins';
-    protected $fillable = ['name', 'email', 'mobile', 'image', 'password'];
+    protected $fillable = ['name', 'email', 'mobile', 'image', 'password', 'gender', 'country_id'];
     protected $hidden = ['password', 'remember_token'];
 
     // === Return storage folder to upload or delete model files ===

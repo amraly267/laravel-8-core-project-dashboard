@@ -11,7 +11,7 @@ class DashboardCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'dashboard:dumy';
+    protected $signature = 'dashboard:dummy';
 
     /**
      * The console command description.
