@@ -93,6 +93,7 @@ return [
     "male" => "ذكر",
     "female" => "أنثى",
     "gender" => "الجنس",
+    "country_id" => "الدولة",
 
 
 

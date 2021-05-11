@@ -184,7 +184,7 @@
                     <!--end::Col-->
 
                     <!--begin::Label-->
-                    <label class="col-lg-1 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'countries')}}</label>
+                    <label class="col-lg-1 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'country')}}</label>
                     <!--end::Label-->
 
                     <!--begin::Col-->
@@ -194,7 +194,7 @@
                                 <option @if($submitFormMethod == 'put' && $admin->country_id == $country->id) {{'selected'}} @endif value="{{$country->id}}">{{$country->name}}</option>
                             @endforeach
                         </select>
-                        <span class="help-block error-help-block input-error role-error" style="color: red;"></span>
+                        <span class="help-block error-help-block input-error country_id-error" style="color: red;"></span>
                     </div>
                     <!--end::Col-->
                 </div>

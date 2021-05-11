@@ -30,6 +30,7 @@ class AdminRequest extends FormRequest
             'email' => 'required|email|unique:admins,email,'.$adminId.',id',
             'mobile' => 'required|digits_between:9,12|unique:admins,mobile,'.$adminId.',id',
             'image' => 'nullable|mimes:jpeg,jpg,png|max:5120',
+            'country_id' => 'required|exists:countries,id',
         ];
 
         if(\Route::currentRouteName() == 'admins.update')
