@@ -97,6 +97,7 @@ return [
     "cities" => "Cities",
     "places" => "Places",
     "areas" => "Areas",
+    "area" => "Area",
     "city" => "City",
 
 ];
