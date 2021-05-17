@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Dashboard;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class AdminRequest extends FormRequest
 {
@@ -28,7 +29,10 @@ class AdminRequest extends FormRequest
         $rules = [
             'name' => 'required',
             'email' => 'required|email|unique:admins,email,'.$adminId.',id',
-            'mobile' => 'required|digits_between:9,12|unique:admins,mobile,'.$adminId.',id',
+            'mobile' => ['required', 'digits_between:9,12', Rule::unique('admins')->where(function($q){
+                                                                $q->where([['mobile', request()->mobile], ['country_id', request()->country_id]]);
+                                                            })->ignore($adminId)
+                        ],
             'image' => 'nullable|mimes:jpeg,jpg,png|max:5120',
             'country_id' => 'required|exists:countries,id',
         ];

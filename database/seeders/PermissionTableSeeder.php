@@ -30,7 +30,7 @@ class PermissionTableSeeder extends Seeder
         }
 
 
-        $permissionGroups= ['role', 'admin', 'country', 'page', 'setting', 'statistics'];
+        $permissionGroups= ['role', 'admin', 'country', 'city', 'area','page', 'setting', 'statistics'];
 
         foreach($permissionGroups as $group)
         {
@@ -40,6 +40,8 @@ class PermissionTableSeeder extends Seeder
         $superPermissions = ['role-list', 'role-create', 'role-edit', 'role-delete',
                                 'admin-list', 'admin-create', 'admin-edit', 'admin-delete',
                                 'country-list', 'country-create', 'country-edit', 'country-delete',
+                                'city-list', 'city-create', 'city-edit', 'city-delete',
+                                'area-list', 'area-create', 'area-edit', 'area-delete',
                                 'page-list', 'page-create', 'page-edit', 'page-delete',
                                 'setting-edit', 'statistics-list'
         ];

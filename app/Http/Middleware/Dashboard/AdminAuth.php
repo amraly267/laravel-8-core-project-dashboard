@@ -8,6 +8,7 @@ use Closure;
 use Illuminate\Http\Request;
 use App\Models\Setting;
 use View;
+use Spatie\Permission\Models\Role;
 
 class AdminAuth
 {
@@ -26,6 +27,9 @@ class AdminAuth
 
         $settings = Setting::find(1);
         View::share('title', $settings->project_name);
+
+        $roles = Role::all();
+        View::share('roles', $roles);
 
         if(is_null($settings->logo))
         {

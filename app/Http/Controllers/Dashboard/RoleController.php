@@ -8,6 +8,8 @@ use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use App\Http\Requests\Dashboard\RoleRequest;
 use App\Models\PermissionGroup;
+use app\Models\Admin;
+
 class RoleController extends BaseController
 {
     public function __construct()
@@ -118,4 +120,30 @@ class RoleController extends BaseController
         $role = Role::where('id', $id)->delete();
         return $this->successResponse(['message' => trans(config('dashboard.trans_file').'success_delete')]);
     }
+
+    public function roleAdmins(Request $request)
+    {
+        $roleId = $request->role_id;
+        $existingRole = Role::find($roleId);
+
+        if($existingRole)
+        {
+            $admins = Admin::whereHas('roles', function($q) use($request){
+                $q->where('id', $request->role_id);
+            })->paginate(10);
+
+            $totalResults = Admin::whereHas('roles', function($q) use($request){
+                $q->where('id', $request->role_id);
+            })->count();
+
+            $pageTitle = strtoupper($existingRole->name);
+            return view(config('dashboard.resource_folder').$this->controllerResource.'role_admins', compact('admins', 'totalResults', 'pageTitle', 'roleId'));
+        }
+        else
+        {
+            abort(404);
+        }
+    }
+
+
 }

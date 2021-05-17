@@ -8,6 +8,8 @@ use App\Http\Controllers\Dashboard\RoleController;
 use App\Http\Controllers\Dashboard\HomeController;
 use App\Http\Controllers\Dashboard\SettingController;
 use App\Http\Controllers\Dashboard\PageController;
+use App\Http\Controllers\Dashboard\CityController;
+use App\Http\Controllers\Dashboard\AreaController;
 
 
 /*
@@ -48,7 +50,10 @@ Route::prefix('admin')->group(function () {
         Route::put('update-profile', [AuthController::class, 'updateProfile'])->name('admin-update-profile');
         Route::resource('admins', AdminController::class);
         Route::resource('roles', RoleController::class);
+        Route::get('role-admins/{role_id}', [RoleController::class, 'roleAdmins'])->name('role-admins');
         Route::resource('countries', CountryController::class);
+        Route::resource('cities', CityController::class);
+        Route::resource('areas', AreaController::class);
         Route::resource('pages', PageController::class);
         Route::get('settings', [SettingController::class, 'index'])->name('admin-settings');
         Route::put('settings', [SettingController::class, 'update'])->name('admin-update-settings');

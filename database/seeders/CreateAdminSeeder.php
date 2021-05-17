@@ -22,6 +22,7 @@ class CreateAdminSeeder extends Seeder
             'email' => 'super@admin.com',
             'password' => bcrypt('123456'),
             'mobile' => '123456789',
+            'country_id' => 1,
         ]);
 
         $superRole = Role::find(1);
@@ -34,7 +35,8 @@ class CreateAdminSeeder extends Seeder
             'name' => 'Admin',
             'email' => 'admin@admin.com',
             'password' => bcrypt('123456'),
-            'mobile' => '123956789',
+            'mobile' => '993956789',
+            'country_id' => 1,
         ]);
         $adminRole = Role::find(2);
         $permissions = Permission::pluck('id')->all();

@@ -23,6 +23,13 @@ class Country extends Model
     }
     // === End function ===
 
+    // === Escape translation arabic unicode before saving to DB ===
+    protected function asJson($value)
+    {
+        return json_encode($value, JSON_UNESCAPED_UNICODE);
+    }
+    // === End function ===
+
     // === Get flag path or set default image ===
     public function getFlagPathAttribute()
     {

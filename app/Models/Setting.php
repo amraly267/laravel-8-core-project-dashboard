@@ -10,6 +10,7 @@ use Storage;
 class Setting extends Model
 {
     use HasFactory, HasTranslations;
+
     public static $storageFolder = 'settings';
     public $translatable = ['project_name'];
     protected $fillable = ['project_name', 'contact_us_email', 'contact_us_mobile', 'contact_us_phone', 'logo', 'facebook_url', 'twitter_url',
@@ -19,6 +20,13 @@ class Setting extends Model
     protected static function storageFolder()
     {
         return self::$storageFolder;
+    }
+    // === End function ===
+
+    // === Escape translation arabic unicode before saving to DB ===
+    protected function asJson($value)
+    {
+        return json_encode($value, JSON_UNESCAPED_UNICODE);
     }
     // === End function ===
 

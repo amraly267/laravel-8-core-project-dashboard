@@ -37,10 +37,10 @@ class DashboardCommand extends Command
      */
     public function handle()
     {
-        \Artisan::call('migrate:refresh');
+        \Artisan::call('migrate:fresh');
+        \Artisan::call('db:seed --class=CreateSettingSeeder');
         \Artisan::call('db:seed --class=PermissionTableSeeder');
         \Artisan::call('db:seed --class=CreateAdminSeeder');
-        \Artisan::call('db:seed --class=CreateSettingSeeder');
         dd('success');
         return 0;
     }

@@ -25,6 +25,13 @@ class Admin extends Authenticatable
     }
     // === End function ===
 
+    // === Admin country ===
+    public function country()
+    {
+        return $this->belongsTo(Country::class)->withTrashed();
+    }
+    // === End function ===
+
     // === Get image path or set default image ===
     public function getImagePathAttribute()
     {

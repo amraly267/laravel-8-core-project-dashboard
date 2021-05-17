@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAdminsTable extends Migration
+class CreateAreasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,14 @@ class CreateAdminsTable extends Migration
      */
     public function up()
     {
-        Schema::create('admins', function (Blueprint $table) {
+        Schema::create('areas', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('city_id')->nullable();
             $table->string('name');
-            $table->string('email')->unique();
-            $table->string('mobile');
-            $table->string('password');
-            $table->string('image')->nullable();
-            $table->enum('gender', ['male', 'female']);
-            $table->rememberToken();
+            $table->enum('status', [1, 0])->default(1);
             $table->timestamps();
+            $table->softDeletes();
+            $table->foreign('city_id')->references('id')->on('cities');
         });
     }
 
@@ -33,6 +31,6 @@ class CreateAdminsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('admins');
+        Schema::dropIfExists('areas');
     }
 }

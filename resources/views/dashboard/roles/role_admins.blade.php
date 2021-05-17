@@ -4,7 +4,7 @@
 
 @section('page_path')
 <!--begin::Title-->
-<h1 class="d-flex align-items-center text-dark fw-bolder my-1 fs-3">{{trans(config('dashboard.trans_file').'admins')}}</h1>
+<h1 class="d-flex align-items-center text-dark fw-bolder my-1 fs-3">{{$pageTitle}}</h1>
 <!--end::Title-->
 <!--begin::Separator-->
 <span class="h-20px border-gray-200 border-start mx-4"></span>
@@ -22,7 +22,7 @@
     </li>
     <!--end::Item-->
     <!--begin::Item-->
-    <li class="breadcrumb-item text-dark">{{trans(config('dashboard.trans_file').'admins')}}</li>
+    <li class="breadcrumb-item text-dark">{{$pageTitle}}</li>
     <!--end::Item-->
 </ul>
 <!--end::Breadcrumb-->
@@ -34,14 +34,16 @@
         <!--begin::Header-->
         <div class="card-header border-0 pt-5">
             <h3 class="card-title align-items-start flex-column">
-                <span class="card-label fw-bolder fs-3 mb-1">{{trans(config('dashboard.trans_file').'admins')}}</span>
+                <span class="card-label fw-bolder fs-3 mb-1">{{$pageTitle}}</span>
                 <span class="text-muted mt-1 fw-bold fs-7">{{trans(config('dashboard.trans_file').'total_results', ['val' => $totalResults])}}</span>
             </h3>
+
             @if(auth()->guard('admin')->user()->can('admin-create'))
             <div class="card-toolbar">
-                <a href="{{route('admins.create')}}" class="btn btn-sm btn-light-primary">
+                <a href="{{route('admins.create', ['role_id' => $roleId])}}" class="btn btn-sm btn-light-primary">
                     <!--begin::Svg Icon | path: icons/duotone/Communication/Add-user.svg-->
-                    <span class="svg-icon svg-icon-primary svg-icon-2x"><!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-03-183419/theme/html/demo2/dist/../src/media/svg/icons/Navigation/Plus.svg-->
+                    <span class="svg-icon svg-icon-primary svg-icon-2x">
+                        <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-03-183419/theme/html/demo2/dist/../src/media/svg/icons/Navigation/Plus.svg-->
                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                 <rect fill="#000000" x="4" y="11" width="16" height="2" rx="1"/>
@@ -105,8 +107,7 @@
                                 <p class="text-dark fw-bolder d-block fs-6">{{$admin->email}}</p>
                             </td>
                             <td>
-                                {{-- {{$$admin['country']}} --}}
-                                <p class="text-dark fw-bolder d-block fs-6">{{$admin->country->phone_code.$admin->mobile}}</p>
+                                <p class="text-dark fw-bolder d-block fs-6">{{$admin->mobile}}</p>
                             </td>
                             @if(auth()->guard('admin')->user()->can('admin-edit') || auth()->guard('admin')->user()->can('admin-delete'))
                             <td class="text-end">

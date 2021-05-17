@@ -94,9 +94,10 @@ return [
     "female" => "Female",
     "gender" => "Gender",
     "country_id" => "Country",
-
-
-
+    "cities" => "Cities",
+    "places" => "Places",
+    "areas" => "Areas",
+    "city" => "City",
 
 ];
 

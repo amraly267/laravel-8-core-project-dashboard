@@ -96,12 +96,34 @@
                         <span class="menu-title">{{trans(config('dashboard.trans_file').'roles')}}</span>
                     </a>
                 </div>
+
+                @foreach($roles as $role)
+                <div class="menu-item">
+                    <a class="menu-link {{ Request::is('admin/role-admins/'.$role->id) ? 'active' : '' }}" href="{{route('role-admins', ['role_id' => $role->id])}}">
+                        <span class="menu-icon">
+                                <!--begin::Svg Icon | path: icons/duotone/Design/PenAndRuller.svg-->
+                                <span class="svg-icon svg-icon-primary svg-icon-2x"><!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-03-183419/theme/html/demo2/dist/../src/media/svg/icons/Home/Key.svg-->
+                                    <!--begin::Svg Icon | path: assets/media/icons/duotone/Interface/User.svg-->
+                                    <span class="svg-icon svg-icon-muted svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path d="M17 6C17 8.76142 14.7614 11 12 11C9.23858 11 7 8.76142 7 6C7 3.23858 9.23858 1 12 1C14.7614 1 17 3.23858 17 6Z" fill="#121319"/>
+                                        <path opacity="0.25" fill-rule="evenodd" clip-rule="evenodd" d="M18.818 14.1248C18.2016 13.4101 17.1428 13.4469 16.3149 13.9001C15.0338 14.6013 13.5635 15 12 15C10.4365 15 8.96618 14.6013 7.68505 13.9001C6.85717 13.4469 5.79841 13.4101 5.182 14.1248C3.82222 15.7014 3 17.7547 3 20V21C3 22.1045 3.89543 23 5 23H19C20.1046 23 21 22.1045 21 21V20C21 17.7547 20.1778 15.7014 18.818 14.1248Z" fill="#191213"/>
+                                    </svg>
+                                </span>
+                                <!--end::Svg Icon-->
+                            </span>
+                            <!--end::Svg Icon-->
+                        </span>
+                        <span class="menu-title">{{$role->name}}</span>
+                    </a>
+                </div>
+                @endforeach
                 @endif
 
-                @if(auth()->guard('admin')->user()->can('country-list') || auth()->guard('admin')->user()->can('page-list') || auth()->guard('admin')->user()->can('setting-edit'))
+
+                @if(auth()->guard('admin')->user()->can('country-list') || auth()->guard('admin')->user()->can('city-list'))
                 <div class="menu-item">
                     <div class="menu-content pt-8 pb-2">
-                        <span class="menu-section text-muted text-uppercase fs-8 ls-1">{{trans(config('dashboard.trans_file').'general_settings')}}</span>
+                        <span class="menu-section text-muted text-uppercase fs-8 ls-1">{{trans(config('dashboard.trans_file').'places')}}</span>
                     </div>
                 </div>
                 @endif
@@ -121,6 +143,53 @@
                     </a>
                 </div>
                 @endif
+
+                @if(auth()->guard('admin')->user()->can('city-list'))
+                <div class="menu-item">
+                    <a class="menu-link {{ Request::is('admin/cities*') ? 'active' : '' }}" href="{{route('cities.index')}}">
+                        <span class="menu-icon">
+                            <!--begin::Svg Icon | path: assets/media/icons/duotone/Map/Location-arrow.svg-->
+                            <span class="svg-icon svg-icon-muted svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <rect x="0" y="0" width="24" height="24"/>
+                                    <path d="M4.88230018,17.2353996 L13.2844582,0.431083506 C13.4820496,0.0359007077 13.9625881,-0.12427877 14.3577709,0.0733126292 C14.5125928,0.15072359 14.6381308,0.276261584 14.7155418,0.431083506 L23.1176998,17.2353996 C23.3152912,17.6305824 23.1551117,18.1111209 22.7599289,18.3087123 C22.5664522,18.4054506 22.3420471,18.4197165 22.1378777,18.3482572 L14,15.5 L5.86212227,18.3482572 C5.44509941,18.4942152 4.98871325,18.2744737 4.84275525,17.8574509 C4.77129597,17.6532815 4.78556182,17.4288764 4.88230018,17.2353996 Z" fill="#000000" fill-rule="nonzero" transform="translate(14.000087, 9.191034) rotate(-315.000000) translate(-14.000087, -9.191034) "/>
+                                </g>
+                            </svg></span>
+                            <!--end::Svg Icon-->
+                        </span>
+                        <span class="menu-title">{{trans(config('dashboard.trans_file').'cities')}}</span>
+                    </a>
+                </div>
+                @endif
+
+                @if(auth()->guard('admin')->user()->can('area-list'))
+                <div class="menu-item">
+                    <a class="menu-link {{ Request::is('admin/areas*') ? 'active' : '' }}" href="{{route('areas.index')}}">
+                        <span class="menu-icon">
+                            <!--begin::Svg Icon | path: assets/media/icons/duotone/Map/Position.svg-->
+                            <span class="svg-icon svg-icon-muted svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <rect x="0" y="0" width="24" height="24"/>
+                                    <path d="M19,11 L21,11 C21.5522847,11 22,11.4477153 22,12 C22,12.5522847 21.5522847,13 21,13 L19,13 C18.4477153,13 18,12.5522847 18,12 C18,11.4477153 18.4477153,11 19,11 Z M3,11 L5,11 C5.55228475,11 6,11.4477153 6,12 C6,12.5522847 5.55228475,13 5,13 L3,13 C2.44771525,13 2,12.5522847 2,12 C2,11.4477153 2.44771525,11 3,11 Z M12,2 C12.5522847,2 13,2.44771525 13,3 L13,5 C13,5.55228475 12.5522847,6 12,6 C11.4477153,6 11,5.55228475 11,5 L11,3 C11,2.44771525 11.4477153,2 12,2 Z M12,18 C12.5522847,18 13,18.4477153 13,19 L13,21 C13,21.5522847 12.5522847,22 12,22 C11.4477153,22 11,21.5522847 11,21 L11,19 C11,18.4477153 11.4477153,18 12,18 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"/>
+                                    <circle fill="#000000" opacity="0.3" cx="12" cy="12" r="2"/>
+                                    <path d="M12,17 C14.7614237,17 17,14.7614237 17,12 C17,9.23857625 14.7614237,7 12,7 C9.23857625,7 7,9.23857625 7,12 C7,14.7614237 9.23857625,17 12,17 Z M12,19 C8.13400675,19 5,15.8659932 5,12 C5,8.13400675 8.13400675,5 12,5 C15.8659932,5 19,8.13400675 19,12 C19,15.8659932 15.8659932,19 12,19 Z" fill="#000000" fill-rule="nonzero"/>
+                                </g>
+                            </svg></span>
+                            <!--end::Svg Icon-->
+                        </span>
+                        <span class="menu-title">{{trans(config('dashboard.trans_file').'areas')}}</span>
+                    </a>
+                </div>
+                @endif
+
+                @if(auth()->guard('admin')->user()->can('page-list') || auth()->guard('admin')->user()->can('setting-edit'))
+                <div class="menu-item">
+                    <div class="menu-content pt-8 pb-2">
+                        <span class="menu-section text-muted text-uppercase fs-8 ls-1">{{trans(config('dashboard.trans_file').'general_settings')}}</span>
+                    </div>
+                </div>
+                @endif
+
 
                 @if(auth()->guard('admin')->user()->can('page-list'))
                 <div class="menu-item">

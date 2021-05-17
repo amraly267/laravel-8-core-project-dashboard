@@ -112,6 +112,41 @@
                 <!--begin::Input group-->
                 <div class="row mb-6">
                     <!--begin::Label-->
+                    <label class="col-lg-1 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'country')}}</label>
+                    <!--end::Label-->
+                    <!--begin::Col-->
+                    <div class="col-lg-5 fv-row fv-plugins-icon-container">
+                        <select id="country_id" name="country_id" data-control="select2" class="form-select form-select-solid form-select-lg fw-bold select2-hidden-accessible" data-select2-id="select2-data-10-jdo1-country" tabindex="-1" aria-hidden="true">
+                            @foreach($countries as $country)
+                                <option data-phone_code="{{$country->phone_code}}" @if($submitFormMethod == 'put' && $admin->country_id == $country->id) {{'selected'}} @endif value="{{$country->id}}">{{$country->name}}</option>
+                            @endforeach
+                        </select>
+                        <span class="help-block error-help-block input-error country_id-error" style="color: red;"></span>
+                    </div>
+                    <!--end::Col-->
+
+                    <!--begin::Label-->
+                    <label class="col-lg-1 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'mobile')}}</label>
+                    <!--end::Label-->
+                    <!--begin::Col-->
+                    <div class="col-lg-5 fv-row fv-plugins-icon-container">
+                        <span id="country_phone_code" class="svg-icon svg-icon-2 svg-icon-lg-1 svg-icon-gray-500 position-absolute top-50 ms-5 translate-middle-y">
+                            @if($submitFormMethod == 'put')
+                                {{$admin->country->phone_code}}
+                            @else
+                                {{count($countries) > 0 ? $countries[0]->phone_code:''}}
+                            @endif
+                        </span>
+                        <input type="tel" minlength="9" maxlength="12" name="mobile" class="form-control form-control-solid px-15" placeholder="{{trans(config('dashboard.trans_file').'mobile')}}" value="{{$submitFormMethod == 'put' ? $admin->mobile : old('mobile')}}">
+                        <span class="help-block error-help-block input-error mobile-error" style="color: red;"></span>
+                    </div>
+                    <!--end::Col-->
+                </div>
+                <!--end::Input group-->
+
+                <!--begin::Input group-->
+                <div class="row mb-6">
+                    <!--begin::Label-->
                     <label class="col-lg-1 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'email')}}</label>
                     <!--end::Label-->
                     <!--begin::Col-->
@@ -121,20 +156,6 @@
                     </div>
                     <!--end::Col-->
 
-                    <!--begin::Label-->
-                    <label class="col-lg-1 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'mobile')}}</label>
-                    <!--end::Label-->
-                    <!--begin::Col-->
-                    <div class="col-lg-5 fv-row fv-plugins-icon-container">
-                        <input type="tel" minlength="9" maxlength="12" name="mobile" class="form-control form-control-lg form-control-solid" placeholder="{{trans(config('dashboard.trans_file').'mobile')}}" value="{{$submitFormMethod == 'put' ? $admin->mobile : old('mobile')}}">
-                        <span class="help-block error-help-block input-error mobile-error" style="color: red;"></span>
-                    </div>
-                    <!--end::Col-->
-                </div>
-                <!--end::Input group-->
-
-                <!--begin::Input group-->
-                <div class="row mb-6">
                     <!--begin::Label-->
                     <label class="col-lg-1 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'password')}}</label>
                     <!--end::Label-->
@@ -149,21 +170,6 @@
                         <span class="help-block error-help-block input-error password-error" style="color: red;"></span>
                     </div>
                     <!--end::Col-->
-
-                    <!--begin::Label-->
-                    <label class="col-lg-1 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'role')}}</label>
-                    <!--end::Label-->
-
-                    <!--begin::Col-->
-                    <div class="col-lg-5 fv-row fv-plugins-icon-container">
-                        <select name="role" data-control="select2" class="form-select form-select-solid form-select-lg fw-bold select2-hidden-accessible" data-select2-id="select2-data-10-jdo1" tabindex="-1" aria-hidden="true">
-                            @foreach($roles as $role)
-                                <option @if($submitFormMethod == 'put' && $admin->roles[0]->id == $role->id) {{'selected'}} @endif value="{{$role->id}}">{{$role->name}}</option>
-                            @endforeach
-                        </select>
-                        <span class="help-block error-help-block input-error role-error" style="color: red;"></span>
-                    </div>
-                    <!--end::Col-->
                 </div>
                 <!--end::Input group-->
 
@@ -172,10 +178,9 @@
                     <!--begin::Label-->
                     <label class="col-lg-1 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'gender')}}</label>
                     <!--end::Label-->
-
                     <!--begin::Col-->
                     <div class="col-lg-5 fv-row fv-plugins-icon-container">
-                        <select name="gender" data-control="select2" class="form-select form-select-solid form-select-lg fw-bold select2-hidden-accessible" data-select2-id="select2-data-10-jdo1" tabindex="-1" aria-hidden="true">
+                        <select name="gender" data-control="select2" class="form-select form-select-solid form-select-lg fw-bold select2-hidden-accessible" data-select2-id="select2-data-10-jdo1-gender" tabindex="-1" aria-hidden="true">
                             <option @if($submitFormMethod == 'put' && $admin->gender == 'male') {{'selected'}} @endif value="male">{{trans(config('dashboard.trans_file').'male')}}</option>
                             <option @if($submitFormMethod == 'put' && $admin->gender == 'female') {{'selected'}} @endif value="female">{{trans(config('dashboard.trans_file').'female')}}</option>
                         </select>
@@ -184,17 +189,16 @@
                     <!--end::Col-->
 
                     <!--begin::Label-->
-                    <label class="col-lg-1 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'country')}}</label>
+                    <label class="col-lg-1 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'role')}}</label>
                     <!--end::Label-->
-
                     <!--begin::Col-->
                     <div class="col-lg-5 fv-row fv-plugins-icon-container">
-                        <select name="country_id" data-control="select2" class="form-select form-select-solid form-select-lg fw-bold select2-hidden-accessible" data-select2-id="select2-data-10-jdo1" tabindex="-1" aria-hidden="true">
-                            @foreach($countries as $country)
-                                <option @if($submitFormMethod == 'put' && $admin->country_id == $country->id) {{'selected'}} @endif value="{{$country->id}}">{{$country->name}}</option>
+                        <select @if(request()->has('role_id')) {{'disabled'}} @endif name="role" data-control="select2" class="form-select form-select-solid form-select-lg fw-bold select2-hidden-accessible" data-select2-id="select2-data-10-jdo1-role" tabindex="-1" aria-hidden="true">
+                            @foreach($roles as $role)
+                                <option @if(($submitFormMethod == 'put' && $admin->roles[0]->id == $role->id) || (request()->role_id == $role->id)) {{'selected'}} @endif value="{{$role->id}}">{{$role->name}}</option>
                             @endforeach
                         </select>
-                        <span class="help-block error-help-block input-error country_id-error" style="color: red;"></span>
+                        <span class="help-block error-help-block input-error role-error" style="color: red;"></span>
                     </div>
                     <!--end::Col-->
                 </div>
@@ -219,9 +223,15 @@
 
 @push('footer-scripts')
     <script>
+        // === Get selected country phone code ===
+        $('#country_id').change(function(){
+            var phoneCode = $(this).find(":selected").data('phone_code');
+            $('#country_phone_code').text(phoneCode);
+        });
+        // === End script ===
+
         // === save changes ===
         $('#saveBtn').on('click', function(){
-
             function beforeSend()
             {
                 $('.input-error').hide();
