@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\Setting;
 use App\Models\Country;
+use Str;
 
 class CreateSettingSeeder extends Seeder
 {
@@ -19,11 +20,14 @@ class CreateSettingSeeder extends Seeder
             'project_name' => ["en"=>"laravel core project","ar"=>"مشروع لارفيل الاساسي"],
         ]);
 
+        for($i=0; $i<500;$i++){
         Country::create([
-            'name' => ['en' => 'Egypt', 'ar' => 'مصر'],
-            'name_code' => 'egy',
-            'phone_code' => '020',
+            'name' => ['en' => Str::random(5), 'ar' => Str::random(5)],
+            'name_code' => Str::random(6),
+            'phone_code' => uniqid(),
+            'status' =>  $i%2 == 0 ? '1' : '0',
         ]);
+    }
 
     }
 }

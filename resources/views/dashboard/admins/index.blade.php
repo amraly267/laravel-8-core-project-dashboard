@@ -1,3 +1,5 @@
+<link href="{{asset('plugins/dashboard/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css" />
+
 @extends(config('dashboard.resource_folder').'partials.layout')
 
 @section('content')
@@ -58,13 +60,30 @@
         <!--end::Header-->
         <!--begin::Body-->
         <div class="card-body py-3">
+
+            {{-- <div class="card-toolbar">
+                <form>
+                    <div class="row mb-12">
+                        <!--begin::Label-->
+                        <label class="col-lg-1 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'search')}}</label>
+                        <!--end::Label-->
+                        <!--begin::Col-->
+                        <div class="col-lg-3 fv-row fv-plugins-icon-container">
+                            <input type="text" name="keyword" class="form-control form-control-lg form-control-solid" placeholder="{{trans(config('dashboard.trans_file').'keyword')}}">
+                            <span class="help-block error-help-block input-error name-error" style="color: red;"></span>
+                        </div>
+                        <!--end::Col-->
+                    </div>
+                </form>
+            </div> --}}
+
             <!--begin::Table container-->
             <div class="table-responsive">
                 <!--begin::Table-->
-                <table class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4">
+                <table id="kt_datatable_example_1" class="table table-row-bordered gy-5">
                     <!--begin::Table head-->
                     <thead>
-                        <tr class="fw-bolder text-muted">
+                        <tr class="fw-bold fs-6 text-muted">
                             <th class="min-w-25px">#</th>
                             <th class="min-w-150px">{{trans(config('dashboard.trans_file').'name')}}</th>
                             <th class="min-w-150px">{{trans(config('dashboard.trans_file').'role')}}</th>
@@ -158,7 +177,9 @@
 @endsection
 
 @push('footer-scripts')
+    <script src="{{asset('plugins/dashboard/datatables/datatables.bundle.js')}}"></script>
     <script>
-    var title = "{{trans(config('dashboard.trans_file').'delete_question')}}";
+        var title = "{{trans(config('dashboard.trans_file').'delete_question')}}";
+        $("#kt_datatable_example_1").DataTable();
     </script>
 @endpush

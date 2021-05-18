@@ -99,6 +99,7 @@ return [
     "areas" => "Areas",
     "area" => "Area",
     "city" => "City",
+    "keyword" => "Keyword",
 
 ];
 

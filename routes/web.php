@@ -52,6 +52,7 @@ Route::prefix('admin')->group(function () {
         Route::resource('roles', RoleController::class);
         Route::get('role-admins/{role_id}', [RoleController::class, 'roleAdmins'])->name('role-admins');
         Route::resource('countries', CountryController::class);
+        Route::get('toJsonData', [CountryController::class, 'toJsonData'])->name('toJsonData');
         Route::resource('cities', CityController::class);
         Route::resource('areas', AreaController::class);
         Route::resource('pages', PageController::class);
