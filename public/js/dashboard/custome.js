@@ -43,6 +43,8 @@ function submitForm(form, beforeSendAction, afterCompleteAction, successResponse
 // === Delete Row ===
 function deleteRow(route, deleteToken)
 {
+    console.log(route);
+
     Swal.fire({
         icon: 'question',
         title: title,

@@ -100,6 +100,11 @@ return [
     "area" => "Area",
     "city" => "City",
     "keyword" => "Keyword",
+    "page_length" => "Page Lenght",
+    "print" => "Print",
+    "pdf" => "PDF",
+    "excel" => "Excel",
+    "columns" => "Columns",
 
 ];
 

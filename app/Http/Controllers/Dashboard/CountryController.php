@@ -6,9 +6,31 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Country;
 use App\Http\Requests\Dashboard\CountryRequest;
+use PDF;
 
 class CountryController extends BaseController
 {
+    public function pdfTo(Request $request)
+    {
+        // dd($request->info);
+        return response()->json(['path' => route('countries.index', ['download-pdf' => true, $request])]);
+
+    }
+
+
+    public function pdfToddd()
+    {
+        $data = [
+            'foo' => 'خط عربي'
+        ];
+
+        $html = view('welcome-arabic', $data)->render();
+        $pdf = PDF::loadHTML($html);
+        return $pdf->download('document.pdf');
+    }
+
+
+
     public function __construct()
     {
         $this->controllerResource = 'countries.';
@@ -26,83 +48,83 @@ class CountryController extends BaseController
      */
     public function index(Request $request)
     {
+        $totalResults = Country::count();
+
+
+        if($request->has('download-pdf'))
+        {
+            $filter = $this->datatableFilter($request);
+            $countries = $filter['countries'];
+            $cols = $request->cols;
+
+            unset($cols[count($cols)-1]);
+
+            $html = view('welcome-arabic', compact('countries', 'cols'))->render();
+            $pdf = PDF::loadHTML($html);
+            return $pdf->download('document.pdf');
+        }
+
+
         if($request->ajax())
         {
-            ## Read value
-            $draw = $request->get('draw');
-            $start = $request->get("start");
-            $rowperpage = $request->get("length"); // Rows display per page
+            $filterData = $this->datatableFilter($request);
+            $response = ["draw" => intval($filterData['draw']),
+                            "iTotalRecords" => $totalResults,
+                            "iTotalDisplayRecords" => $filterData['totalRecordswithFilter'],
+                            "aaData" => $filterData['countries']];
 
-            $columnIndex_arr = $request->get('order');
-            $columnName_arr = $request->get('columns');
-            $order_arr = $request->get('order');
-            $search_arr = $request->get('search');
+            echo json_encode($response);
+        }
+        else
+        {
+            return view(config('dashboard.resource_folder').$this->controllerResource.'index', compact('totalResults'));
+        }
+    }
 
-            $columnIndex = $columnIndex_arr[0]['column']; // Column index
-            $columnName = $columnName_arr[$columnIndex]['data']; // Column name
-            $columnSortOrder = $order_arr[0]['dir']; // asc or desc
-            $searchValue = $search_arr['value']; // Search value
 
-            // Total records
-            $totalRecords = Country::count();
-            $totalRecordswithFilter = Country::where(function($q) use ($searchValue){
+    private function datatableFilter($request)
+    {
+                    // === Get data table request values ===
+                    $draw = $request->get('draw');
+                    $start = $request->get("start");
+                    $rowsPerPage = $request->get("length");
+                    $columnIndexValues = $request->get('order');
+                    $columnNames = $request->get('columns');
+                    $orderValues = $request->get('order');
+                    $searchValues = $request->get('search');
+
+                    $columnIndex = $columnIndexValues[0]['column']; // Column index
+                    $columnName = $columnNames[$columnIndex]['data']; // Column name
+                    $columnSortOrder = $orderValues[0]['dir']; // asc or desc
+                    $searchValue = $searchValues['value']; // Search value
+
+                    // === Filter records if there is search keyword ===
+                    $totalRecordswithFilter = Country::where(function($q) use ($searchValue){
                                                     $q->where('name', 'like', '%' .$searchValue . '%')
                                                         ->orWhere('name_code', 'like', '%' .$searchValue . '%')
                                                         ->orWhere('phone_code', 'like', '%' .$searchValue . '%');
                                                 })->count();
 
-            // Fetch records
-            $records = Country::orderBy($columnName,$columnSortOrder)
-                        ->where(function($q) use ($searchValue){
-                            $q->where('name', 'like', '%' .$searchValue . '%')
-                                ->orWhere('name_code', 'like', '%' .$searchValue . '%')
-                                ->orWhere('phone_code', 'like', '%' .$searchValue . '%');
-                        })
-                        ->skip($start)
-                        ->take($rowperpage)
-                        ->get();
+                    // === Fetch records ===
+                    $countriesRecords = Country::orderBy($columnName,$columnSortOrder)
+                                ->where(function($q) use ($searchValue){
+                                    $q->where('name', 'like', '%' .$searchValue . '%')
+                                        ->orWhere('name_code', 'like', '%' .$searchValue . '%')
+                                        ->orWhere('phone_code', 'like', '%' .$searchValue . '%');
+                                })->skip($start)->take($rowsPerPage)->get();
 
-            $data_arr = array();
-
-            foreach($records as $index => $record){
-                $name = $record->name;
-                $name_code = $record->name_code;
-                $phone_code = $record->phone_code;
-                $status = $record->status_label;
-                $id = $record->id;
-
-                $data_arr[] = array(
-                  "index" => $index+1,
-                  "name" => $name,
-                  "name_code" => $name_code,
-                  "phone_code" => $phone_code,
-                  "status" => $status,
-                  "action" => $id,
-                );
-             }
-             $response = array(
-                "draw" => intval($draw),
-                "iTotalRecords" => $totalRecords,
-                "iTotalDisplayRecords" => $totalRecordswithFilter,
-                "aaData" => $data_arr
-             );
-
-             echo json_encode($response);
-             exit;
-
-        }
-        else
-        {
-            $countries = Country::orderBy('created_at', 'DESC')->paginate(10);
-            $totalResults = Country::count();
-            return view(config('dashboard.resource_folder').$this->controllerResource.'index', compact('countries', 'totalResults'));
-        }
-    }
-
-    // public function toJsonData()
-    // {
-    //     return Country::orderBy('created_at', 'DESC')->get()->toJson();
-    // }
+                    $countries = collect($countriesRecords)->map(function($country, $index){
+                        return [
+                            "index" => $index+1,
+                            "name" => '<img src="'.$country->flag_path.'" alt="'.$country->name.'"> '.$country->name,
+                            "name_code" => $country->name_code,
+                            "phone_code" => $country->phone_code,
+                            "status" => $country->status_label,
+                            "action" => $country->id
+                        ];
+                    });
+                    return ['draw' => $draw, 'totalRecordswithFilter' => $totalRecordswithFilter, 'countries' => $countries, 'columnNames' => $columnNames];
+                }
 
     /**
      * Show the form for creating a new resource.

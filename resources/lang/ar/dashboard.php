@@ -100,6 +100,11 @@ return [
     "area" => "المنطقة",
     "city" => "المدينة",
     "keyword" => "كلمة البحث",
+    "page_length" => "عدد السجلات",
+    "print" => "طباعة",
+    "pdf" => "PDF",
+    "excel" => "Excel",
+    "columns" => "الأعمدة",
 
 
 
