@@ -7,29 +7,14 @@ use Illuminate\Http\Request;
 use App\Models\Country;
 use App\Http\Requests\Dashboard\CountryRequest;
 use PDF;
+use Illuminate\Support\Facades\View;
 
 class CountryController extends BaseController
 {
     public function pdfTo(Request $request)
     {
-        // dd($request->info);
         return response()->json(['path' => route('countries.index', ['download-pdf' => true, $request])]);
-
     }
-
-
-    public function pdfToddd()
-    {
-        $data = [
-            'foo' => 'خط عربي'
-        ];
-
-        $html = view('welcome-arabic', $data)->render();
-        $pdf = PDF::loadHTML($html);
-        return $pdf->download('document.pdf');
-    }
-
-
 
     public function __construct()
     {
@@ -55,15 +40,12 @@ class CountryController extends BaseController
         {
             $filter = $this->datatableFilter($request);
             $countries = $filter['countries'];
-            $cols = $request->cols;
-
-            unset($cols[count($cols)-1]);
-
-            $html = view('welcome-arabic', compact('countries', 'cols'))->render();
+            $visibleColsNames = $request->visibleColsNames;
+            $colsIndexName = $request->colsIndexName;
+            $html = view(config('dashboard.resource_folder').$this->controllerResource.'pdf', compact('countries', 'visibleColsNames', 'colsIndexName'))->render();
             $pdf = PDF::loadHTML($html);
-            return $pdf->download('document.pdf');
+            return $pdf->download(trans(config('dashboard.trans_file').'countries').'.pdf');
         }
-
 
         if($request->ajax())
         {
@@ -81,50 +63,51 @@ class CountryController extends BaseController
         }
     }
 
-
+    // === Datatable filter parameters ===
     private function datatableFilter($request)
     {
-                    // === Get data table request values ===
-                    $draw = $request->get('draw');
-                    $start = $request->get("start");
-                    $rowsPerPage = $request->get("length");
-                    $columnIndexValues = $request->get('order');
-                    $columnNames = $request->get('columns');
-                    $orderValues = $request->get('order');
-                    $searchValues = $request->get('search');
+        // === Get data table request values ===
+        $draw = $request->get('draw');
+        $start = $request->get("start");
+        $rowsPerPage = $request->get("length");
+        $columnIndexValues = $request->get('order');
+        $columnNames = $request->get('columns');
+        $orderValues = $request->get('order');
+        $searchValues = $request->get('search');
 
-                    $columnIndex = $columnIndexValues[0]['column']; // Column index
-                    $columnName = $columnNames[$columnIndex]['data']; // Column name
-                    $columnSortOrder = $orderValues[0]['dir']; // asc or desc
-                    $searchValue = $searchValues['value']; // Search value
+        $columnIndex = $columnIndexValues[0]['column']; // Column index
+        $columnName = $columnNames[$columnIndex]['data']; // Column name
+        $columnSortOrder = $orderValues[0]['dir']; // asc or desc
+        $searchValue = $searchValues['value']; // Search value
 
-                    // === Filter records if there is search keyword ===
-                    $totalRecordswithFilter = Country::where(function($q) use ($searchValue){
-                                                    $q->where('name', 'like', '%' .$searchValue . '%')
-                                                        ->orWhere('name_code', 'like', '%' .$searchValue . '%')
-                                                        ->orWhere('phone_code', 'like', '%' .$searchValue . '%');
-                                                })->count();
+        // === Filter records if there is search keyword ===
+        $totalRecordswithFilter = Country::where(function($q) use ($searchValue){
+                                        $q->where('name', 'like', '%' .$searchValue . '%')
+                                            ->orWhere('name_code', 'like', '%' .$searchValue . '%')
+                                            ->orWhere('phone_code', 'like', '%' .$searchValue . '%');
+                                    })->count();
 
-                    // === Fetch records ===
-                    $countriesRecords = Country::orderBy($columnName,$columnSortOrder)
-                                ->where(function($q) use ($searchValue){
-                                    $q->where('name', 'like', '%' .$searchValue . '%')
-                                        ->orWhere('name_code', 'like', '%' .$searchValue . '%')
-                                        ->orWhere('phone_code', 'like', '%' .$searchValue . '%');
-                                })->skip($start)->take($rowsPerPage)->get();
+        // === Fetch records ===
+        $countriesRecords = Country::orderBy($columnName,$columnSortOrder)
+                    ->where(function($q) use ($searchValue){
+                        $q->where('name', 'like', '%' .$searchValue . '%')
+                            ->orWhere('name_code', 'like', '%' .$searchValue . '%')
+                            ->orWhere('phone_code', 'like', '%' .$searchValue . '%');
+                    })->skip($start)->take($rowsPerPage)->get();
 
-                    $countries = collect($countriesRecords)->map(function($country, $index){
-                        return [
-                            "index" => $index+1,
-                            "name" => '<img src="'.$country->flag_path.'" alt="'.$country->name.'"> '.$country->name,
-                            "name_code" => $country->name_code,
-                            "phone_code" => $country->phone_code,
-                            "status" => $country->status_label,
-                            "action" => $country->id
-                        ];
-                    });
-                    return ['draw' => $draw, 'totalRecordswithFilter' => $totalRecordswithFilter, 'countries' => $countries, 'columnNames' => $columnNames];
-                }
+        $countries = collect($countriesRecords)->map(function($country, $index){
+            return [
+                "index" => $index+1,
+                "name" => '<img src="'.$country->flag_path.'" alt="'.$country->name.'"> '.$country->name,
+                "name_code" => $country->name_code,
+                "phone_code" => $country->phone_code,
+                "status" => $country->status_label,
+                "action" => $country->id
+            ];
+        });
+        return ['draw' => $draw, 'totalRecordswithFilter' => $totalRecordswithFilter, 'countries' => $countries, 'columnNames' => $columnNames];
+    }
+    // === End function ===
 
     /**
      * Show the form for creating a new resource.

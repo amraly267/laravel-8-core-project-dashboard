@@ -82,13 +82,13 @@
                     <!--begin::Table head-->
                     <thead>
                         <tr class="fw-bold fs-6 text-muted">
-                            <th class="min-w-20px">#</th>
-                            <th class="min-w-150px">{{trans(config('dashboard.trans_file').'name')}}</th>
-                            <th class="min-w-100px">{{trans(config('dashboard.trans_file').'name_code')}}</th>
-                            <th class="min-w-100px">{{trans(config('dashboard.trans_file').'phone_code')}}</th>
-                            <th class="min-w-100px">{{trans(config('dashboard.trans_file').'status')}}</th>
+                            <th class="min-w-20px" data-column-name="index">#</th>
+                            <th class="min-w-150px" data-column-name="name">{{trans(config('dashboard.trans_file').'name')}}</th>
+                            <th class="min-w-100px" data-column-name="name_code">{{trans(config('dashboard.trans_file').'name_code')}}</th>
+                            <th class="min-w-100px" data-column-name="phone_code">{{trans(config('dashboard.trans_file').'phone_code')}}</th>
+                            <th class="min-w-100px" data-column-name="status">{{trans(config('dashboard.trans_file').'status')}}</th>
                             @if(auth()->guard('admin')->user()->can('country-edit') || auth()->guard('admin')->user()->can('country-delete'))
-                            <th class="min-w-150px">{{trans(config('dashboard.trans_file').'actions')}}</th>
+                            <th class="min-w-150px" data-column-name="operation">{{trans(config('dashboard.trans_file').'actions')}}</th>
                             @endif
                         </tr>
                     </thead>
@@ -107,36 +107,10 @@
 
 @push('footer-scripts')
     <script src="{{asset('plugins/dashboard/datatables/datatables.bundle.js')}}"></script>
-    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script> --}}
     <script>
-
-
-
         var title = "{{trans(config('dashboard.trans_file').'delete_question')}}";
         function loadData()
         {
-            pdfMake.fonts = {
-                Roboto: {
-                    normal: '{{asset("fonts/cairo/Cairo-Regular.ttf")}}',
-                    bold: '{{asset("fonts/cairo/Cairo-Bold.ttf")}}',
-                    italics: '{{asset("fonts/cairo/Cairo-Regular.ttf")}}',
-                    bolditalics: '{{asset("fonts/cairo/Cairo-Bold.ttf")}}'
-                },
-
-                Cairo: {
-                    normal: '{{asset("fonts/cairo/Cairo-Regular.ttf")}}',
-                    bold: '{{asset("fonts/cairo/Cairo-Bold.ttf")}}',
-                    italics: '{{asset("fonts/cairo/Cairo-Regular.ttf")}}',
-                    bolditalics: '{{asset("fonts/cairo/Cairo-Bold.ttf")}}'
-                },
-                Tajawal:{
-                    normal: '{{asset("fonts/Tajawal/Tajawal-Black.ttf")}}',
-                    bold: '{{asset("fonts/Tajawal/Tajawal-Black.ttf")}}',
-                    italics: '{{asset("fonts/Tajawal/Tajawal-Black.ttf")}}',
-                    bolditalics: '{{asset("fonts/Tajawal/Tajawal-Black.ttf")}}'
-
-                }
-            };
             var dataTable = $("#kt_datatable_example_1").DataTable({
                 processing: true,
                 serverSide: true,
@@ -178,24 +152,29 @@
                     }},
                 ],
                 buttons: [
+                    {extend: "pageLength", className: 'btn btn-default btn-primary btn-sm-menu', text: "{{trans(config('dashboard.trans_file').'page_length')}}", exportOptions: {stripHtml: true, columns: ':visible'}},
+                    {extend: "print", className: 'btn btn-default btn-primary btn-sm-menu', text: "{{trans(config('dashboard.trans_file').'print')}}", exportOptions: {stripHtml: true, columns: ':visible'}},
                     {
-                        text: 'My button',
+                        text: "{{trans(config('dashboard.trans_file').'pdf')}}",
+                        className: 'btn btn-default btn-primary btn-sm-menu',
                         action: function()
                         {
-
-                            var colss = [];
-
-$('#kt_datatable_example_1 > thead > tr > th').each(function(){
-    colss.push($(this).text())
-})
+                            var colsNames = [];
+                            var colsIndexName = [];
+                            for(var i=0; i< $('#kt_datatable_example_1 > thead > tr > th').length; i++)
+                            {
+                                var currentColumn = $('#kt_datatable_example_1 > thead > tr > th')[i];
+                                colsNames.push($(currentColumn).text());
+                                colsIndexName.push($(currentColumn).data('column-name'));
+                            }
+                            colsIndexName.push('ajax_request');
 
                             $.ajax({
                                 type: 'GET',
                                 url: "{{route('download-pdf')}}?"+$.param($('#kt_datatable_example_1').DataTable().ajax.params()),
-                                // data: {data: dataTable.rows().data()},
                                 contentType: "application/json",
                                 dataType: "json",
-                                data: {cols: colss},
+                                data: {'visibleColsNames': colsNames, 'colsIndexName': colsIndexName},
 
                                 complete: function (res) {
 
@@ -209,17 +188,6 @@ $('#kt_datatable_example_1 > thead > tr > th').each(function(){
                             })
                         }
                     },
-                    {extend: "pageLength", className: 'btn btn-default btn-primary btn-sm-menu', text: "{{trans(config('dashboard.trans_file').'page_length')}}", exportOptions: {stripHtml: true, columns: ':visible'}},
-                    {extend: "print", className: 'btn btn-default btn-primary btn-sm-menu', text: "{{trans(config('dashboard.trans_file').'print')}}", exportOptions: {stripHtml: true, columns: ':visible'}},
-                    {extend: "pdf",className: 'btn btn-default btn-primary btn-sm-menu', text: "{{trans(config('dashboard.trans_file').'pdf')}}", exportOptions: {stripHtml: true, columns: ':visible'},
-
-                    // customize: function ( doc ) {
-                    //     doc.defaultStyle.font='Cairo';
-                    //     var csvRows = doc.split('\n');
-                    //     csvRows[0] = csvRows[0].replace('"Severity"', '"Severe"')
-                    //     return csvRows.join('\n');}
-                },
-
                     {extend: "excel", className: 'btn btn-default btn-primary btn-sm-menu', text: "{{trans(config('dashboard.trans_file').'excel')}}", exportOptions: {stripHtml: true, columns: ':visible'}},
                     {extend: "colvis", className: 'btn btn-default btn-primary btn-sm-menu', text: "{{trans(config('dashboard.trans_file').'columns')}}", exportOptions: {stripHtml: true, columns: ':visible'}},
                 ],
