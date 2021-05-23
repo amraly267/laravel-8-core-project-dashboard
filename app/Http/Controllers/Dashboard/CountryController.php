@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\View;
 
 class CountryController extends BaseController
 {
-    public function pdfTo(Request $request)
+    public function downloadPdf(Request $request)
     {
         return response()->json(['path' => route('countries.index', ['download-pdf' => true, $request])]);
     }
