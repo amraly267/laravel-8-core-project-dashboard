@@ -106,6 +106,7 @@ return [
     "excel" => "Excel",
     "columns" => "الأعمدة",
     "all" => "الكل",
+    "reset" => "إعادة تعيين"
 
 
 

@@ -8,6 +8,7 @@ use App\Models\Country;
 use App\Http\Requests\Dashboard\CountryRequest;
 use PDF;
 use Illuminate\Support\Facades\View;
+use DB;
 
 class CountryController extends BaseController
 {
@@ -34,7 +35,6 @@ class CountryController extends BaseController
     public function index(Request $request)
     {
         $totalResults = Country::count();
-
 
         if($request->has('download-pdf'))
         {
@@ -73,45 +73,35 @@ class CountryController extends BaseController
         $columnIndexValues = $request->get('order');
         $columnNames = $request->get('columns');
         $orderValues = $request->get('order');
-        $searchValues = $request->get('search');
 
         $columnIndex = $columnIndexValues[0]['column']; // Column index
         $columnName = $columnNames[$columnIndex]['data']; // Column name
         $columnSortOrder = $orderValues[0]['dir']; // asc or desc
-        $searchValue = $searchValues['value']; // Search value
-
-        // === Filter records if there is search keyword ===
-        $totalRecordswithFilter = Country::where(function($q) use ($request){
-                                        $q->where('name', 'like', '%' .$request->name ?? '' . '%')
-                                            ->orWhere('name_code', 'like', '%' .$request->name_code ?? '' . '%')
-                                            ->orWhere('phone_code', 'like', '%' .$request->phone_code ?? '' . '%');
-                                    })->count();
 
         $model = (new Country)->newQuery();
 
-        dd($request->name);
-
-        if($request->has('name'))
+        if($request->filled('name'))
         {
             $model->where('name', 'like', '%' .$request->name . '%');
         }
-        if($request->has('name_code'))
+        if($request->filled('name_code'))
         {
             $model->where('name_code', 'like', '%' .$request->name_code . '%');
         }
-        if($request->has('phone_code'))
+        if($request->filled('phone_code'))
         {
             $model->where('phone_code', 'like', '%' .$request->phone_code . '%');
         }
+        if($request->filled('status'))
+        {
+            $model->where('status', $request->status);
+        }
+
+        // === Filter records if there is search keyword ===
+        $totalRecordswithFilter = $model->count();
 
         // === Fetch records ===
-        $countriesRecords = $model->orderBy($columnName,$columnSortOrder)
-                    // ->where(function($q) use ($request){
-                    //     $q->where('name', 'like', '%' .$request->name ?? '' . '%')
-                    //         ->orWhere('name_code', 'like', '%' .$request->name_code ?? '' . '%')
-                    //         ->orWhere('phone_code', 'like', '%' .$request->phone_code ?? '' . '%');
-                    // })
-                    ->skip($start)->take($rowsPerPage)->get();
+        $countriesRecords = $model->orderBy($columnName,$columnSortOrder)->skip($start)->take($rowsPerPage)->get();
 
         $countries = collect($countriesRecords)->map(function($country, $index){
             return [

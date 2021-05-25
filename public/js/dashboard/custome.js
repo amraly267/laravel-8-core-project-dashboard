@@ -86,157 +86,21 @@ function deleteRow(route, deleteToken)
 }
 // === End script ===
 
-// function tableGenerate(data = '', url) {
+// === Concatinate two json into one json ===
+function jsonConcat(json1, json2)
+{
+    for (var key in json2)
+    {
+        json1[key] = json2[key];
+    }
+    return json1;
+}
+// === End script ===
 
-//     var dataTable =
-//         $('#kt_datatable_example_1').DataTable({
-//             "createdRow": function (row, data, dataIndex) {
-//                 if (data["deleted_at"] != null) {
-//                     $(row).addClass('danger');
-//                 }
-//             },
-//             ajax: {
-//                 url: url,
-//                 type: "GET",
-//                 data: {
-//                     req: data,
-//                 },
-//             },
-//             language: {
-//                 url: "//cdn.datatables.net/plug-ins/1.10.16/i18n/English.json"
-//             },
-//             stateSave: true,
-//             processing: true,
-//             serverSide: true,
-//             responsive: !0,
-//             order: [[1, "desc"]],
-//             columns: [
-//                 {data: 'id', className: 'dt-center'},
-//                 {data: 'id', className: 'dt-center'},
-//                 {
-//                     data: "image", orderable: false, width: "1%",
-//                     render: function (data, type, row) {
-//                         return '<img src="' + data + '" width="50px"/>'
-//                     }
-//                 },
-//                 {data: 'status', className: 'dt-center'},
-//                 {data: 'title', className: 'dt-center', orderable: false},
-//                 {data: 'created_at', className: 'dt-center'},
-//                 {data: 'id'},
-//             ],
-//             columnDefs: [
-//                 {
-//                     targets: 0,
-//                     width: '30px',
-//                     className: 'dt-center',
-//                     orderable: false,
-//                     render: function (data, type, full, meta) {
-//                         return `<label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
-//                   <input type="checkbox" value="` + data + ` class="group-checkable" name="ids">
-//                   <span></span>
-//                 </label>
-//               `;
-//                     },
-//                 },
-//                 {
-//                     targets: 3,
-//                     width: '30px',
-//                     className: 'dt-center',
-//                     render: function (data, type, full, meta) {
-//                         if (data == 1) {
-//                             return '<span class="badge badge-success"> Active </span>';
-//                         } else {
-//                             return '<span class="badge badge-danger"> Unactive </span>';
-//                         }
-//                     },
-//                 },
-//                 {
-//                     targets: -1,
-//                     width: '13%',
-//                     title: 'Options',
-//                     className: 'dt-center',
-//                     orderable: false,
-//                     render: function (data, type, full, meta) {
-
-//                         // Edit
-//                         var editUrl = 'http://127.0.0.1:8000/en/dashboard/restaurants/:id/edit';
-//                         editUrl = editUrl.replace(':id', data);
-
-//                         // Delete
-//                         var deleteUrl = 'http://127.0.0.1:8000/en/dashboard/restaurants/:id';
-//                         deleteUrl = deleteUrl.replace(':id', data);
-
-//                         return `
-//                                                             <a href="` + editUrl + `" class="btn btn-sm blue" title="Edit">
-//                                 <i class="fa fa-edit"></i>
-//                             </a>
-
-
-//                                                         <input type="hidden" name="_token" value="k8vNumzloSZQUFZ25erTidd7LescbjeRosjSSg6A">                                <a href="javascript:;" onclick="deleteRow('` + deleteUrl + `')" class="btn btn-sm red">
-//                                             <i class="fa fa-trash"></i>
-//                                         </a>
-
-//                         `;
-//                     },
-//                 },
-//             ],
-//             dom: 'Bfrtip',
-//             lengthMenu: [
-//                 [10, 25, 50, 100, 500],
-//                 ['10', '25', '50', '100', '500']
-//             ],
-//             buttons: [
-//                 {
-//                     extend: "pageLength",
-//                     className: "btn blue btn-outline",
-//                     text: "Page Lenght",
-//                     exportOptions: {
-//                         stripHtml: false,
-//                         columns: ':visible',
-//                         columns: [1, 2, 3, 4, 5]
-//                     }
-//                 },
-//                 {
-//                     extend: "print",
-//                     className: "btn blue btn-outline",
-//                     text: "Print",
-//                     exportOptions: {
-//                         stripHtml: false,
-//                         columns: ':visible',
-//                         columns: [1, 2, 3, 4, 5]
-//                     }
-//                 },
-//                 {
-//                     extend: "pdf",
-//                     className: "btn blue btn-outline",
-//                     text: "PDF",
-//                     exportOptions: {
-//                         stripHtml: false,
-//                         columns: ':visible',
-//                         columns: [1, 2, 3, 4, 5]
-//                     }
-//                 },
-//                 {
-//                     extend: "excel",
-//                     className: "btn blue btn-outline ",
-//                     text: "Excel",
-//                     exportOptions: {
-//                         stripHtml: false,
-//                         columns: ':visible',
-//                         columns: [1, 2, 3, 4, 5]
-//                     }
-//                 },
-//                 {
-//                     extend: "colvis",
-//                     className: "btn blue btn-outline",
-//                     text: "Colvis",
-//                     exportOptions: {
-//                         stripHtml: false,
-//                         columns: ':visible',
-//                         columns: [1, 2, 3, 4, 5]
-//                     }
-//                 }
-//             ]
-//         });
-//     }
-
+// === Reset form ===
+$("#kt_reset").click(function(e){
+    e.preventDefault();
+    $("form").trigger("reset");
+    $("form input").val("");
+});
+// === End script ===
