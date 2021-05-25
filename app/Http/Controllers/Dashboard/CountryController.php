@@ -81,19 +81,37 @@ class CountryController extends BaseController
         $searchValue = $searchValues['value']; // Search value
 
         // === Filter records if there is search keyword ===
-        $totalRecordswithFilter = Country::where(function($q) use ($searchValue){
-                                        $q->where('name', 'like', '%' .$searchValue . '%')
-                                            ->orWhere('name_code', 'like', '%' .$searchValue . '%')
-                                            ->orWhere('phone_code', 'like', '%' .$searchValue . '%');
+        $totalRecordswithFilter = Country::where(function($q) use ($request){
+                                        $q->where('name', 'like', '%' .$request->name ?? '' . '%')
+                                            ->orWhere('name_code', 'like', '%' .$request->name_code ?? '' . '%')
+                                            ->orWhere('phone_code', 'like', '%' .$request->phone_code ?? '' . '%');
                                     })->count();
 
+        $model = (new Country)->newQuery();
+
+        dd($request->name);
+
+        if($request->has('name'))
+        {
+            $model->where('name', 'like', '%' .$request->name . '%');
+        }
+        if($request->has('name_code'))
+        {
+            $model->where('name_code', 'like', '%' .$request->name_code . '%');
+        }
+        if($request->has('phone_code'))
+        {
+            $model->where('phone_code', 'like', '%' .$request->phone_code . '%');
+        }
+
         // === Fetch records ===
-        $countriesRecords = Country::orderBy($columnName,$columnSortOrder)
-                    ->where(function($q) use ($searchValue){
-                        $q->where('name', 'like', '%' .$searchValue . '%')
-                            ->orWhere('name_code', 'like', '%' .$searchValue . '%')
-                            ->orWhere('phone_code', 'like', '%' .$searchValue . '%');
-                    })->skip($start)->take($rowsPerPage)->get();
+        $countriesRecords = $model->orderBy($columnName,$columnSortOrder)
+                    // ->where(function($q) use ($request){
+                    //     $q->where('name', 'like', '%' .$request->name ?? '' . '%')
+                    //         ->orWhere('name_code', 'like', '%' .$request->name_code ?? '' . '%')
+                    //         ->orWhere('phone_code', 'like', '%' .$request->phone_code ?? '' . '%');
+                    // })
+                    ->skip($start)->take($rowsPerPage)->get();
 
         $countries = collect($countriesRecords)->map(function($country, $index){
             return [

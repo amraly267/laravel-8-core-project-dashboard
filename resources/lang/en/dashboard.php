@@ -105,6 +105,7 @@ return [
     "pdf" => "PDF",
     "excel" => "Excel",
     "columns" => "Columns",
+    "all" => "All",
 
 ];
 
