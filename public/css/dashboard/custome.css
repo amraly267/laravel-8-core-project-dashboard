@@ -1,0 +1,21 @@
+body {
+    font-size: 0.938rem !important;
+}
+.edit_row{
+    font-size: 20px !important;
+    color: green;
+}
+.delete_row{
+    font-size: 20px !important;
+    color: red;
+}
+.dataTables_filter {
+    display: none;
+}
+.export_menu button, .export_btn{
+    background-color: #f7f7f7 !important;
+    color:blue !important;
+}
+.export_menu button:hover, .export_btn:hover{
+    background-color: #eceaea !important;
+}

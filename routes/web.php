@@ -59,7 +59,8 @@ Route::prefix('admin')->group(function () {
         Route::get('settings', [SettingController::class, 'index'])->name('admin-settings');
         Route::put('settings', [SettingController::class, 'update'])->name('admin-update-settings');
         Route::get('change-language/{lang}', [SettingController::class, 'changeLanguage'])->name('admin-change-language');
-        Route::get('download-pdf', [CountryController::class, 'downloadPdf'])->name('download-pdf');
+        Route::get('download-country-pdf', [CountryController::class, 'downloadPdf'])->name('download-country-pdf');
+        Route::get('download-admin-pdf', [AdminController::class, 'downloadPdf'])->name('download-admin-pdf');
     });
 
 });

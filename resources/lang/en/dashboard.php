@@ -106,8 +106,8 @@ return [
     "excel" => "Excel",
     "columns" => "Columns",
     "all" => "All",
-    "reset" => "Reset"
-
+    "reset" => "Reset",
+    "export" => "Export",
 ];
 
 ?>

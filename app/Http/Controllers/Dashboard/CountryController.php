@@ -7,16 +7,9 @@ use Illuminate\Http\Request;
 use App\Models\Country;
 use App\Http\Requests\Dashboard\CountryRequest;
 use PDF;
-use Illuminate\Support\Facades\View;
-use DB;
 
 class CountryController extends BaseController
 {
-    public function downloadPdf(Request $request)
-    {
-        return response()->json(['path' => route('countries.index', ['download-pdf' => true, $request])]);
-    }
-
     public function __construct()
     {
         $this->controllerResource = 'countries.';
@@ -27,6 +20,10 @@ class CountryController extends BaseController
         $this->middleware('permission:country-delete,admin', ['only' => ['destroy']]);
     }
 
+    public function downloadPdf(Request $request)
+    {
+        return response()->json(['path' => route('countries.index', ['download-pdf' => true, 'request' => $request->all()])]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -38,6 +35,7 @@ class CountryController extends BaseController
 
         if($request->has('download-pdf'))
         {
+            $request = new Request($request->all()['request']);
             $filter = $this->datatableFilter($request);
             $countries = $filter['countries'];
             $visibleColsNames = $request->visibleColsNames;

@@ -9,6 +9,7 @@ use Spatie\Permission\Models\Role;
 use App\Http\Requests\Dashboard\AdminRequest;
 use Spatie\Permission\Models\Permission;
 use App\Models\Country;
+use PDF;
 
 class AdminController extends BaseController
 {
@@ -22,17 +23,113 @@ class AdminController extends BaseController
         $this->middleware('permission:admin-delete,admin', ['only' => ['destroy']]);
     }
 
+    public function downloadPdf(Request $request)
+    {
+        return response()->json(['path' => route('admins.index', ['download-pdf' => true, 'request' => $request->all()])]);
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+
+    public function index(Request $request)
     {
-        $admins = Admin::orderBy('created_at', 'DESC')->paginate(10);
+        $countries = Country::all();
+        $roles = Role::all();
         $totalResults = Admin::count();
-        return view(config('dashboard.resource_folder').$this->controllerResource.'index', compact('admins', 'totalResults'));
+
+        if($request->has('download-pdf'))
+        {
+            $request = new Request($request->all()['request']);
+            $filter = $this->datatableFilter($request);
+            $admins = $filter['admins'];
+            $visibleColsNames = $request->visibleColsNames;
+            $colsIndexName = $request->colsIndexName;
+            $html = view(config('dashboard.resource_folder').$this->controllerResource.'pdf', compact('admins', 'visibleColsNames', 'colsIndexName'))->render();
+            $pdf = PDF::loadHTML($html);
+            return $pdf->download(trans(config('dashboard.trans_file').'admins').'.pdf');
+        }
+
+        if($request->ajax())
+        {
+            $filterData = $this->datatableFilter($request);
+            $response = ["draw" => intval($filterData['draw']),
+                            "iTotalRecords" => $totalResults,
+                            "iTotalDisplayRecords" => $filterData['totalRecordswithFilter'],
+                            "aaData" => $filterData['admins']];
+
+            echo json_encode($response);
+        }
+        else
+        {
+            return view(config('dashboard.resource_folder').$this->controllerResource.'index', compact('totalResults', 'countries', 'roles'));
+        }
     }
+
+    // === Datatable filter parameters ===
+    private function datatableFilter($request)
+    {
+        // === Get data table request values ===
+        $draw = $request->get('draw');
+        $start = $request->get("start");
+        $rowsPerPage = $request->get("length");
+        $columnIndexValues = $request->get('order');
+        $columnNames = $request->get('columns');
+        $orderValues = $request->get('order');
+
+        $columnIndex = $columnIndexValues[0]['column']; // Column index
+        $columnName = $columnNames[$columnIndex]['data']; // Column name
+        $columnSortOrder = $orderValues[0]['dir']; // asc or desc
+
+        $model = (new Admin)->newQuery();
+
+        if($request->filled('name'))
+        {
+            $model->where('name', 'like', '%' .$request->name . '%');
+        }
+        if($request->filled('email'))
+        {
+            $model->where('email', 'like', '%' .$request->email . '%');
+        }
+        if($request->filled('mobile'))
+        {
+            $model->where('mobile', 'like', '%' .$request->mobile . '%');
+        }
+        if($request->filled('gender'))
+        {
+            $model->where('gender', $request->gender);
+        }
+        if($request->filled('country_id'))
+        {
+            $model->where('country_id', $request->country_id);
+        }
+        if($request->filled('role'))
+        {
+            $model->whereHas('roles', function($q) use ($request){$q->where('name', $request->role);});
+        }
+
+        // === Filter records if there is search keyword ===
+        $totalRecordswithFilter = $model->count();
+
+        // === Fetch records ===
+        $adminRecords = $model->orderBy($columnName,$columnSortOrder)->skip($start)->take($rowsPerPage)->get();
+
+        $admins = collect($adminRecords)->map(function($admin, $index){
+            return [
+                "index" => $index+1,
+                "name" => '<img src="'.$admin->image_path.'" alt="'.$admin->name.'"> '.$admin->name,
+                "role" => $admin->roles[0]->name,
+                "email" => $admin->email,
+                "mobile" => $admin->mobile,
+                "gender" => trans(config('dashboard.trans_file').$admin->gender),
+                "country" => $admin->country->name,
+                "action" => $admin->id
+            ];
+        });
+        return ['draw' => $draw, 'totalRecordswithFilter' => $totalRecordswithFilter, 'admins' => $admins, 'columnNames' => $columnNames];
+    }
+    // === End function ===
 
     /**
      * Show the form for creating a new resource.

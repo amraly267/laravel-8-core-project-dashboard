@@ -1,9 +1,5 @@
-<link href="{{asset('plugins/dashboard/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css" />
-
 @extends(config('dashboard.resource_folder').'partials.layout')
-
 @section('content')
-
 @section('page_path')
 <!--begin::Title-->
 <h1 class="d-flex align-items-center text-dark fw-bolder my-1 fs-3">{{trans(config('dashboard.trans_file').'admins')}}</h1>
@@ -29,143 +25,151 @@
 </ul>
 <!--end::Breadcrumb-->
 @endsection
-
+<div class="card card-custom">
+    <div class="card-header">
+        <div class="card-title">
+            <span class="card-icon">
+            <i class="flaticon2-delivery-package text-primary"></i>
+            </span>
+            <span class="menu-icon">
+                <!--begin::Svg Icon | path: assets/media/icons/duotone/Communication/Flag.svg-->
+                <span class="svg-icon svg-icon-2">
+                    <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-03-183419/theme/html/demo2/dist/../src/media/svg/icons/Communication/Shield-user.svg-->
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <rect x="0" y="0" width="24" height="24"/>
+                            <path d="M4,4 L11.6314229,2.5691082 C11.8750185,2.52343403 12.1249815,2.52343403 12.3685771,2.5691082 L20,4 L20,13.2830094 C20,16.2173861 18.4883464,18.9447835 16,20.5 L12.5299989,22.6687507 C12.2057287,22.8714196 11.7942713,22.8714196 11.4700011,22.6687507 L8,20.5 C5.51165358,18.9447835 4,16.2173861 4,13.2830094 L4,4 Z" fill="#000000" opacity="0.3"/>
+                            <path d="M12,11 C10.8954305,11 10,10.1045695 10,9 C10,7.8954305 10.8954305,7 12,7 C13.1045695,7 14,7.8954305 14,9 C14,10.1045695 13.1045695,11 12,11 Z" fill="#000000" opacity="0.3"/>
+                            <path d="M7.00036205,16.4995035 C7.21569918,13.5165724 9.36772908,12 11.9907452,12 C14.6506758,12 16.8360465,13.4332455 16.9988413,16.5 C17.0053266,16.6221713 16.9988413,17 16.5815,17 C14.5228466,17 11.463736,17 7.4041679,17 C7.26484009,17 6.98863236,16.6619875 7.00036205,16.4995035 Z" fill="#000000" opacity="0.3"/>
+                        </g>
+                    </svg>
+                    <!--end::Svg Icon-->
+                </span>
+                <!--end::Svg Icon-->
+            </span>
+            <h3 class="card-label">{{trans(config('dashboard.trans_file').'admins')}}</h3>
+            <span class="text-muted mt-1 fw-bold fs-7">{{trans(config('dashboard.trans_file').'total_results', ['val' => $totalResults])}}</span>
+        </div>
+        <div class="card-toolbar">
+            <!--begin::Dropdown-->
+            <div class="export_menu dropdown dropdown-inline mr-2" style="margin:0 10px 0 10px;">
+                <button disabled class="btn btn-light-primary font-weight-bolder">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">';
+                                icon += '<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">';
+                                icon += '<rect x="0" y="0" width="24" height="24"></rect>';
+                                icon += '<path d="M3,16 L5,16 C5.55228475,16 6,15.5522847 6,15 C6,14.4477153 5.55228475,14 5,14 L3,14 L3,12 L5,12 C5.55228475,12 6,11.5522847 6,11 C6,10.4477153 5.55228475,10 5,10 L3,10 L3,8 L5,8 C5.55228475,8 6,7.55228475 6,7 C6,6.44771525 5.55228475,6 5,6 L3,6 L3,4 C3,3.44771525 3.44771525,3 4,3 L10,3 C10.5522847,3 11,3.44771525 11,4 L11,19 C11,19.5522847 10.5522847,20 10,20 L4,20 C3.44771525,20 3,19.5522847 3,19 L3,16 Z" fill="#000000" opacity="0.3"></path>';
+                                icon += '<path d="M16,3 L19,3 C20.1045695,3 21,3.8954305 21,5 L21,15.2485298 C21,15.7329761 20.8241635,16.200956 20.5051534,16.565539 L17.8762883,19.5699562 C17.6944473,19.7777745 17.378566,19.7988332 17.1707477,19.6169922 C17.1540423,19.602375 17.1383289,19.5866616 17.1237117,19.5699562 L14.4948466,16.565539 C14.1758365,16.200956 14,15.7329761 14,15.2485298 L14,5 C14,3.8954305 14.8954305,3 16,3 Z" fill="#000000"></path>';
+                                icon += '</g></svg>
+            {{trans(config('dashboard.trans_file').'export')}}
+        </button>
+            </div>
+            <!--end::Dropdown-->
+            <!--begin::Button-->
+            @if(auth()->guard('admin')->user()->can('admin-create'))
+            <a href="{{route('admins.create')}}" class="btn btn-primary font-weight-bolder">
+                <span class="svg-icon svg-icon-md">
+                    <!--begin::Svg Icon | path:/metronic/theme/html/demo1/dist/assets/media/svg/icons/Design/Flatten.svg-->
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <rect fill="#000000" x="4" y="11" width="16" height="2" rx="1"/>
+                            <rect fill="#000000" opacity="0.3" transform="translate(12.000000, 12.000000) rotate(-270.000000) translate(-12.000000, -12.000000) " x="4" y="11" width="16" height="2" rx="1"/>
+                        </g>
+                    </svg>
+                    <!--end::Svg Icon-->
+                </span>
+                {{trans(config('dashboard.trans_file').'add_new')}}
+            </a>
+            @endif
+            <!--end::Button-->
+        </div>
+    </div>
+</div>
 <div class="col-xl-12">
     <!--begin::Tables Widget 9-->
     <div class="card card-xxl-stretch mb-5 mb-xl-8">
-        <!--begin::Header-->
-        <div class="card-header border-0 pt-5">
-            <h3 class="card-title align-items-start flex-column">
-                <span class="card-label fw-bolder fs-3 mb-1">{{trans(config('dashboard.trans_file').'admins')}}</span>
-                <span class="text-muted mt-1 fw-bold fs-7">{{trans(config('dashboard.trans_file').'total_results', ['val' => $totalResults])}}</span>
-            </h3>
-            @if(auth()->guard('admin')->user()->can('admin-create'))
-            <div class="card-toolbar">
-                <a href="{{route('admins.create')}}" class="btn btn-sm btn-light-primary">
-                    <!--begin::Svg Icon | path: icons/duotone/Communication/Add-user.svg-->
-                    <span class="svg-icon svg-icon-primary svg-icon-2x"><!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-03-183419/theme/html/demo2/dist/../src/media/svg/icons/Navigation/Plus.svg-->
-                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                <rect fill="#000000" x="4" y="11" width="16" height="2" rx="1"/>
-                                <rect fill="#000000" opacity="0.3" transform="translate(12.000000, 12.000000) rotate(-270.000000) translate(-12.000000, -12.000000) " x="4" y="11" width="16" height="2" rx="1"/>
-                            </g>
-                        </svg><!--end::Svg Icon-->
-                    </span>
-                    {{trans(config('dashboard.trans_file').'add_new')}}
-                    <!--end::Svg Icon-->
-                </a>
-            </div>
-            @endif
-        </div>
-        <!--end::Header-->
         <!--begin::Body-->
         <div class="card-body py-3">
-
-            {{-- <div class="card-toolbar">
-                <form>
-                    <div class="row mb-12">
-                        <!--begin::Label-->
-                        <label class="col-lg-1 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'search')}}</label>
-                        <!--end::Label-->
-                        <!--begin::Col-->
-                        <div class="col-lg-3 fv-row fv-plugins-icon-container">
-                            <input type="text" name="keyword" class="form-control form-control-lg form-control-solid" placeholder="{{trans(config('dashboard.trans_file').'keyword')}}">
-                            <span class="help-block error-help-block input-error name-error" style="color: red;"></span>
-                        </div>
-                        <!--end::Col-->
+            <form class="mb-15" action="{{route('admins.index')}}" method="GET">
+                <div class="row mb-6">
+                    <div class="col-lg-4 mb-lg-0 mb-6">
+                        <label>{{trans(config('dashboard.trans_file').'name')}}</label>
+                        <input type="text" value="{{request()->name}}" name="name" class="form-control datatable-input" placeholder="{{trans(config('dashboard.trans_file').'name')}}" data-col-index="0">
                     </div>
-                </form>
-            </div> --}}
-
+                    <div class="col-lg-4 mb-lg-0 mb-6">
+                        <label>{{trans(config('dashboard.trans_file').'email')}}</label>
+                        <input type="text" value="{{request()->email}}" name="email" class="form-control datatable-input" placeholder="{{trans(config('dashboard.trans_file').'email')}}" data-col-index="1">
+                    </div>
+                    <div class="col-lg-4 mb-lg-0 mb-6">
+                        <label>{{trans(config('dashboard.trans_file').'mobile')}}</label>
+                        <input type="text" value="{{request()->mobile}}" name="mobile" class="form-control datatable-input" name="" placeholder="{{trans(config('dashboard.trans_file').'mobile')}}" data-col-index="4">
+                    </div>
+                </div>
+                <div class="row mb-6">
+                    <div class="col-lg-4 mb-lg-0 mb-6">
+                        <label>{{trans(config('dashboard.trans_file').'gender')}}</label>
+                        <select name="gender" class="form-select">
+                            <option value="">{{trans(config('dashboard.trans_file').'all')}}</option>
+                            <option @if(request()->gender == 'male') {{'selected'}} @endif value="male">{{trans(config('dashboard.trans_file').'male')}}</option>
+                            <option @if(request()->gender == 'female') {{'selected'}} @endif value="female">{{trans(config('dashboard.trans_file').'female')}}</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-4 mb-lg-0 mb-6">
+                        <label>{{trans(config('dashboard.trans_file').'country')}}</label>
+                        <select name="country_id" class="form-select">
+                            <option value="">{{trans(config('dashboard.trans_file').'all')}}</option>
+                            @foreach($countries as $country)
+                                <option @if(request()->country_id == $country->id) {{'selected'}} @endif value="{{$country->id}}">{{$country->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-lg-4 mb-lg-0 mb-6">
+                        <label>{{trans(config('dashboard.trans_file').'role')}}</label>
+                        <select name="role" class="form-select">
+                            <option value="">{{trans(config('dashboard.trans_file').'all')}}</option>
+                            @foreach($roles as $role)
+                                <option @if(request()->role == $role->name) {{'selected'}} @endif value="{{$role->name}}">{{$role->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="row mt-8">
+                    <div class="col-lg-12">
+                        <button class="btn btn-primary btn-primary--icon" id="kt_search">
+                        <span>
+                        <i class="la la-search"></i>
+                        <span>{{trans(config('dashboard.trans_file').'search')}}</span>
+                        </span>
+                        </button>
+                        <button type="reset" class="btn btn-secondary btn-secondary--icon" id="kt_reset">
+                        <span>
+                        <i class="la la-close"></i>
+                        <span>{{trans(config('dashboard.trans_file').'reset')}}</span>
+                        </span>
+                        </button>
+                    </div>
+                </div>
+            </form>
             <!--begin::Table container-->
             <div class="table-responsive">
                 <!--begin::Table-->
-                <table id="kt_datatable_example_1" class="table table-row-bordered gy-5">
+                <table id="kt_datatable_example_1" class="table table-striped table-bordered table-hover table-checkable dataTable dtr-inline">
                     <!--begin::Table head-->
                     <thead>
                         <tr class="fw-bold fs-6 text-muted">
-                            <th class="min-w-25px">#</th>
-                            <th class="min-w-150px">{{trans(config('dashboard.trans_file').'name')}}</th>
-                            <th class="min-w-150px">{{trans(config('dashboard.trans_file').'role')}}</th>
-                            <th class="min-w-140px">{{trans(config('dashboard.trans_file').'email')}}</th>
-                            <th class="min-w-120px">{{trans(config('dashboard.trans_file').'mobile')}}</th>
+                            <th class="min-w-20px" data-column-name="index">#</th>
+                            <th class="min-w-150px" data-column-name="name">{{trans(config('dashboard.trans_file').'name')}}</th>
+                            <th class="min-w-100px" data-column-name="role">{{trans(config('dashboard.trans_file').'role')}}</th>
+                            <th class="min-w-100px" data-column-name="email">{{trans(config('dashboard.trans_file').'email')}}</th>
+                            <th class="min-w-100px" data-column-name="mobile">{{trans(config('dashboard.trans_file').'mobile')}}</th>
+                            <th class="min-w-100px" data-column-name="gender">{{trans(config('dashboard.trans_file').'gender')}}</th>
+                            <th class="min-w-100px" data-column-name="country">{{trans(config('dashboard.trans_file').'country')}}</th>
                             @if(auth()->guard('admin')->user()->can('admin-edit') || auth()->guard('admin')->user()->can('admin-delete'))
-                            <th class="min-w-100px text-end">{{trans(config('dashboard.trans_file').'actions')}}</th>
+                            <th class="min-w-150px" data-column-name="operation">{{trans(config('dashboard.trans_file').'actions')}}</th>
                             @endif
                         </tr>
                     </thead>
                     <!--end::Table head-->
-                    <!--begin::Table body-->
-                    <tbody>
-                        @if(count($admins) == 0)
-                        <td colspan="100%">
-                            <h3 class="col-12 text-center">{{trans(config('dashboard.trans_file').'no_result')}}</h3>
-                        </td>
-                        @else
-                        @foreach ($admins as $index => $admin)
-                        <tr>
-                            <td>
-                                <p class="text-dark fw-bolder d-block fs-6">{{++$index}}</p>
-                            </td>
-                            <td>
-                                <div class="d-flex align-items-center">
-                                    <div class="symbol symbol-45px me-5">
-                                        <img src="{{$admin->image_path}}" alt="{{$admin->name}}">
-                                    </div>
-                                    <div class="d-flex justify-content-start flex-column">
-                                        <p class="text-dark fw-bolder fs-6">{{$admin->name}}</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <p class="text-dark fw-bolder d-block fs-6">{{$admin->roles[0]->name}}</p>
-                            </td>
-                            <td>
-                                <p class="text-dark fw-bolder d-block fs-6">{{$admin->email}}</p>
-                            </td>
-                            <td>
-                                {{-- {{$$admin['country']}} --}}
-                                <p class="text-dark fw-bolder d-block fs-6">{{$admin->country->phone_code.$admin->mobile}}</p>
-                            </td>
-                            @if(auth()->guard('admin')->user()->can('admin-edit') || auth()->guard('admin')->user()->can('admin-delete'))
-                            <td class="text-end">
-                                @if(auth()->guard('admin')->user()->can('admin-edit'))
-                                <a href="{{route('admins.edit', $admin->id)}}" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
-                                    <!--begin::Svg Icon | path: icons/duotone/Communication/Write.svg-->
-                                    <span class="svg-icon svg-icon-3">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                            <path d="M12.2674799,18.2323597 L12.0084872,5.45852451 C12.0004303,5.06114792 12.1504154,4.6768183 12.4255037,4.38993949 L15.0030167,1.70195304 L17.5910752,4.40093695 C17.8599071,4.6812911 18.0095067,5.05499603 18.0083938,5.44341307 L17.9718262,18.2062508 C17.9694575,19.0329966 17.2985816,19.701953 16.4718324,19.701953 L13.7671717,19.701953 C12.9505952,19.701953 12.2840328,19.0487684 12.2674799,18.2323597 Z" fill="#000000" fill-rule="nonzero" transform="translate(14.701953, 10.701953) rotate(-135.000000) translate(-14.701953, -10.701953)"></path>
-                                            <path d="M12.9,2 C13.4522847,2 13.9,2.44771525 13.9,3 C13.9,3.55228475 13.4522847,4 12.9,4 L6,4 C4.8954305,4 4,4.8954305 4,6 L4,18 C4,19.1045695 4.8954305,20 6,20 L18,20 C19.1045695,20 20,19.1045695 20,18 L20,13 C20,12.4477153 20.4477153,12 21,12 C21.5522847,12 22,12.4477153 22,13 L22,18 C22,20.209139 20.209139,22 18,22 L6,22 C3.790861,22 2,20.209139 2,18 L2,6 C2,3.790861 3.790861,2 6,2 L12.9,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
-                                        </svg>
-                                    </span>
-                                    <!--end::Svg Icon-->
-                                </a>
-                                @endif
-
-                                @if(auth()->guard('admin')->user()->can('admin-delete'))
-                                <a href="#" onclick="deleteRow('{{route('admins.destroy', $admin->id)}}', '{{csrf_token()}}')" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm">
-                                    <!--begin::Svg Icon | path: icons/duotone/General/Trash.svg-->
-                                    <span class="svg-icon svg-icon-3">
-                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                <rect x="0" y="0" width="24" height="24"></rect>
-                                                <path d="M6,8 L6,20.5 C6,21.3284271 6.67157288,22 7.5,22 L16.5,22 C17.3284271,22 18,21.3284271 18,20.5 L18,8 L6,8 Z" fill="#000000" fill-rule="nonzero"></path>
-                                                <path d="M14,4.5 L14,4 C14,3.44771525 13.5522847,3 13,3 L11,3 C10.4477153,3 10,3.44771525 10,4 L10,4.5 L5.5,4.5 C5.22385763,4.5 5,4.72385763 5,5 L5,5.5 C5,5.77614237 5.22385763,6 5.5,6 L18.5,6 C18.7761424,6 19,5.77614237 19,5.5 L19,5 C19,4.72385763 18.7761424,4.5 18.5,4.5 L14,4.5 Z" fill="#000000" opacity="0.3"></path>
-                                            </g>
-                                        </svg>
-                                    </span>
-                                    <!--end::Svg Icon-->
-                                </a>
-                                @endif
-                            </td>
-                            @endif
-                        </tr>
-                        @endforeach
-                        @endif
-                    </tbody>
-                    <!--end::Table body-->
                 </table>
-                {{$admins->links("pagination::bootstrap-4")}}
                 <!--end::Table-->
             </div>
             <!--end::Table container-->
@@ -177,9 +181,107 @@
 @endsection
 
 @push('footer-scripts')
-    <script src="{{asset('plugins/dashboard/datatables/datatables.bundle.js')}}"></script>
-    <script>
-        var title = "{{trans(config('dashboard.trans_file').'delete_question')}}";
-        $("#kt_datatable_example_1").DataTable();
-    </script>
+
+<script src="{{asset('plugins/dashboard/datatables/datatables.bundle.js')}}"></script>
+
+<script>
+    var title = "{{trans(config('dashboard.trans_file').'delete_question')}}";
+
+    function loadData()
+    {
+        var dataTable = $("#kt_datatable_example_1").DataTable({
+            processing: true,
+            serverSide: true,
+            responsive: true,
+            stateSave: true,
+            contentType: "application/json",
+            order: [[1, "desc"]],
+            initComplete: function( settings, json ) {
+                var detached =  $(".export_btn").detach();
+                var icon = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">';
+                icon += '<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">';
+                icon += '<rect x="0" y="0" width="24" height="24"></rect>';
+                icon += '<path d="M3,16 L5,16 C5.55228475,16 6,15.5522847 6,15 C6,14.4477153 5.55228475,14 5,14 L3,14 L3,12 L5,12 C5.55228475,12 6,11.5522847 6,11 C6,10.4477153 5.55228475,10 5,10 L3,10 L3,8 L5,8 C5.55228475,8 6,7.55228475 6,7 C6,6.44771525 5.55228475,6 5,6 L3,6 L3,4 C3,3.44771525 3.44771525,3 4,3 L10,3 C10.5522847,3 11,3.44771525 11,4 L11,19 C11,19.5522847 10.5522847,20 10,20 L4,20 C3.44771525,20 3,19.5522847 3,19 L3,16 Z" fill="#000000" opacity="0.3"></path>';
+                icon += '<path d="M16,3 L19,3 C20.1045695,3 21,3.8954305 21,5 L21,15.2485298 C21,15.7329761 20.8241635,16.200956 20.5051534,16.565539 L17.8762883,19.5699562 C17.6944473,19.7777745 17.378566,19.7988332 17.1707477,19.6169922 C17.1540423,19.602375 17.1383289,19.5866616 17.1237117,19.5699562 L14.4948466,16.565539 C14.1758365,16.200956 14,15.7329761 14,15.2485298 L14,5 C14,3.8954305 14.8954305,3 16,3 Z" fill="#000000"></path>';
+                icon += '</g></svg> ';
+                detached.prepend(icon);
+
+                $(".export_menu button").remove();
+                $(".export_menu").append(detached);
+            },
+            ajax: {
+                url: "{{route('admins.index')}}",
+                data: $('form').formToJson(),
+            },
+            columns:[{data: 'index'}, {data: 'name'}, {data: 'role'}, {data: 'email'}, {data: 'mobile'}, {data: 'gender'}, {data: 'country'}, {data: 'action'}],
+            dom: 'frtipB',
+            language: {url: @if(config('app.locale') === 'en') "//cdn.datatables.net/plug-ins/1.10.16/i18n/English.json" @else "//cdn.datatables.net/plug-ins/1.10.16/i18n/Arabic.json" @endif},
+            lengthMenu: [[10, 25, 50, 100, 500],['10', '25', '50', '100', '500']],
+            columnDefs: [
+                {targets: 0, orderable: false, searchable: false, render: function (data, type, full, meta) {return data;}},
+                {targets: -1, orderable: false, searchable: false, render: function (data, type, full, meta) {
+                    var editUrl = "";
+                    var deleteUrl = "";
+                    var csrfToken = "{{csrf_token()}}";
+                    @if(auth()->guard('admin')->user()->can('admin-edit'))
+                        var editRoute = '{{ route("admins.edit", ":id") }}'.replace(':id', data);
+                        editUrl = '<a href="'+editRoute+'" class="btn btn-sm btn-clean btn-icon"><i class="edit_row la la-edit"></i></a>';
+                    @endif
+                    @if(auth()->guard('admin')->user()->can('admin-delete'))
+                        var deleteRoute = '{{ route("admins.destroy", ":id") }}'.replace(':id', data);
+                        deleteUrl = "<a href='#' onclick=deleteRow('"+deleteRoute+"','"+csrfToken+"') class='btn btn-sm btn-clean btn-icon'><i class='delete_row la la-trash'></i></a>";
+                    @endif
+                    return editUrl+deleteUrl;
+                }},
+            ],
+
+            buttons: [
+                {extend: 'collection', text: 'Export', className:"export_btn btn btn-light", fade: true,
+                    buttons:[
+                        {extend: "pageLength", className: 'btn btn-default btn-sm-menu', text: "{{trans(config('dashboard.trans_file').'page_length')}}", exportOptions: {stripHtml: true, columns: ':visible'}},
+                        {extend: "print", className: 'btn btn-default btn-sm-menu', text: "{{trans(config('dashboard.trans_file').'print')}}", exportOptions: {stripHtml: true, columns: ':visible'}},
+                        {
+                            text: "{{trans(config('dashboard.trans_file').'pdf')}}",
+                            className: 'btn btn-default btn-sm-menu',
+                            action: function()
+                            {
+                                var colsNames = [];
+                                var colsIndexName = [];
+                                for(var i=0; i< $('#kt_datatable_example_1 > thead > tr > th').length; i++)
+                                {
+                                    var currentColumn = $('#kt_datatable_example_1 > thead > tr > th')[i];
+                                    colsNames.push($(currentColumn).text());
+                                    colsIndexName.push($(currentColumn).data('column-name'));
+                                }
+                                colsIndexName.push('ajax_request');
+
+                                $.ajax({
+                                    type: 'GET',
+                                    url: "{{route('download-admin-pdf')}}?"+$.param($('#kt_datatable_example_1').DataTable().ajax.params()),
+                                    contentType: "application/json",
+                                    dataType: "json",
+                                    data: jsonConcat({'visibleColsNames': colsNames, 'colsIndexName': colsIndexName}, $('form').formToJson()),
+                                    complete: function (res) {
+                                        var path = res.responseJSON.path;
+                                        var link = document.createElement('a');
+                                        link.href = path;
+                                        link.download = 'download.pdf';
+                                        link.target = '_blank';
+                                        link.click();
+                                    }
+                                })
+                            }
+                        },
+                        {extend: "excel", className: 'btn btn-default btn-sm-menu', text: "{{trans(config('dashboard.trans_file').'excel')}}", exportOptions: {stripHtml: true, columns: ':visible'}},
+                        {extend: "colvis", className: 'btn btn-default btn-sm-menu', text: "{{trans(config('dashboard.trans_file').'columns')}}", exportOptions: {stripHtml: true, columns: ':visible'}},
+                    ]
+                }
+            ],
+        });
+    }
+
+    $(document).ready(function() {
+        loadData();
+    })
+</script>
 @endpush

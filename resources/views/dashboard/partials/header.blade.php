@@ -7,17 +7,15 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
 <!--end::Fonts-->
 <!--begin::Global Stylesheets Bundle(used by all pages)-->
+
+<link href="{{asset('plugins/dashboard/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css" />
 @if(config('app.locale') == 'ar')
 <link href="{{asset('plugins/dashboard/global/plugins.bundle.rtl.css')}}" rel="stylesheet" type="text/css" />
 <link href="{{asset('css/dashboard/style.bundle.rtl.css')}}" rel="stylesheet" type="text/css" />
 <link href='https://fonts.googleapis.com/css?family=Cairo' rel='stylesheet'>
-<style>
-body {
-    font-family: 'Cairo';font-size: 22px;
-}
-</style>
 @else
 <link href="{{asset('plugins/dashboard/global/plugins.bundle.css')}}" rel="stylesheet" type="text/css" />
 <link href="{{asset('css/dashboard/style.bundle.css')}}" rel="stylesheet" type="text/css" />
 @endif
+<link href="{{asset('css/dashboard/custome.css')}}" rel="stylesheet" type="text/css" />
 <!--end::Global Stylesheets Bundle-->

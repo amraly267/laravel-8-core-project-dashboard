@@ -126,18 +126,11 @@
                     <!--end::Col-->
 
                     <!--begin::Label-->
-                    <label class="col-lg-1 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'mobile')}}</label>
+                    <label class="col-lg-1 col-form-label fw-bold fs-6 mobile">{{trans(config('dashboard.trans_file').'mobile')}}</label>
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-5 fv-row fv-plugins-icon-container">
-                        <span id="country_phone_code" class="svg-icon svg-icon-2 svg-icon-lg-1 svg-icon-gray-500 position-absolute top-50 ms-5 translate-middle-y">
-                            @if($submitFormMethod == 'put')
-                                {{$admin->country->phone_code}}
-                            @else
-                                {{count($countries) > 0 ? $countries[0]->phone_code:''}}
-                            @endif
-                        </span>
-                        <input type="tel" minlength="9" maxlength="12" name="mobile" class="form-control form-control-solid px-15" placeholder="{{trans(config('dashboard.trans_file').'mobile')}}" value="{{$submitFormMethod == 'put' ? $admin->mobile : old('mobile')}}">
+                        <input type="tel" minlength="9" maxlength="12" name="mobile" class="form-control form-control-lg form-control-solid" placeholder="{{trans(config('dashboard.trans_file').'mobile')}}" value="{{$submitFormMethod == 'put' ? $admin->mobile : old('mobile')}}">
                         <span class="help-block error-help-block input-error mobile-error" style="color: red;"></span>
                     </div>
                     <!--end::Col-->
@@ -191,6 +184,7 @@
                     <!--begin::Label-->
                     <label class="col-lg-1 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'role')}}</label>
                     <!--end::Label-->
+
                     <!--begin::Col-->
                     <div class="col-lg-5 fv-row fv-plugins-icon-container">
                         <select @if(request()->has('role_id')) {{'disabled'}} @endif name="role" data-control="select2" class="form-select form-select-solid form-select-lg fw-bold select2-hidden-accessible" data-select2-id="select2-data-10-jdo1-role" tabindex="-1" aria-hidden="true">
@@ -226,7 +220,7 @@
         // === Get selected country phone code ===
         $('#country_id').change(function(){
             var phoneCode = $(this).find(":selected").data('phone_code');
-            $('#country_phone_code').text(phoneCode);
+            $('.mobile').append('('+phoneCode+')');
         });
         // === End script ===
 
