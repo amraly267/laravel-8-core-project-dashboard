@@ -99,7 +99,7 @@
 
                 @foreach($roles as $role)
                 <div class="menu-item">
-                    <a class="menu-link {{ Request::is('admin/role-admins/'.$role->id) ? 'active' : '' }}" href="{{route('role-admins', ['role_id' => $role->id])}}">
+                    <a class="menu-link {{ Request::is('admin/role-admins/'.$role->name) ? 'active' : '' }}" href="{{route('role-admins', ['role' => $role->name])}}">
                         <span class="menu-icon">
                                 <!--begin::Svg Icon | path: icons/duotone/Design/PenAndRuller.svg-->
                                 <span class="svg-icon svg-icon-2"><!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-03-183419/theme/html/demo2/dist/../src/media/svg/icons/Home/Key.svg-->

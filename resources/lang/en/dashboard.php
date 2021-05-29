@@ -108,6 +108,8 @@ return [
     "all" => "All",
     "reset" => "Reset",
     "export" => "Export",
+    "search_keyword" => "Search keyword",
+
 ];
 
 ?>

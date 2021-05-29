@@ -138,7 +138,7 @@
 
 @push('footer-scripts')
 
-    <script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
+    <script src="http://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
 
     <script>
         setTimeout(function(){

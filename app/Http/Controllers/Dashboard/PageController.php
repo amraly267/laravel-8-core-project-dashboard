@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Page;
 use App\Http\Requests\Dashboard\PageRequest;
+use PDF;
 
 class PageController extends BaseController
 {
@@ -18,17 +19,91 @@ class PageController extends BaseController
         $this->middleware('permission:page-delete,admin', ['only' => ['destroy']]);
     }
 
+    public function downloadPdf(Request $request)
+    {
+        return response()->json(['path' => route('pages.index', ['download-pdf' => true, 'request' => $request->all()])]);
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $pages = Page::orderBy('created_at', 'DESC')->paginate(10);
         $totalResults = Page::count();
-        return view(config('dashboard.resource_folder').$this->controllerResource.'index', compact('pages', 'totalResults'));
+
+        if($request->has('download-pdf'))
+        {
+            $request = new Request($request->all()['request']);
+            $filter = $this->datatableFilter($request);
+            $pages = $filter['pages'];
+            $visibleColsNames = $request->visibleColsNames;
+            $colsIndexName = $request->colsIndexName;
+            $html = view(config('dashboard.resource_folder').$this->controllerResource.'pdf', compact('pages', 'visibleColsNames', 'colsIndexName'))->render();
+            $pdf = PDF::loadHTML($html);
+            return $pdf->download(trans(config('dashboard.trans_file').'static_pages').'.pdf');
+        }
+
+        if($request->ajax())
+        {
+            $filterData = $this->datatableFilter($request);
+            $response = ["draw" => intval($filterData['draw']),
+                            "iTotalRecords" => $totalResults,
+                            "iTotalDisplayRecords" => $filterData['totalRecordswithFilter'],
+                            "aaData" => $filterData['pages']];
+
+            echo json_encode($response);
+        }
+        else
+        {
+            return view(config('dashboard.resource_folder').$this->controllerResource.'index', compact('totalResults'));
+        }
     }
+
+    // === Datatable filter parameters ===
+    private function datatableFilter($request)
+    {
+        // === Get data table request values ===
+        $draw = $request->get('draw');
+        $start = $request->get("start");
+        $rowsPerPage = $request->get("length");
+        $columnIndexValues = $request->get('order');
+        $columnNames = $request->get('columns');
+        $orderValues = $request->get('order');
+
+        $columnIndex = $columnIndexValues[0]['column']; // Column index
+        $columnName = $columnNames[$columnIndex]['data']; // Column name
+        $columnSortOrder = $orderValues[0]['dir']; // asc or desc
+
+        $model = (new Page)->newQuery();
+
+        if($request->filled('search_keyword'))
+        {
+            $model->where('title', 'like', '%' .$request->search_keyword . '%');
+        }
+        if($request->filled('status'))
+        {
+            $model->where('status', $request->status);
+        }
+
+        // === Filter records if there is search keyword ===
+        $totalRecordswithFilter = $model->count();
+
+        // === Fetch records ===
+        $pagesRecords = $model->orderBy($columnName,$columnSortOrder)->skip($start)->take($rowsPerPage)->get();
+
+        $pages = collect($pagesRecords)->map(function($page, $index){
+            return [
+                "index" => $index+1,
+                "title" => $page->title,
+                "status" => $page->status_label,
+                "action" => $page->id
+            ];
+        });
+
+        return ['draw' => $draw, 'totalRecordswithFilter' => $totalRecordswithFilter, 'pages' => $pages, 'columnNames' => $columnNames];
+    }
+    // === End function ===
 
     /**
      * Show the form for creating a new resource.

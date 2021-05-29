@@ -102,5 +102,10 @@ $("#kt_reset").click(function(e){
     e.preventDefault();
     $("form").trigger("reset");
     $("form input").val("");
+    if (location.href.includes('?')) {
+        history.pushState({}, null, location.href.split('?')[0]);
+    }
+
+    window.location.reload();
 });
 // === End script ===

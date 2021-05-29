@@ -187,9 +187,9 @@
 
                     <!--begin::Col-->
                     <div class="col-lg-5 fv-row fv-plugins-icon-container">
-                        <select @if(request()->has('role_id')) {{'disabled'}} @endif name="role" data-control="select2" class="form-select form-select-solid form-select-lg fw-bold select2-hidden-accessible" data-select2-id="select2-data-10-jdo1-role" tabindex="-1" aria-hidden="true">
+                        <select @if(request()->has('role')) {{'disabled'}} @endif name="role" data-control="select2" class="form-select form-select-solid form-select-lg fw-bold select2-hidden-accessible" data-select2-id="select2-data-10-jdo1-role" tabindex="-1" aria-hidden="true">
                             @foreach($roles as $role)
-                                <option @if(($submitFormMethod == 'put' && $admin->roles[0]->id == $role->id) || (request()->role_id == $role->id)) {{'selected'}} @endif value="{{$role->id}}">{{$role->name}}</option>
+                                <option @if(($submitFormMethod == 'put' && $admin->roles[0]->id == $role->id) || request()->role == $role->name || request()->role_id == $role->id ) {{'selected'}} @endif value="{{$role->id}}">{{$role->name}}</option>
                             @endforeach
                         </select>
                         <span class="help-block error-help-block input-error role-error" style="color: red;"></span>

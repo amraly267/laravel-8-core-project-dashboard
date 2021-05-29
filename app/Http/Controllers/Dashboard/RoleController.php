@@ -9,6 +9,7 @@ use Spatie\Permission\Models\Permission;
 use App\Http\Requests\Dashboard\RoleRequest;
 use App\Models\PermissionGroup;
 use app\Models\Admin;
+use PDF;
 
 class RoleController extends BaseController
 {
@@ -21,17 +22,97 @@ class RoleController extends BaseController
         $this->middleware('permission:role-delete,admin', ['only' => ['destroy']]);
     }
 
+    public function downloadPdf(Request $request)
+    {
+        return response()->json(['path' => route('roles.index', ['download-pdf' => true, 'request' => $request->all()])]);
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+
+    public function index(Request $request)
     {
-        $roles = Role::with('permissions')->paginate(10);
+        $permissions = Permission::get();
         $totalResults = Role::count();
-        return view(config('dashboard.resource_folder').$this->controllerResource.'index', compact('roles', 'totalResults'));
+
+        if($request->has('download-pdf'))
+        {
+            $request = new Request($request->all()['request']);
+            $filter = $this->datatableFilter($request);
+            $roles = $filter['roles'];
+            $visibleColsNames = $request->visibleColsNames;
+            $colsIndexName = $request->colsIndexName;
+            $html = view(config('dashboard.resource_folder').$this->controllerResource.'pdf', compact('roles', 'visibleColsNames', 'colsIndexName'))->render();
+            $pdf = PDF::loadHTML($html);
+            return $pdf->download(trans(config('dashboard.trans_file').'roles').'.pdf');
+        }
+
+        if($request->ajax())
+        {
+            $filterData = $this->datatableFilter($request);
+            $response = ["draw" => intval($filterData['draw']),
+                            "iTotalRecords" => $totalResults,
+                            "iTotalDisplayRecords" => $filterData['totalRecordswithFilter'],
+                            "aaData" => $filterData['roles']];
+
+            echo json_encode($response);
+        }
+        else
+        {
+            return view(config('dashboard.resource_folder').$this->controllerResource.'index', compact('totalResults', 'permissions'));
+        }
     }
+
+    // === Datatable filter parameters ===
+    private function datatableFilter($request)
+    {
+        // === Get data table request values ===
+        $draw = $request->get('draw');
+        $start = $request->get("start");
+        $rowsPerPage = $request->get("length");
+        $columnIndexValues = $request->get('order');
+        $columnNames = $request->get('columns');
+        $orderValues = $request->get('order');
+
+        $columnIndex = $columnIndexValues[0]['column']; // Column index
+        $columnName = $columnNames[$columnIndex]['data']; // Column name
+        $columnSortOrder = $orderValues[0]['dir']; // asc or desc
+
+        $model = (new Role)->newQuery();
+
+        if($request->filled('search_keyword'))
+        {
+            $model->where('name', 'like', '%'.$request->search_keyword.'%');
+        }
+        if($request->filled('permission'))
+        {
+            $model->whereHas('permissions', function($q) use ($request){$q->where('id', $request->permission);});
+        }
+
+        // === Filter records if there is search keyword ===
+        $totalRecordswithFilter = $model->count();
+
+        // === Fetch records ===
+        $roleRecords = $model->orderBy($columnName,$columnSortOrder)->skip($start)->take($rowsPerPage)->get();
+
+        $roles = collect($roleRecords)->map(function($role, $index){
+            $permissions = '';
+            foreach($role->permissions as $permission)
+            {
+                $permissions .= '<span class="badge badge-light-success">'.$permission->name.'</span> ';
+            }
+            return [
+                "index" => $index+1,
+                "name" => $role->name,
+                "permissions" => $permissions,
+                "action" => $role->id
+            ];
+        });
+        return ['draw' => $draw, 'totalRecordswithFilter' => $totalRecordswithFilter, 'roles' => $roles, 'columnNames' => $columnNames];
+    }
+    // === End function ===
 
     /**
      * Show the form for creating a new resource.
@@ -120,30 +201,4 @@ class RoleController extends BaseController
         $role = Role::where('id', $id)->delete();
         return $this->successResponse(['message' => trans(config('dashboard.trans_file').'success_delete')]);
     }
-
-    public function roleAdmins(Request $request)
-    {
-        $roleId = $request->role_id;
-        $existingRole = Role::find($roleId);
-
-        if($existingRole)
-        {
-            $admins = Admin::whereHas('roles', function($q) use($request){
-                $q->where('id', $request->role_id);
-            })->paginate(10);
-
-            $totalResults = Admin::whereHas('roles', function($q) use($request){
-                $q->where('id', $request->role_id);
-            })->count();
-
-            $pageTitle = strtoupper($existingRole->name);
-            return view(config('dashboard.resource_folder').$this->controllerResource.'role_admins', compact('admins', 'totalResults', 'pageTitle', 'roleId'));
-        }
-        else
-        {
-            abort(404);
-        }
-    }
-
-
 }

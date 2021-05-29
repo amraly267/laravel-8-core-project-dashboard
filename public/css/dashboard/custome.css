@@ -19,3 +19,24 @@ body {
 .export_menu button:hover, .export_btn:hover{
     background-color: #eceaea !important;
 }
+table {
+    width: 100%;
+    text-align: center;
+    border: 1px solid rgb(233, 229, 229);
+    border-radius: 5px;
+}
+
+table th{
+    color: #000 !important;
+    background: url('http://tablesorter.com/themes/blue/bg.gif') no-repeat 99% !important;
+
+}
+
+table, th, td {
+    border: 1px solid rgb(233, 229, 229) !important;
+}
+
+td img{
+    width: 35px;
+    height: 35px;
+}

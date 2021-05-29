@@ -50,7 +50,7 @@ Route::prefix('admin')->group(function () {
         Route::put('update-profile', [AuthController::class, 'updateProfile'])->name('admin-update-profile');
         Route::resource('admins', AdminController::class);
         Route::resource('roles', RoleController::class);
-        Route::get('role-admins/{role_id}', [RoleController::class, 'roleAdmins'])->name('role-admins');
+        Route::get('role-admins/{role?}', [AdminController::class, 'index'])->name('role-admins');
         Route::resource('countries', CountryController::class);
         Route::get('toJsonData', [CountryController::class, 'toJsonData'])->name('toJsonData');
         Route::resource('cities', CityController::class);
@@ -61,6 +61,10 @@ Route::prefix('admin')->group(function () {
         Route::get('change-language/{lang}', [SettingController::class, 'changeLanguage'])->name('admin-change-language');
         Route::get('download-country-pdf', [CountryController::class, 'downloadPdf'])->name('download-country-pdf');
         Route::get('download-admin-pdf', [AdminController::class, 'downloadPdf'])->name('download-admin-pdf');
+        Route::get('download-role-pdf', [RoleController::class, 'downloadPdf'])->name('download-role-pdf');
+        Route::get('download-city-pdf', [CityController::class, 'downloadPdf'])->name('download-city-pdf');
+        Route::get('download-area-pdf', [AreaController::class, 'downloadPdf'])->name('download-area-pdf');
+        Route::get('download-page-pdf', [PageController::class, 'downloadPdf'])->name('download-page-pdf');
     });
 
 });

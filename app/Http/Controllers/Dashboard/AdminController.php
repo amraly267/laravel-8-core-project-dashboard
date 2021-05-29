@@ -84,17 +84,13 @@ class AdminController extends BaseController
 
         $model = (new Admin)->newQuery();
 
-        if($request->filled('name'))
+        if($request->filled('search_keyword'))
         {
-            $model->where('name', 'like', '%' .$request->name . '%');
-        }
-        if($request->filled('email'))
-        {
-            $model->where('email', 'like', '%' .$request->email . '%');
-        }
-        if($request->filled('mobile'))
-        {
-            $model->where('mobile', 'like', '%' .$request->mobile . '%');
+            $model->where(function($q) use ($request){
+                $q->where('name', 'like', '%'.$request->search_keyword.'%')
+                ->orWhere('email', 'like', '%'.$request->search_keyword.'%')
+                ->orWhere('mobile', 'like', '%'.$request->search_keyword.'%');
+            });
         }
         if($request->filled('gender'))
         {

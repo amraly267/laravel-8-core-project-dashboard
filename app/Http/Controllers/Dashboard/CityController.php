@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\City;
 use App\Models\Country;
 use App\Http\Requests\Dashboard\CityRequest;
+use PDF;
 
 class CityController extends BaseController
 {
@@ -19,17 +20,97 @@ class CityController extends BaseController
         $this->middleware('permission:city-delete,admin', ['only' => ['destroy']]);
     }
 
+    public function downloadPdf(Request $request)
+    {
+        return response()->json(['path' => route('cities.index', ['download-pdf' => true, 'request' => $request->all()])]);
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $cities = City::orderBy('created_at', 'DESC')->paginate(10);
+        $countries = Country::all();
         $totalResults = City::count();
-        return view(config('dashboard.resource_folder').$this->controllerResource.'index', compact('cities', 'totalResults'));
+
+        if($request->has('download-pdf'))
+        {
+            $request = new Request($request->all()['request']);
+            $filter = $this->datatableFilter($request);
+            $cities = $filter['cities'];
+            $visibleColsNames = $request->visibleColsNames;
+            $colsIndexName = $request->colsIndexName;
+            $html = view(config('dashboard.resource_folder').$this->controllerResource.'pdf', compact('cities', 'visibleColsNames', 'colsIndexName'))->render();
+            $pdf = PDF::loadHTML($html);
+            return $pdf->download(trans(config('dashboard.trans_file').'cities').'.pdf');
+        }
+
+        if($request->ajax())
+        {
+            $filterData = $this->datatableFilter($request);
+            $response = ["draw" => intval($filterData['draw']),
+                            "iTotalRecords" => $totalResults,
+                            "iTotalDisplayRecords" => $filterData['totalRecordswithFilter'],
+                            "aaData" => $filterData['cities']];
+
+            echo json_encode($response);
+        }
+        else
+        {
+            return view(config('dashboard.resource_folder').$this->controllerResource.'index', compact('totalResults', 'countries'));
+        }
     }
+
+    // === Datatable filter parameters ===
+    private function datatableFilter($request)
+    {
+        // === Get data table request values ===
+        $draw = $request->get('draw');
+        $start = $request->get("start");
+        $rowsPerPage = $request->get("length");
+        $columnIndexValues = $request->get('order');
+        $columnNames = $request->get('columns');
+        $orderValues = $request->get('order');
+
+        $columnIndex = $columnIndexValues[0]['column']; // Column index
+        $columnName = $columnNames[$columnIndex]['data']; // Column name
+        $columnSortOrder = $orderValues[0]['dir']; // asc or desc
+
+        $model = (new City)->newQuery();
+
+        if($request->filled('search_keyword'))
+        {
+            $model->where('name', 'like', '%'.$request->search_keyword.'%');
+        }
+        if($request->filled('status'))
+        {
+            $model->where('status', $request->status);
+        }
+        if($request->filled('country_id'))
+        {
+            $model->where('country_id', $request->country_id);
+        }
+
+        // === Filter records if there is search keyword ===
+        $totalRecordswithFilter = $model->count();
+
+        // === Fetch records ===
+        $citiesRecords = $model->orderBy($columnName,$columnSortOrder)->skip($start)->take($rowsPerPage)->get();
+
+        $cities = collect($citiesRecords)->map(function($city, $index){
+            return [
+                "index" => $index+1,
+                "name" => $city->name,
+                "country" => $city->country->name,
+                "status" => $city->status_label,
+                "action" => $city->id
+            ];
+        });
+
+        return ['draw' => $draw, 'totalRecordswithFilter' => $totalRecordswithFilter, 'cities' => $cities, 'columnNames' => $columnNames];
+    }
+    // === End function ===
 
     /**
      * Show the form for creating a new resource.

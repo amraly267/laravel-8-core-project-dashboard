@@ -28,19 +28,6 @@
 <div class="card card-custom">
     <div class="card-header">
         <div class="card-title">
-            <span class="card-icon">
-            <i class="flaticon2-delivery-package text-primary"></i>
-            </span>
-            <span class="menu-icon">
-                <!--begin::Svg Icon | path: assets/media/icons/duotone/Communication/Flag.svg-->
-                <span class="svg-icon svg-icon-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                        <path d="M3.5,3 L5,3 L5,19.5 C5,20.3284271 4.32842712,21 3.5,21 L3.5,21 C2.67157288,21 2,20.3284271 2,19.5 L2,4.5 C2,3.67157288 2.67157288,3 3.5,3 Z" fill="#000000"/>
-                        <path d="M6.99987583,2.99995344 L19.754647,2.99999303 C20.3069317,2.99999474 20.7546456,3.44771138 20.7546439,3.99999613 C20.7546431,4.24703684 20.6631995,4.48533385 20.497938,4.66895776 L17.5,8 L20.4979317,11.3310353 C20.8673908,11.7415453 20.8341123,12.3738351 20.4236023,12.7432941 C20.2399776,12.9085564 20.0016794,13 19.7546376,13 L6.99987583,13 L6.99987583,2.99995344 Z" fill="#000000" opacity="0.3"/>
-                    </svg>
-                </span>
-                <!--end::Svg Icon-->
-            </span>
             <h3 class="card-label">{{trans(config('dashboard.trans_file').'countries')}}</h3>
             <span class="text-muted mt-1 fw-bold fs-7">{{trans(config('dashboard.trans_file').'total_results', ['val' => $totalResults])}}</span>
         </div>
@@ -85,24 +72,16 @@
         <div class="card-body py-3">
             <form class="mb-15" action="{{route('countries.index')}}" method="GET">
                 <div class="row mb-6">
-                    <div class="col-lg-3 mb-lg-0 mb-6">
-                        <label>{{trans(config('dashboard.trans_file').'name')}}</label>
-                        <input type="text" value="{{request()->name}}" name="name" class="form-control datatable-input" placeholder="{{trans(config('dashboard.trans_file').'name')}}" data-col-index="0">
+                    <div class="col-lg-6 mb-lg-0 mb-6">
+                        <label>{{trans(config('dashboard.trans_file').'search_keyword')}}</label>
+                        <input type="text" value="{{request()->search_keyword}}" name="search_keyword" class="form-control datatable-input" placeholder="{{trans(config('dashboard.trans_file').'search_keyword')}}" data-col-index="0">
                     </div>
-                    <div class="col-lg-3 mb-lg-0 mb-6">
-                        <label>{{trans(config('dashboard.trans_file').'name_code')}}</label>
-                        <input type="text" value="{{request()->name_code}}" name="name_code" class="form-control datatable-input" placeholder="{{trans(config('dashboard.trans_file').'name_code')}}" data-col-index="1">
-                    </div>
-                    <div class="col-lg-3 mb-lg-0 mb-6">
-                        <label>{{trans(config('dashboard.trans_file').'phone_code')}}</label>
-                        <input type="text" value="{{request()->phone_code}}" name="phone_code" class="form-control datatable-input" name="" placeholder="{{trans(config('dashboard.trans_file').'phone_code')}}" data-col-index="4">
-                    </div>
-                    <div class="col-lg-3 mb-lg-0 mb-6">
+                    <div class="col-lg-6 mb-lg-0 mb-6">
                         <label>{{trans(config('dashboard.trans_file').'status')}}</label>
                         <select name="status" class="form-select">
                             <option value="">{{trans(config('dashboard.trans_file').'all')}}</option>
-                            <option @if(request()->status == 1) {{'selected'}} @endif value="1">{{trans(config('dashboard.trans_file').'active')}}</option>
-                            <option @if(request()->status == 0) {{'selected'}} @endif value="0">{{trans(config('dashboard.trans_file').'deactivate')}}</option>
+                            <option @if(request()->status === '1') {{'selected'}} @endif value="1">{{trans(config('dashboard.trans_file').'active')}}</option>
+                            <option @if(request()->status === '0') {{'selected'}} @endif value="0">{{trans(config('dashboard.trans_file').'deactivate')}}</option>
                         </select>
                     </div>
                 </div>
@@ -136,7 +115,7 @@
                             <th class="min-w-100px" data-column-name="phone_code">{{trans(config('dashboard.trans_file').'phone_code')}}</th>
                             <th class="min-w-100px" data-column-name="status">{{trans(config('dashboard.trans_file').'status')}}</th>
                             @if(auth()->guard('admin')->user()->can('country-edit') || auth()->guard('admin')->user()->can('country-delete'))
-                            <th class="min-w-150px" data-column-name="operation">{{trans(config('dashboard.trans_file').'actions')}}</th>
+                            <th class="min-w-90px" data-column-name="operation">{{trans(config('dashboard.trans_file').'actions')}}</th>
                             @endif
                         </tr>
                     </thead>
@@ -196,11 +175,11 @@
                     var deleteUrl = "";
                     var csrfToken = "{{csrf_token()}}";
                     @if(auth()->guard('admin')->user()->can('country-edit'))
-                        var editRoute = '{{ route("admins.edit", ":id") }}'.replace(':id', data);
+                        var editRoute = '{{ route("countries.edit", ":id") }}'.replace(':id', data);
                         editUrl = '<a href="'+editRoute+'" class="btn btn-sm btn-clean btn-icon"><i class="la la-edit edit_row"></i></a>';
                     @endif
                     @if(auth()->guard('admin')->user()->can('country-delete'))
-                        var deleteRoute = '{{ route("admins.destroy", ":id") }}'.replace(':id', data);
+                        var deleteRoute = '{{ route("countries.destroy", ":id") }}'.replace(':id', data);
                         deleteUrl = "<a href='#' onclick=deleteRow('"+deleteRoute+"','"+csrfToken+"') class='btn btn-sm btn-clean btn-icon'><i class='la la-trash delete_row'></i></a>";
                     @endif
                     return editUrl+deleteUrl;

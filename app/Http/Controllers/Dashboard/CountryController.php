@@ -78,17 +78,13 @@ class CountryController extends BaseController
 
         $model = (new Country)->newQuery();
 
-        if($request->filled('name'))
+        if($request->filled('search_keyword'))
         {
-            $model->where('name', 'like', '%' .$request->name . '%');
-        }
-        if($request->filled('name_code'))
-        {
-            $model->where('name_code', 'like', '%' .$request->name_code . '%');
-        }
-        if($request->filled('phone_code'))
-        {
-            $model->where('phone_code', 'like', '%' .$request->phone_code . '%');
+            $model->where(function($q) use ($request){
+                $q->where('name', 'like', '%'.$request->search_keyword.'%')
+                ->orWhere('name_code', 'like', '%'.$request->search_keyword.'%')
+                ->orWhere('phone_code', 'like', '%'.$request->search_keyword.'%');
+            });
         }
         if($request->filled('status'))
         {

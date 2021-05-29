@@ -37,7 +37,7 @@ class Country extends Model
     }
     // === End function ===
 
-    // === Get flag path or set default image ===
+    // === Status label ===
     public function getStatusLabelAttribute()
     {
         return $this->status ?  "<span class='badge badge-light-success'>".trans(config('dashboard.trans_file').'active')."</span>" : "<span class='badge badge-light-danger'>".trans(config('dashboard.trans_file').'deactivate')."</span>";

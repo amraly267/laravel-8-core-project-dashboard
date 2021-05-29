@@ -17,6 +17,7 @@ return [
     "home" => "الرئيسية",
     "admins" => "المسؤولين",
     "search" => "بحث",
+    "search_keyword" => "كلمة البحث",
     "name" => "الاسم",
     "mobile" => "رقم الجوال",
     "actions" => "العمليات",
