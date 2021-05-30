@@ -119,11 +119,11 @@
                     <thead>
                         <tr class="fw-bold fs-6 text-muted">
                             <th class="min-w-20px" data-column-name="index">#</th>
-                            <th class="min-w-150px" data-column-name="name">{{trans(config('dashboard.trans_file').'name')}}</th>
+                            <th class="min-w-100px" data-column-name="name">{{trans(config('dashboard.trans_file').'name')}}</th>
                             <th class="min-w-100px" data-column-name="country">{{trans(config('dashboard.trans_file').'country')}}</th>
                             <th class="min-w-100px" data-column-name="status">{{trans(config('dashboard.trans_file').'status')}}</th>
                             @if(auth()->guard('admin')->user()->can('city-edit') || auth()->guard('admin')->user()->can('city-delete'))
-                            <th class="min-w-190px" data-column-name="operation">{{trans(config('dashboard.trans_file').'actions')}}</th>
+                            <th class="min-w-100px" data-column-name="operation">{{trans(config('dashboard.trans_file').'actions')}}</th>
                             @endif
                         </tr>
                     </thead>

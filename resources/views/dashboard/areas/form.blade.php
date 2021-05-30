@@ -37,92 +37,118 @@
 <!--end::Breadcrumb-->
 @endsection
 
-<div class="card mb-5 mb-xl-10">
-    <!--begin::Card header-->
-    <div class="card-header border-0">
-        <!--begin::Card title-->
-        <div class="card-title m-0">
-            <h3 class="fw-bolder m-0">{{$pageTitle}}</h3>
+<div class="row">
+    <div class="card col-2 mb-5 mb-xl-10" style="border-right: 1px solid #ddd">
+        <div class="mt-5 mb-5">
+            <a href="#" class="btn btn-light btn-active-light-primary w-100">{{trans(config('dashboard.trans_file').'main_info')}}</a>
         </div>
-        <!--end::Card title-->
     </div>
-    <!--begin::Card header-->
 
-    <!--begin::Content-->
-    <div id="kt_account_profile_details" class="collapse show">
-        <!--begin::Form-->
-        <form action="{{$submitFormRoute}}" method="POST" id="areaForm" class="form fv-plugins-bootstrap5 fv-plugins-framework" novalidate="novalidate">
-            @csrf @method($submitFormMethod)
-            <!--begin::Card body-->
-            <div class="card-body border-top p-9">
-                <!--begin::Input group-->
-                <div class="row mb-6">
-                    <!--begin::Label-->
-                    <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'city')}}</label>
-                    <!--end::Label-->
-                    <!--begin::Col-->
-                    <div class="col-lg-10 fv-row fv-plugins-icon-container">
-                        <select id="city_id" name="city_id" data-control="select2" class="form-select form-select-solid form-select-lg fw-bold select2-hidden-accessible" data-select2-id="select2-data-10-jdo1-country" tabindex="-1" aria-hidden="true">
-                            @foreach($cities as $city)
-                                <option @if($submitFormMethod == 'put' && $area->city_id == $city->id) {{'selected'}} @endif value="{{$city->id}}">{{$city->name}}</option>
-                            @endforeach
-                        </select>
-                        <span class="help-block error-help-block input-error city_id-error" style="color: red;"></span>
-                    </div>
-                    <!--end::Col-->
-                </div>
-                <!--end::Input group-->
-
-                <!--begin::Input group-->
-                <div class="row mb-6">
-                    <!--begin::Label-->
-                    <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'name_en')}}</label>
-                    <!--end::Label-->
-                    <!--begin::Col-->
-                    <div class="col-lg-4 fv-row fv-plugins-icon-container">
-                        <input type="text" name="name[en]" class="form-control form-control-lg form-control-solid" placeholder="{{trans(config('dashboard.trans_file').'name_en')}}" value="{{$submitFormMethod == 'put' ? $area->getTranslation('name', 'en') : old('name["en"]')}}">
-                        <span class="help-block error-help-block input-error name-en-error" style="color: red;"></span>
-                    </div>
-                    <!--end::Col-->
-
-                    <!--begin::Label-->
-                    <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'name_ar')}}</label>
-                    <!--end::Label-->
-                    <!--begin::Col-->
-                    <div class="col-lg-4 fv-row fv-plugins-icon-container">
-                        <input type="text" name="name[ar]" class="form-control form-control-lg form-control-solid" placeholder="{{trans(config('dashboard.trans_file').'name_ar')}}" value="{{$submitFormMethod == 'put' ? $area->getTranslation('name', 'ar') : old('name["ar"]')}}">
-                        <span class="help-block error-help-block input-error name-ar-error" style="color: red;"></span>
-                    </div>
-                    <!--end::Col-->
-                </div>
-                <!--end::Input group-->
-
-                <!--begin::Input group-->
-                <div class="row mb-6">
-                    <div class="form-check form-switch form-check-custom form-check-solid">
-                        <label class="form-check-label col-lg-2 col-form-label fw-bold fs-6" for="flexSwitchDefault">
-                            {{trans(config('dashboard.trans_file').'status')}}
-                        </label>
-                        <input class="form-check-input" {{$submitFormMethod == 'put' && $area->status == 0 ? '' : 'checked'}} type="checkbox" name="status" value="1" id="flexSwitchDefault"/>
-                    </div>
-                </div>
-                <!--end::Input group-->
+    <div class="card col-10 mb-5 mb-xl-10">
+        <!--begin::Card header-->
+        <div class="card-header border-0">
+            <!--begin::Card title-->
+            <div class="card-title m-0">
+                <h3 class="fw-bolder m-0">{{$pageTitle}}</h3>
             </div>
-            <!--end::Card body-->
+            <!--end::Card title-->
+        </div>
+        <!--begin::Card header-->
 
-            <!--begin::Actions-->
-            <div class="card-footer d-flex justify-content-end py-6 px-9">
-                <button type="reset" class="btn btn-white btn-active-light-primary me-2" onclick="window.location.reload()">{{trans(config('dashboard.trans_file').'cancel')}}</button>
-                <button type="submit" class="btn btn-primary" id="saveBtn">
-                    <span class="spinner-border spinner-border-sm align-middle ms-2 d-none"></span>
-                    {{trans(config('dashboard.trans_file').'save')}}
-                </button>
-            </div>
-            <!--end::Actions-->
-        </form>
-        <!--end::Form-->
+        <!--begin::Content-->
+        <div id="kt_account_profile_details" class="collapse show">
+            <!--begin::Form-->
+            <form action="{{$submitFormRoute}}" method="POST" id="areaForm" class="form fv-plugins-bootstrap5 fv-plugins-framework" novalidate="novalidate">
+                @csrf @method($submitFormMethod)
+                <!--begin::Card body-->
+
+                <div class="card-body border-top p-9">
+                    <!--begin::Input group-->
+                    <div class="row mb-6 tabs">
+                        <ul class="nav nav-tabs nav-line-tabs mb-5 fs-6" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" onclick="changeTab('name_en')" id="name_en-tab" data-toggle="tab" href="#name_en" role="tab" aria-controls="name_en" aria-selected="true">{{trans(config('dashboard.trans_file').'name_en')}}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" onclick="changeTab('name_ar')" id="name_ar-tab" data-toggle="tab" href="#name_ar" role="tab" aria-controls="profile" aria-selected="false">{{trans(config('dashboard.trans_file').'name_ar')}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!--end::Input group-->
+
+                    <!--begin::Input group-->
+                    <div class="row mb-6 tab-pane fade show active" id="name_en" role="tabpanel" aria-labelledby="name_en-tab">
+                        <!--begin::Label-->
+                        <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'name_en')}}</label>
+                        <!--end::Label-->
+                        <!--begin::Col-->
+                        <div class="col-lg-10 fv-row fv-plugins-icon-container">
+                            <input type="text" name="name[en]" class="form-control form-control-lg form-control-solid" placeholder="{{trans(config('dashboard.trans_file').'name_en')}}" value="{{$submitFormMethod == 'put' ? $area->getTranslation('name', 'en') : old('name["en"]')}}">
+                            <span class="help-block error-help-block input-error name-en-error" style="color: red;"></span>
+                        </div>
+                        <!--end::Col-->
+                    </div>
+                    <!--end::Input group-->
+
+                    <!--begin::Input group-->
+                    <div class="row mb-6 tab-pane fade d-none" id="name_ar" role="tabpanel" aria-labelledby="name_ar-tab">
+                        <!--begin::Label-->
+                        <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'name_ar')}}</label>
+                        <!--end::Label-->
+                        <!--begin::Col-->
+                        <div class="col-lg-10 fv-row fv-plugins-icon-container">
+                            <input type="text" name="name[ar]" class="form-control form-control-lg form-control-solid" placeholder="{{trans(config('dashboard.trans_file').'name_ar')}}" value="{{$submitFormMethod == 'put' ? $area->getTranslation('name', 'ar') : old('name["ar"]')}}">
+                            <span class="help-block error-help-block input-error name-ar-error" style="color: red;"></span>
+                        </div>
+                        <!--end::Col-->
+                    </div>
+                    <!--end::Input group-->
+
+                    <!--begin::Input group-->
+                    <div class="row mb-6">
+                        <!--begin::Label-->
+                        <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'city')}}</label>
+                        <!--end::Label-->
+                        <!--begin::Col-->
+                        <div class="col-lg-10 fv-row fv-plugins-icon-container">
+                            <select id="city_id" name="city_id" data-control="select2" class="form-select form-select-solid form-select-lg fw-bold select2-hidden-accessible" data-select2-id="select2-data-10-jdo1-country" tabindex="-1" aria-hidden="true">
+                                @foreach($cities as $city)
+                                    <option @if($submitFormMethod == 'put' && $area->city_id == $city->id) {{'selected'}} @endif value="{{$city->id}}">{{$city->name}}</option>
+                                @endforeach
+                            </select>
+                            <span class="help-block error-help-block input-error city_id-error" style="color: red;"></span>
+                        </div>
+                        <!--end::Col-->
+                    </div>
+                    <!--end::Input group-->
+
+                    <!--begin::Input group-->
+                    <div class="row mb-6">
+                        <div class="form-check form-switch form-check-custom form-check-solid">
+                            <label class="form-check-label col-lg-2 col-form-label fw-bold fs-6" for="flexSwitchDefault">
+                                {{trans(config('dashboard.trans_file').'status')}}
+                            </label>
+                            <input class="form-check-input" {{$submitFormMethod == 'put' && $area->status == 0 ? '' : 'checked'}} type="checkbox" name="status" value="1" id="flexSwitchDefault"/>
+                        </div>
+                    </div>
+                    <!--end::Input group-->
+                </div>
+                <!--end::Card body-->
+
+                <!--begin::Actions-->
+                <div class="card-footer d-flex justify-content-end py-6 px-9">
+                    <button type="reset" class="btn btn-white btn-active-light-primary me-2" onclick="window.location.reload()">{{trans(config('dashboard.trans_file').'cancel')}}</button>
+                    <button type="submit" class="btn btn-primary" id="saveBtn">
+                        <span class="spinner-border spinner-border-sm align-middle ms-2 d-none"></span>
+                        {{trans(config('dashboard.trans_file').'save')}}
+                    </button>
+                </div>
+                <!--end::Actions-->
+            </form>
+            <!--end::Form-->
+        </div>
+        <!--end::Content-->
     </div>
-    <!--end::Content-->
 </div>
 @endsection
 
@@ -135,6 +161,8 @@
                 $('.input-error').hide();
                 $('#saveBtn .spinner-border').removeClass('d-none');
                 $('#areaForm *').prop('disabled', true);
+                $('#name_en-tab').removeAttr('style');
+                $('#name_ar-tab').removeAttr('style');
             }
             function afterComplete()
             {
@@ -159,6 +187,14 @@
                     index = index.replace(".", "-");
                     if($('.'+index+'-error').length)
                     {
+                        if(index == 'name-en')
+                        {
+                            $('#name_en-tab').css('color', 'red');
+                        }
+                        else if(index == 'name-ar')
+                        {
+                            $('#name_ar-tab').css('color', 'red');
+                        }
                         $('.'+index+'-error').show();
                         $('.'+index+'-error').text(value);
                     }

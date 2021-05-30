@@ -15,7 +15,7 @@ return [
     "save" => "Save",
     "confirmation" => "Confirmation",
     "home" => "Home",
-    "admins" => "Admins",
+    "admins" => "All Users",
     "search" => "Search",
     "name" => "Name",
     "mobile" => "Mobile",
@@ -45,7 +45,7 @@ return [
     "my_profile" => "My profile",
     "roles" => "Roles",
     "permissions" => "Permissions",
-    "total_admins" => "Total admins",
+    "total_admins" => "Total users",
     "total_roles" => "Total roles",
     "total_countries" => "Total countries",
     "countries" => "Countries",
@@ -79,7 +79,7 @@ return [
     "snapchat_url" => "Snapchat url",
     "whatsapp_number" => "Whatsapp number",
     "logo" => "Logo",
-    "admins_permissions" => "Admins And Permissions",
+    "admins_permissions" => "Users And Permissions",
     "general_settings" => "General settings",
     "total_static_pages" => "Total static pages",
     "css_in_header" => "Css in header",
@@ -109,7 +109,7 @@ return [
     "reset" => "Reset",
     "export" => "Export",
     "search_keyword" => "Search keyword",
-
+    "main_info" => "Main info",
 ];
 
 ?>

@@ -110,11 +110,11 @@
                     <!--begin::Table head-->
                     <thead>
                         <tr class="fw-bold fs-6 text-muted">
-                            <th class="min-w-20px" data-column-name="index">#</th>
-                            <th class="min-w-150px" data-column-name="name">{{trans(config('dashboard.trans_file').'name')}}</th>
+                            <th class="min-w-50px" data-column-name="index">#</th>
+                            <th class="min-w-100px" data-column-name="name">{{trans(config('dashboard.trans_file').'name')}}</th>
                             <th class="min-w-100px" data-column-name="permissions">{{trans(config('dashboard.trans_file').'permissions')}}</th>
                             @if(auth()->guard('admin')->user()->can('role-edit') || auth()->guard('admin')->user()->can('role-delete'))
-                            <th class="min-w-190px" data-column-name="operation">{{trans(config('dashboard.trans_file').'actions')}}</th>
+                            <th class="min-w-100px" data-column-name="operation">{{trans(config('dashboard.trans_file').'actions')}}</th>
                             @endif
                         </tr>
                     </thead>
@@ -163,7 +163,7 @@
                 url: "{{route('roles.index')}}",
                 data: $('form').formToJson(),
             },
-            columns:[{data: 'index'}, {data: 'name'}, {data: 'permissions'}, {data: 'action'}],
+            columns:[{data: 'index'}, {data: 'name'}, {data: 'permissions', orderable: false}, {data: 'action'}],
             dom: 'frtipB',
             language: {url: @if(config('app.locale') === 'en') "//cdn.datatables.net/plug-ins/1.10.16/i18n/English.json" @else "//cdn.datatables.net/plug-ins/1.10.16/i18n/Arabic.json" @endif},
             lengthMenu: [[10, 25, 50, 100, 500],['10', '25', '50', '100', '500']],

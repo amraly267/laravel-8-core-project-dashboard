@@ -92,6 +92,7 @@ class AdminController extends BaseController
                 ->orWhere('mobile', 'like', '%'.$request->search_keyword.'%');
             });
         }
+
         if($request->filled('gender'))
         {
             $model->where('gender', $request->gender);
@@ -109,7 +110,13 @@ class AdminController extends BaseController
         $totalRecordswithFilter = $model->count();
 
         // === Fetch records ===
-        $adminRecords = $model->orderBy($columnName,$columnSortOrder)->skip($start)->take($rowsPerPage)->get();
+        $excludeOrderColumnFromSql = ['country', 'role'];
+        if(!in_array($columnName, $excludeOrderColumnFromSql))
+        {
+            $model->orderBy($columnName,$columnSortOrder);
+        }
+
+        $adminRecords = $model->skip($start)->take($rowsPerPage)->get();
 
         $admins = collect($adminRecords)->map(function($admin, $index){
             return [
@@ -122,7 +129,13 @@ class AdminController extends BaseController
                 "country" => $admin->country->name,
                 "action" => $admin->id
             ];
-        });
+        })->toArray();
+
+        if(in_array($columnName, $excludeOrderColumnFromSql))
+        {
+            $admins = $this->sortViaColumn($admins, $columnName, $columnSortOrder);
+        }
+
         return ['draw' => $draw, 'totalRecordswithFilter' => $totalRecordswithFilter, 'admins' => $admins, 'columnNames' => $columnNames];
     }
     // === End function ===

@@ -96,7 +96,13 @@ class AreaController extends BaseController
         $totalRecordswithFilter = $model->count();
 
         // === Fetch records ===
-        $areasRecords = $model->orderBy($columnName,$columnSortOrder)->skip($start)->take($rowsPerPage)->get();
+        $excludeOrderColumnFromSql = ['city'];
+        if(!in_array($columnName, $excludeOrderColumnFromSql))
+        {
+            $model->orderBy($columnName,$columnSortOrder);
+        }
+
+        $areasRecords = $model->skip($start)->take($rowsPerPage)->get();
 
         $areas = collect($areasRecords)->map(function($area, $index){
             return [
@@ -106,7 +112,12 @@ class AreaController extends BaseController
                 "status" => $area->status_label,
                 "action" => $area->id
             ];
-        });
+        })->toArray();
+
+        if(in_array($columnName, $excludeOrderColumnFromSql))
+        {
+            $areas = $this->sortViaColumn($areas, $columnName, $columnSortOrder);
+        }
 
         return ['draw' => $draw, 'totalRecordswithFilter' => $totalRecordswithFilter, 'areas' => $areas, 'columnNames' => $columnNames];
     }

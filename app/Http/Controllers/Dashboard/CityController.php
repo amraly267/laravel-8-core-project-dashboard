@@ -96,7 +96,13 @@ class CityController extends BaseController
         $totalRecordswithFilter = $model->count();
 
         // === Fetch records ===
-        $citiesRecords = $model->orderBy($columnName,$columnSortOrder)->skip($start)->take($rowsPerPage)->get();
+        $excludeOrderColumnFromSql = ['country'];
+        if(!in_array($columnName, $excludeOrderColumnFromSql))
+        {
+            $model->orderBy($columnName,$columnSortOrder);
+        }
+
+        $citiesRecords = $model->skip($start)->take($rowsPerPage)->get();
 
         $cities = collect($citiesRecords)->map(function($city, $index){
             return [
@@ -106,7 +112,12 @@ class CityController extends BaseController
                 "status" => $city->status_label,
                 "action" => $city->id
             ];
-        });
+        })->toArray();
+
+        if(in_array($columnName, $excludeOrderColumnFromSql))
+        {
+            $cities = $this->sortViaColumn($cities, $columnName, $columnSortOrder);
+        }
 
         return ['draw' => $draw, 'totalRecordswithFilter' => $totalRecordswithFilter, 'cities' => $cities, 'columnNames' => $columnNames];
     }

@@ -26,7 +26,7 @@ class BaseController extends Controller
     // === End function ===
 
     // === Upload image from storage folder ===
-    public function uploadImage($image, $storageFolder)
+    protected function uploadImage($image, $storageFolder)
     {
         if(!Storage::exists($storageFolder))
         {
@@ -40,9 +40,31 @@ class BaseController extends Controller
     // === End function ===
 
     // === Remove image from storage folder ===
-    public function removeImage($imageName, $storageFolder)
+    protected function removeImage($imageName, $storageFolder)
     {
         Storage::disk($storageFolder)->delete($imageName);
     }
     // === End function ===
+
+    // === Sort by specific column ===
+    protected function sortViaColumn($array, $column, $columnSortOrder)
+    {
+        foreach ($array as $key => $row)
+        {
+            $count[$key] = strtolower($row[$column]);
+        }
+
+        if($columnSortOrder == 'asc')
+        {
+            array_multisort($count, SORT_ASC, $array);
+        }
+        else
+        {
+            array_multisort($count, SORT_DESC, $array);
+        }
+
+        return $array;
+    }
+    // === End function ===
+
 }

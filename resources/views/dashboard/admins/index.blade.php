@@ -72,6 +72,9 @@
         <!--begin::Body-->
         <div class="card-body py-3">
             <form class="mb-15" action="{{route('admins.index')}}" method="GET">
+                @if(Route::currentRouteName() == 'role-admins')
+                    <input type="hidden" name="role" value="{{request()->role}}"/>
+                @endif
                 <div class="row mb-6">
                     <div class="col-lg-3 mb-lg-0 mb-6">
                         <label>{{trans(config('dashboard.trans_file').'search_keyword')}}</label>
