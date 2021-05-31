@@ -37,16 +37,23 @@
 <!--end::Breadcrumb-->
 @endsection
 
-<div class="card mb-5 mb-xl-10">
-    <!--begin::Card header-->
-    <div class="card-header border-0">
-        <!--begin::Card title-->
-        <div class="card-title m-0">
-            <h3 class="fw-bolder m-0">{{$pageTitle}}</h3>
+<div class="row">
+    <div class="card col-2 mb-5 mb-xl-10 form-side-menu">
+        <div class="mt-5 mb-5">
+            <a href="#" class="btn btn-light btn-active-light-primary w-100">{{trans(config('dashboard.trans_file').'main_info')}}</a>
         </div>
-        <!--end::Card title-->
     </div>
-    <!--begin::Card header-->
+
+    <div class="card col-10 mb-5 mb-xl-10">
+        <!--begin::Card header-->
+        <div class="card-header border-0">
+            <!--begin::Card title-->
+            <div class="card-title m-0">
+                <h3 class="fw-bolder m-0">{{$pageTitle}}</h3>
+            </div>
+            <!--end::Card title-->
+        </div>
+        <!--begin::Card header-->
 
     <!--begin::Content-->
     <div id="kt_account_profile_details" class="collapse show">
@@ -55,6 +62,19 @@
             @csrf @method($submitFormMethod)
             <!--begin::Card body-->
             <div class="card-body border-top p-9">
+                <!--begin::Input group-->
+                <div class="row mb-6 tabs">
+                    <ul class="nav nav-tabs nav-line-tabs mb-5 fs-6" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" onclick="changeTab('name_en')" id="name_en-tab" data-toggle="tab" href="#name_en" role="tab" aria-controls="name_en" aria-selected="true">{{trans(config('dashboard.trans_file').'name_en')}}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" onclick="changeTab('name_ar')" id="name_ar-tab" data-toggle="tab" href="#name_ar" role="tab" aria-controls="profile" aria-selected="false">{{trans(config('dashboard.trans_file').'name_ar')}}</a>
+                        </li>
+                    </ul>
+                </div>
+                <!--end::Input group-->
+
                 <!--begin::Input group-->
                 <div class="row mb-6">
                     <!--begin::Label-->
@@ -96,22 +116,26 @@
                 <!--end::Input group-->
 
                 <!--begin::Input group-->
-                <div class="row mb-6">
+                <div class="row mb-6 tab-pane fade show active" id="name_en" role="tabpanel" aria-labelledby="name_en-tab">
                     <!--begin::Label-->
                     <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'name_en')}}</label>
                     <!--end::Label-->
                     <!--begin::Col-->
-                    <div class="col-lg-4 fv-row fv-plugins-icon-container">
+                    <div class="col-lg-10 fv-row fv-plugins-icon-container">
                         <input type="text" name="name[en]" class="form-control form-control-lg form-control-solid" placeholder="{{trans(config('dashboard.trans_file').'name_en')}}" value="{{$submitFormMethod == 'put' ? $country->getTranslation('name', 'en') : old('name_en')}}">
                         <span class="help-block error-help-block input-error name-en-error" style="color: red;"></span>
                     </div>
                     <!--end::Col-->
+                </div>
+                <!--end::Input group-->
 
+                <!--begin::Input group-->
+                <div class="row mb-6 tab-pane fade d-none" id="name_ar" role="tabpanel" aria-labelledby="name_ar-tab">
                     <!--begin::Label-->
                     <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'name_ar')}}</label>
                     <!--end::Label-->
                     <!--begin::Col-->
-                    <div class="col-lg-4 fv-row fv-plugins-icon-container">
+                    <div class="col-lg-10 fv-row fv-plugins-icon-container">
                         <input type="text" name="name[ar]" class="form-control form-control-lg form-control-solid" placeholder="{{trans(config('dashboard.trans_file').'name_ar')}}" value="{{$submitFormMethod == 'put' ? $country->getTranslation('name', 'ar') : old('name_ar')}}">
                         <span class="help-block error-help-block input-error name-ar-error" style="color: red;"></span>
                     </div>
@@ -125,17 +149,21 @@
                     <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'name_code')}}</label>
                     <!--end::Label-->
                     <!--begin::Col-->
-                    <div class="col-lg-4 fv-row fv-plugins-icon-container">
+                    <div class="col-lg-10 fv-row fv-plugins-icon-container">
                         <input type="text" minlength="2" maxlength="3" name="name_code" class="form-control form-control-lg form-control-solid" placeholder="{{trans(config('dashboard.trans_file').'name_code')}}" value="{{$submitFormMethod == 'put' ? $country->name_code : old('name_code')}}">
                         <span class="help-block error-help-block input-error name_code-error" style="color: red;"></span>
                     </div>
                     <!--end::Col-->
+                </div>
+                <!--end::Input group-->
 
+                <!--begin::Input group-->
+                <div class="row mb-6">
                     <!--begin::Label-->
                     <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'phone_code')}}</label>
                     <!--end::Label-->
                     <!--begin::Col-->
-                    <div class="col-lg-4 fv-row fv-plugins-icon-container">
+                    <div class="col-lg-10 fv-row fv-plugins-icon-container">
                         <input type="tel" minlength="3" maxlength="3" name="phone_code" class="form-control form-control-lg form-control-solid" placeholder="{{trans(config('dashboard.trans_file').'phone_code')}}" value="{{$submitFormMethod == 'put' ? $country->phone_code : old('phone_code')}}">
                         <span class="help-block error-help-block input-error phone_code-error" style="color: red;"></span>
                     </div>
@@ -169,7 +197,9 @@
         <!--end::Form-->
     </div>
     <!--end::Content-->
+    </div>
 </div>
+
 @endsection
 
 @push('footer-scripts')
@@ -182,6 +212,8 @@
                 $('.input-error').hide();
                 $('#saveBtn .spinner-border').removeClass('d-none');
                 $('#countryForm *').prop('disabled', true);
+                $('#name_en-tab').removeAttr('style');
+                $('#name_ar-tab').removeAttr('style');
             }
             function afterComplete()
             {
@@ -206,6 +238,14 @@
                     index = index.replace(".", "-");
                     if($('.'+index+'-error').length)
                     {
+                        if(index == 'name-en')
+                        {
+                            $('#name_en-tab').css('color', 'red');
+                        }
+                        else if(index == 'name-ar')
+                        {
+                            $('#name_ar-tab').css('color', 'red');
+                        }
                         $('.'+index+'-error').show();
                         $('.'+index+'-error').text(value);
                     }

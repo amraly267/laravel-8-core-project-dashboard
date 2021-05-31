@@ -40,3 +40,11 @@ td img{
     width: 35px;
     height: 35px;
 }
+
+.form-side-menu{
+    border-right: 1px solid #ddd;
+    width:15%
+}
+.form-menu-text{
+    margin-left: 15%;
+}

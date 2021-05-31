@@ -37,19 +37,26 @@
 <!--end::Breadcrumb-->
 @endsection
 
-<div class="card mb-5 mb-xl-10">
-    <!--begin::Card header-->
-    <div class="card-header border-0">
-        <!--begin::Card title-->
-        <div class="card-title m-0">
-            <h3 class="fw-bolder m-0">{{$pageTitle}}</h3>
+<div class="row">
+    <div class="card col-2 mb-5 mb-xl-10 form-side-menu">
+        <div class="mt-5 mb-5">
+            <a href="#" class="btn btn-light btn-active-light-primary w-100">{{trans(config('dashboard.trans_file').'main_info')}}</a>
         </div>
-        <!--end::Card title-->
     </div>
-    <!--begin::Card header-->
 
-    <!--begin::Content-->
-    <div id="kt_account_profile_details" class="collapse show">
+    <div class="card col-10 mb-5 mb-xl-10">
+        <!--begin::Card header-->
+        <div class="card-header border-0">
+            <!--begin::Card title-->
+            <div class="card-title m-0">
+                <h3 class="fw-bolder m-0">{{$pageTitle}}</h3>
+            </div>
+            <!--end::Card title-->
+        </div>
+        <!--begin::Card header-->
+
+        <!--begin::Content-->
+        <div id="kt_account_profile_details" class="collapse show">
         <!--begin::Form-->
         <form action="{{$submitFormRoute}}" method="POST" id="adminForm" class="form fv-plugins-bootstrap5 fv-plugins-framework" novalidate="novalidate">
             @csrf @method($submitFormMethod)
@@ -110,9 +117,11 @@
             <!--end::Actions-->
         </form>
         <!--end::Form-->
+        </div>
+        <!--end::Content-->
     </div>
-    <!--end::Content-->
 </div>
+
 @endsection
 
 @push('footer-scripts')

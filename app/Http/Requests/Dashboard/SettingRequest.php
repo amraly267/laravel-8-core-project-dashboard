@@ -24,7 +24,7 @@ class SettingRequest extends FormRequest
     public function rules()
     {
         return [
-            'project_name' => 'required',
+            'project_name.*' => 'required',
             'contact_us_email' => 'nullable|email',
             'contact_us_mobile' => 'nullable|digits_between:9,12',
             'facebook_url' => 'nullable|url',
@@ -36,4 +36,12 @@ class SettingRequest extends FormRequest
             'logo' => 'nullable|mimes:jpeg,jpg,png|max:5120',
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'project_name.*.required' => trans(config('dashboard.trans_file').'name_is_required'),
+        ];
+    }
+
 }

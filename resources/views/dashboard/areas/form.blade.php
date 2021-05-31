@@ -38,7 +38,7 @@
 @endsection
 
 <div class="row">
-    <div class="card col-2 mb-5 mb-xl-10" style="border-right: 1px solid #ddd">
+    <div class="card col-2 mb-5 mb-xl-10 form-side-menu">
         <div class="mt-5 mb-5">
             <a href="#" class="btn btn-light btn-active-light-primary w-100">{{trans(config('dashboard.trans_file').'main_info')}}</a>
         </div>
@@ -150,6 +150,7 @@
         <!--end::Content-->
     </div>
 </div>
+
 @endsection
 
 @push('footer-scripts')
