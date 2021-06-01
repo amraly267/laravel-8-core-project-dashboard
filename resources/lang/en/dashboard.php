@@ -110,6 +110,11 @@ return [
     "export" => "Export",
     "search_keyword" => "Search keyword",
     "main_info" => "Main info",
+    'general_settings' => "General settings",
+    'appearance' => "Appearance",
+    'social_media' => "Social media",
+    'custome_css_js' => "Custom CSS/JS",
+
 ];
 
 ?>

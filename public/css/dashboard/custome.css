@@ -48,3 +48,16 @@ td img{
 .form-menu-text{
     margin-left: 15%;
 }
+
+/* .accordion-tab li{
+    width: 100%;
+} */
+
+.accordion-tab li>a.active{
+    color:#009ef7 !important;
+    padding-left: 10px !important;
+    border-left:  3px solid #009ef7 !important;
+}
+.accordion-tab {
+    background-color: azure;
+}

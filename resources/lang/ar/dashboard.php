@@ -110,7 +110,10 @@ return [
     "reset" => "إعادة تعيين",
     "export" => "تصدير",
     "main_info" => "المعلومات الاساسية",
-
+    'general_settings' => "اعدادات عامة",
+    'appearance' => "المظهر",
+    'social_media' => "وسائل التواصل",
+    'custome_css_js' => "Custom CSS/JS",
 
 ];
 
