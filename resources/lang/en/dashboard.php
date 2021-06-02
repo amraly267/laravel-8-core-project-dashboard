@@ -114,6 +114,12 @@ return [
     'appearance' => "Appearance",
     'social_media' => "Social media",
     'custome_css_js' => "Custom CSS/JS",
+    'countries_languages' => "Countries and languages",
+    'supported_countries' => "Supported countries",
+    'default_country' => "Default country",
+    'supported_locales' => "Supported locales",
+    'default_locale' => "Default locale",
+    'default_timezone' => "Default timezone",
 
 ];
 

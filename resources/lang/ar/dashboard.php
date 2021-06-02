@@ -114,6 +114,12 @@ return [
     'appearance' => "المظهر",
     'social_media' => "وسائل التواصل",
     'custome_css_js' => "Custom CSS/JS",
+    'countries_languages' => "الدول واللغات",
+    'supported_countries' => "الدول المدعومة",
+    'default_country' => "الدولة الافتراضية",
+    'supported_locales' => "اللغات المدعومة",
+    'default_locale' => "اللغة الافتراضية",
+    'default_timezone' => "التوقيت الافتراضي",
 
 ];
 

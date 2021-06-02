@@ -52,6 +52,7 @@
                         @include(config('dashboard.resource_folder').'settings.appearance_tab')
                         @include(config('dashboard.resource_folder').'settings.social_media')
                         @include(config('dashboard.resource_folder').'settings.custome_css_js')
+                        @include(config('dashboard.resource_folder').'settings.countries_languages')
                     </div>
                 </div>
                 <!--end::Card body-->
@@ -74,9 +75,33 @@
 
 @push('footer-scripts')
 <script>
+    $(document).ready(function(){
+        // The DOM elements you wish to replace with Tagify
+        var supported_countries = document.querySelector("#supported_countries");
+        new Tagify(supported_countries, {
+            whitelist: {!! json_encode($tagifyCountriesNames) !!},
+            dropdown: {
+                maxItems: 20, // <- mixumum allowed rendered suggestions
+                classname: "", // <- custom classname for this dropdown, so it could be targeted
+                enabled: 0, // <- show suggestions on focus
+                closeOnSelect: false// <- do not hide the suggestions dropdown once an item has been selected
+            }
+        });
+
+        var supported_locales = document.querySelector("#supported_locales");
+        new Tagify(supported_locales, {
+            whitelist: ['English', 'Arabic'],
+            dropdown: {
+                maxItems: 20, // <- mixumum allowed rendered suggestions
+                classname: "", // <- custom classname for this dropdown, so it could be targeted
+                enabled: 0, // <- show suggestions on focus
+                closeOnSelect: false// <- do not hide the suggestions dropdown once an item has been selected
+            }
+        });
+    })
+
     // === save changes ===
     $('#saveBtn').on('click', function(){
-
         function beforeSend()
         {
             $('.input-error').hide();
@@ -109,13 +134,12 @@
                 if($('.'+index+'-error').length)
                 {
                     var parents = $('.'+index+'-error').parents().find('.tab-pane')
-                    console.log(parents);
-
                     parents.each(function(i, obj){
                         if($(obj).find($('.'+index+'-error')).length)
                         {
-                            $('[href="#'+$(obj).attr('id')+'"]').tab('show');
-
+                            $(document).ready(function(){
+                                $('[href="#'+$(obj).attr('id')+'"]').tab('show');
+                            });
                         }
                     })
 

@@ -109,12 +109,3 @@ $("#kt_reset").click(function(e){
     window.location.reload();
 });
 // === End script ===
-
-// === Switch tabs ===
-function changeTab(tab)
-{
-    $('.tab-pane').hide();
-    $('#'+tab).removeClass('d-none');
-    $('#'+tab).show();
-}
-// === End script ===

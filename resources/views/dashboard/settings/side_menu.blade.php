@@ -16,6 +16,9 @@
                         <li>
                             <a class="btn w-100" href="#custome_css_js" data-toggle="tab">{{trans(config('dashboard.trans_file').'custome_css_js')}}</a>
                         </li>
+                        <li>
+                            <a class="btn w-100" href="#countries_languages" data-toggle="tab">{{trans(config('dashboard.trans_file').'countries_languages')}}</a>
+                        </li>
                     </ul>
                 </div>
             </div>

@@ -51,6 +51,7 @@
         <!--end::Col-->
     </div>
     <!--end::Input group-->
+
     <div class="tab-content">
         <div class="tab-pane fade show active" id="name_en" role="tabpanel">
             <div class="row mb-6">

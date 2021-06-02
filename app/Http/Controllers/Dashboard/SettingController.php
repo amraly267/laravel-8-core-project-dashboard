@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Setting;
 use App\Http\Requests\Dashboard\SettingRequest;
 use App;
+use App\Models\Country;
+use App\Models\Timezone;
 
 class SettingController extends BaseController
 {
@@ -41,7 +43,11 @@ class SettingController extends BaseController
         $pageTitle = trans(config('dashboard.trans_file').'settings');
         $submitFormRoute = route('admin-update-settings');
         $submitFormMethod = 'put';
-        return view(config('dashboard.resource_folder').$this->controllerResource.'form', compact('settings', 'pageTitle', 'submitFormRoute', 'submitFormMethod'));
+        $countries = Country::all();
+        $tagifyCountriesValues = $this->retrieveTagifyCountries('id', explode(',', $settings->supported_countries), 'name');
+        $tagifyCountriesNames = Country::pluck('name')->all();
+        $timezones = Timezone::all();
+        return view(config('dashboard.resource_folder').$this->controllerResource.'form', compact('timezones','tagifyCountriesNames', 'tagifyCountriesValues', 'countries','settings', 'pageTitle', 'submitFormRoute', 'submitFormMethod'));
     }
     // === End function ===
 
@@ -63,8 +69,24 @@ class SettingController extends BaseController
             $settings->logo = $this->uploadImage($request->logo, $this->storageFolder);
         }
 
+        $supportedCountries = collect(json_decode($request->supported_countries, true))->map(function($supportedCountry){
+            return $supportedCountry['value'];
+        });
+
+        $settings->supported_countries = implode(',',Country::whereIn('name->'.config('app.locale'), $supportedCountries)->pluck('id')->all());
+        $settings->default_country_id = $request->default_country_id;
+        $settings->supported_locales = $request->supported_locales;
+        $settings->default_locale = $request->default_locale;
+        $settings->timezone_id = $request->timezone_id;
         $settings->save();
         return $this->successResponse(['message' => trans(config('dashboard.trans_file').'success_save')]);
+    }
+    // === End function ===
+
+    // === Retrieve tagify country values ===
+    private function retrieveTagifyCountries($currentColumn, $countries, $retireveCol)
+    {
+        return Country::whereIn($currentColumn, $countries)->pluck($retireveCol);
     }
     // === End function ===
 }

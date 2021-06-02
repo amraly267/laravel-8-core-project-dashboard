@@ -38,11 +38,7 @@
 @endsection
 
 <div class="row">
-    <div class="card col-2 mb-5 mb-xl-10 form-side-menu">
-        <div class="mt-5 mb-5">
-            <a href="#" class="btn btn-light btn-active-light-primary w-100">{{trans(config('dashboard.trans_file').'main_info')}}</a>
-        </div>
-    </div>
+    @include(config('dashboard.resource_folder').'areas.side_menu')
 
     <div class="card col-10 mb-5 mb-xl-10">
         <!--begin::Card header-->
@@ -63,75 +59,79 @@
                 <!--begin::Card body-->
 
                 <div class="card-body border-top p-9">
-                    <!--begin::Input group-->
-                    <div class="row mb-6 tabs">
-                        <ul class="nav nav-tabs nav-line-tabs mb-5 fs-6" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link active" onclick="changeTab('name_en')" id="name_en-tab" data-toggle="tab" href="#name_en" role="tab" aria-controls="name_en" aria-selected="true">{{trans(config('dashboard.trans_file').'name_en')}}</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" onclick="changeTab('name_ar')" id="name_ar-tab" data-toggle="tab" href="#name_ar" role="tab" aria-controls="profile" aria-selected="false">{{trans(config('dashboard.trans_file').'name_ar')}}</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <!--end::Input group-->
-
-                    <!--begin::Input group-->
-                    <div class="row mb-6 tab-pane fade show active" id="name_en" role="tabpanel" aria-labelledby="name_en-tab">
-                        <!--begin::Label-->
-                        <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'name_en')}}</label>
-                        <!--end::Label-->
-                        <!--begin::Col-->
-                        <div class="col-lg-10 fv-row fv-plugins-icon-container">
-                            <input type="text" name="name[en]" class="form-control form-control-lg form-control-solid" placeholder="{{trans(config('dashboard.trans_file').'name_en')}}" value="{{$submitFormMethod == 'put' ? $area->getTranslation('name', 'en') : old('name["en"]')}}">
-                            <span class="help-block error-help-block input-error name-en-error" style="color: red;"></span>
+                    <div class="tab-pane fade show active" id="more_info">
+                        <!--begin::Input group-->
+                        <div class="card-toolbar mb-5">
+                            <ul class="nav nav-tabs nav-line-tabs nav-stretch fs-6 border-0">
+                                <li class="nav-item">
+                                    <a id="name_en_tab" class="nav-link active" data-bs-toggle="tab" href="#name_en">{{trans(config('dashboard.trans_file').'name_en')}}</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a id="name_ar_tab" class="nav-link" data-bs-toggle="tab" href="#name_ar">{{trans(config('dashboard.trans_file').'name_ar')}}</a>
+                                </li>
+                            </ul>
                         </div>
-                        <!--end::Col-->
-                    </div>
-                    <!--end::Input group-->
+                        <!--end::Input group-->
 
-                    <!--begin::Input group-->
-                    <div class="row mb-6 tab-pane fade d-none" id="name_ar" role="tabpanel" aria-labelledby="name_ar-tab">
-                        <!--begin::Label-->
-                        <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'name_ar')}}</label>
-                        <!--end::Label-->
-                        <!--begin::Col-->
-                        <div class="col-lg-10 fv-row fv-plugins-icon-container">
-                            <input type="text" name="name[ar]" class="form-control form-control-lg form-control-solid" placeholder="{{trans(config('dashboard.trans_file').'name_ar')}}" value="{{$submitFormMethod == 'put' ? $area->getTranslation('name', 'ar') : old('name["ar"]')}}">
-                            <span class="help-block error-help-block input-error name-ar-error" style="color: red;"></span>
+                        <!--begin::Input group-->
+                        <div class="tab-content">
+                            <div class="tab-pane fade show active" id="name_en" role="tabpanel">
+                                <div class="row mb-6">
+                                    <!--begin::Label-->
+                                    <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'name_en')}}</label>
+                                    <!--end::Label-->
+                                    <!--begin::Col-->
+                                    <div class="col-lg-10 fv-row fv-plugins-icon-container">
+                                        <input type="text" name="name[en]" class="form-control form-control-lg form-control-solid" placeholder="{{trans(config('dashboard.trans_file').'name_en')}}" value="{{$submitFormMethod == 'put' ? $area->getTranslation('name', 'en') : old('name_en')}}">
+                                        <span class="help-block error-help-block input-error name-en-error" style="color: red;"></span>
+                                    </div>
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <div class="tab-pane fade" id="name_ar" role="tabpanel">
+                                <div class="row mb-6">
+                                    <!--begin::Label-->
+                                    <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'name_ar')}}</label>
+                                    <!--end::Label-->
+                                    <!--begin::Col-->
+                                    <div class="col-lg-10 fv-row fv-plugins-icon-container">
+                                        <input type="text" name="name[ar]" class="form-control form-control-lg form-control-solid" placeholder="{{trans(config('dashboard.trans_file').'name_ar')}}" value="{{$submitFormMethod == 'put' ? $area->getTranslation('name', 'ar') : old('name_ar')}}">
+                                        <span class="help-block error-help-block input-error name-ar-error" style="color: red;"></span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <!--end::Col-->
-                    </div>
-                    <!--end::Input group-->
+                        <!--end::Input group-->
 
-                    <!--begin::Input group-->
-                    <div class="row mb-6">
-                        <!--begin::Label-->
-                        <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'city')}}</label>
-                        <!--end::Label-->
-                        <!--begin::Col-->
-                        <div class="col-lg-10 fv-row fv-plugins-icon-container">
-                            <select id="city_id" name="city_id" data-control="select2" class="form-select form-select-solid form-select-lg fw-bold select2-hidden-accessible" data-select2-id="select2-data-10-jdo1-country" tabindex="-1" aria-hidden="true">
-                                @foreach($cities as $city)
-                                    <option @if($submitFormMethod == 'put' && $area->city_id == $city->id) {{'selected'}} @endif value="{{$city->id}}">{{$city->name}}</option>
-                                @endforeach
-                            </select>
-                            <span class="help-block error-help-block input-error city_id-error" style="color: red;"></span>
+                        <!--begin::Input group-->
+                        <div class="row mb-6">
+                            <!--begin::Label-->
+                            <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'city')}}</label>
+                            <!--end::Label-->
+                            <!--begin::Col-->
+                            <div class="col-lg-10 fv-row fv-plugins-icon-container">
+                                <select id="city_id" name="city_id" data-control="select2" class="form-select form-select-solid form-select-lg fw-bold select2-hidden-accessible" data-select2-id="select2-data-10-jdo1-country" tabindex="-1" aria-hidden="true">
+                                    @foreach($cities as $city)
+                                        <option @if($submitFormMethod == 'put' && $area->city_id == $city->id) {{'selected'}} @endif value="{{$city->id}}">{{$city->name}}</option>
+                                    @endforeach
+                                </select>
+                                <span class="help-block error-help-block input-error city_id-error" style="color: red;"></span>
+                            </div>
+                            <!--end::Col-->
                         </div>
-                        <!--end::Col-->
-                    </div>
-                    <!--end::Input group-->
+                        <!--end::Input group-->
 
-                    <!--begin::Input group-->
-                    <div class="row mb-6">
-                        <div class="form-check form-switch form-check-custom form-check-solid">
-                            <label class="form-check-label col-lg-2 col-form-label fw-bold fs-6" for="flexSwitchDefault">
-                                {{trans(config('dashboard.trans_file').'status')}}
-                            </label>
-                            <input class="form-check-input" {{$submitFormMethod == 'put' && $area->status == 0 ? '' : 'checked'}} type="checkbox" name="status" value="1" id="flexSwitchDefault"/>
+                        <!--begin::Input group-->
+                        <div class="row mb-6">
+                            <div class="form-check form-switch form-check-custom form-check-solid">
+                                <label class="form-check-label col-lg-2 col-form-label fw-bold fs-6" for="flexSwitchDefault">
+                                    {{trans(config('dashboard.trans_file').'status')}}
+                                </label>
+                                <input class="form-check-input" {{$submitFormMethod == 'put' && $area->status == 0 ? '' : 'checked'}} type="checkbox" name="status" value="1" id="flexSwitchDefault"/>
+                            </div>
                         </div>
+                        <!--end::Input group-->
                     </div>
-                    <!--end::Input group-->
                 </div>
                 <!--end::Card body-->
 
@@ -188,14 +188,16 @@
                     index = index.replace(".", "-");
                     if($('.'+index+'-error').length)
                     {
-                        if(index == 'name-en')
-                        {
-                            $('#name_en-tab').css('color', 'red');
-                        }
-                        else if(index == 'name-ar')
-                        {
-                            $('#name_ar-tab').css('color', 'red');
-                        }
+                        var parents = $('.'+index+'-error').parents().find('.tab-pane')
+                        parents.each(function(i, obj){
+                            if($(obj).find($('.'+index+'-error')).length)
+                            {
+                                $(document).ready(function(){
+                                    $('[href="#'+$(obj).attr('id')+'"]').tab('show');
+                                });
+                            }
+                        })
+
                         $('.'+index+'-error').show();
                         $('.'+index+'-error').text(value);
                     }

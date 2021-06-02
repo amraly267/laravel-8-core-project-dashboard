@@ -38,11 +38,8 @@
 @endsection
 
 <div class="row">
-    <div class="card col-2 mb-5 mb-xl-10 form-side-menu">
-        <div class="mt-5 mb-5">
-            <a href="#" class="btn btn-light btn-active-light-primary w-100">{{trans(config('dashboard.trans_file').'main_info')}}</a>
-        </div>
-    </div>
+    @include(config('dashboard.resource_folder').'admins.side_menu')
+
     <div class="card col-10 mb-5 mb-xl-10">
         <!--begin::Card header-->
         <div class="card-header border-0">
@@ -61,160 +58,161 @@
                 @csrf @method($submitFormMethod)
                 <!--begin::Card body-->
                 <div class="card-body border-top p-9">
-                    <!--begin::Input group-->
-                    <div class="row mb-6">
-                        <!--begin::Label-->
-                        <label class="col-lg-4 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'image')}}</label>
-                        <!--end::Label-->
-                        <!--begin::Col-->
-                        <div class="col-lg-8">
-                            <!--begin::Image input-->
-                            <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url({{asset('img/dashboard/default-user.svg')}})">
-                                <!--begin::Preview existing avatar-->
-                                <div class="image-input-wrapper w-125px h-125px" style="background-image: url({{$submitFormMethod == 'put' ? $admin->image_path : asset('img/dashboard/default-user.svg')}})"></div>
-                                <!--end::Preview existing avatar-->
-                                <!--begin::Label-->
-                                <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="" data-bs-original-title="{{trans(config('dashboard.trans_file').'change_image')}}">
-                                    <i class="bi bi-pencil-fill fs-7"></i>
-                                    <!--begin::Inputs-->
-                                    <input type="file" name="image" accept=".png, .jpg, .jpeg">
-                                    <input type="hidden" name="image_remove">
-                                    <!--end::Inputs-->
-                                </label>
-                                <!--end::Label-->
-                                <!--begin::Cancel-->
-                                <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="" data-bs-original-title="{{trans(config('dashboard.trans_file').'cancel')}}">
-                                <i class="bi bi-x fs-2"></i>
-                                </span>
-                                <!--end::Cancel-->
-                                <!--begin::Remove-->
-                                <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="" data-bs-original-title="{{trans(config('dashboard.trans_file').'remove_image')}}">
-                                <i class="bi bi-x fs-2"></i>
-                                </span>
-                                <!--end::Remove-->
+                    <div class="tab-pane fade show active" id="more_info">
+                        <!--begin::Input group-->
+                        <div class="row mb-6">
+                            <!--begin::Label-->
+                            <label class="col-lg-4 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'image')}}</label>
+                            <!--end::Label-->
+                            <!--begin::Col-->
+                            <div class="col-lg-8">
+                                <!--begin::Image input-->
+                                <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url({{asset('img/dashboard/default-user.svg')}})">
+                                    <!--begin::Preview existing avatar-->
+                                    <div class="image-input-wrapper w-125px h-125px" style="background-image: url({{$submitFormMethod == 'put' ? $admin->image_path : asset('img/dashboard/default-user.svg')}})"></div>
+                                    <!--end::Preview existing avatar-->
+                                    <!--begin::Label-->
+                                    <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="" data-bs-original-title="{{trans(config('dashboard.trans_file').'change_image')}}">
+                                        <i class="bi bi-pencil-fill fs-7"></i>
+                                        <!--begin::Inputs-->
+                                        <input type="file" name="image" accept=".png, .jpg, .jpeg">
+                                        <input type="hidden" name="image_remove">
+                                        <!--end::Inputs-->
+                                    </label>
+                                    <!--end::Label-->
+                                    <!--begin::Cancel-->
+                                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="" data-bs-original-title="{{trans(config('dashboard.trans_file').'cancel')}}">
+                                    <i class="bi bi-x fs-2"></i>
+                                    </span>
+                                    <!--end::Cancel-->
+                                    <!--begin::Remove-->
+                                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="" data-bs-original-title="{{trans(config('dashboard.trans_file').'remove_image')}}">
+                                    <i class="bi bi-x fs-2"></i>
+                                    </span>
+                                    <!--end::Remove-->
+                                </div>
+                                <br>
+                                <span class="help-block error-help-block input-error image-error" style="color: red;"></span>
+                                <!--end::Image input-->
                             </div>
-                            <br>
-                            <span class="help-block error-help-block input-error image-error" style="color: red;"></span>
-                            <!--end::Image input-->
+                            <!--end::Col-->
                         </div>
-                        <!--end::Col-->
+                        <!--end::Input group-->
+
+                        <!--begin::Input group-->
+                        <div class="row mb-6">
+                            <!--begin::Label-->
+                            <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'name')}}</label>
+                            <!--end::Label-->
+                            <!--begin::Col-->
+                            <div class="col-lg-10 fv-row fv-plugins-icon-container">
+                                <input type="text" name="name" class="form-control form-control-lg form-control-solid" placeholder="{{trans(config('dashboard.trans_file').'name')}}" value="{{$submitFormMethod == 'put' ? $admin->name : old('name')}}">
+                                <span class="help-block error-help-block input-error name-error" style="color: red;"></span>
+                            </div>
+                            <!--end::Col-->
+                        </div>
+                        <!--end::Input group-->
+
+                        <!--begin::Input group-->
+                        <div class="row mb-6">
+                            <!--begin::Label-->
+                            <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'country')}}</label>
+                            <!--end::Label-->
+                            <!--begin::Col-->
+                            <div class="col-lg-10 fv-row fv-plugins-icon-container">
+                                <select id="country_id" name="country_id" data-control="select2" class="form-select form-select-solid form-select-lg fw-bold select2-hidden-accessible" data-select2-id="select2-data-10-jdo1-country" tabindex="-1" aria-hidden="true">
+                                @foreach($countries as $country)
+                                <option data-phone_code="{{$country->phone_code}}" @if($submitFormMethod == 'put' && $admin->country_id == $country->id) {{'selected'}} @endif value="{{$country->id}}">{{$country->name.'('.$country->phone_code.')'}}</option>
+                                @endforeach
+                                </select>
+                                <span class="help-block error-help-block input-error country_id-error" style="color: red;"></span>
+                            </div>
+                            <!--end::Col-->
+                        </div>
+                        <!--end::Input group-->
+
+                        <!--begin::Input group-->
+                        <div class="row mb-6">
+                            <!--begin::Label-->
+                            <label class="col-lg-2 col-form-label fw-bold fs-6 mobile">{{trans(config('dashboard.trans_file').'mobile')}}</label>
+                            <!--end::Label-->
+                            <!--begin::Col-->
+                            <div class="col-lg-10 fv-row fv-plugins-icon-container">
+                                <input type="tel" minlength="9" maxlength="12" name="mobile" class="form-control form-control-lg form-control-solid" placeholder="{{trans(config('dashboard.trans_file').'mobile')}}" value="{{$submitFormMethod == 'put' ? $admin->mobile : old('mobile')}}">
+                                <span class="help-block error-help-block input-error mobile-error" style="color: red;"></span>
+                            </div>
+                            <!--end::Col-->
+                        </div>
+                        <!--end::Input group-->
+
+                        <!--begin::Input group-->
+                        <div class="row mb-6">
+                            <!--begin::Label-->
+                            <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'email')}}</label>
+                            <!--end::Label-->
+                            <!--begin::Col-->
+                            <div class="col-lg-10 fv-row fv-plugins-icon-container">
+                                <input type="email" name="email" class="form-control form-control-lg form-control-solid" placeholder="{{trans(config('dashboard.trans_file').'email')}}" value="{{$submitFormMethod == 'put' ? $admin->email : old('email')}}">
+                                <span class="help-block error-help-block input-error email-error" style="color: red;"></span>
+                            </div>
+                            <!--end::Col-->
+                        </div>
+                        <!--end::Input group-->
+
+                        <!--begin::Input group-->
+                        <div class="row mb-6">
+                            <!--begin::Label-->
+                            <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'password')}}</label>
+                            <!--end::Label-->
+                            <!--begin::Col-->
+                            <div class="col-lg-10 fv-row fv-plugins-icon-container">
+                                <input type="password" name="password" class="form-control form-control-lg form-control-solid" placeholder="{{trans(config('dashboard.trans_file').'password')}}" value="">
+                                @if($submitFormMethod == 'put')
+                                <span class="help-block error-help-block input-error password-error" style="color: rgb(167, 161, 161);">
+                                {{trans(config('dashboard.trans_file').'let_password_empty')}}
+                                </span><br>
+                                @endif
+                                <span class="help-block error-help-block input-error password-error" style="color: red;"></span>
+                            </div>
+                            <!--end::Col-->
+                        </div>
+                        <!--end::Input group-->
+
+                        <!--begin::Input group-->
+                        <div class="row mb-6">
+                            <!--begin::Label-->
+                            <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'gender')}}</label>
+                            <!--end::Label-->
+                            <!--begin::Col-->
+                            <div class="col-lg-10 fv-row fv-plugins-icon-container">
+                                <select name="gender" data-control="select2" class="form-select form-select-solid form-select-lg fw-bold select2-hidden-accessible" data-select2-id="select2-data-10-jdo1-gender" tabindex="-1" aria-hidden="true">
+                                <option @if($submitFormMethod == 'put' && $admin->gender == 'male') {{'selected'}} @endif value="male">{{trans(config('dashboard.trans_file').'male')}}</option>
+                                <option @if($submitFormMethod == 'put' && $admin->gender == 'female') {{'selected'}} @endif value="female">{{trans(config('dashboard.trans_file').'female')}}</option>
+                                </select>
+                                <span class="help-block error-help-block input-error gender-error" style="color: red;"></span>
+                            </div>
+                            <!--end::Col-->
+                        </div>
+                        <!--end::Input group-->
+
+                        <!--begin::Input group-->
+                        <div class="row mb-6">
+                            <!--begin::Label-->
+                            <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'role')}}</label>
+                            <!--end::Label-->
+                            <!--begin::Col-->
+                            <div class="col-lg-10 fv-row fv-plugins-icon-container">
+                                <select @if(request()->has('role')) {{'disabled'}} @endif name="role" data-control="select2" class="form-select form-select-solid form-select-lg fw-bold select2-hidden-accessible" data-select2-id="select2-data-10-jdo1-role" tabindex="-1" aria-hidden="true">
+                                @foreach($roles as $role)
+                                <option @if(($submitFormMethod == 'put' && $admin->roles[0]->id == $role->id) || request()->role == $role->name || request()->role_id == $role->id ) {{'selected'}} @endif value="{{$role->id}}">{{$role->name}}</option>
+                                @endforeach
+                                </select>
+                                <span class="help-block error-help-block input-error role-error" style="color: red;"></span>
+                            </div>
+                            <!--end::Col-->
+                        </div>
+                        <!--end::Input group-->
                     </div>
-                    <!--end::Input group-->
-
-                    <!--begin::Input group-->
-                    <div class="row mb-6">
-                        <!--begin::Label-->
-                        <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'name')}}</label>
-                        <!--end::Label-->
-                        <!--begin::Col-->
-                        <div class="col-lg-10 fv-row fv-plugins-icon-container">
-                            <input type="text" name="name" class="form-control form-control-lg form-control-solid" placeholder="{{trans(config('dashboard.trans_file').'name')}}" value="{{$submitFormMethod == 'put' ? $admin->name : old('name')}}">
-                            <span class="help-block error-help-block input-error name-error" style="color: red;"></span>
-                        </div>
-                        <!--end::Col-->
-                    </div>
-                    <!--end::Input group-->
-
-                    <!--begin::Input group-->
-                    <div class="row mb-6">
-                        <!--begin::Label-->
-                        <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'country')}}</label>
-                        <!--end::Label-->
-                        <!--begin::Col-->
-                        <div class="col-lg-10 fv-row fv-plugins-icon-container">
-                            <select id="country_id" name="country_id" data-control="select2" class="form-select form-select-solid form-select-lg fw-bold select2-hidden-accessible" data-select2-id="select2-data-10-jdo1-country" tabindex="-1" aria-hidden="true">
-                            @foreach($countries as $country)
-                            <option data-phone_code="{{$country->phone_code}}" @if($submitFormMethod == 'put' && $admin->country_id == $country->id) {{'selected'}} @endif value="{{$country->id}}">{{$country->name.'('.$country->phone_code.')'}}</option>
-                            @endforeach
-                            </select>
-                            <span class="help-block error-help-block input-error country_id-error" style="color: red;"></span>
-                        </div>
-                        <!--end::Col-->
-                    </div>
-                    <!--end::Input group-->
-
-                    <!--begin::Input group-->
-                    <div class="row mb-6">
-                        <!--begin::Label-->
-                        <label class="col-lg-2 col-form-label fw-bold fs-6 mobile">{{trans(config('dashboard.trans_file').'mobile')}}</label>
-                        <!--end::Label-->
-                        <!--begin::Col-->
-                        <div class="col-lg-10 fv-row fv-plugins-icon-container">
-                            <input type="tel" minlength="9" maxlength="12" name="mobile" class="form-control form-control-lg form-control-solid" placeholder="{{trans(config('dashboard.trans_file').'mobile')}}" value="{{$submitFormMethod == 'put' ? $admin->mobile : old('mobile')}}">
-                            <span class="help-block error-help-block input-error mobile-error" style="color: red;"></span>
-                        </div>
-                        <!--end::Col-->
-                    </div>
-                    <!--end::Input group-->
-
-                    <!--begin::Input group-->
-                    <div class="row mb-6">
-                        <!--begin::Label-->
-                        <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'email')}}</label>
-                        <!--end::Label-->
-                        <!--begin::Col-->
-                        <div class="col-lg-10 fv-row fv-plugins-icon-container">
-                            <input type="email" name="email" class="form-control form-control-lg form-control-solid" placeholder="{{trans(config('dashboard.trans_file').'email')}}" value="{{$submitFormMethod == 'put' ? $admin->email : old('email')}}">
-                            <span class="help-block error-help-block input-error email-error" style="color: red;"></span>
-                        </div>
-                        <!--end::Col-->
-                    </div>
-                    <!--end::Input group-->
-
-                     <!--begin::Input group-->
-                     <div class="row mb-6">
-                        <!--begin::Label-->
-                        <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'password')}}</label>
-                        <!--end::Label-->
-                        <!--begin::Col-->
-                        <div class="col-lg-10 fv-row fv-plugins-icon-container">
-                            <input type="password" name="password" class="form-control form-control-lg form-control-solid" placeholder="{{trans(config('dashboard.trans_file').'password')}}" value="">
-                            @if($submitFormMethod == 'put')
-                            <span class="help-block error-help-block input-error password-error" style="color: rgb(167, 161, 161);">
-                            {{trans(config('dashboard.trans_file').'let_password_empty')}}
-                            </span><br>
-                            @endif
-                            <span class="help-block error-help-block input-error password-error" style="color: red;"></span>
-                        </div>
-                        <!--end::Col-->
-                     </div>
-                    <!--end::Input group-->
-
-                    <!--begin::Input group-->
-                    <div class="row mb-6">
-                        <!--begin::Label-->
-                        <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'gender')}}</label>
-                        <!--end::Label-->
-                        <!--begin::Col-->
-                        <div class="col-lg-10 fv-row fv-plugins-icon-container">
-                            <select name="gender" data-control="select2" class="form-select form-select-solid form-select-lg fw-bold select2-hidden-accessible" data-select2-id="select2-data-10-jdo1-gender" tabindex="-1" aria-hidden="true">
-                            <option @if($submitFormMethod == 'put' && $admin->gender == 'male') {{'selected'}} @endif value="male">{{trans(config('dashboard.trans_file').'male')}}</option>
-                            <option @if($submitFormMethod == 'put' && $admin->gender == 'female') {{'selected'}} @endif value="female">{{trans(config('dashboard.trans_file').'female')}}</option>
-                            </select>
-                            <span class="help-block error-help-block input-error gender-error" style="color: red;"></span>
-                        </div>
-                        <!--end::Col-->
-                    </div>
-                    <!--end::Input group-->
-
-                    <!--begin::Input group-->
-                    <div class="row mb-6">
-                        <!--begin::Label-->
-                        <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'role')}}</label>
-                        <!--end::Label-->
-                        <!--begin::Col-->
-                        <div class="col-lg-10 fv-row fv-plugins-icon-container">
-                            <select @if(request()->has('role')) {{'disabled'}} @endif name="role" data-control="select2" class="form-select form-select-solid form-select-lg fw-bold select2-hidden-accessible" data-select2-id="select2-data-10-jdo1-role" tabindex="-1" aria-hidden="true">
-                            @foreach($roles as $role)
-                            <option @if(($submitFormMethod == 'put' && $admin->roles[0]->id == $role->id) || request()->role == $role->name || request()->role_id == $role->id ) {{'selected'}} @endif value="{{$role->id}}">{{$role->name}}</option>
-                            @endforeach
-                            </select>
-                            <span class="help-block error-help-block input-error role-error" style="color: red;"></span>
-                        </div>
-                        <!--end::Col-->
-                    </div>
-                    <!--end::Input group-->
-
                 </div>
                 <!--end::Card body-->
                 <!--begin::Actions-->
@@ -275,6 +273,16 @@
                 $.each(callResponse.responseJSON.errors, function(index, value) {
                     if($('.'+index+'-error').length)
                     {
+                        var parents = $('.'+index+'-error').parents().find('.tab-pane')
+                        parents.each(function(i, obj){
+                            if($(obj).find($('.'+index+'-error')).length)
+                            {
+                                $(document).ready(function(){
+                                    $('[href="#'+$(obj).attr('id')+'"]').tab('show');
+                                });
+                            }
+                        })
+
                         $('.'+index+'-error').show();
                         $('.'+index+'-error').text(value);
                     }

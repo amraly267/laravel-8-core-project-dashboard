@@ -38,11 +38,7 @@
 @endsection
 
 <div class="row">
-    <div class="card col-2 mb-5 mb-xl-10 form-side-menu">
-        <div class="mt-5 mb-5">
-            <a href="#" class="btn btn-light btn-active-light-primary w-100">{{trans(config('dashboard.trans_file').'main_info')}}</a>
-        </div>
-    </div>
+    @include(config('dashboard.resource_folder').'roles.side_menu')
 
     <div class="card col-10 mb-5 mb-xl-10">
         <!--begin::Card header-->
@@ -62,47 +58,48 @@
             @csrf @method($submitFormMethod)
             <!--begin::Card body-->
             <div class="card-body border-top p-9">
-                <!--begin::Input group-->
-                <div class="row mb-6">
-                    <!--begin::Label-->
-                    <label class="col-lg-1 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'name')}}</label>
-                    <!--end::Label-->
-                    <!--begin::Col-->
-                    <div class="col-lg-11 fv-row fv-plugins-icon-container">
-                        <input type="text" name="name" class="form-control form-control-lg form-control-solid" placeholder="{{trans(config('dashboard.trans_file').'name')}}" value="{{$submitFormMethod == 'put' ? $role->name : old('name')}}">
-                        <span class="help-block error-help-block input-error name-error" style="color: red;"></span>
+                <div class="tab-pane fade show active" id="more_info">
+                    <!--begin::Input group-->
+                    <div class="row mb-6">
+                        <!--begin::Label-->
+                        <label class="col-lg-1 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'name')}}</label>
+                        <!--end::Label-->
+                        <!--begin::Col-->
+                        <div class="col-lg-11 fv-row fv-plugins-icon-container">
+                            <input type="text" name="name" class="form-control form-control-lg form-control-solid" placeholder="{{trans(config('dashboard.trans_file').'name')}}" value="{{$submitFormMethod == 'put' ? $role->name : old('name')}}">
+                            <span class="help-block error-help-block input-error name-error" style="color: red;"></span>
+                        </div>
+                        <!--end::Col-->
                     </div>
-                    <!--end::Col-->
-                </div>
-                <!--end::Input group-->
+                    <!--end::Input group-->
 
-                <!--begin::Input group-->
-                <div class="row mb-6">
-                    <!--begin::Label-->
-                    <label class="col-lg-12 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'permissions')}}</label>
-                    <span class="help-block error-help-block input-error permissions-error" style="color: red;"></span>
-                    <!--end::Label-->
-                </div>
-                <!--end::Input group-->
+                    <!--begin::Input group-->
+                    <div class="row mb-6">
+                        <!--begin::Label-->
+                        <label class="col-lg-12 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'permissions')}}</label>
+                        <span class="help-block error-help-block input-error permissions-error" style="color: red;"></span>
+                        <!--end::Label-->
+                    </div>
+                    <!--end::Input group-->
 
-                @foreach($permissions as $key => $permission)
-                <!--begin::Input group-->
-                <div class="row mb-6">
-                    <!--begin::Checkbox-->
-                    <label class="mb-2 col-12 form-check form-check-custom form-check-solid me-10">
-                        <span class="form-check-label fw-bold">{{trans(config('dashboard.trans_file').$permission->name)}}</span>
-                    </label>
-                    @foreach($permission->relatedPerm as $related)
-                    <label class="mb-2 col-2 form-check form-check-custom form-check-solid me-10">
-                        <input class="form-check-input h-20px w-20px"{{$submitFormMethod == 'put' && in_array($related->id, $relatedPermissions)? 'checked':''}} type="checkbox" name="permissions[]" value="{{$related->id}}">
-                        <span class="form-check-label fw-bold">{{$related->name}}</span>
-                    </label>
+                    @foreach($permissions as $key => $permission)
+                    <!--begin::Input group-->
+                    <div class="row mb-6">
+                        <!--begin::Checkbox-->
+                        <label class="mb-2 col-12 form-check form-check-custom form-check-solid me-10">
+                            <span class="form-check-label fw-bold">{{trans(config('dashboard.trans_file').$permission->name)}}</span>
+                        </label>
+                        @foreach($permission->relatedPerm as $related)
+                        <label class="mb-2 col-2 form-check form-check-custom form-check-solid me-10">
+                            <input class="form-check-input h-20px w-20px"{{$submitFormMethod == 'put' && in_array($related->id, $relatedPermissions)? 'checked':''}} type="checkbox" name="permissions[]" value="{{$related->id}}">
+                            <span class="form-check-label fw-bold">{{$related->name}}</span>
+                        </label>
+                        @endforeach
+                        <!--end::Checkbox-->
+                    </div>
                     @endforeach
-                    <!--end::Checkbox-->
+                    <!--end::Input group-->
                 </div>
-                @endforeach
-                <!--end::Input group-->
-
             </div>
             <!--end::Card body-->
 
@@ -157,6 +154,16 @@
                 $.each(callResponse.responseJSON.errors, function(index, value) {
                     if($('.'+index+'-error').length)
                     {
+                        var parents = $('.'+index+'-error').parents().find('.tab-pane')
+                        parents.each(function(i, obj){
+                            if($(obj).find($('.'+index+'-error')).length)
+                            {
+                                $(document).ready(function(){
+                                    $('[href="#'+$(obj).attr('id')+'"]').tab('show');
+                                });
+                            }
+                        })
+
                         $('.'+index+'-error').show();
                         $('.'+index+'-error').text(value);
                     }

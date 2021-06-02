@@ -34,6 +34,11 @@ class SettingRequest extends FormRequest
             'snapchat_url' => 'nullable|url',
             'whatsapp_number' => 'nullable|digits_between:9,12',
             'logo' => 'nullable|mimes:jpeg,jpg,png|max:5120',
+            'supported_countries' => 'required',
+            'default_country_id' => 'required|exists:countries,id',
+            'supported_locales' => 'required',
+            'default_locale' => 'required',
+            'timezone_id' => 'required|exists:timezones,id',
         ];
     }
 
