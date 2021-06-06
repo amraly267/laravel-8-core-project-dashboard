@@ -202,7 +202,7 @@
                             </svg></span>
                             <!--end::Svg Icon-->
                         </span>
-                        <span class="menu-title">{{trans(config('dashboard.trans_file').'static_pages')}}</span>
+                        <span class="menu-title">{{trans(config('dashboard.trans_file').'pages')}}</span>
                     </a>
                 </div>
                 @endif

@@ -33,7 +33,7 @@ class PageRequest extends FormRequest
     {
         return [
             'title.*.required' => trans(config('dashboard.trans_file').'title_is_required'),
-            'description.*.required' => trans(config('dashboard.trans_file').'description_is_required'),
+            'description.*.required' => trans(config('dashboard.trans_file').'content_is_required'),
         ];
     }
 }

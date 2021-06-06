@@ -1,7 +1,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 <title>{{$title}}</title>
 <meta name="csrf-token" content="{{ csrf_token() }}" />
-<link rel="shortcut icon" href="{{$logo}}" />
+<link rel="shortcut icon" href="{{$favicon}}" />
 
 <!--begin::Fonts-->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
@@ -14,7 +14,6 @@
 <style>
     body{
         font-family: 'Cairo';
-        /* font-size: 1rem !important; */
     }
 </style>
 @else

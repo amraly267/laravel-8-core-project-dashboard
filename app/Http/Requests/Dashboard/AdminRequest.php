@@ -29,7 +29,7 @@ class AdminRequest extends FormRequest
         $rules = [
             'name' => 'required',
             'email' => 'required|email|unique:admins,email,'.$adminId.',id',
-            'mobile' => ['required', 'digits_between:9,12', Rule::unique('admins')->where(function($q){
+            'mobile' => ['required', Rule::unique('admins')->where(function($q){
                                                                 $q->where([['mobile', request()->mobile], ['country_id', request()->country_id]]);
                                                             })->ignore($adminId)
                         ],
@@ -40,10 +40,12 @@ class AdminRequest extends FormRequest
         if(\Route::currentRouteName() == 'admins.update')
         {
             $rules['password'] = 'nullable|min:6';
+            $rules['confirm_password'] = 'required_if:password,!=,|same:password';
         }
         else
         {
             $rules['password'] = 'required|min:6';
+            $rules['confirm_password'] = 'required|require_if:password|same:password';
         }
 
         return $rules;

@@ -122,7 +122,7 @@
                             <div class="col-lg-10 fv-row fv-plugins-icon-container">
                                 <select id="country_id" name="country_id" data-control="select2" class="form-select form-select-solid form-select-lg fw-bold select2-hidden-accessible" data-select2-id="select2-data-10-jdo1-country" tabindex="-1" aria-hidden="true">
                                 @foreach($countries as $country)
-                                <option data-phone_code="{{$country->phone_code}}" @if($submitFormMethod == 'put' && $admin->country_id == $country->id) {{'selected'}} @endif value="{{$country->id}}">{{$country->name.'('.$country->phone_code.')'}}</option>
+                                <option data-phone_code="{{$country->phone_code}}" @if($submitFormMethod == 'put' && $admin->country_id == $country->id) {{'selected'}} @endif value="{{$country->id}}">{{$country->name}}</option>
                                 @endforeach
                                 </select>
                                 <span class="help-block error-help-block input-error country_id-error" style="color: red;"></span>
@@ -134,7 +134,7 @@
                         <!--begin::Input group-->
                         <div class="row mb-6">
                             <!--begin::Label-->
-                            <label class="col-lg-2 col-form-label fw-bold fs-6 mobile">{{trans(config('dashboard.trans_file').'mobile')}}</label>
+                            <label class="col-lg-2 col-form-label fw-bold fs-6 mobile">{{trans(config('dashboard.trans_file').'mobile')}} {{'('.$countries[0]['phone_code'].')'}}</label>
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-10 fv-row fv-plugins-icon-container">
@@ -168,11 +168,30 @@
                             <div class="col-lg-10 fv-row fv-plugins-icon-container">
                                 <input type="password" name="password" class="form-control form-control-lg form-control-solid" placeholder="{{trans(config('dashboard.trans_file').'password')}}" value="">
                                 @if($submitFormMethod == 'put')
-                                <span class="help-block error-help-block input-error password-error" style="color: rgb(167, 161, 161);">
+                                <span class="help-block error-help-block" style="color: rgb(167, 161, 161);">
                                 {{trans(config('dashboard.trans_file').'let_password_empty')}}
                                 </span><br>
                                 @endif
                                 <span class="help-block error-help-block input-error password-error" style="color: red;"></span>
+                            </div>
+                            <!--end::Col-->
+                        </div>
+                        <!--end::Input group-->
+
+                        <!--begin::Input group-->
+                        <div class="row mb-6">
+                            <!--begin::Label-->
+                            <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'confirm_password')}}</label>
+                            <!--end::Label-->
+                            <!--begin::Col-->
+                            <div class="col-lg-10 fv-row fv-plugins-icon-container">
+                                <input type="password" name="confirm_password" class="form-control form-control-lg form-control-solid" placeholder="{{trans(config('dashboard.trans_file').'confirm_password')}}" value="">
+                                @if($submitFormMethod == 'put')
+                                <span class="help-block error-help-block" style="color: rgb(167, 161, 161);">
+                                {{trans(config('dashboard.trans_file').'let_password_empty')}}
+                                </span><br>
+                                @endif
+                                <span class="help-block error-help-block input-error confirm_password-error" style="color: red;"></span>
                             </div>
                             <!--end::Col-->
                         </div>

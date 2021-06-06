@@ -85,6 +85,14 @@ class PageController extends BaseController
         {
             $model->where('status', $request->status);
         }
+        if($request->filled('is_web'))
+        {
+            $model->where('is_web', $request->is_web);
+        }
+        if($request->filled('is_mobile'))
+        {
+            $model->where('is_mobile', $request->is_mobile);
+        }
 
         // === Filter records if there is search keyword ===
         $totalRecordswithFilter = $model->count();
@@ -96,6 +104,8 @@ class PageController extends BaseController
             return [
                 "index" => $index+1,
                 "title" => $page->title,
+                "is_web" => $page->is_web_label,
+                "is_mobile" => $page->is_mobile_label,
                 "status" => $page->status_label,
                 "action" => $page->id
             ];
@@ -130,6 +140,8 @@ class PageController extends BaseController
             'title' => $request->title,
             'description' => $request->description,
             'status' => $request->has('status') ? '1' : '0',
+            'is_web' => $request->has('is_web') ? '1' : '0',
+            'is_mobile' => $request->has('is_mobile') ? '1' : '0',
         ]);
 
         return $this->successResponse(['message' => trans(config('dashboard.trans_file').'success_save')]);
@@ -174,6 +186,8 @@ class PageController extends BaseController
         $page->title = $request->title;
         $page->description = $request->description;
         $page->status = $request->has('status') ? '1' : '0';
+        $page->is_web = $request->has('is_web') ? '1' : '0';
+        $page->is_mobile = $request->has('is_mobile') ? '1' : '0';
         $page->save();
         return $this->successResponse(['message' => trans(config('dashboard.trans_file').'success_save')]);
     }

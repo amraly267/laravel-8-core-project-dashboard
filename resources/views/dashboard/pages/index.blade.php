@@ -2,7 +2,7 @@
 @section('content')
 @section('page_path')
 <!--begin::Title-->
-<h1 class="d-flex align-items-center text-dark fw-bolder my-1 fs-3">{{trans(config('dashboard.trans_file').'static_pages')}}</h1>
+<h1 class="d-flex align-items-center text-dark fw-bolder my-1 fs-3">{{trans(config('dashboard.trans_file').'pages')}}</h1>
 <!--end::Title-->
 <!--begin::Separator-->
 <span class="h-20px border-gray-200 border-start mx-4"></span>
@@ -20,7 +20,7 @@
     </li>
     <!--end::Item-->
     <!--begin::Item-->
-    <li class="breadcrumb-item text-dark">{{trans(config('dashboard.trans_file').'static_pages')}}</li>
+    <li class="breadcrumb-item text-dark">{{trans(config('dashboard.trans_file').'pages')}}</li>
     <!--end::Item-->
 </ul>
 <!--end::Breadcrumb-->
@@ -28,7 +28,7 @@
 <div class="card card-custom">
     <div class="card-header">
         <div class="card-title">
-            <h3 class="card-label">{{trans(config('dashboard.trans_file').'static_pages')}}</h3>
+            <h3 class="card-label">{{trans(config('dashboard.trans_file').'pages')}}</h3>
             <span class="text-muted mt-1 fw-bold fs-7">{{trans(config('dashboard.trans_file').'total_results', ['val' => $totalResults])}}</span>
         </div>
         <div class="card-toolbar">
@@ -72,17 +72,35 @@
         <div class="card-body py-3">
             <form class="mb-15" action="{{route('pages.index')}}" method="GET">
                 <div class="row mb-6">
-                    <div class="col-lg-6 mb-lg-0 mb-6">
+                    <div class="col-lg-3 mb-lg-0 mb-6">
                         <label>{{trans(config('dashboard.trans_file').'search_keyword')}}</label>
                         <input type="text" value="{{request()->search_keyword}}" name="search_keyword" class="form-control datatable-input" placeholder="{{trans(config('dashboard.trans_file').'search_keyword')}}" data-col-index="0">
                     </div>
 
-                    <div class="col-lg-6 mb-lg-0 mb-6">
+                    <div class="col-lg-3 mb-lg-0 mb-6">
                         <label>{{trans(config('dashboard.trans_file').'status')}}</label>
                         <select name="status" class="form-select">
                             <option value="">{{trans(config('dashboard.trans_file').'all')}}</option>
                             <option @if(request()->status === '1') {{'selected'}} @endif value="1">{{trans(config('dashboard.trans_file').'active')}}</option>
                             <option @if(request()->status === '0') {{'selected'}} @endif value="0">{{trans(config('dashboard.trans_file').'deactivate')}}</option>
+                        </select>
+                    </div>
+
+                    <div class="col-lg-3 mb-lg-0 mb-6">
+                        <label>{{trans(config('dashboard.trans_file').'is_web')}}</label>
+                        <select name="is_web" class="form-select">
+                            <option value="">{{trans(config('dashboard.trans_file').'all')}}</option>
+                            <option @if(request()->is_web === '1') {{'selected'}} @endif value="1">{{trans(config('dashboard.trans_file').'active')}}</option>
+                            <option @if(request()->is_web === '0') {{'selected'}} @endif value="0">{{trans(config('dashboard.trans_file').'deactivate')}}</option>
+                        </select>
+                    </div>
+
+                    <div class="col-lg-3 mb-lg-0 mb-6">
+                        <label>{{trans(config('dashboard.trans_file').'is_mobile')}}</label>
+                        <select name="is_mobile" class="form-select">
+                            <option value="">{{trans(config('dashboard.trans_file').'all')}}</option>
+                            <option @if(request()->is_mobile === '1') {{'selected'}} @endif value="1">{{trans(config('dashboard.trans_file').'active')}}</option>
+                            <option @if(request()->is_mobile === '0') {{'selected'}} @endif value="0">{{trans(config('dashboard.trans_file').'deactivate')}}</option>
                         </select>
                     </div>
                 </div>
@@ -112,6 +130,8 @@
                         <tr class="fw-bold fs-6 text-muted">
                             <th class="min-w-20px" data-column-name="index">#</th>
                             <th class="min-w-150px" data-column-name="title">{{trans(config('dashboard.trans_file').'title')}}</th>
+                            <th class="min-w-100px" data-column-name="is_web">{{trans(config('dashboard.trans_file').'is_web')}}</th>
+                            <th class="min-w-100px" data-column-name="is_mobile">{{trans(config('dashboard.trans_file').'is_mobile')}}</th>
                             <th class="min-w-100px" data-column-name="status">{{trans(config('dashboard.trans_file').'status')}}</th>
                             @if(auth()->guard('admin')->user()->can('page-edit') || auth()->guard('admin')->user()->can('page-delete'))
                             <th class="min-w-190px" data-column-name="operation">{{trans(config('dashboard.trans_file').'actions')}}</th>
@@ -163,7 +183,7 @@
                 url: "{{route('pages.index')}}",
                 data: $('form').formToJson(),
             },
-            columns:[{data: 'index'}, {data: 'title'}, {data: 'status'}, {data: 'action'}],
+            columns:[{data: 'index'}, {data: 'title'}, {data: 'is_web'}, {data: 'is_mobile'}, {data: 'status'}, {data: 'action'}],
             dom: 'frtipB',
             language: {url: @if(config('app.locale') === 'en') "//cdn.datatables.net/plug-ins/1.10.16/i18n/English.json" @else "//cdn.datatables.net/plug-ins/1.10.16/i18n/Arabic.json" @endif},
             lengthMenu: [[10, 25, 50, 100, 500],['10', '25', '50', '100', '500']],

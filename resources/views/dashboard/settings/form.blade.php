@@ -49,7 +49,10 @@
                 <!--begin::Card body-->
                 <div class="card-body border-top p-9">
                     <div class="tab-content">
+                        @include(config('dashboard.resource_folder').'settings.logo_tab')
                         @include(config('dashboard.resource_folder').'settings.appearance_tab')
+                        @include(config('dashboard.resource_folder').'settings.mail_configuration')
+                        @include(config('dashboard.resource_folder').'settings.contacts_info')
                         @include(config('dashboard.resource_folder').'settings.social_media')
                         @include(config('dashboard.resource_folder').'settings.custome_css_js')
                         @include(config('dashboard.resource_folder').'settings.countries_languages')

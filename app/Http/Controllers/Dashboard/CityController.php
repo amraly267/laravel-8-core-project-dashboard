@@ -210,4 +210,13 @@ class CityController extends BaseController
         $existingCity->delete();
         return $this->successResponse(['message' => trans(config('dashboard.trans_file').'success_delete')]);
     }
+
+    // === Retrive cities via country id ===
+    public function countryCities($countryId)
+    {
+        $cities = City::where('country_id', $countryId)->get();
+        return $this->successResponse(['cities' => $cities]);
+    }
+    // === End function ===
+
 }

@@ -18,6 +18,12 @@
             @if(in_array('title', $colsIndexName))
             <td>{{$page['title']}}</td>
             @endif
+            @if(in_array('is_web', $colsIndexName))
+            <td>{{strip_tags($page['is_web'])}}</td>
+            @endif
+            @if(in_array('is_mobile', $colsIndexName))
+            <td>{{strip_tags($page['is_mobile'])}}</td>
+            @endif
             @if(in_array('status', $colsIndexName))
             <td>{{strip_tags($page['status'])}}</td>
             @endif

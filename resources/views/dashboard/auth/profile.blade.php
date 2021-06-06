@@ -129,18 +129,33 @@
                     <label class="col-lg-1 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'password')}}</label>
                     <!--end::Label-->
                     <!--begin::Col-->
-                    <div class="col-lg-11 fv-row fv-plugins-icon-container">
+                    <div class="col-lg-5 fv-row fv-plugins-icon-container">
                         <input type="password" name="password" class="form-control form-control-lg form-control-solid" placeholder="{{trans(config('dashboard.trans_file').'password')}}" value="">
                         @if($submitFormMethod == 'put')
-                            <span class="help-block error-help-block input-error password-error" style="color: rgb(167, 161, 161);">
+                            <span class="help-block error-help-block" style="color: rgb(167, 161, 161);">
                                 {{trans(config('dashboard.trans_file').'let_password_empty')}}
                             </span><br>
                         @endif
                         <span class="help-block error-help-block input-error password-error" style="color: red;"></span>
                     </div>
                     <!--end::Col-->
+                    <!--begin::Label-->
+                    <label class="col-lg-1 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'confirm_password')}}</label>
+                    <!--end::Label-->
+                    <!--begin::Col-->
+                    <div class="col-lg-5 fv-row fv-plugins-icon-container">
+                        <input type="password" name="confirm_password" class="form-control form-control-lg form-control-solid" placeholder="{{trans(config('dashboard.trans_file').'confirm_password')}}" value="">
+                        @if($submitFormMethod == 'put')
+                        <span class="help-block error-help-block" style="color: rgb(167, 161, 161);">
+                        {{trans(config('dashboard.trans_file').'let_password_empty')}}
+                        </span><br>
+                        @endif
+                        <span class="help-block error-help-block input-error confirm_password-error" style="color: red;"></span>
+                    </div>
+                    <!--end::Col-->
                 </div>
                 <!--end::Input group-->
+
             </div>
             <!--end::Card body-->
             <!--begin::Actions-->

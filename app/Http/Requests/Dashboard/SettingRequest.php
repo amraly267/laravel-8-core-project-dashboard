@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Dashboard;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\Dashboard\ValidateDomain;
 
 class SettingRequest extends FormRequest
 {
@@ -33,12 +34,20 @@ class SettingRequest extends FormRequest
             'instagram_url' => 'nullable|url',
             'snapchat_url' => 'nullable|url',
             'whatsapp_number' => 'nullable|digits_between:9,12',
-            'logo' => 'nullable|mimes:jpeg,jpg,png|max:5120',
             'supported_countries' => 'required',
             'default_country_id' => 'required|exists:countries,id',
+            'customer_role_id' => 'required|exists:roles,id',
             'supported_locales' => 'required',
             'default_locale' => 'required',
             'timezone_id' => 'required|exists:timezones,id',
+            'logo' => 'nullable|mimes:jpeg,jpg,png|max:5120',
+            'app_icon' => 'nullable|mimes:jpeg,jpg,png|max:5120',
+            'favicon' => 'nullable|mimes:jpeg,jpg,png|max:5120',
+            'white_logo' => 'nullable|mimes:jpeg,jpg,png|max:5120',
+            'mail_from_address' => 'nullable|email',
+            'mail_host' => ['nullable', new ValidateDomain],
+            'mail_port' => 'nullable|numeric|between:0,65535',
+
         ];
     }
 

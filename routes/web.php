@@ -54,7 +54,9 @@ Route::prefix('admin')->group(function () {
         Route::resource('countries', CountryController::class);
         Route::get('toJsonData', [CountryController::class, 'toJsonData'])->name('toJsonData');
         Route::resource('cities', CityController::class);
+        Route::get('country-cities/{countryId}', [CityController::class, 'countryCities'])->name('admin-country-cities');
         Route::resource('areas', AreaController::class);
+        Route::get('city-areas/{cityId}', [AreaController::class, 'cityAreas'])->name('admin-city-areas');
         Route::resource('pages', PageController::class);
         Route::get('settings', [SettingController::class, 'index'])->name('admin-settings');
         Route::put('settings', [SettingController::class, 'update'])->name('admin-update-settings');

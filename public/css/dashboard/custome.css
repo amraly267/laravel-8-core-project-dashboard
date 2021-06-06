@@ -59,3 +59,8 @@ td img{
 .accordion-tab {
     background-color: azure;
 }
+
+.accordion-tab li a{
+    text-align: left !important;
+    font-size: revert !important;
+}

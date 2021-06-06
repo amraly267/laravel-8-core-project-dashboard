@@ -26,9 +26,10 @@ class ProfileRequest extends FormRequest
         return [
             'name' => 'required',
             'email' => 'required|email|unique:admins,email,'.auth()->guard('admin')->user()->id.',id',
-            'mobile' => 'required|digits_between:9,12|unique:admins,mobile,'.auth()->guard('admin')->user()->id.',id',
+            'mobile' => 'required|unique:admins,mobile,'.auth()->guard('admin')->user()->id.',id',
             'image' => 'nullable|mimes:jpeg,jpg,png|max:5120',
             'password' => 'nullable|min:6',
+            'confirm_password' => 'required_if:password,!=,|same:password',
         ];
     }
 }

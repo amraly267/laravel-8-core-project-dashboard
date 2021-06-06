@@ -9,6 +9,7 @@ use App\Http\Requests\Dashboard\SettingRequest;
 use App;
 use App\Models\Country;
 use App\Models\Timezone;
+use Spatie\Permission\Models\Role;
 
 class SettingController extends BaseController
 {
@@ -40,6 +41,7 @@ class SettingController extends BaseController
     public function index()
     {
         $settings = Setting::find(1);
+        $roles = Role::all();
         $pageTitle = trans(config('dashboard.trans_file').'settings');
         $submitFormRoute = route('admin-update-settings');
         $submitFormMethod = 'put';
@@ -47,37 +49,81 @@ class SettingController extends BaseController
         $tagifyCountriesValues = $this->retrieveTagifyCountries('id', explode(',', $settings->supported_countries), 'name');
         $tagifyCountriesNames = Country::pluck('name')->all();
         $timezones = Timezone::all();
-        return view(config('dashboard.resource_folder').$this->controllerResource.'form', compact('timezones','tagifyCountriesNames', 'tagifyCountriesValues', 'countries','settings', 'pageTitle', 'submitFormRoute', 'submitFormMethod'));
+        return view(config('dashboard.resource_folder').$this->controllerResource.'form', compact('roles', 'timezones','tagifyCountriesNames', 'tagifyCountriesValues', 'countries','settings', 'pageTitle', 'submitFormRoute', 'submitFormMethod'));
     }
     // === End function ===
 
     // === Update settings ===
     public function update(SettingRequest $request)
     {
+        $settingsData = $request->except('logo', 'app_icon', 'favicon', 'white_logo');
         $settings = Setting::find(1);
-        $settings->fill($request->all());
 
         if($request->logo_remove)
         {
             $this->removeImage($settings->logo, $this->storageFolder);
-            $settings->logo = null;
+            $settingsData['logo'] = null;
         }
-
         if($request->hasFile('logo'))
         {
             $this->removeImage($settings->logo, $this->storageFolder);
-            $settings->logo = $this->uploadImage($request->logo, $this->storageFolder);
+            $settingsData['logo'] = $this->uploadImage($request->logo, $this->storageFolder);
+        }
+
+        if($request->app_icon_remove)
+        {
+            $this->removeImage($settings->app_icon, $this->storageFolder);
+            $settingsData['app_icon'] = null;
+        }
+        if($request->hasFile('app_icon'))
+        {
+            $this->removeImage($settings->app_icon, $this->storageFolder);
+            $settingsData['app_icon'] = $this->uploadImage($request->app_icon, $this->storageFolder);
+        }
+
+        if($request->favicon_remove)
+        {
+            $this->removeImage($settings->favicon, $this->storageFolder);
+            $settingsData['favicon'] = null;
+        }
+        if($request->hasFile('favicon'))
+        {
+            $this->removeImage($settings->favicon, $this->storageFolder);
+            $settingsData['favicon'] = $this->uploadImage($request->favicon, $this->storageFolder);
+        }
+
+        if($request->white_logo_remove)
+        {
+            $this->removeImage($settings->white_logo, $this->storageFolder);
+            $settingsData['white_logo'] = null;
+        }
+        if($request->hasFile('white_logo'))
+        {
+            $this->removeImage($settings->white_logo, $this->storageFolder);
+            $settingsData['white_logo'] = $this->uploadImage($request->white_logo, $this->storageFolder);
+        }
+
+        if(!$request->has('city_id'))
+        {
+            $settingsData['city_id'] = null;
+        }
+
+        if(!$request->has('area_id'))
+        {
+            $settingsData['area_id'] = null;
         }
 
         $supportedCountries = collect(json_decode($request->supported_countries, true))->map(function($supportedCountry){
             return $supportedCountry['value'];
         });
+        $supportedLocales = collect(json_decode($request->supported_locales, true))->map(function($supportedLocale){
+            return $supportedLocale['value'];
+        })->toArray();
 
-        $settings->supported_countries = implode(',',Country::whereIn('name->'.config('app.locale'), $supportedCountries)->pluck('id')->all());
-        $settings->default_country_id = $request->default_country_id;
-        $settings->supported_locales = $request->supported_locales;
-        $settings->default_locale = $request->default_locale;
-        $settings->timezone_id = $request->timezone_id;
+        $settingsData['supported_countries'] = implode(',', Country::whereIn('name->'.config('app.locale'), $supportedCountries)->pluck('id')->all());
+        $settingsData['supported_locales'] = implode(',', $supportedLocales);
+
+        $settings->fill($settingsData);
         $settings->save();
         return $this->successResponse(['message' => trans(config('dashboard.trans_file').'success_save')]);
     }

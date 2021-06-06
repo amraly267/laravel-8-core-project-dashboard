@@ -206,8 +206,16 @@ class AreaController extends BaseController
      */
     public function destroy($id)
     {
-        $existingArea = area::find($id);
+        $existingArea = Area::find($id);
         $existingArea->delete();
         return $this->successResponse(['message' => trans(config('dashboard.trans_file').'success_delete')]);
     }
+
+    // === Retrive areas via city id ===
+    public function cityAreas($cityId)
+    {
+        $areas = Area::where('city_id', $cityId)->get();
+        return $this->successResponse(['areas' => $areas]);
+    }
+    // === End function ==
 }
