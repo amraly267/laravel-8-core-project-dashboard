@@ -37,7 +37,7 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
-            \App\Http\Middleware\Dashboard\AdminLocalization::class,
+            \Modules\Apps\Http\Middleware\Dashboard\AdminLocalization::class,
 
         ],
 
@@ -64,8 +64,8 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        'admin.guest' => \App\Http\Middleware\Dashboard\AdminGuest::class,
-        'admin.auth' => \App\Http\Middleware\Dashboard\AdminAuth::class,
+        'admin.guest' => \Modules\Apps\Http\Middleware\Dashboard\AdminGuest::class,
+        'admin.auth' => \Modules\Apps\Http\Middleware\Dashboard\AdminAuth::class,
         'role' => \Spatie\Permission\Middlewares\RoleMiddleware::class,
         'permission' => \Spatie\Permission\Middlewares\PermissionMiddleware::class,
         'role_or_permission' => \Spatie\Permission\Middlewares\RoleOrPermissionMiddleware::class,

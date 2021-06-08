@@ -31,27 +31,27 @@ Route::get('/', function () {
 
 Route::prefix('admin')->group(function () {
 
-    // === Not login admin routes ===
-    Route::middleware(['admin.guest'])->group(function () {
-        Route::get('login', [AuthController::class, 'loginForm'])->name('admin-login');
-        Route::get('forget-password', [AuthController::class, 'forgetPasswordForm'])->name('admin-forget-password');
-        Route::get('reset-password', [AuthController::class, 'resetPasswordForm'])->name('admin-reset-password');
-        Route::post('submit-login',[AuthController::class, 'submitLogin'])->name('admin-submit-login');
-        Route::post('submit-forget-password', [AuthController::class, 'submitForgetPassword'])->name('admin-submit-forget-password');
-        Route::post('submit-reset-password', [AuthController::class, 'submitResetPassword'])->name('admin-submit-reset-password');
-    });
+    // // === Not login admin routes ===
+    // Route::middleware(['admin.guest'])->group(function () {
+    //     Route::get('login', [AuthController::class, 'loginForm'])->name('admin-login');
+    //     Route::get('forget-password', [AuthController::class, 'forgetPasswordForm'])->name('admin-forget-password');
+    //     Route::get('reset-password', [AuthController::class, 'resetPasswordForm'])->name('admin-reset-password');
+    //     Route::post('submit-login',[AuthController::class, 'submitLogin'])->name('admin-submit-login');
+    //     Route::post('submit-forget-password', [AuthController::class, 'submitForgetPassword'])->name('admin-submit-forget-password');
+    //     Route::post('submit-reset-password', [AuthController::class, 'submitResetPassword'])->name('admin-submit-reset-password');
+    // });
 
     // === Login admin routes ===
     Route::middleware(['admin.auth'])->group(function () {
-        Route::get('/', [HomeController::class, 'index']);
-        Route::get('home', [HomeController::class, 'index'])->name('admin-home');
+        // Route::get('/', [HomeController::class, 'index']);
+        // Route::get('home', [HomeController::class, 'index'])->name('admin-home');
         Route::post('logout', [AuthController::class, 'logout'])->name('admin-logout');
         Route::get('profile', [AuthController::class, 'profile'])->name('admin-profile');
         Route::put('update-profile', [AuthController::class, 'updateProfile'])->name('admin-update-profile');
         Route::resource('admins', AdminController::class);
         Route::resource('roles', RoleController::class);
         Route::get('role-admins/{role?}', [AdminController::class, 'index'])->name('role-admins');
-        Route::resource('countries', CountryController::class);
+        // Route::resource('countries', CountryController::class);
         Route::get('toJsonData', [CountryController::class, 'toJsonData'])->name('toJsonData');
         Route::resource('cities', CityController::class);
         Route::get('country-cities/{countryId}', [CityController::class, 'countryCities'])->name('admin-country-cities');
@@ -61,7 +61,7 @@ Route::prefix('admin')->group(function () {
         Route::get('settings', [SettingController::class, 'index'])->name('admin-settings');
         Route::put('settings', [SettingController::class, 'update'])->name('admin-update-settings');
         Route::get('change-language/{lang}', [SettingController::class, 'changeLanguage'])->name('admin-change-language');
-        Route::get('download-country-pdf', [CountryController::class, 'downloadPdf'])->name('download-country-pdf');
+        // Route::get('download-country-pdf', [CountryController::class, 'downloadPdf'])->name('download-country-pdf');
         Route::get('download-admin-pdf', [AdminController::class, 'downloadPdf'])->name('download-admin-pdf');
         Route::get('download-role-pdf', [RoleController::class, 'downloadPdf'])->name('download-role-pdf');
         Route::get('download-city-pdf', [CityController::class, 'downloadPdf'])->name('download-city-pdf');

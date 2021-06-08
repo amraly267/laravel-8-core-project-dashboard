@@ -1,0 +1,8 @@
+{
+    "Blog": true,
+    "Country": true,
+    "Home": true,
+    "Apps": true,
+    "Auth": true,
+    "Admin": true
+}

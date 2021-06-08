@@ -15,6 +15,7 @@
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5",
         "niklasravnsborg/laravel-pdf": "^4.0",
+        "nwidart/laravel-modules": "^8.2",
         "spatie/laravel-permission": "^4.0",
         "spatie/laravel-translatable": "^4.6"
     },
@@ -31,7 +32,8 @@
         "psr-4": {
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
-            "Database\\Seeders\\": "database/seeders/"
+            "Database\\Seeders\\": "database/seeders/",
+            "Modules\\": "Modules/"
         }
     },
     "autoload-dev": {
