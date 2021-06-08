@@ -73,7 +73,7 @@
                     title: callResponse.message,
                     confirmButtonText: "{{trans(config('dashboard.trans_file').'ok')}}",
                 });
-                $('#forgetPasswordForm')[0].reset();
+                // $('#forgetPasswordForm')[0].reset();
             }
             function errorResponse()
             {
