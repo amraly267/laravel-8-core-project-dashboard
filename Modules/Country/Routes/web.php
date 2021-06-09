@@ -13,5 +13,5 @@
 
 Route::middleware(['admin.auth'])->prefix('admin')->namespace('Dashboard')->group(function() {
     Route::resource('countries', CountryController::class);
-    Route::get('download-country-pdf', [CountryController::class, 'downloadPdf'])->name('download-country-pdf');
+    Route::get('download-country-pdf', 'CountryController@downloadPdf')->name('download-country-pdf');
 });

@@ -45,7 +45,7 @@ class CountryController extends BaseController
             $countries = $filter['countries'];
             $visibleColsNames = $request->visibleColsNames;
             $colsIndexName = $request->colsIndexName;
-            $html = view('country::pdf', compact('countries', 'visibleColsNames', 'colsIndexName'))->render();
+            $html = view('country::'.$this->controllerResource.'pdf', compact('countries', 'visibleColsNames', 'colsIndexName'))->render();
             $pdf = PDF::loadHTML($html);
             return $pdf->download(trans(config('dashboard.trans_file').'countries').'.pdf');
         }

@@ -4,5 +4,8 @@
     "Home": true,
     "Apps": true,
     "Auth": true,
-    "Admin": true
+    "Admin": true,
+    "Role": true,
+    "Area": true,
+    "City": true
 }

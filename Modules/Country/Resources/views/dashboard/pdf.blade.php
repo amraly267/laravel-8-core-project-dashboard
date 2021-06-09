@@ -1,4 +1,4 @@
-@extends(config('dashboard.resource_folder').'partials.pdf_layout')
+@extends('apps::dashboard.partials.pdf_layout')
 @section('content')
 
 <table class="styled-table">

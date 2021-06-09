@@ -4,6 +4,7 @@ namespace Modules\Admin\Http\Requests\Dashboard;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Validator;
 
 class AdminRequest extends FormRequest
 {
@@ -30,8 +31,8 @@ class AdminRequest extends FormRequest
             'name' => 'required',
             'email' => 'required|email|unique:admins,email,'.$adminId.',id',
             'mobile' => ['required', Rule::unique('admins')->where(function($q){
-                                                                $q->where([['mobile', request()->mobile], ['country_id', request()->country_id]]);
-                                                            })->ignore($adminId)
+                                            $q->where([['mobile', request()->mobile], ['country_id', request()->country_id]]);
+                                        })->ignore($adminId)
                         ],
             'image' => 'nullable|mimes:jpeg,jpg,png|max:5120',
             'country_id' => 'required|exists:countries,id',
@@ -45,7 +46,7 @@ class AdminRequest extends FormRequest
         else
         {
             $rules['password'] = 'required|min:6';
-            $rules['confirm_password'] = 'required|require_if:password|same:password';
+            $rules['confirm_password'] = 'required|same:password';
         }
 
         return $rules;

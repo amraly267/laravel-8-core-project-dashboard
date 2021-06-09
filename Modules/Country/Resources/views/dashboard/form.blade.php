@@ -1,4 +1,4 @@
-@extends(config('dashboard.resource_folder').'partials.layout')
+@extends('apps::dashboard.partials.layout')
 @section('content')
 
 @section('page_path')

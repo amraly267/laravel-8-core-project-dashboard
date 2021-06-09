@@ -1,13 +1,13 @@
 <?php
 
-namespace Modules\Admin\Http\Controllers;
+namespace Modules\Admin\Http\Controllers\Dashboard;
 
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Admin\Entities\Admin;
 use Spatie\Permission\Models\Role;
-use App\Http\Requests\Dashboard\AdminRequest;
+use Modules\Admin\Http\Requests\Dashboard\AdminRequest;
 use Spatie\Permission\Models\Permission;
 use Modules\Country\Entities\Country;
 use PDF;
@@ -17,7 +17,7 @@ class AdminController extends BaseController
 {
     public function __construct()
     {
-        $this->controllerResource = 'admins.';
+        $this->controllerResource .= 'admin.';
         $this->storageFolder = Admin::storageFolder();
         $this->middleware('permission:admin-list,admin', ['only' => ['index','show']]);
         $this->middleware('permission:admin-create,admin', ['only' => ['create','store']]);
@@ -48,7 +48,7 @@ class AdminController extends BaseController
             $admins = $filter['admins'];
             $visibleColsNames = $request->visibleColsNames;
             $colsIndexName = $request->colsIndexName;
-            $html = view(config('dashboard.resource_folder').$this->controllerResource.'pdf', compact('admins', 'visibleColsNames', 'colsIndexName'))->render();
+            $html = view('admin::'.$this->controllerResource.'pdf', compact('admins', 'visibleColsNames', 'colsIndexName'))->render();
             $pdf = PDF::loadHTML($html);
             return $pdf->download(trans(config('dashboard.trans_file').'admins').'.pdf');
         }
@@ -65,7 +65,7 @@ class AdminController extends BaseController
         }
         else
         {
-            return view(config('dashboard.resource_folder').$this->controllerResource.'index', compact('totalResults', 'countries', 'roles'));
+            return view('admin::'.$this->controllerResource.'index', compact('totalResults', 'countries', 'roles'));
         }
     }
 
@@ -154,7 +154,7 @@ class AdminController extends BaseController
         $pageTitle = trans(config('dashboard.trans_file').'add_new');
         $submitFormRoute = route('admins.store');
         $submitFormMethod = 'post';
-        return view(config('dashboard.resource_folder').$this->controllerResource.'form', compact('countries', 'roles', 'pageTitle', 'submitFormRoute', 'submitFormMethod'));
+        return view('admin::'.$this->controllerResource.'form', compact('countries', 'roles', 'pageTitle', 'submitFormRoute', 'submitFormMethod'));
     }
 
     /**
@@ -211,7 +211,7 @@ class AdminController extends BaseController
         $pageTitle = trans(config('dashboard.trans_file').'edit');
         $submitFormRoute = route('admins.update', $id);
         $submitFormMethod = 'put';
-        return view(config('dashboard.resource_folder').$this->controllerResource.'form', compact('countries', 'roles', 'admin', 'pageTitle', 'submitFormRoute', 'submitFormMethod'));
+        return view('admin::'.$this->controllerResource.'form', compact('countries', 'roles', 'admin', 'pageTitle', 'submitFormRoute', 'submitFormMethod'));
     }
 
     /**

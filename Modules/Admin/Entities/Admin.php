@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Traits\HasRoles;
 use Storage;
+use Modules\Country\Entities\Country;
 
 class Admin extends Authenticatable
 {

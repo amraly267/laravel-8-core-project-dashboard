@@ -1,7 +1,5 @@
 <?php
 
-use Modules\Admin\Http\Controllers\Dashboard\AuthController;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,12 +11,24 @@ use Modules\Admin\Http\Controllers\Dashboard\AuthController;
 |
 */
 
+
 Route::middleware(['admin.guest'])->prefix('admin')->namespace('Dashboard')->group(function() {
 
-    Route::get('login', [AuthController::class, 'loginForm'])->name('admin-login');
-    Route::get('forget-password', [AuthController::class, 'forgetPasswordForm'])->name('admin-forget-password');
-    Route::get('reset-password', [AuthController::class, 'resetPasswordForm'])->name('admin-reset-password');
-    Route::post('submit-login',[AuthController::class, 'submitLogin'])->name('admin-submit-login');
-    Route::post('submit-forget-password', [AuthController::class, 'submitForgetPassword'])->name('admin-submit-forget-password');
-    Route::post('submit-reset-password', [AuthController::class, 'submitResetPassword'])->name('admin-submit-reset-password');
+    Route::get('login', 'AuthController@loginForm')->name('admin-login');
+    Route::get('forget-password', 'AuthController@forgetPasswordForm')->name('admin-forget-password');
+    Route::get('reset-password', 'AuthController@resetPasswordForm')->name('admin-reset-password');
+    Route::post('submit-login','AuthController@submitLogin')->name('admin-submit-login');
+    Route::post('submit-forget-password', 'AuthController@submitForgetPassword')->name('admin-submit-forget-password');
+    Route::post('submit-reset-password', 'AuthController@submitResetPassword')->name('admin-submit-reset-password');
+});
+
+Route::middleware(['admin.auth'])->prefix('admin')->namespace('Dashboard')->group(function() {
+
+    Route::resource('admins', AdminController::class);
+    Route::post('logout', 'AuthController@logout')->name('admin-logout');
+    Route::get('profile', 'AuthController@profile')->name('admin-profile');
+    Route::put('update-profile', 'AuthController@updateProfile')->name('admin-update-profile');
+    Route::get('role-admins/{role?}', 'AdminController@index')->name('role-admins');
+    Route::get('download-admin-pdf', 'AdminController@downloadPdf')->name('download-admin-pdf');
+
 });
