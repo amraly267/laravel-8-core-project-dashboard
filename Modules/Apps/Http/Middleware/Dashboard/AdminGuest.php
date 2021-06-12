@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Redirect;
 use Auth;
 use Closure;
 use Illuminate\Http\Request;
-use App\Models\Setting;
+use Modules\Setting\Entities\Setting;
 use View;
 
 class AdminGuest

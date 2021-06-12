@@ -6,6 +6,7 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Apps\Http\Controllers\Dashboard\BaseController;
+use Modules\Area\Http\Requests\Dashboard\AreaRequest;
 use Modules\Area\Entities\Area;
 use Modules\City\Entities\City;
 use PDF;

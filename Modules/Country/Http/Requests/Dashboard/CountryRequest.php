@@ -3,7 +3,6 @@
 namespace Modules\Country\Http\Requests\Dashboard;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Models\Country;
 use CodeZero\UniqueTranslation\UniqueTranslationRule;
 
 class CountryRequest extends FormRequest

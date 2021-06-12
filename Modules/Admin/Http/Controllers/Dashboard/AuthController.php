@@ -9,7 +9,7 @@ use Modules\Apps\Http\Controllers\Dashboard\BaseController;
 use Modules\Admin\Http\Requests\Dashboard\LoginRequest;
 use Modules\Admin\Http\Requests\Dashboard\ForgetPasswordRequest;
 use Modules\Admin\Http\Requests\Dashboard\ResetPasswordRequest;
-use App\Notifications\Dashboard\ForgetPasswordEmail;
+use Modules\Admin\Notifications\Dashboard\ForgetPasswordEmail;
 use Modules\Admin\Entities\Admin;
 use Carbon\Carbon;
 use Illuminate\Auth\Notifications\ResetPassword;

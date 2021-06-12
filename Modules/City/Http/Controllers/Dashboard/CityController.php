@@ -5,7 +5,7 @@ namespace Modules\City\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Modules\City\Entities\City;
-use App\Http\Requests\Dashboard\CityRequest;
+use Modules\City\Http\Requests\Dashboard\CityRequest;
 use Modules\Country\Entities\Country;
 use Modules\Apps\Http\Controllers\Dashboard\BaseController;
 use PDF;
@@ -14,7 +14,6 @@ class CityController extends BaseController
 {
     public function __construct()
     {
-        $this->controllerResource = 'cities.';
         $this->middleware('permission:city-list,admin', ['only' => ['index','show']]);
         $this->middleware('permission:city-create,admin', ['only' => ['create','store']]);
         $this->middleware('permission:city-edit,admin', ['only' => ['edit','update']]);

@@ -29,18 +29,3 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::prefix('admin')->group(function () {
-
-    // === Login admin routes ===
-    Route::middleware(['admin.auth'])->group(function () {
-
-        Route::resource('pages', PageController::class);
-        Route::get('settings', [SettingController::class, 'index'])->name('admin-settings');
-        Route::put('settings', [SettingController::class, 'update'])->name('admin-update-settings');
-        Route::get('change-language/{lang}', [SettingController::class, 'changeLanguage'])->name('admin-change-language');
-
-        Route::get('download-area-pdf', [AreaController::class, 'downloadPdf'])->name('download-area-pdf');
-        Route::get('download-page-pdf', [PageController::class, 'downloadPdf'])->name('download-page-pdf');
-    });
-
-});

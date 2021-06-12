@@ -16,4 +16,6 @@
 Route::middleware(['admin.auth'])->prefix('admin')->namespace('Dashboard')->group(function() {
     Route::resource('areas', AreaController::class);
     Route::get('city-areas/{cityId}', 'AreaController@cityAreas')->name('admin-city-areas');
+    Route::get('download-area-pdf', 'AreaController@downloadPdf')->name('download-area-pdf');
+
 });
