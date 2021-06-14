@@ -47,7 +47,7 @@ class CountryController extends BaseController
             $colsIndexName = $request->colsIndexName;
             $html = view('country::'.$this->controllerResource.'pdf', compact('countries', 'visibleColsNames', 'colsIndexName'))->render();
             $pdf = PDF::loadHTML($html);
-            return $pdf->download(trans(config('dashboard.trans_file').'countries').'.pdf');
+            return $pdf->download(trans('country::dashboard.countries').'.pdf');
         }
 
         if($request->ajax())
@@ -123,7 +123,7 @@ class CountryController extends BaseController
      */
     public function create()
     {
-        $pageTitle = trans(config('dashboard.trans_file').'add_new');
+        $pageTitle = trans('country::dashboard.add_new');
         $submitFormRoute = route('countries.store');
         $submitFormMethod = 'post';
         return view('country::'.$this->controllerResource.'form', compact('pageTitle', 'submitFormRoute', 'submitFormMethod'));
@@ -152,7 +152,7 @@ class CountryController extends BaseController
             'status' => $request->has('status') ? '1' : '0',
         ]);
 
-        return $this->successResponse(['message' => trans(config('dashboard.trans_file').'success_save')]);
+        return $this->successResponse(['message' => trans('country::dashboard.success_save')]);
     }
 
     /**
@@ -175,7 +175,7 @@ class CountryController extends BaseController
     public function edit($id)
     {
         $country = Country::find($id);
-        $pageTitle = trans(config('dashboard.trans_file').'edit');
+        $pageTitle = trans('country::dashboard.edit');
         $submitFormRoute = route('countries.update', $id);
         $submitFormMethod = 'put';
         return view('country::'.$this->controllerResource.'form', compact('country', 'pageTitle', 'submitFormRoute', 'submitFormMethod'));
@@ -209,7 +209,7 @@ class CountryController extends BaseController
         $country->phone_code = $request->phone_code;
         $country->status = $request->has('status') ? '1' : '0';
         $country->save();
-        return $this->successResponse(['message' => trans(config('dashboard.trans_file').'success_save')]);
+        return $this->successResponse(['message' => trans('country::dashboard.success_save')]);
     }
 
     /**
@@ -223,6 +223,6 @@ class CountryController extends BaseController
         $existingCountry = Country::find($id);
         $this->removeImage($existingCountry->flag, $this->storageFolder);
         $existingCountry->delete();
-        return $this->successResponse(['message' => trans(config('dashboard.trans_file').'success_delete')]);
+        return $this->successResponse(['message' => trans('country::dashboard.success_delete')]);
     }
 }

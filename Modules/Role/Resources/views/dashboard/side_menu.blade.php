@@ -2,7 +2,7 @@
     <div class="mt-5 mb-5">
         <div class="nav nav-tabs">
             <button class="active btn btn-light btn-active-light-primary w-100" href="#more_info" data-toggle="tab">
-                {{trans(config('dashboard.trans_file').'main_info')}}
+                {{trans('role::dashboard.main_info')}}
             </button>
         </div>
     </div>

@@ -2,7 +2,7 @@
     <!--begin::Input group-->
     <div class="row mb-6">
         <!--begin::Label-->
-        <label class="col-lg-4 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'logo')}}</label>
+        <label class="col-lg-4 col-form-label fw-bold fs-6">{{trans('setting::dashboard.logo')}}</label>
         <!--end::Label-->
         <!--begin::Col-->
         <div class="col-lg-8">
@@ -12,7 +12,7 @@
                 <div class="image-input-wrapper w-125px h-125px" style="background-image: url({{$submitFormMethod == 'put' ? $settings->logo_path : asset('img/dashboard/default-image.svg')}})"></div>
                 <!--end::Preview existing avatar-->
                 <!--begin::Label-->
-                <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="" data-bs-original-title="{{trans(config('dashboard.trans_file').'change_image')}}">
+                <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="" data-bs-original-title="{{trans('setting::dashboard.change_image')}}">
                     <i class="bi bi-pencil-fill fs-7"></i>
                     <!--begin::Inputs-->
                     <input type="file" name="logo" accept=".png, .jpg, .jpeg">
@@ -21,12 +21,12 @@
                 </label>
                 <!--end::Label-->
                 <!--begin::Cancel-->
-                <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="" data-bs-original-title="{{trans(config('dashboard.trans_file').'cancel')}}">
+                <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="" data-bs-original-title="{{trans('setting::dashboard.cancel')}}">
                 <i class="bi bi-x fs-2"></i>
                 </span>
                 <!--end::Cancel-->
                 <!--begin::Remove-->
-                <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="" data-bs-original-title="{{trans(config('dashboard.trans_file').'remove_image')}}">
+                <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="" data-bs-original-title="{{trans('setting::dashboard.remove_image')}}">
                 <i class="bi bi-x fs-2"></i>
                 </span>
                 <!--end::Remove-->
@@ -42,7 +42,7 @@
     <!--begin::Input group-->
     <div class="row mb-6">
         <!--begin::Label-->
-        <label class="col-lg-4 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'white_logo')}}</label>
+        <label class="col-lg-4 col-form-label fw-bold fs-6">{{trans('setting::dashboard.white_logo')}}</label>
         <!--end::Label-->
         <!--begin::Col-->
         <div class="col-lg-8">
@@ -52,7 +52,7 @@
                 <div class="image-input-wrapper w-125px h-125px" style="background-image: url({{$submitFormMethod == 'put' ? $settings->white_logo_path : asset('img/dashboard/default-image.svg')}})"></div>
                 <!--end::Preview existing avatar-->
                 <!--begin::Label-->
-                <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="" data-bs-original-title="{{trans(config('dashboard.trans_file').'change_image')}}">
+                <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="" data-bs-original-title="{{trans('setting::dashboard.change_image')}}">
                     <i class="bi bi-pencil-fill fs-7"></i>
                     <!--begin::Inputs-->
                     <input type="file" name="white_logo" accept=".png, .jpg, .jpeg">
@@ -61,12 +61,12 @@
                 </label>
                 <!--end::Label-->
                 <!--begin::Cancel-->
-                <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="" data-bs-original-title="{{trans(config('dashboard.trans_file').'cancel')}}">
+                <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="" data-bs-original-title="{{trans('setting::dashboard.cancel')}}">
                 <i class="bi bi-x fs-2"></i>
                 </span>
                 <!--end::Cancel-->
                 <!--begin::Remove-->
-                <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="" data-bs-original-title="{{trans(config('dashboard.trans_file').'remove_image')}}">
+                <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="" data-bs-original-title="{{trans('setting::dashboard.remove_image')}}">
                 <i class="bi bi-x fs-2"></i>
                 </span>
                 <!--end::Remove-->
@@ -82,7 +82,7 @@
     <!--begin::Input group-->
     <div class="row mb-6">
         <!--begin::Label-->
-        <label class="col-lg-4 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'app_icon')}}</label>
+        <label class="col-lg-4 col-form-label fw-bold fs-6">{{trans('setting::dashboard.app_icon')}}</label>
         <!--end::Label-->
         <!--begin::Col-->
         <div class="col-lg-8">
@@ -92,7 +92,7 @@
                 <div class="image-input-wrapper w-125px h-125px" style="background-image: url({{$submitFormMethod == 'put' ? $settings->app_icon_path : asset('img/dashboard/default-image.svg')}})"></div>
                 <!--end::Preview existing avatar-->
                 <!--begin::Label-->
-                <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="" data-bs-original-title="{{trans(config('dashboard.trans_file').'change_image')}}">
+                <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="" data-bs-original-title="{{trans('setting::dashboard.change_image')}}">
                     <i class="bi bi-pencil-fill fs-7"></i>
                     <!--begin::Inputs-->
                     <input type="file" name="app_icon" accept=".png, .jpg, .jpeg">
@@ -101,12 +101,12 @@
                 </label>
                 <!--end::Label-->
                 <!--begin::Cancel-->
-                <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="" data-bs-original-title="{{trans(config('dashboard.trans_file').'cancel')}}">
+                <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="" data-bs-original-title="{{trans('setting::dashboard.cancel')}}">
                 <i class="bi bi-x fs-2"></i>
                 </span>
                 <!--end::Cancel-->
                 <!--begin::Remove-->
-                <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="" data-bs-original-title="{{trans(config('dashboard.trans_file').'remove_image')}}">
+                <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="" data-bs-original-title="{{trans('setting::dashboard.remove_image')}}">
                 <i class="bi bi-x fs-2"></i>
                 </span>
                 <!--end::Remove-->
@@ -122,7 +122,7 @@
     <!--begin::Input group-->
     <div class="row mb-6">
         <!--begin::Label-->
-        <label class="col-lg-4 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'favicon')}}</label>
+        <label class="col-lg-4 col-form-label fw-bold fs-6">{{trans('setting::dashboard.favicon')}}</label>
         <!--end::Label-->
         <!--begin::Col-->
         <div class="col-lg-8">
@@ -132,7 +132,7 @@
                 <div class="image-input-wrapper w-125px h-125px" style="background-image: url({{$submitFormMethod == 'put' ? $settings->favicon_path : asset('img/dashboard/default-image.svg')}})"></div>
                 <!--end::Preview existing avatar-->
                 <!--begin::Label-->
-                <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="" data-bs-original-title="{{trans(config('dashboard.trans_file').'change_image')}}">
+                <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="" data-bs-original-title="{{trans('setting::dashboard.change_image')}}">
                     <i class="bi bi-pencil-fill fs-7"></i>
                     <!--begin::Inputs-->
                     <input type="file" name="favicon" accept=".png, .jpg, .jpeg">
@@ -141,12 +141,12 @@
                 </label>
                 <!--end::Label-->
                 <!--begin::Cancel-->
-                <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="" data-bs-original-title="{{trans(config('dashboard.trans_file').'cancel')}}">
+                <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="" data-bs-original-title="{{trans('setting::dashboard.cancel')}}">
                 <i class="bi bi-x fs-2"></i>
                 </span>
                 <!--end::Cancel-->
                 <!--begin::Remove-->
-                <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="" data-bs-original-title="{{trans(config('dashboard.trans_file').'remove_image')}}">
+                <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="" data-bs-original-title="{{trans('setting::dashboard.remove_image')}}">
                 <i class="bi bi-x fs-2"></i>
                 </span>
                 <!--end::Remove-->

@@ -50,7 +50,7 @@ class AdminController extends BaseController
             $colsIndexName = $request->colsIndexName;
             $html = view('admin::'.$this->controllerResource.'pdf', compact('admins', 'visibleColsNames', 'colsIndexName'))->render();
             $pdf = PDF::loadHTML($html);
-            return $pdf->download(trans(config('dashboard.trans_file').'admins').'.pdf');
+            return $pdf->download(trans('admin::dashboard.admins').'.pdf');
         }
 
         if($request->ajax())
@@ -127,7 +127,7 @@ class AdminController extends BaseController
                 "role" => $admin->roles[0]->name,
                 "email" => $admin->email,
                 "mobile" => $admin->mobile,
-                "gender" => trans(config('dashboard.trans_file').$admin->gender),
+                "gender" => trans('admin::dashboard.'.$admin->gender),
                 "country" => $admin->country->name,
                 "action" => $admin->id
             ];
@@ -151,7 +151,7 @@ class AdminController extends BaseController
     {
         $countries = Country::all();
         $roles = Role::all();
-        $pageTitle = trans(config('dashboard.trans_file').'add_new');
+        $pageTitle = trans('admin::dashboard.add_new');
         $submitFormRoute = route('admins.store');
         $submitFormMethod = 'post';
         return view('admin::'.$this->controllerResource.'form', compact('countries', 'roles', 'pageTitle', 'submitFormRoute', 'submitFormMethod'));
@@ -183,7 +183,7 @@ class AdminController extends BaseController
         ]);
 
         $this->assignRole($admin, $request->role);
-        return $this->successResponse(['message' => trans(config('dashboard.trans_file').'success_save')]);
+        return $this->successResponse(['message' => trans('admin::dashboard.success_save')]);
     }
 
     /**
@@ -208,7 +208,7 @@ class AdminController extends BaseController
         $countries = Country::all();
         $roles = Role::all();
         $admin = Admin::find($id);
-        $pageTitle = trans(config('dashboard.trans_file').'edit');
+        $pageTitle = trans('admin::dashboard.edit');
         $submitFormRoute = route('admins.update', $id);
         $submitFormMethod = 'put';
         return view('admin::'.$this->controllerResource.'form', compact('countries', 'roles', 'admin', 'pageTitle', 'submitFormRoute', 'submitFormMethod'));
@@ -249,7 +249,7 @@ class AdminController extends BaseController
         $admin->country_id = $request->country_id;
         $admin->save();
         $this->assignRole($admin, $request->role);
-        return $this->successResponse(['message' => trans(config('dashboard.trans_file').'success_save')]);
+        return $this->successResponse(['message' => trans('admin::dashboard.success_save')]);
     }
 
     /**
@@ -262,12 +262,12 @@ class AdminController extends BaseController
     {
         if(auth()->guard('admin')->user()->id == $id)
         {
-            return $this->successResponse(['message' => trans(config('dashboard.trans_file').'cannot_delete_your_account')], 400);
+            return $this->successResponse(['message' => trans('admin::dashboard.cannot_delete_your_account')], 400);
         }
         $existingAdmin = Admin::find($id);
         $this->removeImage($existingAdmin->image, $this->storageFolder);
         $existingAdmin->delete();
-        return $this->successResponse(['message' => trans(config('dashboard.trans_file').'success_delete')]);
+        return $this->successResponse(['message' => trans('admin::dashboard.success_delete')]);
     }
 
     // === Assign or update role to admin ===

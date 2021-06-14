@@ -3,7 +3,7 @@
 
 @section('page_path')
 <!--begin::Title-->
-<h1 class="d-flex align-items-center text-dark fw-bolder my-1 fs-3">{{trans(config('dashboard.trans_file').'pages')}}</h1>
+<h1 class="d-flex align-items-center text-dark fw-bolder my-1 fs-3">{{trans('page::dashboard.pages')}}</h1>
 <!--end::Title-->
 <!--begin::Separator-->
 <span class="h-20px border-gray-200 border-start mx-4"></span>
@@ -12,7 +12,7 @@
 <ul class="breadcrumb breadcrumb-separatorless fw-bold fs-7 my-1">
     <!--begin::Item-->
     <li class="breadcrumb-item text-muted">
-        <a href="{{route('admin-home')}}" class="text-muted text-hover-primary">{{trans(config('dashboard.trans_file').'home')}}</a>
+        <a href="{{route('admin-home')}}" class="text-muted text-hover-primary">{{trans('page::dashboard.home')}}</a>
     </li>
     <!--end::Item-->
     <!--begin::Item-->
@@ -22,7 +22,7 @@
     <!--end::Item-->
     <!--begin::Item-->
     <li class="breadcrumb-item text-muted">
-        <a href="{{route('pages.index')}}" class="text-muted text-hover-primary">{{trans(config('dashboard.trans_file').'pages')}}</a>
+        <a href="{{route('pages.index')}}" class="text-muted text-hover-primary">{{trans('page::dashboard.pages')}}</a>
     </li>
     <!--end::Item-->
     <!--begin::Item-->
@@ -65,10 +65,10 @@
                         <div class="card-toolbar mb-5">
                             <ul class="nav nav-tabs nav-line-tabs nav-stretch fs-6 border-0">
                                 <li class="nav-item">
-                                    <a id="name_en_tab" class="nav-link active" data-bs-toggle="tab" href="#name_en">{{trans(config('dashboard.trans_file').'name_en')}}</a>
+                                    <a id="name_en_tab" class="nav-link active" data-bs-toggle="tab" href="#name_en">{{trans('page::dashboard.name_en')}}</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a id="name_ar_tab" class="nav-link" data-bs-toggle="tab" href="#name_ar">{{trans(config('dashboard.trans_file').'name_ar')}}</a>
+                                    <a id="name_ar_tab" class="nav-link" data-bs-toggle="tab" href="#name_ar">{{trans('page::dashboard.name_ar')}}</a>
                                 </li>
                             </ul>
                         </div>
@@ -79,11 +79,11 @@
                                 <!--begin::Input group-->
                                 <div class="row mb-6">
                                     <!--begin::Label-->
-                                    <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'title_en')}}</label>
+                                    <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans('page::dashboard.title_en')}}</label>
                                     <!--end::Label-->
                                     <!--begin::Col-->
                                     <div class="col-lg-10 fv-row fv-plugins-icon-container">
-                                        <input type="text" name="title[en]" class="form-control form-control-lg form-control-solid" placeholder="{{trans(config('dashboard.trans_file').'title_en')}}" value="{{$submitFormMethod == 'put' ? $page->getTranslation('title', 'en') : old('title_en')}}">
+                                        <input type="text" name="title[en]" class="form-control form-control-lg form-control-solid" placeholder="{{trans('page::dashboard.title_en')}}" value="{{$submitFormMethod == 'put' ? $page->getTranslation('title', 'en') : old('title_en')}}">
                                         <span class="help-block error-help-block input-error title-en-error" style="color: red;"></span>
                                     </div>
                                     <!--end::Col-->
@@ -93,11 +93,11 @@
                                 <!--begin::Input group-->
                                 <div class="row mb-6">
                                     <!--begin::Label-->
-                                    <label class="col-lg-12 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'content_en')}}</label>
+                                    <label class="col-lg-12 col-form-label fw-bold fs-6">{{trans('page::dashboard.content_en')}}</label>
                                     <!--end::Label-->
                                     <!--begin::Col-->
                                     <div class="col-lg-12 fv-row fv-plugins-icon-container">
-                                        <textarea name="description[en]" class="description form-control form-control-lg form-control-solid" placeholder="{{trans(config('dashboard.trans_file').'description_en')}}" rows="8">{{$submitFormMethod == 'put' ? $page->getTranslation('description', 'en') : old('description_en')}}</textarea>
+                                        <textarea name="description[en]" class="description form-control form-control-lg form-control-solid" placeholder="{{trans('page::dashboard.description_en')}}" rows="8">{{$submitFormMethod == 'put' ? $page->getTranslation('description', 'en') : old('description_en')}}</textarea>
                                         <span class="help-block error-help-block input-error description-en-error" style="color: red;"></span>
                                     </div>
                                     <!--end::Col-->
@@ -109,11 +109,11 @@
                                 <!--begin::Input group-->
                                 <div class="row mb-6">
                                     <!--begin::Label-->
-                                    <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'title_ar')}}</label>
+                                    <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans('page::dashboard.title_ar')}}</label>
                                     <!--end::Label-->
                                     <!--begin::Col-->
                                     <div class="col-lg-10 fv-row fv-plugins-icon-container">
-                                        <input type="text" name="title[ar]" class="form-control form-control-lg form-control-solid" placeholder="{{trans(config('dashboard.trans_file').'title_ar')}}" value="{{$submitFormMethod == 'put' ? $page->getTranslation('title', 'ar') : old('title_ar')}}">
+                                        <input type="text" name="title[ar]" class="form-control form-control-lg form-control-solid" placeholder="{{trans('page::dashboard.title_ar')}}" value="{{$submitFormMethod == 'put' ? $page->getTranslation('title', 'ar') : old('title_ar')}}">
                                         <span class="help-block error-help-block input-error title-ar-error" style="color: red;"></span>
                                     </div>
                                     <!--end::Col-->
@@ -123,11 +123,11 @@
                                 <!--begin::Input group-->
                                 <div class="row mb-6">
                                     <!--begin::Label-->
-                                    <label class="col-lg-12 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'content_ar')}}</label>
+                                    <label class="col-lg-12 col-form-label fw-bold fs-6">{{trans('page::dashboard.content_ar')}}</label>
                                     <!--end::Label-->
                                     <!--begin::Col-->
                                     <div class="col-lg-12 fv-row fv-plugins-icon-container">
-                                        <textarea name="description[ar]" class="description form-control form-control-lg form-control-solid" placeholder="{{trans(config('dashboard.trans_file').'description_ar')}}" rows="8">{{$submitFormMethod == 'put' ? $page->getTranslation('description', 'ar') : old('description_en')}}</textarea>
+                                        <textarea name="description[ar]" class="description form-control form-control-lg form-control-solid" placeholder="{{trans('page::dashboard.description_ar')}}" rows="8">{{$submitFormMethod == 'put' ? $page->getTranslation('description', 'ar') : old('description_en')}}</textarea>
                                         <span class="help-block error-help-block input-error description-ar-error" style="color: red;"></span>
                                     </div>
                                     <!--end::Col-->
@@ -140,7 +140,7 @@
                         <div class="row mb-6">
                             <div class="form-check form-switch form-check-custom form-check-solid">
                                 <label class="form-check-label col-lg-2 col-form-label fw-bold fs-6" for="flexSwitchDefault">
-                                    {{trans(config('dashboard.trans_file').'is_web')}}
+                                    {{trans('page::dashboard.is_web')}}
                                 </label>
                                 <input class="form-check-input" {{$submitFormMethod == 'put' && $page->is_web == 0 ? '' : 'checked'}} type="checkbox" name="is_web" value="1" id="flexSwitchDefault"/>
                             </div>
@@ -151,7 +151,7 @@
                         <div class="row mb-6">
                             <div class="form-check form-switch form-check-custom form-check-solid">
                                 <label class="form-check-label col-lg-2 col-form-label fw-bold fs-6" for="flexSwitchDefault">
-                                    {{trans(config('dashboard.trans_file').'is_mobile')}}
+                                    {{trans('page::dashboard.is_mobile')}}
                                 </label>
                                 <input class="form-check-input" {{$submitFormMethod == 'put' && $page->is_mobile == 0 ? '' : 'checked'}} type="checkbox" name="is_mobile" value="1" id="flexSwitchDefault"/>
                             </div>
@@ -162,7 +162,7 @@
                         <div class="row mb-6">
                             <div class="form-check form-switch form-check-custom form-check-solid">
                                 <label class="form-check-label col-lg-2 col-form-label fw-bold fs-6" for="flexSwitchDefault">
-                                    {{trans(config('dashboard.trans_file').'status')}}
+                                    {{trans('page::dashboard.status')}}
                                 </label>
                                 <input class="form-check-input" {{$submitFormMethod == 'put' && $page->status == 0 ? '' : 'checked'}} type="checkbox" name="status" value="1" id="flexSwitchDefault"/>
                             </div>
@@ -174,10 +174,10 @@
 
                 <!--begin::Actions-->
                 <div class="card-footer d-flex justify-content-end py-6 px-9">
-                    <button type="reset" class="btn btn-white btn-active-light-primary me-2" onclick="window.location.reload()">{{trans(config('dashboard.trans_file').'cancel')}}</button>
+                    <button type="reset" class="btn btn-white btn-active-light-primary me-2" onclick="window.location.reload()">{{trans('page::dashboard.cancel')}}</button>
                     <button type="submit" class="btn btn-primary" id="saveBtn">
                         <span class="spinner-border spinner-border-sm align-middle ms-2 d-none"></span>
-                        {{trans(config('dashboard.trans_file').'save')}}
+                        {{trans('page::dashboard.save')}}
                     </button>
                 </div>
                 <!--end::Actions-->

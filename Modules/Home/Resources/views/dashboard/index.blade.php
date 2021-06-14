@@ -2,7 +2,7 @@
 @section('content')
 @section('page_path')
 <!--begin::Title-->
-<h1 class="d-flex align-items-center text-dark fw-bolder my-1 fs-3">{{trans(config('dashboard.trans_file').'home')}}</h1>
+<h1 class="d-flex align-items-center text-dark fw-bolder my-1 fs-3">{{trans('home::dashboard.home')}}</h1>
 <!--end::Title-->
 @endsection
 
@@ -25,7 +25,7 @@
                     </svg>
                 </span>
                 <!--end::Svg Icon-->
-                <div class="text-inverse-danger fw-bolder fs-2 mb-2 mt-5">{{trans(config('dashboard.trans_file').'total_admins')}}</div>
+                <div class="text-inverse-danger fw-bolder fs-2 mb-2 mt-5">{{trans('home::dashboard.total_admins')}}</div>
                 <div class="fw-bold text-inverse-danger fs-7">{{$totalAdmins}}</div>
             </div>
             <!--end::Body-->
@@ -48,7 +48,7 @@
                     </svg><!--end::Svg Icon-->
                 </span>
                 <!--end::Svg Icon-->
-                <div class="text-inverse-primary fw-bolder fs-2 mb-2 mt-5">{{trans(config('dashboard.trans_file').'total_roles')}}</div>
+                <div class="text-inverse-primary fw-bolder fs-2 mb-2 mt-5">{{trans('home::dashboard.total_roles')}}</div>
                 <div class="fw-bold text-inverse-primary fs-7">{{$totalRoles}}</div>
             </div>
             <!--end::Body-->
@@ -68,7 +68,7 @@
                     </svg>
                 </span>
                 <!--end::Svg Icon-->
-                <div class="text-inverse-primary fw-bolder fs-2 mb-2 mt-5">{{trans(config('dashboard.trans_file').'total_countries')}}</div>
+                <div class="text-inverse-primary fw-bolder fs-2 mb-2 mt-5">{{trans('home::dashboard.total_countries')}}</div>
                 <div class="fw-bold text-inverse-primary fs-7">{{$totalCountries}}</div>
             </div>
             <!--end::Body-->
@@ -91,7 +91,7 @@
                     <!--end::Svg Icon-->
                 </span>
                 <!--end::Svg Icon-->
-                <div class="text-inverse-primary fw-bolder fs-2 mb-2 mt-5">{{trans(config('dashboard.trans_file').'total_static_pages')}}</div>
+                <div class="text-inverse-primary fw-bolder fs-2 mb-2 mt-5">{{trans('home::dashboard.total_static_pages')}}</div>
                 <div class="fw-bold text-inverse-primary fs-7">{{$totalPages}}</div>
             </div>
             <!--end::Body-->

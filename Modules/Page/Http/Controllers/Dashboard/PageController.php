@@ -41,7 +41,7 @@ class PageController extends BaseController
             $colsIndexName = $request->colsIndexName;
             $html = view('page::'.$this->controllerResource.'pdf', compact('pages', 'visibleColsNames', 'colsIndexName'))->render();
             $pdf = PDF::loadHTML($html);
-            return $pdf->download(trans(config('dashboard.trans_file').'static_pages').'.pdf');
+            return $pdf->download(trans('page::dashboard.static_pages').'.pdf');
         }
 
         if($request->ajax())
@@ -122,7 +122,7 @@ class PageController extends BaseController
      */
     public function create()
     {
-        $pageTitle = trans(config('dashboard.trans_file').'add_new');
+        $pageTitle = trans('page::dashboard.add_new');
         $submitFormRoute = route('pages.store');
         $submitFormMethod = 'post';
         return view('page::'.$this->controllerResource.'form', compact('pageTitle', 'submitFormRoute', 'submitFormMethod'));
@@ -144,7 +144,7 @@ class PageController extends BaseController
             'is_mobile' => $request->has('is_mobile') ? '1' : '0',
         ]);
 
-        return $this->successResponse(['message' => trans(config('dashboard.trans_file').'success_save')]);
+        return $this->successResponse(['message' => trans('page::dashboard.success_save')]);
     }
 
     /**
@@ -167,7 +167,7 @@ class PageController extends BaseController
     public function edit($id)
     {
         $page = Page::find($id);
-        $pageTitle = trans(config('dashboard.trans_file').'edit');
+        $pageTitle = trans('page::dashboard.edit');
         $submitFormRoute = route('pages.update', $id);
         $submitFormMethod = 'put';
         return view('page::'.$this->controllerResource.'form', compact('page', 'pageTitle', 'submitFormRoute', 'submitFormMethod'));
@@ -189,7 +189,7 @@ class PageController extends BaseController
         $page->is_web = $request->has('is_web') ? '1' : '0';
         $page->is_mobile = $request->has('is_mobile') ? '1' : '0';
         $page->save();
-        return $this->successResponse(['message' => trans(config('dashboard.trans_file').'success_save')]);
+        return $this->successResponse(['message' => trans('page::dashboard.success_save')]);
     }
 
     /**
@@ -201,6 +201,6 @@ class PageController extends BaseController
     public function destroy($id)
     {
         Page::where('id', $id)->delete();
-        return $this->successResponse(['message' => trans(config('dashboard.trans_file').'success_delete')]);
+        return $this->successResponse(['message' => trans('page::dashboard.success_delete')]);
     }
 }

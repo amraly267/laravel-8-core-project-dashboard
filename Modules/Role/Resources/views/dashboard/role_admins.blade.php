@@ -13,7 +13,7 @@
 <ul class="breadcrumb breadcrumb-separatorless fw-bold fs-7 my-1">
     <!--begin::Item-->
     <li class="breadcrumb-item text-muted">
-        <a href="{{route('admin-home')}}" class="text-muted text-hover-primary">{{trans(config('dashboard.trans_file').'home')}}</a>
+        <a href="{{route('admin-home')}}" class="text-muted text-hover-primary">{{trans('role::dashboard.home')}}</a>
     </li>
     <!--end::Item-->
     <!--begin::Item-->
@@ -35,7 +35,7 @@
         <div class="card-header border-0 pt-5">
             <h3 class="card-title align-items-start flex-column">
                 <span class="card-label fw-bolder fs-3 mb-1">{{$pageTitle}}</span>
-                <span class="text-muted mt-1 fw-bold fs-7">{{trans(config('dashboard.trans_file').'total_results', ['val' => $totalResults])}}</span>
+                <span class="text-muted mt-1 fw-bold fs-7">{{trans('role::dashboard.total_results', ['val' => $totalResults])}}</span>
             </h3>
 
             @if(auth()->guard('admin')->user()->can('admin-create'))
@@ -51,7 +51,7 @@
                             </g>
                         </svg><!--end::Svg Icon-->
                     </span>
-                    {{trans(config('dashboard.trans_file').'add_new')}}
+                    {{trans('role::dashboard.add_new')}}
                     <!--end::Svg Icon-->
                 </a>
             </div>
@@ -68,12 +68,12 @@
                     <thead>
                         <tr class="fw-bolder text-muted">
                             <th class="min-w-25px">#</th>
-                            <th class="min-w-150px">{{trans(config('dashboard.trans_file').'name')}}</th>
-                            <th class="min-w-150px">{{trans(config('dashboard.trans_file').'role')}}</th>
-                            <th class="min-w-140px">{{trans(config('dashboard.trans_file').'email')}}</th>
-                            <th class="min-w-120px">{{trans(config('dashboard.trans_file').'mobile')}}</th>
+                            <th class="min-w-150px">{{trans('role::dashboard.name')}}</th>
+                            <th class="min-w-150px">{{trans('role::dashboard.role')}}</th>
+                            <th class="min-w-140px">{{trans('role::dashboard.email')}}</th>
+                            <th class="min-w-120px">{{trans('role::dashboard.mobile')}}</th>
                             @if(auth()->guard('admin')->user()->can('admin-edit') || auth()->guard('admin')->user()->can('admin-delete'))
-                            <th class="min-w-100px text-end">{{trans(config('dashboard.trans_file').'actions')}}</th>
+                            <th class="min-w-100px text-end">{{trans('role::dashboard.actions')}}</th>
                             @endif
                         </tr>
                     </thead>
@@ -82,7 +82,7 @@
                     <tbody>
                         @if(count($admins) == 0)
                         <td colspan="100%">
-                            <h3 class="col-12 text-center">{{trans(config('dashboard.trans_file').'no_result')}}</h3>
+                            <h3 class="col-12 text-center">{{trans('role::dashboard.no_result')}}</h3>
                         </td>
                         @else
                         @foreach ($admins as $index => $admin)
@@ -160,6 +160,6 @@
 
 @push('footer-scripts')
     <script>
-    var title = "{{trans(config('dashboard.trans_file').'delete_question')}}";
+    var title = "{{trans('role::dashboard.delete_question')}}";
     </script>
 @endpush

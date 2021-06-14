@@ -2,7 +2,7 @@
 @section('content')
 @section('page_path')
 <!--begin::Title-->
-<h1 class="d-flex align-items-center text-dark fw-bolder my-1 fs-3">{{trans(config('dashboard.trans_file').'settings')}}</h1>
+<h1 class="d-flex align-items-center text-dark fw-bolder my-1 fs-3">{{trans('setting::dashboard.settings')}}</h1>
 <!--end::Title-->
 <!--begin::Separator-->
 <span class="h-20px border-gray-200 border-start mx-4"></span>
@@ -11,7 +11,7 @@
 <ul class="breadcrumb breadcrumb-separatorless fw-bold fs-7 my-1">
     <!--begin::Item-->
     <li class="breadcrumb-item text-muted">
-        <a href="{{route('admin-home')}}" class="text-muted text-hover-primary">{{trans(config('dashboard.trans_file').'home')}}</a>
+        <a href="{{route('admin-home')}}" class="text-muted text-hover-primary">{{trans('setting::dashboard.home')}}</a>
     </li>
     <!--end::Item-->
     <!--begin::Item-->
@@ -61,10 +61,10 @@
                 <!--end::Card body-->
                 <!--begin::Actions-->
                 <div class="card-footer d-flex justify-content-end py-6 px-9">
-                    <button type="reset" class="btn btn-white btn-active-light-primary me-2" onclick="window.location.reload()">{{trans(config('dashboard.trans_file').'cancel')}}</button>
+                    <button type="reset" class="btn btn-white btn-active-light-primary me-2" onclick="window.location.reload()">{{trans('setting::dashboard.cancel')}}</button>
                     <button type="submit" class="btn btn-primary" id="saveBtn">
                         <span class="spinner-border spinner-border-sm align-middle ms-2 d-none"></span>
-                        {{trans(config('dashboard.trans_file').'save')}}
+                        {{trans('setting::dashboard.save')}}
                     </button>
                 </div>
                 <!--end::Actions-->

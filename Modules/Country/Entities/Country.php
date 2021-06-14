@@ -40,7 +40,7 @@ class Country extends Model
     // === Status label ===
     public function getStatusLabelAttribute()
     {
-        return $this->status ?  "<span class='badge badge-light-success'>".trans(config('dashboard.trans_file').'active')."</span>" : "<span class='badge badge-light-danger'>".trans(config('dashboard.trans_file').'deactivate')."</span>";
+        return $this->status ?  "<span class='badge badge-light-success'>".trans('country::dashboard.active')."</span>" : "<span class='badge badge-light-danger'>".trans('country::dashboard.deactivate')."</span>";
     }
     // === End function =
 }

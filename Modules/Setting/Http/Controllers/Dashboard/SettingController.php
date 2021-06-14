@@ -42,7 +42,7 @@ class SettingController extends BaseController
     {
         $settings = Setting::find(1);
         $roles = Role::all();
-        $pageTitle = trans(config('dashboard.trans_file').'settings');
+        $pageTitle = trans('setting::dashboard.settings');
         $submitFormRoute = route('admin-update-settings');
         $submitFormMethod = 'put';
         $countries = Country::all();
@@ -125,7 +125,7 @@ class SettingController extends BaseController
 
         $settings->fill($settingsData);
         $settings->save();
-        return $this->successResponse(['message' => trans(config('dashboard.trans_file').'success_save')]);
+        return $this->successResponse(['message' => trans('setting::dashboard.success_save')]);
     }
     // === End function ===
 

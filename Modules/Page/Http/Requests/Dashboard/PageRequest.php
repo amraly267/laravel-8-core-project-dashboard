@@ -32,8 +32,8 @@ class PageRequest extends FormRequest
     public function messages()
     {
         return [
-            'title.*.required' => trans(config('dashboard.trans_file').'title_is_required'),
-            'description.*.required' => trans(config('dashboard.trans_file').'content_is_required'),
+            'title.*.required' => trans('page::dashboard.title_is_required'),
+            'description.*.required' => trans('page::dashboard.content_is_required'),
         ];
     }
 }

@@ -43,7 +43,7 @@ class CityController extends BaseController
             $colsIndexName = $request->colsIndexName;
             $html = view('city::'.$this->controllerResource.'pdf', compact('cities', 'visibleColsNames', 'colsIndexName'))->render();
             $pdf = PDF::loadHTML($html);
-            return $pdf->download(trans(config('dashboard.trans_file').'cities').'.pdf');
+            return $pdf->download(trans('city::dashboard.cities').'.pdf');
         }
 
         if($request->ajax())
@@ -131,7 +131,7 @@ class CityController extends BaseController
     public function create()
     {
         $countries = Country::all();
-        $pageTitle = trans(config('dashboard.trans_file').'add_new');
+        $pageTitle = trans('city::dashboard.add_new');
         $submitFormRoute = route('cities.store');
         $submitFormMethod = 'post';
         return view('city::'.$this->controllerResource.'form', compact('countries', 'pageTitle', 'submitFormRoute', 'submitFormMethod'));
@@ -151,7 +151,7 @@ class CityController extends BaseController
             'status' => $request->has('status') ? '1' : '0',
         ]);
 
-        return $this->successResponse(['message' => trans(config('dashboard.trans_file').'success_save')]);
+        return $this->successResponse(['message' => trans('city::dashboard.success_save')]);
     }
 
     /**
@@ -175,7 +175,7 @@ class CityController extends BaseController
     {
         $city = City::find($id);
         $countries = Country::all();
-        $pageTitle = trans(config('dashboard.trans_file').'edit');
+        $pageTitle = trans('city::dashboard.edit');
         $submitFormRoute = route('cities.update', $id);
         $submitFormMethod = 'put';
         return view('city::'.$this->controllerResource.'form', compact('city', 'countries', 'pageTitle', 'submitFormRoute', 'submitFormMethod'));
@@ -195,7 +195,7 @@ class CityController extends BaseController
         $city->country_id = $request->country_id;
         $city->status = $request->has('status') ? '1' : '0';
         $city->save();
-        return $this->successResponse(['message' => trans(config('dashboard.trans_file').'success_save')]);
+        return $this->successResponse(['message' => trans('city::dashboard.success_save')]);
     }
 
     /**
@@ -208,7 +208,7 @@ class CityController extends BaseController
     {
         $existingCity = City::find($id);
         $existingCity->delete();
-        return $this->successResponse(['message' => trans(config('dashboard.trans_file').'success_delete')]);
+        return $this->successResponse(['message' => trans('city::dashboard.success_delete')]);
     }
 
     // === Retrive cities via country id ===

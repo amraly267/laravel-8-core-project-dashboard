@@ -23,21 +23,21 @@ class Page extends Model
     // === Status label ===
     public function getStatusLabelAttribute()
     {
-        return $this->status ?  "<span class='badge badge-light-success'>".trans(config('dashboard.trans_file').'active')."</span>" : "<span class='badge badge-light-danger'>".trans(config('dashboard.trans_file').'deactivate')."</span>";
+        return $this->status ?  "<span class='badge badge-light-success'>".trans('page::dashboard.active')."</span>" : "<span class='badge badge-light-danger'>".trans('page::dashboard.deactivate')."</span>";
     }
     // === End function =
 
     // === Is web label ===
     public function getIsWebLabelAttribute()
     {
-        return $this->is_web ?  "<span class='badge badge-light-success'>".trans(config('dashboard.trans_file').'active')."</span>" : "<span class='badge badge-light-danger'>".trans(config('dashboard.trans_file').'deactivate')."</span>";
+        return $this->is_web ?  "<span class='badge badge-light-success'>".trans('page::dashboard.active')."</span>" : "<span class='badge badge-light-danger'>".trans('page::dashboard.deactivate')."</span>";
     }
     // === End function =
 
     // === Is mobile label ===
     public function getIsMobileLabelAttribute()
     {
-        return $this->is_mobile ?  "<span class='badge badge-light-success'>".trans(config('dashboard.trans_file').'active')."</span>" : "<span class='badge badge-light-danger'>".trans(config('dashboard.trans_file').'deactivate')."</span>";
+        return $this->is_mobile ?  "<span class='badge badge-light-success'>".trans('page::dashboard.active')."</span>" : "<span class='badge badge-light-danger'>".trans('page::dashboard.deactivate')."</span>";
     }
     // === End function =
 

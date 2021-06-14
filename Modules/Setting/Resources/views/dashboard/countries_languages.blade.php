@@ -2,7 +2,7 @@
     <!--begin::Input group-->
     <div class="row mb-6">
         <!--begin::Label-->
-        <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'supported_countries')}}</label>
+        <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans('setting::dashboard.supported_countries')}}</label>
         <!--end::Label-->
         <!--begin::Col-->
         <div class="col-lg-10 fv-row fv-plugins-icon-container">
@@ -15,7 +15,7 @@
     <!--begin::Input group-->
     <div class="row mb-6">
         <!--begin::Label-->
-        <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'default_country')}}</label>
+        <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans('setting::dashboard.default_country')}}</label>
         <!--end::Label-->
         <!--begin::Col-->
         <div class="col-lg-10 fv-row fv-plugins-icon-container">
@@ -33,7 +33,7 @@
     <!--begin::Input group-->
     <div class="row mb-6">
         <!--begin::Label-->
-        <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'supported_locales')}}</label>
+        <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans('setting::dashboard.supported_locales')}}</label>
         <!--end::Label-->
         <!--begin::Col-->
         <div class="col-lg-10 fv-row fv-plugins-icon-container">
@@ -46,13 +46,13 @@
     <!--begin::Input group-->
     <div class="row mb-6">
         <!--begin::Label-->
-        <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'default_locale')}}</label>
+        <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans('setting::dashboard.default_locale')}}</label>
         <!--end::Label-->
         <!--begin::Col-->
         <div class="col-lg-10 fv-row fv-plugins-icon-container">
             <select name="default_locale" data-control="select2" class="form-select form-select-solid form-select-lg fw-bold select2-hidden-accessible" data-select2-id="select2-data-10-jdo1-locale" tabindex="-1" aria-hidden="true">
-                <option @if($submitFormMethod == 'put' && $settings->default_locale == 'en') {{'selected'}} @endif value="en">{{trans(config('dashboard.trans_file').'english')}}</option>
-                <option @if($submitFormMethod == 'put' && $settings->default_locale == 'ar') {{'selected'}} @endif value="ar">{{trans(config('dashboard.trans_file').'arabic')}}</option>
+                <option @if($submitFormMethod == 'put' && $settings->default_locale == 'en') {{'selected'}} @endif value="en">{{trans('setting::dashboard.english')}}</option>
+                <option @if($submitFormMethod == 'put' && $settings->default_locale == 'ar') {{'selected'}} @endif value="ar">{{trans('setting::dashboard.arabic')}}</option>
             </select>
             <span class="help-block error-help-block input-error default_language-error" style="color: red;"></span>
         </div>
@@ -63,7 +63,7 @@
     <!--begin::Input group-->
     <div class="row mb-6">
         <!--begin::Label-->
-        <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'default_timezone')}}</label>
+        <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans('setting::dashboard.default_timezone')}}</label>
         <!--end::Label-->
         <!--begin::Col-->
         <div class="col-lg-10 fv-row fv-plugins-icon-container">
@@ -81,7 +81,7 @@
     <!--begin::Input group-->
     <div class="row mb-6">
         <!--begin::Label-->
-        <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'customer_role')}}</label>
+        <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans('setting::dashboard.customer_role')}}</label>
         <!--end::Label-->
         <!--begin::Col-->
         <div class="col-lg-10 fv-row fv-plugins-icon-container">

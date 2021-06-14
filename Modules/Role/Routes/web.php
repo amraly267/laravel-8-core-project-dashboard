@@ -14,6 +14,6 @@
 Route::middleware(['admin.auth'])->prefix('admin')->namespace('Dashboard')->group(function() {
 
     Route::resource('roles', RoleController::class);
-    Route::get('download-role-pdf', [RoleController::class, 'downloadPdf'])->name('download-role-pdf');
+    Route::get('download-role-pdf', 'RoleController@downloadPdf')->name('download-role-pdf');
 
 });

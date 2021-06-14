@@ -2,15 +2,15 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">{{trans(config('dashboard.trans_file').'confirmation')}}</h5>
+                <h5 class="modal-title" id="exampleModalLabel">{{trans('apps::dashboard.confirmation')}}</h5>
             </div>
-            <div class="modal-body">{{trans(config('dashboard.trans_file').'are_you_sure_logout')}}</div>
+            <div class="modal-body">{{trans('apps::dashboard.are_you_sure_logout')}}</div>
             <div class="modal-footer">
                 <form action="{{route('admin-logout')}}" method="POST">
                     @csrf @method('post')
-                    <button type="submit" class="btn btn-primary">{{trans(config('dashboard.trans_file').'ok')}} <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></button>
+                    <button type="submit" class="btn btn-primary">{{trans('apps::dashboard.ok')}} <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></button>
                 </form>
-                <button type="button" class="btn btn-outline-dark ml-2" data-bs-dismiss="modal">{{trans(config('dashboard.trans_file').'cancel')}}</button>
+                <button type="button" class="btn btn-outline-dark ml-2" data-bs-dismiss="modal">{{trans('apps::dashboard.cancel')}}</button>
             </div>
         </div>
     </div>
@@ -82,20 +82,20 @@
                             <!--end::Menu separator-->
                             <!--begin::Menu item-->
                             <div class="menu-item px-5">
-                                <a href="{{route('admin-profile')}}" class="menu-link px-5">{{trans(config('dashboard.trans_file').'my_profile')}}</a>
+                                <a href="{{route('admin-profile')}}" class="menu-link px-5">{{trans('apps::dashboard.my_profile')}}</a>
                             </div>
                             <!--end::Menu item-->
                             <!--begin::Menu item-->
                             <div class="menu-item px-5" data-kt-menu-trigger="hover" data-kt-menu-placement="left-start" data-kt-menu-flip="center, top">
                                 <a href="#" class="menu-link px-5">
-                                    <span class="menu-title position-relative">{{trans(config('dashboard.trans_file').'language')}}
+                                    <span class="menu-title position-relative">{{trans('apps::dashboard.language')}}
                                         <span class="fs-8 rounded bg-light px-3 py-2 position-absolute translate-middle-y top-50 end-0">
                                             @if(config('app.locale') == 'ar')
-                                                {{trans(config('dashboard.trans_file').'arabic')}}
+                                                {{trans('apps::dashboard.arabic')}}
                                             @else
-                                                {{trans(config('dashboard.trans_file').'english')}}
+                                                {{trans('apps::dashboard.english')}}
                                             @endif
-                                            <img class="w-15px h-15px rounded-1 ms-2" src="@if(config('app.locale') == 'ar'){{asset('img/dashboard/saudi-arabia.svg')}}@else{{asset('img/dashboard/united-states.svg')}}@endif" alt="@if(config('app.locale') == 'ar'){{trans(config('dashboard.trans_file').'arabic')}}@else{{trans(config('dashboard.trans_file').'english')}}@endif"/>
+                                            <img class="w-15px h-15px rounded-1 ms-2" src="@if(config('app.locale') == 'ar'){{asset('img/dashboard/saudi-arabia.svg')}}@else{{asset('img/dashboard/united-states.svg')}}@endif" alt="@if(config('app.locale') == 'ar'){{trans('apps::dashboard.arabic')}}@else{{trans('apps::dashboard.english')}}@endif"/>
                                         </span>
                                     </span>
                                 </a>
@@ -105,8 +105,8 @@
                                     <div class="menu-item px-3">
                                         <a href="{{route('admin-change-language', ['lang' => 'en'])}}" class="menu-link d-flex px-5 @if(config('app.locale') != 'ar'){{'active'}}@endif">
                                             <span class="symbol symbol-20px me-4">
-                                                <img class="rounded-1" src="{{asset('img/dashboard/united-states.svg')}}" alt="{{trans(config('dashboard.trans_file').'english')}}"/>
-                                            </span>{{trans(config('dashboard.trans_file').'english')}}
+                                                <img class="rounded-1" src="{{asset('img/dashboard/united-states.svg')}}" alt="{{trans('apps::dashboard.english')}}"/>
+                                            </span>{{trans('apps::dashboard.english')}}
                                         </a>
                                     </div>
                                     <!--end::Menu item-->
@@ -114,8 +114,8 @@
                                     <div class="menu-item px-3">
                                         <a href="{{route('admin-change-language', ['lang' => 'ar'])}}" class="menu-link d-flex px-5 @if(config('app.locale') == 'ar'){{'active'}}@endif">
                                             <span class="symbol symbol-20px me-4">
-                                                <img class="rounded-1" src="{{asset('img/dashboard/saudi-arabia.svg')}}" alt="{{trans(config('dashboard.trans_file').'arabic')}}" />
-                                            </span>{{trans(config('dashboard.trans_file').'arabic')}}
+                                                <img class="rounded-1" src="{{asset('img/dashboard/saudi-arabia.svg')}}" alt="{{trans('apps::dashboard.arabic')}}" />
+                                            </span>{{trans('apps::dashboard.arabic')}}
                                         </a>
                                     </div>
                                     <!--end::Menu item-->
@@ -125,7 +125,7 @@
                             <!--end::Menu item-->
                             <!--begin::Menu item-->
                             <div class="menu-item px-5">
-                                <a href="#" data-bs-toggle="modal" data-bs-target="#logoutModel" class="menu-link px-5">{{trans(config('dashboard.trans_file').'logout')}}</a>
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#logoutModel" class="menu-link px-5">{{trans('apps::dashboard.logout')}}</a>
                             </div>
                             <!--end::Menu item-->
                         </div>

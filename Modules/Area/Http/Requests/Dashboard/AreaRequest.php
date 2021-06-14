@@ -35,8 +35,8 @@ class AreaRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.*.required' => trans(config('dashboard.trans_file').'name_is_required'),
-            'name.*.unique_translation' => trans(config('dashboard.trans_file').'name_is_already_exist'),
+            'name.*.required' => trans('area::dashboard.name_is_required'),
+            'name.*.unique_translation' => trans('area::dashboard.name_is_already_exist'),
         ];
     }
 }

@@ -3,11 +3,11 @@
     <!--begin::Input group-->
     <div class="row mb-6">
         <!--begin::Label-->
-        <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'address')}}</label>
+        <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans('setting::dashboard.address')}}</label>
         <!--end::Label-->
         <!--begin::Col-->
         <div class="col-lg-10 fv-row fv-plugins-icon-container">
-            <input type="text" name="address" class="form-control form-control-lg form-control-solid" placeholder="{{trans(config('dashboard.trans_file').'address')}}" value="{{$submitFormMethod == 'put' ? $settings->address : old('address')}}">
+            <input type="text" name="address" class="form-control form-control-lg form-control-solid" placeholder="{{trans('setting::dashboard.address')}}" value="{{$submitFormMethod == 'put' ? $settings->address : old('address')}}">
             <span class="help-block error-help-block input-error address-error" style="color: red;"></span>
         </div>
         <!--end::Col-->
@@ -17,7 +17,7 @@
     <!--begin::Input group-->
     <div class="row mb-6">
         <!--begin::Label-->
-        <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'country')}}</label>
+        <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans('setting::dashboard.country')}}</label>
         <!--end::Label-->
         <!--begin::Col-->
         <div class="col-lg-10 fv-row fv-plugins-icon-container">
@@ -35,7 +35,7 @@
     <!--begin::Input group-->
     <div class="row mb-6">
         <!--begin::Label-->
-        <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'city')}}</label>
+        <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans('setting::dashboard.city')}}</label>
         <!--end::Label-->
         <!--begin::Col-->
         <div class="col-lg-10 fv-row fv-plugins-icon-container">
@@ -50,7 +50,7 @@
     <!--begin::Input group-->
     <div class="row mb-6">
         <!--begin::Label-->
-        <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'area')}}</label>
+        <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans('setting::dashboard.area')}}</label>
         <!--end::Label-->
         <!--begin::Col-->
         <div class="col-lg-10 fv-row fv-plugins-icon-container">
@@ -65,11 +65,11 @@
     <!--begin::Input group-->
     <div class="row mb-6">
         <!--begin::Label-->
-        <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'contact_us_email')}}</label>
+        <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans('setting::dashboard.contact_us_email')}}</label>
         <!--end::Label-->
         <!--begin::Col-->
         <div class="col-lg-10 fv-row fv-plugins-icon-container">
-            <input type="email" name="contact_us_email" class="form-control form-control-lg form-control-solid" placeholder="{{trans(config('dashboard.trans_file').'contact_us_email')}}" value="{{$submitFormMethod == 'put' ? $settings->contact_us_email : old('contact_us_email')}}">
+            <input type="email" name="contact_us_email" class="form-control form-control-lg form-control-solid" placeholder="{{trans('setting::dashboard.contact_us_email')}}" value="{{$submitFormMethod == 'put' ? $settings->contact_us_email : old('contact_us_email')}}">
             <span class="help-block error-help-block input-error contact_us_email-error" style="color: red;"></span>
         </div>
         <!--end::Col-->
@@ -79,11 +79,11 @@
     <!--begin::Input group-->
     <div class="row mb-6">
         <!--begin::Label-->
-        <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'contact_us_mobile')}}</label>
+        <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans('setting::dashboard.contact_us_mobile')}}</label>
         <!--end::Label-->
         <!--begin::Col-->
         <div class="col-lg-10 fv-row fv-plugins-icon-container">
-            <input type="tel" minlength="9" maxlength="12" name="contact_us_mobile" class="form-control form-control-lg form-control-solid" placeholder="{{trans(config('dashboard.trans_file').'contact_us_mobile')}}" value="{{$submitFormMethod == 'put' ? $settings->contact_us_mobile : old('contact_us_mobile')}}">
+            <input type="tel" minlength="9" maxlength="12" name="contact_us_mobile" class="form-control form-control-lg form-control-solid" placeholder="{{trans('setting::dashboard.contact_us_mobile')}}" value="{{$submitFormMethod == 'put' ? $settings->contact_us_mobile : old('contact_us_mobile')}}">
             <span class="help-block error-help-block input-error contact_us_mobile-error" style="color: red;"></span>
         </div>
         <!--end::Col-->
@@ -93,11 +93,11 @@
     <!--begin::Input group-->
     <div class="row mb-6">
         <!--begin::Label-->
-        <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'whatsapp_number')}}</label>
+        <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans('setting::dashboard.whatsapp_number')}}</label>
         <!--end::Label-->
         <!--begin::Col-->
         <div class="col-lg-10 fv-row fv-plugins-icon-container">
-            <input type="tel" minlength="9" maxlength="12" name="whatsapp_number" class="form-control form-control-lg form-control-solid" placeholder="{{trans(config('dashboard.trans_file').'whatsapp_number')}}" value="{{$submitFormMethod == 'put' ? $settings->whatsapp_number : old('whatsapp_number')}}">
+            <input type="tel" minlength="9" maxlength="12" name="whatsapp_number" class="form-control form-control-lg form-control-solid" placeholder="{{trans('setting::dashboard.whatsapp_number')}}" value="{{$submitFormMethod == 'put' ? $settings->whatsapp_number : old('whatsapp_number')}}">
             <span class="help-block error-help-block input-error whatsapp_number-error" style="color: red;"></span>
         </div>
         <!--end::Col-->

@@ -16,7 +16,7 @@
                 <!--begin::Heading-->
                 <div class="text-center mb-10">
                     <!--begin::Title-->
-                    <h1 class="text-dark mb-3">{{trans(config('dashboard.trans_file').'sing_in_dashboard')}}</h1>
+                    <h1 class="text-dark mb-3">{{trans('admin::dashboard.sing_in_dashboard')}}</h1>
                     <!--end::Title-->
                     <span class="help-block error-help-block input-error credential-error" style="color: red;"></span>
                 </div>
@@ -24,10 +24,10 @@
                 <!--begin::Input group-->
                 <div class="fv-row mb-10">
                     <!--begin::Label-->
-                    <label class="form-label fs-6 fw-bolder text-dark">{{trans(config('dashboard.trans_file').'email')}}</label>
+                    <label class="form-label fs-6 fw-bolder text-dark">{{trans('admin::dashboard.email')}}</label>
                     <!--end::Label-->
                     <!--begin::Input-->
-                    <input class="form-control form-control-lg form-control-solid" type="email" placeholder="{{trans(config('dashboard.trans_file').'email')}}" name="email" autocomplete="off" />
+                    <input class="form-control form-control-lg form-control-solid" type="email" placeholder="{{trans('admin::dashboard.email')}}" name="email" autocomplete="off" />
                     <!--end::Input-->
                     <span class="help-block error-help-block input-error email-error" style="color: red;"></span>
                 </div>
@@ -37,15 +37,15 @@
                     <!--begin::Wrapper-->
                     <div class="d-flex flex-stack mb-2">
                         <!--begin::Label-->
-                        <label class="form-label fw-bolder text-dark fs-6 mb-0">{{trans(config('dashboard.trans_file').'password')}}</label>
+                        <label class="form-label fw-bolder text-dark fs-6 mb-0">{{trans('admin::dashboard.password')}}</label>
                         <!--end::Label-->
                         <!--begin::Link-->
-                        <a href="{{route('admin-forget-password')}}" class="link-primary fs-6 fw-bolder">{{trans(config('dashboard.trans_file').'forget_password')}}</a>
+                        <a href="{{route('admin-forget-password')}}" class="link-primary fs-6 fw-bolder">{{trans('admin::dashboard.forget_password')}}</a>
                         <!--end::Link-->
                     </div>
                     <!--end::Wrapper-->
                     <!--begin::Input-->
-                    <input class="form-control form-control-lg form-control-solid" type="password" placeholder="{{trans(config('dashboard.trans_file').'password')}}" name="password" autocomplete="off" />
+                    <input class="form-control form-control-lg form-control-solid" type="password" placeholder="{{trans('admin::dashboard.password')}}" name="password" autocomplete="off" />
                     <!--end::Input-->
                     <span class="help-block error-help-block input-error password-error" style="color: red;"></span>
                 </div>
@@ -54,7 +54,7 @@
                 <div class="text-center">
                     <!--begin::Submit button-->
                     <button type="submit" id="loginBtn" class="btn btn-lg btn-primary w-100 mb-5">
-                        {{trans(config('dashboard.trans_file').'login')}}
+                        {{trans('admin::dashboard.login')}}
                         <span class="spinner-border spinner-border-sm align-middle ms-2 d-none"></span>
                     </button>
                     <!--end::Submit button-->

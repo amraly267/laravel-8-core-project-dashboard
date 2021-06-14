@@ -20,7 +20,7 @@
                 <!--begin::Heading-->
                 <div class="text-center mb-10">
                     <!--begin::Title-->
-                    <h1 class="text-dark mb-3">{{trans(config('dashboard.trans_file').'reset_password')}}</h1>
+                    <h1 class="text-dark mb-3">{{trans('admin::dashboard.reset_password')}}</h1>
                     <!--end::Title-->
                     <span class="help-block error-help-block input-error credential-error" style="color: red;"></span>
                 </div>
@@ -28,10 +28,10 @@
                 <!--begin::Input group-->
                 <div class="fv-row mb-10">
                     <!--begin::Label-->
-                    <label class="form-label fs-6 fw-bolder text-dark">{{trans(config('dashboard.trans_file').'password')}}</label>
+                    <label class="form-label fs-6 fw-bolder text-dark">{{trans('admin::dashboard.password')}}</label>
                     <!--end::Label-->
                     <!--begin::Input-->
-                    <input class="form-control form-control-lg form-control-solid" type="password" placeholder="{{trans(config('dashboard.trans_file').'password')}}" name="password" autocomplete="off" />
+                    <input class="form-control form-control-lg form-control-solid" type="password" placeholder="{{trans('admin::dashboard.password')}}" name="password" autocomplete="off" />
                     <!--end::Input-->
                     <span class="help-block error-help-block input-error password-error" style="color: red;"></span>
                 </div>
@@ -41,12 +41,12 @@
                     <!--begin::Wrapper-->
                     <div class="d-flex flex-stack mb-2">
                         <!--begin::Label-->
-                        <label class="form-label fw-bolder text-dark fs-6 mb-0">{{trans(config('dashboard.trans_file').'confirm_password')}}</label>
+                        <label class="form-label fw-bolder text-dark fs-6 mb-0">{{trans('admin::dashboard.confirm_password')}}</label>
                         <!--end::Label-->
                     </div>
                     <!--end::Wrapper-->
                     <!--begin::Input-->
-                    <input class="form-control form-control-lg form-control-solid" type="password" placeholder="{{trans(config('dashboard.trans_file').'confirm_password')}}" name="confirm_password" autocomplete="off" />
+                    <input class="form-control form-control-lg form-control-solid" type="password" placeholder="{{trans('admin::dashboard.confirm_password')}}" name="confirm_password" autocomplete="off" />
                     <!--end::Input-->
                     <span class="help-block error-help-block input-error confirm_password-error" style="color: red;"></span>
                 </div>
@@ -55,7 +55,7 @@
                 <div class="text-center">
                     <!--begin::Submit button-->
                     <button type="submit" id="resetPasswordBtn" class="btn btn-lg btn-primary w-100 mb-5">
-                        {{trans(config('dashboard.trans_file').'save')}}
+                        {{trans('admin::dashboard.save')}}
                         <span class="spinner-border spinner-border-sm align-middle ms-2 d-none"></span></span>
                     </button>
                     <!--end::Submit button-->

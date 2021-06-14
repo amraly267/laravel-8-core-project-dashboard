@@ -41,14 +41,14 @@
                             </span>
                             <!--end::Svg Icon-->
                         </span>
-                        <span class="menu-title">{{trans(config('dashboard.trans_file').'home')}}</span>
+                        <span class="menu-title">{{trans('apps::dashboard.home')}}</span>
                     </a>
                 </div>
 
                 @if(auth()->guard('admin')->user()->can('admin-list') || auth()->guard('admin')->user()->can('role-list'))
                 <div class="menu-item">
                     <div class="menu-content pt-8 pb-2">
-                        <span class="menu-section text-muted text-uppercase fs-8 ls-1">{{trans(config('dashboard.trans_file').'admins_permissions')}}</span>
+                        <span class="menu-section text-muted text-uppercase fs-8 ls-1">{{trans('apps::dashboard.admins_permissions')}}</span>
                     </div>
                 </div>
                 @endif
@@ -69,7 +69,7 @@
                             </span>
                             <!--end::Svg Icon-->
                         </span>
-                        <span class="menu-title">{{trans(config('dashboard.trans_file').'roles')}}</span>
+                        <span class="menu-title">{{trans('apps::dashboard.roles')}}</span>
                     </a>
                 </div>
                 @endif
@@ -93,7 +93,7 @@
                             </span>
                             <!--end::Svg Icon-->
                         </span>
-                        <span class="menu-title">{{trans(config('dashboard.trans_file').'admins')}}</span>
+                        <span class="menu-title">{{trans('apps::dashboard.admins')}}</span>
                     </a>
                 </div>
                 @endif
@@ -124,7 +124,7 @@
                 @if(auth()->guard('admin')->user()->can('country-list') || auth()->guard('admin')->user()->can('city-list'))
                 <div class="menu-item">
                     <div class="menu-content pt-8 pb-2">
-                        <span class="menu-section text-muted text-uppercase fs-8 ls-1">{{trans(config('dashboard.trans_file').'places')}}</span>
+                        <span class="menu-section text-muted text-uppercase fs-8 ls-1">{{trans('apps::dashboard.places')}}</span>
                     </div>
                 </div>
                 @endif
@@ -140,7 +140,7 @@
                             </svg></span>
                             <!--end::Svg Icon-->
                         </span>
-                        <span class="menu-title">{{trans(config('dashboard.trans_file').'countries')}}</span>
+                        <span class="menu-title">{{trans('apps::dashboard.countries')}}</span>
                     </a>
                 </div>
                 @endif
@@ -158,7 +158,7 @@
                             </svg></span>
                             <!--end::Svg Icon-->
                         </span>
-                        <span class="menu-title">{{trans(config('dashboard.trans_file').'cities')}}</span>
+                        <span class="menu-title">{{trans('apps::dashboard.cities')}}</span>
                     </a>
                 </div>
                 @endif
@@ -178,7 +178,7 @@
                             </svg></span>
                             <!--end::Svg Icon-->
                         </span>
-                        <span class="menu-title">{{trans(config('dashboard.trans_file').'areas')}}</span>
+                        <span class="menu-title">{{trans('apps::dashboard.areas')}}</span>
                     </a>
                 </div>
                 @endif
@@ -186,7 +186,7 @@
                 @if(auth()->guard('admin')->user()->can('page-list') || auth()->guard('admin')->user()->can('setting-edit'))
                 <div class="menu-item">
                     <div class="menu-content pt-8 pb-2">
-                        <span class="menu-section text-muted text-uppercase fs-8 ls-1">{{trans(config('dashboard.trans_file').'general_settings')}}</span>
+                        <span class="menu-section text-muted text-uppercase fs-8 ls-1">{{trans('apps::dashboard.general_settings')}}</span>
                     </div>
                 </div>
                 @endif
@@ -202,7 +202,7 @@
                             </svg></span>
                             <!--end::Svg Icon-->
                         </span>
-                        <span class="menu-title">{{trans(config('dashboard.trans_file').'pages')}}</span>
+                        <span class="menu-title">{{trans('apps::dashboard.pages')}}</span>
                     </a>
                 </div>
                 @endif
@@ -221,7 +221,7 @@
                         </span>
                             <!--end::Svg Icon-->
                         </span>
-                        <span class="menu-title">{{trans(config('dashboard.trans_file').'settings')}}</span>
+                        <span class="menu-title">{{trans('apps::dashboard.settings')}}</span>
                     </a>
                 </div>
                 @endif

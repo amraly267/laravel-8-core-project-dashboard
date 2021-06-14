@@ -39,6 +39,6 @@ class ValidateDomain implements Rule
      */
     public function message()
     {
-        return trans(config('dashboard.trans_file').'invalid_host');
+        return trans('setting::dashboard.invalid_host');
     }
 }

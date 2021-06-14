@@ -16,8 +16,8 @@
                 <!--begin::Heading-->
                 <div class="text-center mb-10">
                     <!--begin::Title-->
-                    <h1 class="text-dark mb-3">{{trans(config('dashboard.trans_file').'forget_password')}}</h1>
-                    <div class="text-gray-400 fw-bold fs-4">{{trans(config('dashboard.trans_file').'enter_email_to_reset_password')}}</div>
+                    <h1 class="text-dark mb-3">{{trans('admin::dashboard.forget_password')}}</h1>
+                    <div class="text-gray-400 fw-bold fs-4">{{trans('admin::dashboard.enter_email_to_reset_password')}}</div>
                     <!--end::Title-->
                     <span class="help-block error-help-block input-error credential-error" style="color: red;"></span>
                 </div>
@@ -25,10 +25,10 @@
                 <!--begin::Input group-->
                 <div class="fv-row mb-10">
                     <!--begin::Label-->
-                    <label class="form-label fs-6 fw-bolder text-dark">{{trans(config('dashboard.trans_file').'email')}}</label>
+                    <label class="form-label fs-6 fw-bolder text-dark">{{trans('admin::dashboard.email')}}</label>
                     <!--end::Label-->
                     <!--begin::Input-->
-                    <input class="form-control form-control-lg form-control-solid" type="email" placeholder="{{trans(config('dashboard.trans_file').'email')}}" name="email" autocomplete="off" />
+                    <input class="form-control form-control-lg form-control-solid" type="email" placeholder="{{trans('admin::dashboard.email')}}" name="email" autocomplete="off" />
                     <!--end::Input-->
                     <span class="help-block error-help-block input-error email-error" style="color: red;"></span>
                 </div>
@@ -37,7 +37,7 @@
                 <div class="text-center">
                     <!--begin::Submit button-->
                     <button type="submit" id="forgetPasswordBtn" class="btn btn-lg btn-primary w-100 mb-5">
-                        {{trans(config('dashboard.trans_file').'send_reset_password_link')}}
+                        {{trans('admin::dashboard.send_reset_password_link')}}
                         <span class="spinner-border spinner-border-sm align-middle ms-2 d-none"></span></span>
                     </button>
                     <!--end::Submit button-->
@@ -71,7 +71,7 @@
                 Swal.fire({
                     icon: 'success',
                     title: callResponse.message,
-                    confirmButtonText: "{{trans(config('dashboard.trans_file').'ok')}}",
+                    confirmButtonText: "{{trans('admin::dashboard.ok')}}",
                 });
                 // $('#forgetPasswordForm')[0].reset();
             }

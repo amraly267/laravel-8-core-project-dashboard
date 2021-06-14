@@ -3,7 +3,7 @@
 
 @section('page_path')
 <!--begin::Title-->
-<h1 class="d-flex align-items-center text-dark fw-bolder my-1 fs-3">{{trans(config('dashboard.trans_file').'roles')}}</h1>
+<h1 class="d-flex align-items-center text-dark fw-bolder my-1 fs-3">{{trans('role::dashboard.roles')}}</h1>
 <!--end::Title-->
 <!--begin::Separator-->
 <span class="h-20px border-gray-200 border-start mx-4"></span>
@@ -12,7 +12,7 @@
 <ul class="breadcrumb breadcrumb-separatorless fw-bold fs-7 my-1">
     <!--begin::Item-->
     <li class="breadcrumb-item text-muted">
-        <a href="{{route('admin-home')}}" class="text-muted text-hover-primary">{{trans(config('dashboard.trans_file').'home')}}</a>
+        <a href="{{route('admin-home')}}" class="text-muted text-hover-primary">{{trans('role::dashboard.home')}}</a>
     </li>
     <!--end::Item-->
     <!--begin::Item-->
@@ -22,7 +22,7 @@
     <!--end::Item-->
     <!--begin::Item-->
     <li class="breadcrumb-item text-muted">
-        <a href="{{route('roles.index')}}" class="text-muted text-hover-primary">{{trans(config('dashboard.trans_file').'roles')}}</a>
+        <a href="{{route('roles.index')}}" class="text-muted text-hover-primary">{{trans('role::dashboard.roles')}}</a>
     </li>
     <!--end::Item-->
     <!--begin::Item-->
@@ -62,11 +62,11 @@
                     <!--begin::Input group-->
                     <div class="row mb-6">
                         <!--begin::Label-->
-                        <label class="col-lg-1 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'name')}}</label>
+                        <label class="col-lg-1 col-form-label fw-bold fs-6">{{trans('role::dashboard.name')}}</label>
                         <!--end::Label-->
                         <!--begin::Col-->
                         <div class="col-lg-11 fv-row fv-plugins-icon-container">
-                            <input type="text" name="name" class="form-control form-control-lg form-control-solid" placeholder="{{trans(config('dashboard.trans_file').'name')}}" value="{{$submitFormMethod == 'put' ? $role->name : old('name')}}">
+                            <input type="text" name="name" class="form-control form-control-lg form-control-solid" placeholder="{{trans('role::dashboard.name')}}" value="{{$submitFormMethod == 'put' ? $role->name : old('name')}}">
                             <span class="help-block error-help-block input-error name-error" style="color: red;"></span>
                         </div>
                         <!--end::Col-->
@@ -76,7 +76,7 @@
                     <!--begin::Input group-->
                     <div class="row mb-6">
                         <!--begin::Label-->
-                        <label class="col-lg-12 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'permissions')}}</label>
+                        <label class="col-lg-12 col-form-label fw-bold fs-6">{{trans('role::dashboard.permissions')}}</label>
                         <span class="help-block error-help-block input-error permissions-error" style="color: red;"></span>
                         <!--end::Label-->
                     </div>
@@ -87,7 +87,7 @@
                     <div class="row mb-6">
                         <!--begin::Checkbox-->
                         <label class="mb-2 col-12 form-check form-check-custom form-check-solid me-10">
-                            <span class="form-check-label fw-bold">{{trans(config('dashboard.trans_file').$permission->name)}}</span>
+                            <span class="form-check-label fw-bold">{{trans('role::dashboard.'.$permission->name)}}</span>
                         </label>
                         @foreach($permission->relatedPerm as $related)
                         <label class="mb-2 col-2 form-check form-check-custom form-check-solid me-10">
@@ -105,10 +105,10 @@
 
             <!--begin::Actions-->
             <div class="card-footer d-flex justify-content-end py-6 px-9">
-                <button type="reset" class="btn btn-white btn-active-light-primary me-2" onclick="window.location.reload()">{{trans(config('dashboard.trans_file').'cancel')}}</button>
+                <button type="reset" class="btn btn-white btn-active-light-primary me-2" onclick="window.location.reload()">{{trans('role::dashboard.cancel')}}</button>
                 <button type="submit" class="btn btn-primary" id="saveBtn">
                     <span class="spinner-border spinner-border-sm align-middle ms-2 d-none"></span>
-                    {{trans(config('dashboard.trans_file').'save')}}
+                    {{trans('role::dashboard.save')}}
                 </button>
             </div>
             <!--end::Actions-->

@@ -36,8 +36,8 @@ class CountryRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.*.required' => trans(config('dashboard.trans_file').'name_is_required'),
-            'name.*.unique_translation' => trans(config('dashboard.trans_file').'name_is_already_exist'),
+            'name.*.required' => trans('country::dashboard.name_is_required'),
+            'name.*.unique_translation' => trans('country::dashboard.name_is_already_exist'),
         ];
     }
 }

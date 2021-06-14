@@ -3,7 +3,7 @@
 
 @section('page_path')
 <!--begin::Title-->
-<h1 class="d-flex align-items-center text-dark fw-bolder my-1 fs-3">{{trans(config('dashboard.trans_file').'cities')}}</h1>
+<h1 class="d-flex align-items-center text-dark fw-bolder my-1 fs-3">{{trans('city::dashboard.cities')}}</h1>
 <!--end::Title-->
 <!--begin::Separator-->
 <span class="h-20px border-gray-200 border-start mx-4"></span>
@@ -12,7 +12,7 @@
 <ul class="breadcrumb breadcrumb-separatorless fw-bold fs-7 my-1">
     <!--begin::Item-->
     <li class="breadcrumb-item text-muted">
-        <a href="{{route('admin-home')}}" class="text-muted text-hover-primary">{{trans(config('dashboard.trans_file').'home')}}</a>
+        <a href="{{route('admin-home')}}" class="text-muted text-hover-primary">{{trans('city::dashboard.home')}}</a>
     </li>
     <!--end::Item-->
     <!--begin::Item-->
@@ -22,7 +22,7 @@
     <!--end::Item-->
     <!--begin::Item-->
     <li class="breadcrumb-item text-muted">
-        <a href="{{route('cities.index')}}" class="text-muted text-hover-primary">{{trans(config('dashboard.trans_file').'cities')}}</a>
+        <a href="{{route('cities.index')}}" class="text-muted text-hover-primary">{{trans('city::dashboard.cities')}}</a>
     </li>
     <!--end::Item-->
     <!--begin::Item-->
@@ -63,10 +63,10 @@
                         <div class="card-toolbar mb-5">
                             <ul class="nav nav-tabs nav-line-tabs nav-stretch fs-6 border-0">
                                 <li class="nav-item">
-                                    <a id="name_en_tab" class="nav-link active" data-bs-toggle="tab" href="#name_en">{{trans(config('dashboard.trans_file').'name_en')}}</a>
+                                    <a id="name_en_tab" class="nav-link active" data-bs-toggle="tab" href="#name_en">{{trans('city::dashboard.name_en')}}</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a id="name_ar_tab" class="nav-link" data-bs-toggle="tab" href="#name_ar">{{trans(config('dashboard.trans_file').'name_ar')}}</a>
+                                    <a id="name_ar_tab" class="nav-link" data-bs-toggle="tab" href="#name_ar">{{trans('city::dashboard.name_ar')}}</a>
                                 </li>
                             </ul>
                         </div>
@@ -77,11 +77,11 @@
                             <div class="tab-pane fade show active" id="name_en" role="tabpanel">
                                 <div class="row mb-6">
                                     <!--begin::Label-->
-                                    <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'name_en')}}</label>
+                                    <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans('city::dashboard.name_en')}}</label>
                                     <!--end::Label-->
                                     <!--begin::Col-->
                                     <div class="col-lg-10 fv-row fv-plugins-icon-container">
-                                        <input type="text" name="name[en]" class="form-control form-control-lg form-control-solid" placeholder="{{trans(config('dashboard.trans_file').'name_en')}}" value="{{$submitFormMethod == 'put' ? $city->getTranslation('name', 'en') : old('name_en')}}">
+                                        <input type="text" name="name[en]" class="form-control form-control-lg form-control-solid" placeholder="{{trans('city::dashboard.name_en')}}" value="{{$submitFormMethod == 'put' ? $city->getTranslation('name', 'en') : old('name_en')}}">
                                         <span class="help-block error-help-block input-error name-en-error" style="color: red;"></span>
                                     </div>
                                 </div>
@@ -90,11 +90,11 @@
                             <div class="tab-pane fade" id="name_ar" role="tabpanel">
                                 <div class="row mb-6">
                                     <!--begin::Label-->
-                                    <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'name_ar')}}</label>
+                                    <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans('city::dashboard.name_ar')}}</label>
                                     <!--end::Label-->
                                     <!--begin::Col-->
                                     <div class="col-lg-10 fv-row fv-plugins-icon-container">
-                                        <input type="text" name="name[ar]" class="form-control form-control-lg form-control-solid" placeholder="{{trans(config('dashboard.trans_file').'name_ar')}}" value="{{$submitFormMethod == 'put' ? $city->getTranslation('name', 'ar') : old('name_ar')}}">
+                                        <input type="text" name="name[ar]" class="form-control form-control-lg form-control-solid" placeholder="{{trans('city::dashboard.name_ar')}}" value="{{$submitFormMethod == 'put' ? $city->getTranslation('name', 'ar') : old('name_ar')}}">
                                         <span class="help-block error-help-block input-error name-ar-error" style="color: red;"></span>
                                     </div>
                                 </div>
@@ -105,7 +105,7 @@
                         <!--begin::Input group-->
                         <div class="row mb-6">
                             <!--begin::Label-->
-                            <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'country')}}</label>
+                            <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans('city::dashboard.country')}}</label>
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-10 fv-row fv-plugins-icon-container">
@@ -124,7 +124,7 @@
                         <div class="row mb-6">
                             <div class="form-check form-switch form-check-custom form-check-solid">
                                 <label class="form-check-label col-lg-2 col-form-label fw-bold fs-6" for="flexSwitchDefault">
-                                    {{trans(config('dashboard.trans_file').'status')}}
+                                    {{trans('city::dashboard.status')}}
                                 </label>
                                 <input class="form-check-input" {{$submitFormMethod == 'put' && $city->status == 0 ? '' : 'checked'}} type="checkbox" name="status" value="1" id="flexSwitchDefault"/>
                             </div>
@@ -136,10 +136,10 @@
 
                 <!--begin::Actions-->
                 <div class="card-footer d-flex justify-content-end py-6 px-9">
-                    <button type="reset" class="btn btn-white btn-active-light-primary me-2" onclick="window.location.reload()">{{trans(config('dashboard.trans_file').'cancel')}}</button>
+                    <button type="reset" class="btn btn-white btn-active-light-primary me-2" onclick="window.location.reload()">{{trans('city::dashboard.cancel')}}</button>
                     <button type="submit" class="btn btn-primary" id="saveBtn">
                         <span class="spinner-border spinner-border-sm align-middle ms-2 d-none"></span>
-                        {{trans(config('dashboard.trans_file').'save')}}
+                        {{trans('city::dashboard.save')}}
                     </button>
                 </div>
                 <!--end::Actions-->

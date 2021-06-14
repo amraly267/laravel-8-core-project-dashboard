@@ -44,7 +44,7 @@ class AreaController extends BaseController
             $colsIndexName = $request->colsIndexName;
             $html = view('area::'.$this->controllerResource.'pdf', compact('areas', 'visibleColsNames', 'colsIndexName'))->render();
             $pdf = PDF::loadHTML($html);
-            return $pdf->download(trans(config('dashboard.trans_file').'areas').'.pdf');
+            return $pdf->download(trans('area::dashboard.areas').'.pdf');
         }
 
         if($request->ajax())
@@ -132,7 +132,7 @@ class AreaController extends BaseController
     public function create()
     {
         $cities = City::all();
-        $pageTitle = trans(config('dashboard.trans_file').'add_new');
+        $pageTitle = trans('area::dashboard.add_new');
         $submitFormRoute = route('areas.store');
         $submitFormMethod = 'post';
         return view('area::'.$this->controllerResource.'form', compact('cities', 'pageTitle', 'submitFormRoute', 'submitFormMethod'));
@@ -152,7 +152,7 @@ class AreaController extends BaseController
             'status' => $request->has('status') ? '1' : '0',
         ]);
 
-        return $this->successResponse(['message' => trans(config('dashboard.trans_file').'success_save')]);
+        return $this->successResponse(['message' => trans('area::dashboard.success_save')]);
     }
 
     /**
@@ -176,7 +176,7 @@ class AreaController extends BaseController
     {
         $area = Area::find($id);
         $cities = City::all();
-        $pageTitle = trans(config('dashboard.trans_file').'edit');
+        $pageTitle = trans('area::dashboard.edit');
         $submitFormRoute = route('areas.update', $id);
         $submitFormMethod = 'put';
         return view('area::'.$this->controllerResource.'form', compact('area', 'cities', 'pageTitle', 'submitFormRoute', 'submitFormMethod'));
@@ -196,7 +196,7 @@ class AreaController extends BaseController
         $area->city_id = $request->city_id;
         $area->status = $request->has('status') ? '1' : '0';
         $area->save();
-        return $this->successResponse(['message' => trans(config('dashboard.trans_file').'success_save')]);
+        return $this->successResponse(['message' => trans('area::dashboard.success_save')]);
     }
 
     /**
@@ -209,7 +209,7 @@ class AreaController extends BaseController
     {
         $existingArea = Area::find($id);
         $existingArea->delete();
-        return $this->successResponse(['message' => trans(config('dashboard.trans_file').'success_delete')]);
+        return $this->successResponse(['message' => trans('area::dashboard.success_delete')]);
     }
 
     // === Retrive areas via city id ===

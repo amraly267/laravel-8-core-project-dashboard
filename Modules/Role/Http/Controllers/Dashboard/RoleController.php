@@ -47,7 +47,7 @@ class RoleController extends BaseController
             $colsIndexName = $request->colsIndexName;
             $html = view('role::'.$this->controllerResource.'pdf', compact('roles', 'visibleColsNames', 'colsIndexName'))->render();
             $pdf = PDF::loadHTML($html);
-            return $pdf->download(trans(config('dashboard.trans_file').'roles').'.pdf');
+            return $pdf->download(trans('role::dashboard.roles').'.pdf');
         }
 
         if($request->ajax())
@@ -123,7 +123,7 @@ class RoleController extends BaseController
     public function create()
     {
         $permissions = PermissionGroup::get();
-        $pageTitle = trans(config('dashboard.trans_file').'add_new');
+        $pageTitle = trans('role::dashboard.add_new');
         $submitFormRoute = route('roles.store');
         $submitFormMethod = 'post';
         return view('role::'.$this->controllerResource.'form', compact('permissions', 'pageTitle', 'submitFormRoute', 'submitFormMethod'));
@@ -139,7 +139,7 @@ class RoleController extends BaseController
     {
         $role = Role::create(['name' => $request->name, 'guard_name' => 'admin']);
         $role->syncPermissions($request->permissions);
-        return $this->successResponse(['message' => trans(config('dashboard.trans_file').'success_save')]);
+        return $this->successResponse(['message' => trans('role::dashboard.success_save')]);
     }
 
     /**
@@ -168,7 +168,7 @@ class RoleController extends BaseController
             $q->where('name', $role->name);
         })->pluck('id')->toArray();
 
-        $pageTitle = trans(config('dashboard.trans_file').'edit');
+        $pageTitle = trans('role::dashboard.edit');
         $submitFormRoute = route('roles.update', $id);
         $submitFormMethod = 'put';
         return view('role::'.$this->controllerResource.'form', compact('relatedPermissions', 'permissions', 'role', 'pageTitle', 'submitFormRoute', 'submitFormMethod'));
@@ -188,7 +188,7 @@ class RoleController extends BaseController
         $role->guard_name = 'admin';
         $role->save();
         $role->syncPermissions($request->permissions);
-        return $this->successResponse(['message' => trans(config('dashboard.trans_file').'success_save')]);
+        return $this->successResponse(['message' => trans('role::dashboard.success_save')]);
     }
 
     /**
@@ -200,6 +200,6 @@ class RoleController extends BaseController
     public function destroy($id)
     {
         $role = Role::where('id', $id)->delete();
-        return $this->successResponse(['message' => trans(config('dashboard.trans_file').'success_delete')]);
+        return $this->successResponse(['message' => trans('role::dashboard.success_delete')]);
     }
 }

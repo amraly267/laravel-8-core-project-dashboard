@@ -3,7 +3,7 @@
 
 @section('page_path')
 <!--begin::Title-->
-<h1 class="d-flex align-items-center text-dark fw-bolder my-1 fs-3">{{trans(config('dashboard.trans_file').'admins')}}</h1>
+<h1 class="d-flex align-items-center text-dark fw-bolder my-1 fs-3">{{trans('admin::dashboard.admins')}}</h1>
 <!--end::Title-->
 <!--begin::Separator-->
 <span class="h-20px border-gray-200 border-start mx-4"></span>
@@ -12,7 +12,7 @@
 <ul class="breadcrumb breadcrumb-separatorless fw-bold fs-7 my-1">
     <!--begin::Item-->
     <li class="breadcrumb-item text-muted">
-        <a href="{{route('admin-home')}}" class="text-muted text-hover-primary">{{trans(config('dashboard.trans_file').'home')}}</a>
+        <a href="{{route('admin-home')}}" class="text-muted text-hover-primary">{{trans('admin::dashboard.home')}}</a>
     </li>
     <!--end::Item-->
     <!--begin::Item-->
@@ -22,7 +22,7 @@
     <!--end::Item-->
     <!--begin::Item-->
     <li class="breadcrumb-item text-muted">
-        <a href="{{route('admins.index')}}" class="text-muted text-hover-primary">{{trans(config('dashboard.trans_file').'admins')}}</a>
+        <a href="{{route('admins.index')}}" class="text-muted text-hover-primary">{{trans('admin::dashboard.admins')}}</a>
     </li>
     <!--end::Item-->
     <!--begin::Item-->
@@ -61,7 +61,7 @@
                         <!--begin::Input group-->
                         <div class="row mb-6">
                             <!--begin::Label-->
-                            <label class="col-lg-4 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'image')}}</label>
+                            <label class="col-lg-4 col-form-label fw-bold fs-6">{{trans('admin::dashboard.image')}}</label>
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-8">
@@ -71,7 +71,7 @@
                                     <div class="image-input-wrapper w-125px h-125px" style="background-image: url({{$submitFormMethod == 'put' ? $admin->image_path : asset('img/dashboard/default-user.svg')}})"></div>
                                     <!--end::Preview existing avatar-->
                                     <!--begin::Label-->
-                                    <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="" data-bs-original-title="{{trans(config('dashboard.trans_file').'change_image')}}">
+                                    <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="" data-bs-original-title="{{trans('admin::dashboard.change_image')}}">
                                         <i class="bi bi-pencil-fill fs-7"></i>
                                         <!--begin::Inputs-->
                                         <input type="file" name="image" accept=".png, .jpg, .jpeg">
@@ -80,12 +80,12 @@
                                     </label>
                                     <!--end::Label-->
                                     <!--begin::Cancel-->
-                                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="" data-bs-original-title="{{trans(config('dashboard.trans_file').'cancel')}}">
+                                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="" data-bs-original-title="{{trans('admin::dashboard.cancel')}}">
                                     <i class="bi bi-x fs-2"></i>
                                     </span>
                                     <!--end::Cancel-->
                                     <!--begin::Remove-->
-                                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="" data-bs-original-title="{{trans(config('dashboard.trans_file').'remove_image')}}">
+                                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="" data-bs-original-title="{{trans('admin::dashboard.remove_image')}}">
                                     <i class="bi bi-x fs-2"></i>
                                     </span>
                                     <!--end::Remove-->
@@ -101,11 +101,11 @@
                         <!--begin::Input group-->
                         <div class="row mb-6">
                             <!--begin::Label-->
-                            <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'name')}}</label>
+                            <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans('admin::dashboard.name')}}</label>
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-10 fv-row fv-plugins-icon-container">
-                                <input type="text" name="name" class="form-control form-control-lg form-control-solid" placeholder="{{trans(config('dashboard.trans_file').'name')}}" value="{{$submitFormMethod == 'put' ? $admin->name : old('name')}}">
+                                <input type="text" name="name" class="form-control form-control-lg form-control-solid" placeholder="{{trans('admin::dashboard.name')}}" value="{{$submitFormMethod == 'put' ? $admin->name : old('name')}}">
                                 <span class="help-block error-help-block input-error name-error" style="color: red;"></span>
                             </div>
                             <!--end::Col-->
@@ -115,7 +115,7 @@
                         <!--begin::Input group-->
                         <div class="row mb-6">
                             <!--begin::Label-->
-                            <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'country')}}</label>
+                            <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans('admin::dashboard.country')}}</label>
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-10 fv-row fv-plugins-icon-container">
@@ -133,11 +133,11 @@
                         <!--begin::Input group-->
                         <div class="row mb-6">
                             <!--begin::Label-->
-                            <label class="col-lg-2 col-form-label fw-bold fs-6 mobile">{{trans(config('dashboard.trans_file').'mobile')}} {{'('.$countries[0]['phone_code'].')'}}</label>
+                            <label class="col-lg-2 col-form-label fw-bold fs-6 mobile">{{trans('admin::dashboard.mobile')}} {{'('.$countries[0]['phone_code'].')'}}</label>
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-10 fv-row fv-plugins-icon-container">
-                                <input type="tel" minlength="9" maxlength="12" name="mobile" class="form-control form-control-lg form-control-solid" placeholder="{{trans(config('dashboard.trans_file').'mobile')}}" value="{{$submitFormMethod == 'put' ? $admin->mobile : old('mobile')}}">
+                                <input type="tel" minlength="9" maxlength="12" name="mobile" class="form-control form-control-lg form-control-solid" placeholder="{{trans('admin::dashboard.mobile')}}" value="{{$submitFormMethod == 'put' ? $admin->mobile : old('mobile')}}">
                                 <span class="help-block error-help-block input-error mobile-error" style="color: red;"></span>
                             </div>
                             <!--end::Col-->
@@ -147,11 +147,11 @@
                         <!--begin::Input group-->
                         <div class="row mb-6">
                             <!--begin::Label-->
-                            <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'email')}}</label>
+                            <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans('admin::dashboard.email')}}</label>
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-10 fv-row fv-plugins-icon-container">
-                                <input type="email" name="email" class="form-control form-control-lg form-control-solid" placeholder="{{trans(config('dashboard.trans_file').'email')}}" value="{{$submitFormMethod == 'put' ? $admin->email : old('email')}}">
+                                <input type="email" name="email" class="form-control form-control-lg form-control-solid" placeholder="{{trans('admin::dashboard.email')}}" value="{{$submitFormMethod == 'put' ? $admin->email : old('email')}}">
                                 <span class="help-block error-help-block input-error email-error" style="color: red;"></span>
                             </div>
                             <!--end::Col-->
@@ -161,14 +161,14 @@
                         <!--begin::Input group-->
                         <div class="row mb-6">
                             <!--begin::Label-->
-                            <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'password')}}</label>
+                            <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans('admin::dashboard.password')}}</label>
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-10 fv-row fv-plugins-icon-container">
-                                <input type="password" name="password" class="form-control form-control-lg form-control-solid" placeholder="{{trans(config('dashboard.trans_file').'password')}}" value="">
+                                <input type="password" name="password" class="form-control form-control-lg form-control-solid" placeholder="{{trans('admin::dashboard.password')}}" value="">
                                 @if($submitFormMethod == 'put')
                                 <span class="help-block error-help-block" style="color: rgb(167, 161, 161);">
-                                {{trans(config('dashboard.trans_file').'let_password_empty')}}
+                                {{trans('admin::dashboard.let_password_empty')}}
                                 </span><br>
                                 @endif
                                 <span class="help-block error-help-block input-error password-error" style="color: red;"></span>
@@ -180,14 +180,14 @@
                         <!--begin::Input group-->
                         <div class="row mb-6">
                             <!--begin::Label-->
-                            <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'confirm_password')}}</label>
+                            <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans('admin::dashboard.confirm_password')}}</label>
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-10 fv-row fv-plugins-icon-container">
-                                <input type="password" name="confirm_password" class="form-control form-control-lg form-control-solid" placeholder="{{trans(config('dashboard.trans_file').'confirm_password')}}" value="">
+                                <input type="password" name="confirm_password" class="form-control form-control-lg form-control-solid" placeholder="{{trans('admin::dashboard.confirm_password')}}" value="">
                                 @if($submitFormMethod == 'put')
                                 <span class="help-block error-help-block" style="color: rgb(167, 161, 161);">
-                                {{trans(config('dashboard.trans_file').'let_password_empty')}}
+                                {{trans('admin::dashboard.let_password_empty')}}
                                 </span><br>
                                 @endif
                                 <span class="help-block error-help-block input-error confirm_password-error" style="color: red;"></span>
@@ -199,13 +199,13 @@
                         <!--begin::Input group-->
                         <div class="row mb-6">
                             <!--begin::Label-->
-                            <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'gender')}}</label>
+                            <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans('admin::dashboard.gender')}}</label>
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-10 fv-row fv-plugins-icon-container">
                                 <select name="gender" data-control="select2" class="form-select form-select-solid form-select-lg fw-bold select2-hidden-accessible" data-select2-id="select2-data-10-jdo1-gender" tabindex="-1" aria-hidden="true">
-                                <option @if($submitFormMethod == 'put' && $admin->gender == 'male') {{'selected'}} @endif value="male">{{trans(config('dashboard.trans_file').'male')}}</option>
-                                <option @if($submitFormMethod == 'put' && $admin->gender == 'female') {{'selected'}} @endif value="female">{{trans(config('dashboard.trans_file').'female')}}</option>
+                                <option @if($submitFormMethod == 'put' && $admin->gender == 'male') {{'selected'}} @endif value="male">{{trans('admin::dashboard.male')}}</option>
+                                <option @if($submitFormMethod == 'put' && $admin->gender == 'female') {{'selected'}} @endif value="female">{{trans('admin::dashboard.female')}}</option>
                                 </select>
                                 <span class="help-block error-help-block input-error gender-error" style="color: red;"></span>
                             </div>
@@ -216,7 +216,7 @@
                         <!--begin::Input group-->
                         <div class="row mb-6">
                             <!--begin::Label-->
-                            <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans(config('dashboard.trans_file').'role')}}</label>
+                            <label class="col-lg-2 col-form-label fw-bold fs-6">{{trans('admin::dashboard.role')}}</label>
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-10 fv-row fv-plugins-icon-container">
@@ -235,10 +235,10 @@
                 <!--end::Card body-->
                 <!--begin::Actions-->
                 <div class="card-footer d-flex justify-content-end py-6 px-9">
-                    <button type="reset" class="btn btn-white btn-active-light-primary me-2" onclick="window.location.reload()">{{trans(config('dashboard.trans_file').'cancel')}}</button>
+                    <button type="reset" class="btn btn-white btn-active-light-primary me-2" onclick="window.location.reload()">{{trans('admin::dashboard.cancel')}}</button>
                     <button type="submit" class="btn btn-primary" id="saveBtn">
                     <span class="spinner-border spinner-border-sm align-middle ms-2 d-none"></span>
-                    {{trans(config('dashboard.trans_file').'save')}}
+                    {{trans('admin::dashboard.save')}}
                     </button>
                 </div>
                 <!--end::Actions-->

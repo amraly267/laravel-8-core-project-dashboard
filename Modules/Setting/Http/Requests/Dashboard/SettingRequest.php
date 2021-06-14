@@ -54,7 +54,7 @@ class SettingRequest extends FormRequest
     public function messages()
     {
         return [
-            'project_name.*.required' => trans(config('dashboard.trans_file').'name_is_required'),
+            'project_name.*.required' => trans('setting::dashboard.name_is_required'),
         ];
     }
 

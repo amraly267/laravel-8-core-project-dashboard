@@ -2,7 +2,7 @@
 @section('content')
 @section('page_path')
 <!--begin::Title-->
-<h1 class="d-flex align-items-center text-dark fw-bolder my-1 fs-3">{{trans(config('dashboard.trans_file').'roles')}}</h1>
+<h1 class="d-flex align-items-center text-dark fw-bolder my-1 fs-3">{{trans('role::dashboard.roles')}}</h1>
 <!--end::Title-->
 <!--begin::Separator-->
 <span class="h-20px border-gray-200 border-start mx-4"></span>
@@ -11,7 +11,7 @@
 <ul class="breadcrumb breadcrumb-separatorless fw-bold fs-7 my-1">
     <!--begin::Item-->
     <li class="breadcrumb-item text-muted">
-        <a href="{{route('admin-home')}}" class="text-muted text-hover-primary">{{trans(config('dashboard.trans_file').'home')}}</a>
+        <a href="{{route('admin-home')}}" class="text-muted text-hover-primary">{{trans('role::dashboard.home')}}</a>
     </li>
     <!--end::Item-->
     <!--begin::Item-->
@@ -20,7 +20,7 @@
     </li>
     <!--end::Item-->
     <!--begin::Item-->
-    <li class="breadcrumb-item text-dark">{{trans(config('dashboard.trans_file').'roles')}}</li>
+    <li class="breadcrumb-item text-dark">{{trans('role::dashboard.roles')}}</li>
     <!--end::Item-->
 </ul>
 <!--end::Breadcrumb-->
@@ -28,8 +28,8 @@
 <div class="card card-custom">
     <div class="card-header">
         <div class="card-title">
-            <h3 class="card-label">{{trans(config('dashboard.trans_file').'roles')}}</h3>
-            <span class="text-muted mt-1 fw-bold fs-7">{{trans(config('dashboard.trans_file').'total_results', ['val' => $totalResults])}}</span>
+            <h3 class="card-label">{{trans('role::dashboard.roles')}}</h3>
+            <span class="text-muted mt-1 fw-bold fs-7">{{trans('role::dashboard.total_results', ['val' => $totalResults])}}</span>
         </div>
         <div class="card-toolbar">
             <!--begin::Dropdown-->
@@ -41,7 +41,7 @@
                                 icon += '<path d="M3,16 L5,16 C5.55228475,16 6,15.5522847 6,15 C6,14.4477153 5.55228475,14 5,14 L3,14 L3,12 L5,12 C5.55228475,12 6,11.5522847 6,11 C6,10.4477153 5.55228475,10 5,10 L3,10 L3,8 L5,8 C5.55228475,8 6,7.55228475 6,7 C6,6.44771525 5.55228475,6 5,6 L3,6 L3,4 C3,3.44771525 3.44771525,3 4,3 L10,3 C10.5522847,3 11,3.44771525 11,4 L11,19 C11,19.5522847 10.5522847,20 10,20 L4,20 C3.44771525,20 3,19.5522847 3,19 L3,16 Z" fill="#000000" opacity="0.3"></path>';
                                 icon += '<path d="M16,3 L19,3 C20.1045695,3 21,3.8954305 21,5 L21,15.2485298 C21,15.7329761 20.8241635,16.200956 20.5051534,16.565539 L17.8762883,19.5699562 C17.6944473,19.7777745 17.378566,19.7988332 17.1707477,19.6169922 C17.1540423,19.602375 17.1383289,19.5866616 17.1237117,19.5699562 L14.4948466,16.565539 C14.1758365,16.200956 14,15.7329761 14,15.2485298 L14,5 C14,3.8954305 14.8954305,3 16,3 Z" fill="#000000"></path>';
                                 icon += '</g></svg>
-            {{trans(config('dashboard.trans_file').'export')}}
+            {{trans('role::dashboard.export')}}
         </button>
             </div>
             <!--end::Dropdown-->
@@ -58,7 +58,7 @@
                     </svg>
                     <!--end::Svg Icon-->
                 </span>
-                {{trans(config('dashboard.trans_file').'add_new')}}
+                {{trans('role::dashboard.add_new')}}
             </a>
             @endif
             <!--end::Button-->
@@ -73,13 +73,13 @@
             <form class="mb-15" action="{{route('roles.index')}}" method="GET">
                 <div class="row mb-6">
                     <div class="col-lg-6 mb-lg-0 mb-6">
-                        <label>{{trans(config('dashboard.trans_file').'search_keyword')}}</label>
-                        <input type="text" value="{{request()->search_keyword}}" name="search_keyword" class="form-control datatable-input" placeholder="{{trans(config('dashboard.trans_file').'search_keyword')}}" data-col-index="0">
+                        <label>{{trans('role::dashboard.search_keyword')}}</label>
+                        <input type="text" value="{{request()->search_keyword}}" name="search_keyword" class="form-control datatable-input" placeholder="{{trans('role::dashboard.search_keyword')}}" data-col-index="0">
                     </div>
                     <div class="col-lg-6 mb-lg-0 mb-6">
-                        <label>{{trans(config('dashboard.trans_file').'permissions')}}</label>
+                        <label>{{trans('role::dashboard.permissions')}}</label>
                         <select name="permission" class="form-select">
-                            <option value="">{{trans(config('dashboard.trans_file').'all')}}</option>
+                            <option value="">{{trans('role::dashboard.all')}}</option>
                             @foreach($permissions as $permission)
                                 <option @if(request()->permission == $permission->id) {{'selected'}} @endif value="{{$permission->id}}">{{$permission->name}}</option>
                             @endforeach
@@ -91,13 +91,13 @@
                         <button class="btn btn-primary btn-primary--icon" id="kt_search">
                         <span>
                         <i class="la la-search"></i>
-                        <span>{{trans(config('dashboard.trans_file').'search')}}</span>
+                        <span>{{trans('role::dashboard.search')}}</span>
                         </span>
                         </button>
                         <button type="reset" class="btn btn-secondary btn-secondary--icon" id="kt_reset">
                         <span>
                         <i class="la la-close"></i>
-                        <span>{{trans(config('dashboard.trans_file').'reset')}}</span>
+                        <span>{{trans('role::dashboard.reset')}}</span>
                         </span>
                         </button>
                     </div>
@@ -111,10 +111,10 @@
                     <thead>
                         <tr class="fw-bold fs-6 text-muted">
                             <th class="min-w-50px" data-column-name="index">#</th>
-                            <th class="min-w-100px" data-column-name="name">{{trans(config('dashboard.trans_file').'name')}}</th>
-                            <th class="min-w-100px" data-column-name="permissions">{{trans(config('dashboard.trans_file').'permissions')}}</th>
+                            <th class="min-w-100px" data-column-name="name">{{trans('role::dashboard.name')}}</th>
+                            <th class="min-w-100px" data-column-name="permissions">{{trans('role::dashboard.permissions')}}</th>
                             @if(auth()->guard('admin')->user()->can('role-edit') || auth()->guard('admin')->user()->can('role-delete'))
-                            <th class="min-w-100px" data-column-name="operation">{{trans(config('dashboard.trans_file').'actions')}}</th>
+                            <th class="min-w-100px" data-column-name="operation">{{trans('role::dashboard.actions')}}</th>
                             @endif
                         </tr>
                     </thead>
@@ -135,7 +135,7 @@
 <script src="{{asset('plugins/dashboard/datatables/datatables.bundle.js')}}"></script>
 
 <script>
-    var title = "{{trans(config('dashboard.trans_file').'delete_question')}}";
+    var title = "{{trans('role::dashboard.delete_question')}}";
 
     function loadData()
     {
@@ -186,12 +186,12 @@
             ],
 
             buttons: [
-                {extend: 'collection', text: 'Export', className:"export_btn btn btn-light", fade: true,
+                {extend: 'collection', text: "{{trans('role::dashboard.export')}}", className:"export_btn btn btn-light", fade: true,
                     buttons:[
-                        {extend: "pageLength", className: 'btn btn-default btn-sm-menu', text: "{{trans(config('dashboard.trans_file').'page_length')}}", exportOptions: {stripHtml: true, columns: ':visible'}},
-                        {extend: "print", className: 'btn btn-default btn-sm-menu', text: "{{trans(config('dashboard.trans_file').'print')}}", exportOptions: {stripHtml: true, columns: ':visible'}},
+                        {extend: "pageLength", className: 'btn btn-default btn-sm-menu', text: "{{trans('role::dashboard.page_length')}}", exportOptions: {stripHtml: true, columns: ':visible'}},
+                        {extend: "print", className: 'btn btn-default btn-sm-menu', text: "{{trans('role::dashboard.print')}}", exportOptions: {stripHtml: true, columns: ':visible'}},
                         {
-                            text: "{{trans(config('dashboard.trans_file').'pdf')}}",
+                            text: "{{trans('role::dashboard.pdf')}}",
                             className: 'btn btn-default btn-sm-menu',
                             action: function()
                             {
@@ -222,8 +222,8 @@
                                 })
                             }
                         },
-                        {extend: "excel", className: 'btn btn-default btn-sm-menu', text: "{{trans(config('dashboard.trans_file').'excel')}}", exportOptions: {stripHtml: true, columns: ':visible'}},
-                        {extend: "colvis", className: 'btn btn-default btn-sm-menu', text: "{{trans(config('dashboard.trans_file').'columns')}}", exportOptions: {stripHtml: true, columns: ':visible'}},
+                        {extend: "excel", className: 'btn btn-default btn-sm-menu', text: "{{trans('role::dashboard.excel')}}", exportOptions: {stripHtml: true, columns: ':visible'}},
+                        {extend: "colvis", className: 'btn btn-default btn-sm-menu', text: "{{trans('role::dashboard.columns')}}", exportOptions: {stripHtml: true, columns: ':visible'}},
                     ]
                 }
             ],
