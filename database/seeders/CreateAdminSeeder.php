@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\Admin;
+use Modules\Admin\Entities\Admin;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 

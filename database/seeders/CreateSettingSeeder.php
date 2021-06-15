@@ -3,10 +3,10 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\Setting;
-use App\Models\Country;
+use Modules\Setting\Entities\Setting;
+use Modules\Country\Entities\Country;
 use Str;
-use App\Models\Timezone;
+use Modules\Timezone\Entities\Timezone;
 
 class CreateSettingSeeder extends Seeder
 {
