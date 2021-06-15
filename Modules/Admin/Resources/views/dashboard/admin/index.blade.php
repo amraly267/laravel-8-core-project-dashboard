@@ -158,7 +158,7 @@
 
 @push('footer-scripts')
 
-<script src="{{asset('plugins/dashboard/datatables/datatables.bundle.js')}}"></script>
+<script src="{{url('plugins/dashboard/datatables/datatables.bundle.js')}}"></script>
 
 <script>
     var title = "{{trans('admin::dashboard.delete_question')}}";

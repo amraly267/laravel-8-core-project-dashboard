@@ -33,7 +33,7 @@ class Country extends Model
     // === Get flag path or set default image ===
     public function getFlagPathAttribute()
     {
-        return is_null($this->flag) ? asset('img/dashboard/default-flag.svg') : Storage::disk(self::$storageFolder)->url($this->flag);
+        return is_null($this->flag) ? url('img/dashboard/default-flag.svg') : Storage::disk(self::$storageFolder)->url($this->flag);
     }
     // === End function ===
 

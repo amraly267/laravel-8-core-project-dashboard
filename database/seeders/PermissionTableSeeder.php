@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
-use Modules\Admin\Entities\PermissionGroup;
+use Modules\Role\Entities\PermissionGroup;
 
 class PermissionTableSeeder extends Seeder
 {

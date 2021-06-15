@@ -141,7 +141,7 @@
 
 @push('footer-scripts')
 
-<script src="{{asset('plugins/dashboard/datatables/datatables.bundle.js')}}"></script>
+<script src="{{url('plugins/dashboard/datatables/datatables.bundle.js')}}"></script>
 
 <script>
     var title = "{{trans('city::dashboard.delete_question')}}";

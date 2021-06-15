@@ -36,28 +36,28 @@ class Setting extends Model
     // === Get logo path or set default image ===
     public function getLogoPathAttribute()
     {
-        return is_null($this->logo) ? asset('img/dashboard/default-image.svg') : Storage::disk(self::$storageFolder)->url($this->logo);
+        return is_null($this->logo) ? url('img/dashboard/default-image.svg') : Storage::disk(self::$storageFolder)->url($this->logo);
     }
     // === End function ===
 
     // === Get white logo path or set default image ===
     public function getWhiteLogoPathAttribute()
     {
-        return is_null($this->white_logo) ? asset('img/dashboard/default-image.svg') : Storage::disk(self::$storageFolder)->url($this->white_logo);
+        return is_null($this->white_logo) ? url('img/dashboard/default-image.svg') : Storage::disk(self::$storageFolder)->url($this->white_logo);
     }
     // === End function ===
 
     // === Get app logo path or set default image ===
     public function getAppIconPathAttribute()
     {
-        return is_null($this->app_icon) ? asset('img/dashboard/default-image.svg') : Storage::disk(self::$storageFolder)->url($this->app_icon);
+        return is_null($this->app_icon) ? url('img/dashboard/default-image.svg') : Storage::disk(self::$storageFolder)->url($this->app_icon);
     }
     // === End function ===
 
     // === Get favicon path or set default image ===
     public function getFaviconPathAttribute()
     {
-        return is_null($this->favicon) ? asset('img/dashboard/default-image.svg') : Storage::disk(self::$storageFolder)->url($this->favicon);
+        return is_null($this->favicon) ? url('img/dashboard/default-image.svg') : Storage::disk(self::$storageFolder)->url($this->favicon);
     }
     // === End function ===
 

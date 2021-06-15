@@ -27,7 +27,7 @@ class AdminAuth
 
         $settings = Setting::find(1);
         View::share('title', $settings->project_name);
-        View::share('logo', $settings->logo ? $settings->logo_path : asset('img/dashboard/logo.svg'));
+        View::share('logo', $settings->logo ? $settings->logo_path : url('img/dashboard/logo.svg'));
 
         if($settings->favicon)
         {
@@ -41,13 +41,13 @@ class AdminAuth
             }
             else
             {
-                View::share('favicon', asset('img/dashboard/logo.svg'));
+                View::share('favicon', url('img/dashboard/logo.svg'));
             }
         }
 
         if(is_null($settings->logo))
         {
-            View::share('logo', asset('img/dashboard/logo.svg'));
+            View::share('logo', url('img/dashboard/logo.svg'));
         }
         else
         {

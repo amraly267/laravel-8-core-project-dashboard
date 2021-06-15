@@ -95,7 +95,7 @@
                                             @else
                                                 {{trans('apps::dashboard.english')}}
                                             @endif
-                                            <img class="w-15px h-15px rounded-1 ms-2" src="@if(config('app.locale') == 'ar'){{asset('img/dashboard/saudi-arabia.svg')}}@else{{asset('img/dashboard/united-states.svg')}}@endif" alt="@if(config('app.locale') == 'ar'){{trans('apps::dashboard.arabic')}}@else{{trans('apps::dashboard.english')}}@endif"/>
+                                            <img class="w-15px h-15px rounded-1 ms-2" src="@if(config('app.locale') == 'ar'){{url('img/dashboard/saudi-arabia.svg')}}@else{{url('img/dashboard/united-states.svg')}}@endif" alt="@if(config('app.locale') == 'ar'){{trans('apps::dashboard.arabic')}}@else{{trans('apps::dashboard.english')}}@endif"/>
                                         </span>
                                     </span>
                                 </a>
@@ -105,7 +105,7 @@
                                     <div class="menu-item px-3">
                                         <a href="{{route('admin-change-language', ['lang' => 'en'])}}" class="menu-link d-flex px-5 @if(config('app.locale') != 'ar'){{'active'}}@endif">
                                             <span class="symbol symbol-20px me-4">
-                                                <img class="rounded-1" src="{{asset('img/dashboard/united-states.svg')}}" alt="{{trans('apps::dashboard.english')}}"/>
+                                                <img class="rounded-1" src="{{url('img/dashboard/united-states.svg')}}" alt="{{trans('apps::dashboard.english')}}"/>
                                             </span>{{trans('apps::dashboard.english')}}
                                         </a>
                                     </div>
@@ -114,7 +114,7 @@
                                     <div class="menu-item px-3">
                                         <a href="{{route('admin-change-language', ['lang' => 'ar'])}}" class="menu-link d-flex px-5 @if(config('app.locale') == 'ar'){{'active'}}@endif">
                                             <span class="symbol symbol-20px me-4">
-                                                <img class="rounded-1" src="{{asset('img/dashboard/saudi-arabia.svg')}}" alt="{{trans('apps::dashboard.arabic')}}" />
+                                                <img class="rounded-1" src="{{url('img/dashboard/saudi-arabia.svg')}}" alt="{{trans('apps::dashboard.arabic')}}" />
                                             </span>{{trans('apps::dashboard.arabic')}}
                                         </a>
                                     </div>

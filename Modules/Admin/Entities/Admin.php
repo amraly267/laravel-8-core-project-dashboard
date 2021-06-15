@@ -43,7 +43,7 @@ class Admin extends Authenticatable
     // === Get image path or set default image ===
     public function getImagePathAttribute()
     {
-        return is_null($this->image) ? asset('img/dashboard/default-user.svg') : Storage::disk(self::$storageFolder)->url($this->image);
+        return is_null($this->image) ? url('img/dashboard/default-user.svg') : Storage::disk(self::$storageFolder)->url($this->image);
     }
     // === End function ===
 

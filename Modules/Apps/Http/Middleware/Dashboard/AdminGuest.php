@@ -40,13 +40,13 @@ class AdminGuest
             }
             else
             {
-                View::share('favicon', asset('img/dashboard/logo.svg'));
+                View::share('favicon', url('img/dashboard/logo.svg'));
             }
         }
 
         if(is_null($settings->logo))
         {
-            View::share('logo', asset('img/dashboard/logo.svg'));
+            View::share('logo', url('img/dashboard/logo.svg'));
         }
         else
         {

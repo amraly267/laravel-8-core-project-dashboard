@@ -79,9 +79,9 @@
                         <!--begin::Col-->
                         <div class="col-lg-8">
                             <!--begin::Image input-->
-                            <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url({{asset('img/dashboard/default-flag.svg')}})">
+                            <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url({{url('img/dashboard/default-flag.svg')}})">
                                 <!--begin::Preview existing avatar-->
-                                <div class="image-input-wrapper w-125px h-125px" style="background-image: url({{$submitFormMethod == 'put' ? $country->flag_path : asset('img/dashboard/default-flag.svg')}})"></div>
+                                <div class="image-input-wrapper w-125px h-125px" style="background-image: url({{$submitFormMethod == 'put' ? $country->flag_path : url('img/dashboard/default-flag.svg')}})"></div>
                                 <!--end::Preview existing avatar-->
                                 <!--begin::Label-->
                                 <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="" data-bs-original-title="{{trans('country::dashboard.change_image')}}">
