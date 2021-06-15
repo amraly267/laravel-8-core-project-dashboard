@@ -297,6 +297,7 @@
                             {
                                 $(document).ready(function(){
                                     $('[href="#'+$(obj).attr('id')+'"]').tab('show');
+                                    $('#'+$(obj).attr('id')+'_tab').css('color', 'red');
                                 });
                             }
                         })
