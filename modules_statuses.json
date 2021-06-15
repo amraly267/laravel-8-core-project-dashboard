@@ -10,5 +10,7 @@
     "City": true,
     "Page": true,
     "Setting": true,
-    "Timezone": true
+    "Timezone": true,
+    "LandPage": true,
+    "User": true
 }

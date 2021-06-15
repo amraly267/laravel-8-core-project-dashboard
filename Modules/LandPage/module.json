@@ -1,0 +1,13 @@
+{
+    "name": "LandPage",
+    "alias": "landpage",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\LandPage\\Providers\\LandPageServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

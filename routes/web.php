@@ -25,7 +25,7 @@ use App\Http\Controllers\Dashboard\AreaController;
 
 // use App\Models\PermissionGroup;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
