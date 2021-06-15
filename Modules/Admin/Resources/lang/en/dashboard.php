@@ -47,6 +47,7 @@ return [
     "delete_question" => "Do you want to delete this row ?",
     "save" => "Save",
     "let_password_empty" => "Let password field empty if you don't want to change it",
+    "my_profile" => "My profile",
 
 
 ];

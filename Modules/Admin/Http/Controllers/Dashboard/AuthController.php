@@ -44,7 +44,7 @@ class AuthController extends BaseController
         }
         else
         {
-            return $this->invalidResponse(['credential' => 'dashboard.invalid_credentials']);
+            return $this->invalidResponse(['credential' => trans('admin::dashboard.invalid_credentials')]);
         }
     }
     // === End function ===
@@ -72,11 +72,11 @@ class AuthController extends BaseController
             ]);
 
             $existingAdmin->notify(new ForgetPasswordEmail($token));
-            return $this->successResponse(['message' => 'dashboard.success_send']);
+            return $this->successResponse(['message' => trans('admin::dashboard.success_send')]);
         }
         else
         {
-            return $this->invalidResponse(['email' => 'dashboard.invalid_email']);
+            return $this->invalidResponse(['email' => trans('admin::dashboard.invalid_email')]);
         }
     }
     // === End function ===
@@ -112,7 +112,7 @@ class AuthController extends BaseController
         $existingAdmin->password = bcrypt($request->password);
         $existingAdmin->save();
         DB::table('admin_password_resets')->where([['email', $request->email], ['token', $request->token]])->delete();
-        return $this->successResponse(['redirect' => route('admin-login'), 'message' => 'dashboard.success_reset_password']);
+        return $this->successResponse(['redirect' => route('admin-login'), 'message' => trans('admin::dashboard.success_reset_password')]);
     }
     // === End function ===
 
@@ -150,7 +150,7 @@ class AuthController extends BaseController
         $admin->mobile = $request->mobile;
         $admin->save();
 
-        return $this->successResponse(['message' => 'dashboard.success_save']);
+        return $this->successResponse(['message' => trans('admin::dashboard.success_save')]);
     }
     // === End function ===
 

@@ -49,7 +49,7 @@ return [
     "delete_question" => "هل تريد حذف هذا العنصر ؟",
     "save" => "حفظ",
     "let_password_empty" => "اترك كلمة المرور فارغة اذا لم تريد تعديله",
-
+    "my_profile" => "حسابي",
 
 
 
